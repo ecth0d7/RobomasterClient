@@ -8,19 +8,18 @@
 
 extern "C" {
 #include <libavcodec/avcodec.h>
-#include <libavutil/imgutils.h>
 #include <libswscale/swscale.h>
+#include <libavutil/imgutils.h>
 }
 
-class VideoReceiver : public QObject
-{
+class VideoReceiver : public QObject {
     Q_OBJECT
 public:
     explicit VideoReceiver(VideoImageProvider *provider, QObject *parent = nullptr);
     ~VideoReceiver();
 
 signals:
-    void frameReady(); // 只发信号，不发数据，数据已经在 provider 里了
+    void frameReady();
 
 private slots:
     void readData();
@@ -28,18 +27,18 @@ private slots:
 private:
     void decode(const QByteArray &data);
 
-    QUdpSocket *m_socket = nullptr;
-    VideoImageProvider *m_provider = nullptr; // 保存 provider 的指针
-
-    // FFmpeg 成员
+    QUdpSocket *m_socket;
+    VideoImageProvider *m_provider;
     AVCodecContext *m_codecCtx = nullptr;
     AVFrame *m_frame = nullptr;
     SwsContext *m_swsCtx = nullptr;
     uint8_t *m_rgbBuffer = nullptr;
 
-    // 数据缓冲
+    // 组包逻辑变量
     QByteArray m_buffer;
-    int m_pendingSize = 0;
+    uint16_t m_lastFrameId = 0xFFFF;
+    uint16_t m_expectedSliceId = 0;
+    bool m_isCurrentFrameCorrupt = true;
 };
 
-#endif // VIDEORECEIVER_H
+#endif
