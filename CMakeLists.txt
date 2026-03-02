@@ -7,8 +7,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # ========================= Qt6配置（参考配置风格） =========================
 # 强制指定Qt6.9.3路径（保留你的原有配置）
-# set(Qt6_DIR "/home/yourname/Qt/6.9.3/gcc_64/lib/cmake/Qt6" CACHE PATH "Qt6配置文件目录" FORCE)
-find_package(Qt6 REQUIRED COMPONENTS Core Gui Qml Quick)#直接用qt creator打开
+set(Qt6_DIR "/home/htc/Qt/6.9.3/gcc_64/lib/cmake/Qt6" CACHE PATH "Qt6配置文件目录" FORCE)
+# find_package(Qt6 REQUIRED COMPONENTS Core Gui Qml Quick)#直接用qt creator打开
 if(NOT EXISTS "${Qt6_DIR}/Qt6Config.cmake")
     message(FATAL_ERROR "Qt6配置文件不存在！请检查路径：${Qt6_DIR}")
 endif()
