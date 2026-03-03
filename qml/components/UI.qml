@@ -1116,6 +1116,7 @@ Rectangle {
         }
     }
     
+    
     // 添加一个网格线覆盖层（可选，用于调试显示截取区域）
     /*
     Rectangle {
@@ -1910,5 +1911,149 @@ Item {
     }
     
     opacity: 0
+}
+// ======================================================
+// 战术雷达图层 (Tactical Radar Layer)
+// 适配协议：RoboMaster 2026 选手端自定义控制器协议
+// 功能：实时绘制自身位置、哨兵规划路径、雷达检测敌方目标
+// ======================================================
+Item {
+    id: radarOverlay
+    // 布局绑定：锁定至 UI.qml 中的 miniMap 矩形框区域
+    x: miniMap.x
+    y: miniMap.y
+    width: miniMap.width
+    height: miniMap.height
+    z: 20
+    clip: true // 裁剪超出 28m x 15m 物理边界的图形（主要针对路径）
+
+    // --- 坐标系转换逻辑 ---
+    // 物理参考：RMUC 标准场地 (28.0m x 15.0m)
+    // 逻辑原点：左下角为 (0,0)
+    readonly property real fieldW: 28.0
+    readonly property real fieldH: 15.0
+    
+    // 转换函数：物理米(m) -> UI像素(px)
+    function toX(mX) { return mX * (width / fieldW) }
+    // 转换说明：QML 坐标 Y 轴向下，物理坐标 Y 轴向上，故需进行 (height - y) 翻转
+    function toY(mY) { return height - (mY * (height / fieldH)) }
+
+    // -------------------------------------------------------------------
+    // 1. 机器人自身状态图层 [对应协议：12. RobotPosition]
+    // 涉及字段：robotPosition_x (m), robotPosition_y (m), robotPosition_yaw (deg)
+    // -------------------------------------------------------------------
+    Item {
+        id: selfPositionContainer
+        x: radarOverlay.toX(dataStore.robotPosition_x)
+        y: radarOverlay.toY(dataStore.robotPosition_y)
+        visible: dataStore.robotPosition_x !== 0 // 初始值 0 时隐藏，避免左下角误报
+
+        // 机器人主体图标：灰色圆点
+        Rectangle {
+            width: 10; height: 10; radius: 5
+            color: "#888888"; border.color: "white"; border.width: 1
+            anchors.centerIn: parent
+        }
+
+        // 朝向指示器：根据机器人云台/底盘 Yaw 角旋转
+        Canvas {
+            id: arrowCanvas
+            width: 20; height: 20
+            anchors.centerIn: parent
+            rotation: dataStore.robotPosition_yaw // 顺时针旋转角度
+            antialiasing: true 
+
+            onPaint: {
+                var ctx = getContext("2d");
+                ctx.reset(); 
+                ctx.fillStyle = "white";
+                ctx.beginPath();
+                // 绘制经典三角形箭头
+                ctx.moveTo(10, 0);  // 尖端 (向上)
+                ctx.lineTo(14, 8);  // 右翼底
+                ctx.lineTo(10, 6);  // 尾部内凹，提升指向锐利度
+                ctx.lineTo(6, 8);   // 左翼底
+                ctx.closePath(); 
+                ctx.fill();
+            }
+        }
+    }
+
+    // -------------------------------------------------------------------
+    // 2. 哨兵轨迹规划图层 [对应协议：15. RobotPathPlanInfo]
+    // 涉及字段：robotPath_start_pos_x/y (dm), robotPath_offset_x/y (dm)
+    // 单位说明：协议原始数据单位为分米 (dm)，绘制前需除以 10 转换为米 (m)
+    // -------------------------------------------------------------------
+    Canvas {
+        id: pathLayer
+        anchors.fill: parent
+        opacity: 0.8
+        
+        onPaint: {
+            var ctx = getContext("2d");
+            ctx.reset();
+            
+            // 将分米(dm)起始点转换为米(m)
+            var curX = dataStore.robotPath_start_pos_x / 10.0;
+            var curY = dataStore.robotPath_start_pos_y / 10.0;
+            var dxs = dataStore.robotPath_offset_x; // 增量偏移数组 (最多49个点)
+            var dys = dataStore.robotPath_offset_y;
+
+            if (!dxs || dxs.length === 0) return;
+
+            ctx.strokeStyle = "#FFFF00"; // 规划路径显示为黄色
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(radarOverlay.toX(curX), radarOverlay.toY(curY));
+
+            // 迭代增量数组，连续绘制轨迹线
+            for (var i = 0; i < dxs.length; i++) {
+                curX += dxs[i] / 10.0; // 累加增量并转换单位
+                curY += dys[i] / 10.0;
+                ctx.lineTo(radarOverlay.toX(curX), radarOverlay.toY(curY));
+            }
+            ctx.stroke();
+        }
+
+        // 监听偏移量变化，自动触发 Canvas 重绘
+        Connections {
+            target: dataStore
+            function onRobotPath_offset_xChanged() { pathLayer.requestPaint() }
+        }
+    }
+
+    // -------------------------------------------------------------------
+    // 3. 敌方机器人图层 [对应协议：16. RadarInfoToClient]
+    // 涉及字段：radar_target_pos_x (m), radar_target_pos_y (m), radar_target_robot_id
+    // -------------------------------------------------------------------
+    Item {
+        id: enemyRadarMarker
+        x: radarOverlay.toX(dataStore.radar_target_pos_x)
+        y: radarOverlay.toY(dataStore.radar_target_pos_y)
+        visible: dataStore.radar_target_robot_id !== 0
+
+        // 目标标记图标：红色圆点
+        Rectangle {
+            width: 14; height: 14; radius: 7; color: "#FF0000"
+            anchors.centerIn: parent
+            // 高亮逻辑：radar_is_high_light 为 1 时显示黄色描边（代表威胁极大）
+            border.color: dataStore.radar_is_high_light === 1 ? "yellow" : "white"
+            border.width: 1
+
+            // 机器人 ID 文本映射 (根据协议 ID 判断类型)
+            Text {
+                anchors.centerIn: parent
+                text: {
+                    var id = dataStore.radar_target_robot_id;
+                    var base = id > 100 ? id - 100 : id; // 统一红蓝双方编号
+                    if (base === 1) return "英"; // 英雄机器人
+                    if (base === 7) return "哨"; // 哨兵机器人
+                    if (base === 6) return "空"; // 空中机器人
+                    return base; // 其他显示数字（步兵 3, 4, 5）
+                }
+                color: "white"; font.pixelSize: 10; font.bold: true
+            }
+        }
+    }
 }
 }

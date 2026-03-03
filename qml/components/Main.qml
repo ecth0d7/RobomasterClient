@@ -253,7 +253,7 @@ ApplicationWindow {
         property string mousePosText: ""         // 鼠标位置
         property string wheelInfoText: ""        // 滚轮信息
         // 27. MQTT发送参数
-        property bool mqttSend_enableAutoSend: true
+        property bool mqttSend_enableAutoSend: false
         property string mqttSend_customControlHexData: ""
         property int mqttSend_mapClickIsSendAll: 0
         property string mqttSend_mapClickRobotIdHex: "00000000000000"
