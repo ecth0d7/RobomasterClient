@@ -1930,7 +1930,9 @@ Item {
 
     readonly property int dotSize: 14      
     readonly property real fieldW: 28.0    
-    readonly property real fieldH: 15.0    
+    readonly property real fieldH: 15.0 
+    // 1. 定义一个 ListModel，这是 QML 动态重绘最稳的方式
+    ListModel { id: robotListModel }   
 
     function toX(mX) { return mX * (radarOverlay.width / radarOverlay.fieldW) }
     function toY(mY) { return radarOverlay.height - (mY * (radarOverlay.height / radarOverlay.fieldH)) }
@@ -2033,36 +2035,105 @@ Item {
     }
 
     // -------------------------------------------------------------------
-    // 3. 全场机器人信息 [Message 18] - 深色阵营点
+   // -------------------------------------------------------------------
     // -------------------------------------------------------------------
-    Item {
-        id: radarMarker
-        x: radarOverlay.toX(dataStore.radar_target_pos_x)
-        y: radarOverlay.toY(dataStore.radar_target_pos_y)
-        visible: dataStore.radar_target_robot_id !== 0
+    // 3. 全场动态机器人信息 - 彻底修复朝向版
+    // -------------------------------------------------------------------
+    Repeater {
+        model: robotListModel
+        delegate: Item {
+            // 绑定 model 属性
+            readonly property real mPosX: model.posX
+            readonly property real mPosY: model.posY
+            readonly property real mAngle: model.angle
+            readonly property int mRid: model.robotId
+            readonly property int mHl: model.isHighLight
 
-        Canvas {
-            width: 24; height: 24; anchors.centerIn: parent
-            rotation: dataStore.radar_toward_angle
-            onPaint: {
-                var ctx = getContext("2d"); ctx.reset(); ctx.fillStyle = "white";
-                ctx.beginPath(); ctx.moveTo(12, 0); ctx.lineTo(19, 10); 
-                ctx.lineTo(12, 10); ctx.lineTo(5, 10); ctx.closePath(); ctx.fill();
+            x: radarOverlay.toX(mPosX)
+            y: radarOverlay.toY(mPosY)
+            z: 20
+
+            // 彻底修复：将旋转逻辑写进 Canvas 内部
+            Canvas {
+                id: robotArrow
+                width: 24; height: 24; anchors.centerIn: parent
+                
+                // 关键点 1：显式绑定数据源的角度
+                property real currentAngle: mAngle
+                
+                // 关键点 2：监听角度变化强制重绘
+                onCurrentAngleChanged: requestPaint()
+
+                onPaint: {
+                    var ctx = getContext("2d");
+                    ctx.reset();
+                    
+                    // 关键点 3：在绘图层进行坐标变换
+                    ctx.save();
+                    ctx.translate(12, 12); // 移到中心
+                    ctx.rotate(currentAngle * Math.PI / 180); // 弧度转换
+                    ctx.translate(-12, -12); // 移回去
+                    
+                    ctx.fillStyle = "white";
+                    ctx.beginPath();
+                    ctx.moveTo(12, 0);   // 顶点
+                    ctx.lineTo(19, 10);  // 右翼
+                    ctx.lineTo(12, 10);  // 尾部凹陷点
+                    ctx.lineTo(5, 10);   // 左翼
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.restore();
+                }
             }
-        }
 
-        Rectangle {
-            width: radarOverlay.dotSize; height: radarOverlay.dotSize; radius: width/2
-            color: dataStore.radar_target_robot_id < 100 ? "#660000" : "#003366"
-            // 高亮目标使用亮黄色边框突出
-            border.color: dataStore.radar_is_high_light >= 1 ? "#FFFF00" : "white"
-            border.width: dataStore.radar_is_high_light >= 1 ? 2.5 : 1.5
-            anchors.centerIn: parent
-            Text {
-                text: radarOverlay.getRobotName(dataStore.radar_target_robot_id)
-                color: "white"; font.pixelSize: 9; font.bold: true; anchors.centerIn: parent
+            Rectangle {
+                width: radarOverlay.dotSize; height: radarOverlay.dotSize; radius: width/2
+                color: mRid < 100 ? "#660000" : "#003366"
+                border.color: mHl >= 1 ? "#FFFF00" : "white"
+                border.width: mHl >= 1 ? 2.5 : 1.5
+                anchors.centerIn: parent
+                Text {
+                    text: radarOverlay.getRobotName(mRid)
+                    color: "white"; font.pixelSize: 9; font.bold: true; anchors.centerIn: parent
+                }
             }
         }
     }
-}
-}
+
+    // --- 数据源处理核心 (必须包含这一段监听) ---
+    Connections {
+        target: dataStore
+        function updateRobotData() {
+            var rid = dataStore.radar_target_robot_id;
+            if (rid === 0) return;
+
+            var found = false;
+            for (var i = 0; i < robotListModel.count; i++) {
+                if (robotListModel.get(i).robotId === rid) {
+                    robotListModel.setProperty(i, "posX", dataStore.radar_target_pos_x);
+                    robotListModel.setProperty(i, "posY", dataStore.radar_target_pos_y);
+                    // 确保 angle 真的被写入了
+                    robotListModel.setProperty(i, "angle", dataStore.radar_toward_angle);
+                    robotListModel.setProperty(i, "isHighLight", dataStore.radar_is_high_light);
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                robotListModel.append({
+                    "robotId": rid,
+                    "posX": dataStore.radar_target_pos_x,
+                    "posY": dataStore.radar_target_pos_y,
+                    "angle": dataStore.radar_toward_angle,
+                    "isHighLight": dataStore.radar_is_high_light
+                });
+            }
+        }
+
+        // 关键点 4：除了坐标，还要监听角度信号变化
+        function onRadar_target_pos_xChanged() { updateRobotData() }
+        function onRadar_target_pos_yChanged() { updateRobotData() }
+        function onRadar_toward_angleChanged() { updateRobotData() }
+    }
+}}

@@ -364,7 +364,7 @@ message RadarInfoToClient {
   uint32 target_robot_id = 1; // 目标机器人ID（对方机器人ID，如101=蓝方英雄，3=红方3号步兵）
   float target_pos_x = 2; // 目标机器人X坐标（单位：米），基于场地坐标系
   float target_pos_y = 3; // 目标机器人Y坐标（单位：米），基于场地坐标系
-  float toward_angle = 4; // 目标机器人朝向角度（单位：度），正北为0度，顺时针递增
+  float torward_angle = 4; // 目标机器人朝向角度（单位：度），正北为0度，顺时针递增
   uint32 is_high_light = 5; // 目标机器人是否被特殊标识：0=否，1=是，2=是但目标定位模块离线（坐标数据可能不准确）
 }
 

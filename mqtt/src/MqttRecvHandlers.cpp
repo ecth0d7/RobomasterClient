@@ -770,7 +770,7 @@ QVariantMap RadarInfoRecvHandler::toQmlMap(const robomaster::custom_client::Rada
     map["target_robot_id"] = static_cast<int>(info.target_robot_id());
     map["target_pos_x"] = static_cast<float>(info.target_pos_x());
     map["target_pos_y"] = static_cast<float>(info.target_pos_y());
-    map["torward_angle"] = static_cast<float>(info.toward_angle());
+    map["torward_angle"] = static_cast<float>(info.torward_angle());
     map["is_high_light"] = static_cast<int>(info.is_high_light());
     return map;
 }
@@ -787,7 +787,7 @@ void RadarInfoRecvHandler::handleMessage(const std::string& topic, const std::st
     qDebug() << "目标机器人ID：" << m_info.target_robot_id();
     qDebug() << "目标机器人坐标(X,Y)：" << QString::number(m_info.target_pos_x(), 'f', 2) << "," 
              << QString::number(m_info.target_pos_y(), 'f', 2) << "米";
-    qDebug() << "目标机器人朝向角度：" << QString::number(m_info.toward_angle(), 'f', 1) << "°（正北为0度，顺时针递增）";
+    qDebug() << "目标机器人朝向角度：" << QString::number(m_info.torward_angle(), 'f', 1) << "°（正北为0度，顺时针递增）";
     
     QString highLightDesc;
     switch (m_info.is_high_light()) {

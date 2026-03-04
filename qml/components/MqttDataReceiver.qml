@@ -422,10 +422,11 @@ Item {
             root.radar_target_robot_id = map.target_robot_id || 0
             root.radar_target_pos_x = map.target_pos_x || 0.0
             root.radar_target_pos_y = map.target_pos_y || 0.0
-            root.radar_toward_angle = map.toward_angle || 0.0
+            root.radar_toward_angle = map.torward_angle || 0.0
             root.radar_is_high_light = map.is_high_light || 0
             console.log("[雷达信息] 目标ID=", root.radar_target_robot_id,
-                        "坐标(", root.radar_target_pos_x, ",", root.radar_target_pos_y, ")")
+                        "坐标(", root.radar_target_pos_x, ",", root.radar_target_pos_y, ")",
+                        "角度",root.radar_toward_angle)
         }
     }
 
