@@ -1913,109 +1913,119 @@ Item {
     opacity: 0
 }
 // ======================================================
-// 战术雷达图层 (Tactical Radar Layer)
-// 适配协议：RoboMaster 2026 选手端自定义控制器协议
-// 功能：实时绘制自身位置、哨兵规划路径、雷达检测敌方目标
+// 战术雷达图层 (Tactical Radar Layer) - 2026 深度定制版
+// 适配协议：RobotPosition(12), RobotPathPlanInfo(15), RadarInfoToClient(16)
+// ======================================================
+// ======================================================
+// 战术雷达图层 (Tactical Radar Layer) - 实战高亮轨迹版
+// ------------------------------------------------------
+// 视觉策略：机器人圆点采用深色系(压场)，规划轨迹采用亮色系(导引)
+// 适配协议：RobotPosition(13), RobotPathPlanInfo(16), RadarInfoToClient(18)
 // ======================================================
 Item {
     id: radarOverlay
-    // 布局绑定：锁定至 UI.qml 中的 miniMap 矩形框区域
-    x: miniMap.x
-    y: miniMap.y
-    width: miniMap.width
-    height: miniMap.height
-    z: 20
-    clip: true // 裁剪超出 28m x 15m 物理边界的图形（主要针对路径）
+    x: miniMap.x; y: miniMap.y
+    width: miniMap.width; height: miniMap.height
+    z: 20; clip: true 
 
-    // --- 坐标系转换逻辑 ---
-    // 物理参考：RMUC 标准场地 (28.0m x 15.0m)
-    // 逻辑原点：左下角为 (0,0)
-    readonly property real fieldW: 28.0
-    readonly property real fieldH: 15.0
-    
-    // 转换函数：物理米(m) -> UI像素(px)
-    function toX(mX) { return mX * (width / fieldW) }
-    // 转换说明：QML 坐标 Y 轴向下，物理坐标 Y 轴向上，故需进行 (height - y) 翻转
-    function toY(mY) { return height - (mY * (height / fieldH)) }
+    readonly property int dotSize: 14      
+    readonly property real fieldW: 28.0    
+    readonly property real fieldH: 15.0    
+
+    function toX(mX) { return mX * (radarOverlay.width / radarOverlay.fieldW) }
+    function toY(mY) { return radarOverlay.height - (mY * (radarOverlay.height / radarOverlay.fieldH)) }
+
+    function getRobotName(fullId) {
+        var base = fullId > 100 ? fullId - 100 : fullId;
+        var names = {1:"英", 2:"工", 3:"步", 4:"步", 5:"步", 6:"空", 7:"哨", 8:"镖", 9:"雷"};
+        return names[base] || "";
+    }
 
     // -------------------------------------------------------------------
-    // 1. 机器人自身状态图层 [对应协议：12. RobotPosition]
-    // 涉及字段：robotPosition_x (m), robotPosition_y (m), robotPosition_yaw (deg)
+    // 1. 自身位置 [Message 13] - 深绿色圆点
     // -------------------------------------------------------------------
     Item {
-        id: selfPositionContainer
+        id: selfMarker
         x: radarOverlay.toX(dataStore.robotPosition_x)
         y: radarOverlay.toY(dataStore.robotPosition_y)
-        visible: dataStore.robotPosition_x !== 0 // 初始值 0 时隐藏，避免左下角误报
+        visible: dataStore.robotPosition_x !== 0
 
-        // 机器人主体图标：灰色圆点
-        Rectangle {
-            width: 10; height: 10; radius: 5
-            color: "#888888"; border.color: "white"; border.width: 1
-            anchors.centerIn: parent
+        Canvas {
+            width: 24; height: 24; anchors.centerIn: parent
+            rotation: dataStore.robotPosition_yaw 
+            onPaint: {
+                var ctx = getContext("2d"); ctx.reset(); ctx.fillStyle = "white";
+                ctx.beginPath(); ctx.moveTo(12, 0); ctx.lineTo(19, 10); 
+                ctx.lineTo(12, 10); ctx.lineTo(5, 10); ctx.closePath(); ctx.fill();
+            }
         }
 
-        // 朝向指示器：根据机器人云台/底盘 Yaw 角旋转
-        Canvas {
-            id: arrowCanvas
-            width: 20; height: 20
-            anchors.centerIn: parent
-            rotation: dataStore.robotPosition_yaw // 顺时针旋转角度
-            antialiasing: true 
-
-            onPaint: {
-                var ctx = getContext("2d");
-                ctx.reset(); 
-                ctx.fillStyle = "white";
-                ctx.beginPath();
-                // 绘制经典三角形箭头
-                ctx.moveTo(10, 0);  // 尖端 (向上)
-                ctx.lineTo(14, 8);  // 右翼底
-                ctx.lineTo(10, 6);  // 尾部内凹，提升指向锐利度
-                ctx.lineTo(6, 8);   // 左翼底
-                ctx.closePath(); 
-                ctx.fill();
+        Rectangle {
+            width: radarOverlay.dotSize; height: radarOverlay.dotSize; radius: width/2
+            color: "#004d00"; // 深森林绿
+            border.color: "white"; border.width: 1.5; anchors.centerIn: parent
+            Text {
+                text: radarOverlay.getRobotName(dataStore.robotStatic_robot_id)
+                color: "white"; font.pixelSize: 9; font.bold: true; anchors.centerIn: parent
             }
         }
     }
 
     // -------------------------------------------------------------------
-    // 2. 哨兵轨迹规划图层 [对应协议：15. RobotPathPlanInfo]
-    // 涉及字段：robotPath_start_pos_x/y (dm), robotPath_offset_x/y (dm)
-    // 单位说明：协议原始数据单位为分米 (dm)，绘制前需除以 10 转换为米 (m)
+    // 2. 哨兵轨迹 [Message 16] - 亮色轨迹线 + 深色位置点
     // -------------------------------------------------------------------
     Canvas {
         id: pathLayer
         anchors.fill: parent
-        opacity: 0.8
-        
         onPaint: {
-            var ctx = getContext("2d");
-            ctx.reset();
-            
-            // 将分米(dm)起始点转换为米(m)
+            var ctx = getContext("2d"); ctx.reset();
             var curX = dataStore.robotPath_start_pos_x / 10.0;
             var curY = dataStore.robotPath_start_pos_y / 10.0;
-            var dxs = dataStore.robotPath_offset_x; // 增量偏移数组 (最多49个点)
+            var dxs = dataStore.robotPath_offset_x;
             var dys = dataStore.robotPath_offset_y;
-
             if (!dxs || dxs.length === 0) return;
 
-            ctx.strokeStyle = "#FFFF00"; // 规划路径显示为黄色
-            ctx.lineWidth = 2;
+            // 轨迹采用【亮色系】：1-鲜红(攻), 2-亮绿(防), 3-明黄(移)
+            var intent = dataStore.robotPath_intention;
+            var pathColor = (intent === 1) ? "#FF0000" : (intent === 2 ? "#00FF00" : "#FFFF00");
+
+            ctx.strokeStyle = pathColor; ctx.lineWidth = 2.5;
+            ctx.shadowColor = pathColor; ctx.shadowBlur = 4; // 增加微弱发光感，提升引导视觉
             ctx.beginPath();
             ctx.moveTo(radarOverlay.toX(curX), radarOverlay.toY(curY));
-
-            // 迭代增量数组，连续绘制轨迹线
             for (var i = 0; i < dxs.length; i++) {
-                curX += dxs[i] / 10.0; // 累加增量并转换单位
-                curY += dys[i] / 10.0;
+                curX += dxs[i] / 10.0; curY += dys[i] / 10.0;
                 ctx.lineTo(radarOverlay.toX(curX), radarOverlay.toY(curY));
             }
             ctx.stroke();
         }
 
-        // 监听偏移量变化，自动触发 Canvas 重绘
+        Item {
+            x: radarOverlay.toX(dataStore.robotPath_start_pos_x / 10.0)
+            y: radarOverlay.toY(dataStore.robotPath_start_pos_y / 10.0)
+            visible: dataStore.robotPath_sender_id !== 0
+
+            // 箭头朝向：完全对齐首段轨迹矢量
+            Canvas {
+                width: 24; height: 24; anchors.centerIn: parent
+                visible: dataStore.robotPath_offset_x && dataStore.robotPath_offset_x.length > 0
+                rotation: Math.atan2(dataStore.robotPath_offset_x[0], dataStore.robotPath_offset_y[0]) * 180 / Math.PI
+                onPaint: {
+                    var ctx = getContext("2d"); ctx.reset(); ctx.fillStyle = "white";
+                    ctx.beginPath(); ctx.moveTo(12, 0); ctx.lineTo(19, 10); 
+                    ctx.lineTo(12, 10); ctx.lineTo(5, 10); ctx.closePath(); ctx.fill();
+                }
+            }
+
+            Rectangle {
+                width: radarOverlay.dotSize; height: radarOverlay.dotSize; radius: width/2
+                // 机器人本体圆点依然保持【深色系】
+                color: dataStore.robotPath_sender_id < 100 ? "#660000" : "#003366"
+                border.color: "white"; border.width: 1.5; anchors.centerIn: parent
+                Text { text: "哨"; color: "white"; font.pixelSize: 9; font.bold: true; anchors.centerIn: parent }
+            }
+        }
+        
         Connections {
             target: dataStore
             function onRobotPath_offset_xChanged() { pathLayer.requestPaint() }
@@ -2023,35 +2033,34 @@ Item {
     }
 
     // -------------------------------------------------------------------
-    // 3. 敌方机器人图层 [对应协议：16. RadarInfoToClient]
-    // 涉及字段：radar_target_pos_x (m), radar_target_pos_y (m), radar_target_robot_id
+    // 3. 全场机器人信息 [Message 18] - 深色阵营点
     // -------------------------------------------------------------------
     Item {
-        id: enemyRadarMarker
+        id: radarMarker
         x: radarOverlay.toX(dataStore.radar_target_pos_x)
         y: radarOverlay.toY(dataStore.radar_target_pos_y)
         visible: dataStore.radar_target_robot_id !== 0
 
-        // 目标标记图标：红色圆点
-        Rectangle {
-            width: 14; height: 14; radius: 7; color: "#FF0000"
-            anchors.centerIn: parent
-            // 高亮逻辑：radar_is_high_light 为 1 时显示黄色描边（代表威胁极大）
-            border.color: dataStore.radar_is_high_light === 1 ? "yellow" : "white"
-            border.width: 1
+        Canvas {
+            width: 24; height: 24; anchors.centerIn: parent
+            rotation: dataStore.radar_toward_angle
+            onPaint: {
+                var ctx = getContext("2d"); ctx.reset(); ctx.fillStyle = "white";
+                ctx.beginPath(); ctx.moveTo(12, 0); ctx.lineTo(19, 10); 
+                ctx.lineTo(12, 10); ctx.lineTo(5, 10); ctx.closePath(); ctx.fill();
+            }
+        }
 
-            // 机器人 ID 文本映射 (根据协议 ID 判断类型)
+        Rectangle {
+            width: radarOverlay.dotSize; height: radarOverlay.dotSize; radius: width/2
+            color: dataStore.radar_target_robot_id < 100 ? "#660000" : "#003366"
+            // 高亮目标使用亮黄色边框突出
+            border.color: dataStore.radar_is_high_light >= 1 ? "#FFFF00" : "white"
+            border.width: dataStore.radar_is_high_light >= 1 ? 2.5 : 1.5
+            anchors.centerIn: parent
             Text {
-                anchors.centerIn: parent
-                text: {
-                    var id = dataStore.radar_target_robot_id;
-                    var base = id > 100 ? id - 100 : id; // 统一红蓝双方编号
-                    if (base === 1) return "英"; // 英雄机器人
-                    if (base === 7) return "哨"; // 哨兵机器人
-                    if (base === 6) return "空"; // 空中机器人
-                    return base; // 其他显示数字（步兵 3, 4, 5）
-                }
-                color: "white"; font.pixelSize: 10; font.bold: true
+                text: radarOverlay.getRobotName(dataStore.radar_target_robot_id)
+                color: "white"; font.pixelSize: 9; font.bold: true; anchors.centerIn: parent
             }
         }
     }
