@@ -2409,5 +2409,140 @@ Rectangle {
             }
         }
     }
+// ========== 独立的工程装配指令模块（右上角） ==========
+Item {
+    id: assemblyOverlay
+    anchors.fill: parent
+    // 逻辑判定：仅在机器人ID为 2 (红方工程) 或 102 (蓝方工程) 时显示
+    visible: dataStore.robotStatic_robot_id === 2 || dataStore.robotStatic_robot_id === 102
+    z: 1000 // 确保层级在最上方
 
+    Rectangle {
+        id: assemblyPanel
+        // 定位到右上角，避开可能的退出/最小化按钮区域
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.topMargin: 60 
+        anchors.rightMargin: 20
+        
+        width: 220
+        height: 120
+        color: "#CC111111" // 深色半透明背景
+        radius: 8
+        border.color: "#44FFFFFF"
+        border.width: 1
+
+        Column {
+            anchors.fill: parent
+            anchors.margins: 12
+            spacing: 10
+
+            // 标题与状态指示
+            RowLayout {
+                width: parent.width
+                Text {
+                    text: "工程装配控制"
+                    color: "#00EBFF"
+                    font.pixelSize: 14
+                    font.bold: true
+                    Layout.fillWidth: true
+                }
+                // 状态指示小灯
+                Rectangle {
+                    width: 8; height: 8; radius: 4
+                    color: dataStore.mqttSend_assemblyOperation === 1 ? "#00FF00" : "#555555"
+                }
+            }
+
+            // 难度选择 (1-4)
+            Row {
+                spacing: 4
+                property var levels: ["简单", "中等", "困难", "专家"]
+                Repeater {
+                    model: 4
+                    Button {
+                        width: 45; height: 26
+                        enabled: dataStore.mqttSend_assemblyOperation !== 1 // 装配中禁止修改难度
+                        
+                        background: Rectangle {
+                            color: dataStore.mqttSend_assemblyDifficulty === (modelData + 1) ? "#00EBFF" : "#333333"
+                            radius: 3
+                            opacity: parent.enabled ? 1.0 : 0.5
+                        }
+
+                        contentItem: Text {
+                            text: parent.parent.levels[modelData]
+                            color: dataStore.mqttSend_assemblyDifficulty === (modelData + 1) ? "black" : "white"
+                            font.pixelSize: 10
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                        }
+
+                        onClicked: dataStore.mqttSend_assemblyDifficulty = modelData + 1
+                    }
+                }
+            }
+
+            // 操作按钮切换逻辑
+            RowLayout {
+                width: parent.width
+                spacing: 8
+
+                // 确认/装配中 按钮
+                Button {
+                    Layout.fillWidth: true
+                    height: 35
+                    // 状态切换文字：如果操作码为1，显示“装配中...”，否则显示“确认装配”
+                    text: dataStore.mqttSend_assemblyOperation === 1 ? "装配中..." : "确认装配"
+                    
+                    background: Rectangle {
+                        // 装配中变为深绿色，正常为明亮绿
+                        color: dataStore.mqttSend_assemblyOperation === 1 ? "#155724" : "#28a745"
+                        radius: 4
+                    }
+                    
+                    contentItem: Text {
+                        text: parent.text
+                        color: "white"
+                        font.bold: true
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
+
+                    onClicked: {
+                        if (dataStore.mqttSend_assemblyOperation !== 1) {
+                            dataStore.mqttSend_assemblyOperation = 1
+                            console.log("[Assembly] 开始装配，难度: " + dataStore.mqttSend_assemblyDifficulty)
+                        }
+                    }
+                }
+
+                // 取消按钮
+                Button {
+                    width: 60; height: 35
+                    text: "取消"
+                    // 只有在装配状态下，取消按钮才高亮，否则半透明
+                    opacity: dataStore.mqttSend_assemblyOperation === 1 ? 1.0 : 0.6
+                    
+                    background: Rectangle {
+                        color: "#dc3545"
+                        radius: 4
+                    }
+
+                    contentItem: Text {
+                        text: parent.text
+                        color: "white"
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
+
+                    onClicked: {
+                        dataStore.mqttSend_assemblyOperation = 2 // 发送取消指令
+                        console.log("[Assembly] 已取消装配任务")
+                    }
+                }
+            }
+        }
+    }
+}
 }

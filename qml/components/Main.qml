@@ -265,8 +265,8 @@ ApplicationWindow {
         property int mqttSend_mapClickScreenY: 0
         property real mqttSend_mapClickMapX: 0.0
         property real mqttSend_mapClickMapY: 0.0
-        property int mqttSend_assemblyOperation: 1
-        property int mqttSend_assemblyDifficulty: 1
+        property int mqttSend_assemblyOperation: 0
+        property int mqttSend_assemblyDifficulty: 0
         property int mqttSend_robotPerfShooter: 1
         property int mqttSend_robotPerfChassis: 1
         property int mqttSend_robotPerfSentryControl: 0
