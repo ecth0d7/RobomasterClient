@@ -15,10 +15,11 @@
         <file>../resources/大窗.png</file>
         <file>../resources/关闭.png</file>
         <file>../resources/控制框.png</file>
-         <file>../resources/模块在线.png</file>
-         <file>../resources/模块离线.png</file>
-         <file>../resources/模块不规范.png</file>
-          <file>../resources/地图.png</file>
+        <file>../resources/模块在线.png</file>
+        <file>../resources/模块离线.png</file>
+        <file>../resources/模块不规范.png</file>
+        <file>../resources/地图.png</file>
+        <file>../resources/判罚.png</file>
     </qresource>
 
 </RCC>

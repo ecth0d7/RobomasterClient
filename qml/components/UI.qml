@@ -494,6 +494,7 @@ Item {
 
             // 机器人面板
             Rectangle {
+                id:robotStatusPanel
                 width: 200
                 height: 80
                 color: "#00000080"
@@ -512,6 +513,7 @@ Item {
                 
             }
         }
+
                // 7.5 机器人模块状态显示
         Item {
             id: moduleStatusDisplay
@@ -2136,4 +2138,276 @@ Item {
         function onRadar_target_pos_yChanged() { updateRobotData() }
         function onRadar_toward_angleChanged() { updateRobotData() }
     }
-}}
+}// 19. 自定义数据流显示面板 (独立 Item)
+Rectangle {
+    id: customByteBlockPanel
+    x:robotStatusPanel.x+20;
+    y:robotStatusPanel.y+140;
+    width: robotStatusPanel.width;
+    height: robotStatusPanel.height;
+    z:999;
+    clip: true 
+    color: "#AA000000" // 半透明黑色背景
+    border.color: "#00FFCC" // 使用青色边框增强识别度
+    border.width: 1
+    
+    radius: 4
+
+    Column {
+        anchors.fill: parent
+        anchors.margins: 8
+        spacing: 6
+
+        // 标题栏
+        Row {
+            spacing: 5
+            Rectangle {
+                width: 3; height: 12; color: "#00FFCC"; anchors.verticalCenter: parent.verticalCenter
+            }
+            Text {
+                text: "自定义数据流 (0x0310)"
+                color: "#00FFCC"
+                font.pixelSize: 12
+                font.bold: true
+            }
+        }
+
+        // 分割线
+        Rectangle {
+            width: parent.width
+            height: 1
+            color: "#33FFFFFF"
+        }
+
+        // 数据展示区
+        ScrollView {
+            width: parent.width
+            height: 70
+            clip: true
+            ScrollBar.vertical.policy: ScrollBar.AsNeeded
+
+            Text {
+                width: parent.width
+                // 绑定 Main.qml 中 dataStore 的属性
+                text: dataStore.customByteBlock_data !== "" ? dataStore.customByteBlock_data : "无实时数据..."
+                color: dataStore.customByteBlock_data !== "" ? "#FFFFFF" : "#666666"
+                font.pixelSize: 11
+                font.family: "Consolas" // 使用等宽字体方便观察二进制位
+                wrapMode: Text.WrapAnywhere // 允许在任何地方换行以适应宽度
+                lineHeight: 1.2
+            }
+        }
+    }
+    
+    // 右下角显示频率提示
+    Text {
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        anchors.margins: 4
+        text: "50Hz"
+        font.pixelSize: 9
+        color: "#44FFFFFF"
+    }
+}
+// =============================================
+    // 14. 判罚系统（严格参考事件队列逻辑，修复发送过快不显示问题）
+    // =============================================
+    Item {
+        id: penaltySystem
+        anchors.fill: parent
+        z: 2000000 
+
+        // --- 核心属性 ---
+        property var penaltyQueue: []
+        property bool isShowing: false
+        
+        // 累计数值（常驻显示用）
+        property int yellowCardTotal: 0
+        property int redCardTotal: 0
+
+        // 1. 处理新数据入队
+        function handleNewPenalty(pType, pSec, pNum) {
+            if (pType <= 0) return;
+
+            // 更新左下角面板数值
+            if (pType === 1 || pType === 2) yellowCardTotal = pNum;
+            else if (pType === 3) redCardTotal = pNum;
+
+            // 创建独立对象入队
+            var info = {
+                type: pType,
+                sec: pSec,
+                num: pNum,
+                timestamp: new Date().getTime()
+            };
+            
+            penaltyQueue.push(info);
+            console.log("[判罚系统] 收到新数据，当前队列长度:", penaltyQueue.length);
+            
+            // 如果当前没在显示，则触发显示逻辑
+            if (!isShowing) {
+                showNextPenalty();
+            }
+        }
+
+        // 2. 显示下一个判罚 (逻辑同事件通知)
+        function showNextPenalty() {
+            if (penaltyQueue.length === 0) {
+                isShowing = false;
+                penaltyPopup.visible = false;
+                return;
+            }
+
+            isShowing = true;
+            var current = penaltyQueue[0]; // 只看，先不删
+
+            // 更新弹窗内容
+            popupTitle.text = getPenaltyTitle(current.type);
+            popupDesc.text = "持续时间: " + (current.sec === 0 ? "直至比赛结束" : current.sec + "s") + 
+                            " | 当前累计次数: " + current.num;
+            
+            penaltyPopup.visible = true;
+            
+            // 启动动画序列
+            penaltyShowAnimation.start();
+        }
+
+        // 3. 完成当前显示 (由动画结束时调用)
+        function finishCurrentPenalty() {
+            if (penaltyQueue.length > 0) {
+                penaltyQueue.shift(); // 此时才弹出队列
+            }
+            
+            penaltyPopup.visible = false;
+            
+            if (penaltyQueue.length > 0) {
+                // 使用 Timer 短暂延迟，防止动画状态机冲突
+                nextPenaltyTimer.start();
+            } else {
+                isShowing = false;
+            }
+        }
+
+        // 辅助：延迟触发器
+        Timer {
+            id: nextPenaltyTimer
+            interval: 50
+            repeat: false
+            onTriggered: penaltySystem.showNextPenalty()
+        }
+
+        function getPenaltyTitle(type) {
+            switch(type) {
+                case 1: return "黄牌警告"; case 2: return "双方黄牌";
+                case 3: return "红牌罚下"; case 4: return "底盘超功率";
+                case 5: return "机构超热量"; case 6: return "射击超频率";
+                default: return "违规判罚";
+            }
+        }
+
+        // 监听 C++ 信号
+        Connections {
+            target: penaltyInfoHandler 
+            function onPenaltyInfoUpdated(map) {
+                if (!map) return;
+                var pType = map.penalty_type || 0;
+                var pSec = map.penalty_effect_sec || 0;
+                var pNum = map.total_penalty_num || 0;
+                if (pType > 0) {
+                    penaltySystem.handleNewPenalty(pType, pSec, pNum);
+                }
+            }
+        }
+
+        // ========== UI A: 弹窗部分 ==========
+        Item {
+            id: penaltyPopup
+            anchors.fill: parent
+            visible: false
+            opacity: 0
+
+            Rectangle { anchors.fill: parent; color: "#AA000000" }
+
+            Item {
+                width: 800; height: 500; anchors.centerIn: parent
+                Image {
+                    source: "qrc:images/resources/判罚.png"
+                    anchors.fill: parent; fillMode: Image.PreserveAspectFit; opacity: 0.8
+                }
+                Column {
+                    anchors.centerIn: parent; spacing: 30; width: parent.width
+                    Text {
+                        id: popupTitle
+                        width: parent.width; horizontalAlignment: Text.AlignHCenter
+                        color: Qt.rgba(1.0, 0.8, 0.8, 0.7); font.pixelSize: 72; font.bold: true
+                        style: Text.Outline; styleColor: Qt.rgba(0, 0, 0, 0.5)
+                    }
+                    Text {
+                        id: popupDesc
+                        width: parent.width; horizontalAlignment: Text.AlignHCenter
+                        color: Qt.rgba(1.0, 0.8, 0.8, 0.6); font.pixelSize: 26; font.bold: true
+                        style: Text.Outline; styleColor: Qt.rgba(0, 0, 0, 0.4)
+                    }
+                }
+            }
+
+            Rectangle {
+                anchors.bottom: parent.bottom; anchors.horizontalCenter: parent.horizontalCenter
+                anchors.bottomMargin: 100; width: 400; height: 4; radius: 2; color: "#22FFFFFF"
+                Rectangle {
+                    id: penaltyProgressBar
+                    height: parent.height; radius: 2; color: "#FFCCCC"; opacity: 0.6; width: 0
+                }
+            }
+
+            // 核心动画序列：严格模仿事件通知的逻辑执行顺序
+            SequentialAnimation {
+                id: penaltyShowAnimation
+                
+                // 1. 淡入
+                NumberAnimation { target: penaltyPopup; property: "opacity"; from: 0; to: 1; duration: 250 }
+                
+                // 2. 进度条与停留
+                PropertyAnimation { 
+                    target: penaltyProgressBar; property: "width"; 
+                    from: 400; to: 0; duration: 2000 
+                }
+                
+                // 3. 淡出
+                NumberAnimation { target: penaltyPopup; property: "opacity"; from: 1; to: 0; duration: 250 }
+                
+                // 4. 触发完成回调
+                ScriptAction {
+                    script: penaltySystem.finishCurrentPenalty()
+                }
+            }
+        }
+
+        // ========== UI B: 左下角常驻面板 ==========
+        Rectangle {
+            id: counterPanel
+            anchors.left: parent.left; anchors.bottom: parent.bottom; anchors.margins: 30
+            width: 170; height: 65; color: "#66000000"; radius: 8; border.color: "#33FFFFFF"
+            Column {
+                anchors.centerIn: parent; spacing: 6
+                Row {
+                    spacing: 10
+                    Rectangle { width: 12; height: 16; color: "#FFD700"; radius: 2; anchors.verticalCenter: parent.verticalCenter }
+                    Text {
+                        text: "累计黄牌: " + penaltySystem.yellowCardTotal
+                        color: Qt.rgba(1.0, 0.8, 0.8, 0.8); font.pixelSize: 16; font.bold: true
+                    }
+                }
+                Row {
+                    spacing: 10
+                    Rectangle { width: 12; height: 16; color: "#FF4444"; radius: 2; anchors.verticalCenter: parent.verticalCenter }
+                    Text {
+                        text: "累计红牌: " + penaltySystem.redCardTotal
+                        color: Qt.rgba(1.0, 0.8, 0.8, 0.8); font.pixelSize: 16; font.bold: true
+                    }
+                }
+            }
+        }
+    }
+
+}
