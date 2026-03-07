@@ -2545,4 +2545,145 @@ Item {
         }
     }
 }
+// ========== 步兵/英雄/哨兵性能体系面板 (右上角) ==========
+Item {
+    id: perfSelectionOverlay
+    anchors.fill: parent
+    // 逻辑判定：步兵(3,4,5 / 103,104,105)、英雄(1,101)、哨兵(7,107)
+    property var validIds: [1, 3, 4, 5, 7, 101, 103, 104, 105, 107]
+    visible: validIds.indexOf(dataStore.robotStatic_robot_id) !== -1
+    z: 1001
+
+    // 内部临时变量：用于实现“先选好，点确认再发送”的逻辑
+    property int tempShooter: dataStore.robotPerfSync_shooter
+    property int tempChassis: dataStore.robotPerfSync_chassis
+    property int tempSentry: dataStore.robotPerfSync_sentry_control
+
+    Rectangle {
+        id: perfPanel
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.topMargin: 200 // 位于装配面板下方，避免重叠
+        anchors.rightMargin: 20
+        width: 240
+        height: isSentry ? 220 : 180 // 哨兵多一行控制选项
+        color: "#CC1A1A1A"
+        radius: 8
+        border.color: "#44FFFFFF"
+
+        property bool isSentry: dataStore.robotStatic_robot_id === 7 || dataStore.robotStatic_robot_id === 107
+
+        Column {
+            anchors.fill: parent
+            anchors.margins: 12
+            spacing: 12
+
+            Text {
+                text: "性能体系配置"
+                color: "#FFD700"
+                font.pixelSize: 14
+                font.bold: true
+            }
+
+            // 1. 发射机构 (Shooter)
+            Column {
+                spacing: 5
+                Text { text: "发射机构:"; color: "#AAAAAA"; font.pixelSize: 11 }
+                Row {
+                    spacing: 4
+                    Repeater {
+                        model: ["冷却", "爆发", "近战", "远程"]
+                        Button {
+                            width: 50; height: 26
+                            background: Rectangle {
+                                color: (perfSelectionOverlay.tempShooter === index + 1) ? "#FFD700" : "#333333"
+                                radius: 3
+                            }
+                            contentItem: Text { text: modelData; font.pixelSize: 10; color: (perfSelectionOverlay.tempShooter === index + 1) ? "black" : "white"; horizontalAlignment: Text.AlignHCenter }
+                            onClicked: perfSelectionOverlay.tempShooter = index + 1
+                        }
+                    }
+                }
+            }
+
+            // 2. 底盘 (Chassis)
+            Column {
+                spacing: 5
+                Text { text: "底盘体系:"; color: "#AAAAAA"; font.pixelSize: 11 }
+                Row {
+                    spacing: 4
+                    Repeater {
+                        model: ["血量", "功率", "近战", "远程"]
+                        Button {
+                            width: 50; height: 26
+                            background: Rectangle {
+                                color: (perfSelectionOverlay.tempChassis === index + 1) ? "#FFD700" : "#333333"
+                                radius: 3
+                            }
+                            contentItem: Text { text: modelData; font.pixelSize: 10; color: (perfSelectionOverlay.tempChassis === index + 1) ? "black" : "white"; horizontalAlignment: Text.AlignHCenter }
+                            onClicked: perfSelectionOverlay.tempChassis = index + 1
+                        }
+                    }
+                }
+            }
+
+            // 3. 哨兵控制 (仅哨兵显示)
+            Column {
+                spacing: 5
+                visible: perfPanel.isSentry
+                Text { text: "哨兵控制:"; color: "#AAAAAA"; font.pixelSize: 11 }
+                Row {
+                    spacing: 4
+                    Repeater {
+                        model: ["自动", "半自动"]
+                        Button {
+                            width: 104; height: 26
+                            background: Rectangle {
+                                color: (perfSelectionOverlay.tempSentry === index) ? "#FFD700" : "#333333"
+                                radius: 3
+                            }
+                            contentItem: Text { text: modelData; font.pixelSize: 10; color: (perfSelectionOverlay.tempSentry === index) ? "black" : "white"; horizontalAlignment: Text.AlignHCenter }
+                            onClicked: perfSelectionOverlay.tempSentry = index
+                        }
+                    }
+                }
+            }
+
+            // 确认发送按钮
+            Button {
+                width: parent.width
+                height: 35
+                text: "确认修改"
+                
+                background: Rectangle {
+                    // 如果临时值和当前同步值不一致，显示高亮提示需要确认
+                    color: (perfSelectionOverlay.tempShooter !== dataStore.robotPerfSync_shooter || 
+                            perfSelectionOverlay.tempChassis !== dataStore.robotPerfSync_chassis ||
+                            perfSelectionOverlay.tempSentry !== dataStore.robotPerfSync_sentry_control) ? "#FF8C00" : "#444444"
+                    radius: 4
+                }
+
+                contentItem: Text {
+                    text: parent.text
+                    color: "white"
+                    font.bold: true
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+
+                onClicked: {
+                    // 只有点确认时，才将临时变量的值赋给 Main.qml 中的发送属性
+                    dataStore.mqttSend_robotPerfShooter = perfSelectionOverlay.tempShooter;
+                    dataStore.mqttSend_robotPerfChassis = perfSelectionOverlay.tempChassis;
+                    dataStore.mqttSend_robotPerfSentryControl = perfSelectionOverlay.tempSentry;
+                    
+                    console.log("[Performance] 已同步选择并触发发送: ", 
+                                dataStore.mqttSend_robotPerfShooter, 
+                                dataStore.mqttSend_robotPerfChassis, 
+                                dataStore.mqttSend_robotPerfSentryControl);
+                }
+            }
+        }
+    }
+}
 }
