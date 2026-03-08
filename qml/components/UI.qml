@@ -2422,7 +2422,7 @@ Item {
         // 定位到右上角，避开可能的退出/最小化按钮区域
         anchors.top: parent.top
         anchors.right: parent.right
-        anchors.topMargin: 60 
+        anchors.topMargin: 150
         anchors.rightMargin: 20
         
         width: 220
@@ -2545,116 +2545,119 @@ Item {
         }
     }
 }
-// ========== 科技核心状态同步面板 (独立模块) ==========
+// ========== 科技核心状态同步面板 (独立 Item - X/Y 绝对定位版) ==========
 Item {
-    id: techCoreOverlay
-    // 仅在工程机器人(2, 102)或观测者模式下显示
-    visible: dataStore.robotStatic_robot_id === 2 || dataStore.robotStatic_robot_id === 102 || dataStore.isObserverMode
+    id: techCoreSyncOverlay
+    // 逻辑判定：仅在机器人ID为 2 (红方工程) 或 102 (蓝方工程) 时显示
+    visible: dataStore.robotStatic_robot_id === 2 || dataStore.robotStatic_robot_id === 102
+    z: 1001 
+
+    // --- 核心定位逻辑：利用 id.属性 显式绑定 ---
+    // 横向与装配控制面板对齐
+    x: assemblyPanel.x
+    // 纵向位于装配控制面板上方，间距 8 像素
+    y: assemblyPanel.y - height - 8
     
-    // 绝对定位：参考比分栏(scoreBar)的位置
-    anchors.verticalCenter: scoreBar.verticalCenter 
-    anchors.left: scoreBar.right
-    anchors.leftMargin: 20 // 与比分栏保持一定间距
-    
-    width: 260
-    height: 40
+    width: 220
+    height: 95 // 增加高度以展示所有协议字段
 
-    Rectangle {
-        anchors.fill: parent
-        color: "#CC111111" // 深色半透明背景
-        radius: 6
-        border.color: "#44FFFFFF"
-        border.width: 1
-
-        RowLayout {
-            anchors.fill: parent
-            anchors.margins: 8
-            spacing: 10
-
-            // 1. 状态指示图标
-            Rectangle {
-                width: 12; height: 12; radius: 6
-                color: getStatusColor(dataStore.techCore_status)
-                
-                // 呼吸灯动画：当处于移动中或装配中时闪烁
-                SequentialAnimation on opacity {
-                    running: dataStore.techCore_status >= 2 && dataStore.techCore_status <= 4
-                    loops: Animation.Infinite
-                    NumberAnimation { from: 1.0; to: 0.3; duration: 800 }
-                    NumberAnimation { from: 0.3; to: 1.0; duration: 800 }
-                }
-            }
-
-            // 2. 核心状态文字描述
-            Column {
-                Layout.fillWidth: true
-                Text {
-                    text: "科技核心: " + getStatusText(dataStore.techCore_status)
-                    color: "white"
-                    font.pixelSize: 11
-                    font.bold: true
-                }
-                Text {
-                    text: "最高难度限制: " + ["-", "简单", "中等", "困难", "专家"][dataStore.techCore_maximum_difficulty_level]
-                    color: "#888888"
-                    font.pixelSize: 9
-                }
-            }
-
-            // 3. 倒计时模块 (仅在4级装配有时间时显示)
-            Column {
-                visible: dataStore.techCore_remain_time_all > 0
-                spacing: 0
-                Text {
-                    text: "总 " + dataStore.techCore_remain_time_all + "s"
-                    color: "#FFD700"
-                    font.pixelSize: 10
-                    font.bold: true
-                }
-                Text {
-                    text: "步 " + dataStore.techCore_remain_time_step + "s"
-                    color: "#FF4444"
-                    font.pixelSize: 9
-                }
-            }
-
-            // 4. 敌方状态快照
-            Rectangle {
-                width: 45; height: 28
-                color: "#22FFFFFF"
-                radius: 3
-                Column {
-                    anchors.centerIn: parent
-                    Text { text: "敌方核心"; color: "#FF4444"; font.pixelSize: 7 }
-                    Text { 
-                        text: ["无", "非4级", "4级"][dataStore.techCore_enemy_core_status] || "-"
-                        color: "white"; font.pixelSize: 9; font.bold: true 
-                    }
-                }
-            }
-        }
-    }
-
-    // --- 状态枚举转换逻辑 ---
+    // --- 内部逻辑函数 ---
     function getStatusText(status) {
         var map = {
-            1: "未进入装配",
-            2: "核心移动中...",
-            3: "就绪(可开始)",
-            4: "步骤完成(待续)",
-            5: "装配成功",
-            6: "返回中..."
+            1: "未进入装配状态",
+            2: "核心前往装配位...",
+            3: "就绪 (可开始首步)",
+            4: "步骤完成 (待下步)",
+            5: "装配成功 ✅",
+            6: "任务结束 (返回中)"
         };
         return map[status] || "未知状态";
     }
 
     function getStatusColor(status) {
-        switch(status) {
-            case 1: return "#666666"; // 灰色
-            case 2: case 6: return "#00EBFF"; // 青色（移动）
-            case 3: case 4: return "#FFD700"; // 黄色（待交互）
-            case 5: return "#00FF00"; // 绿色（完成）
-            default: return "#FF0000";
+        if (status === 5) return "#00FF00"; // 成功绿
+        if (status === 2 || status === 6) return "#00EBFF"; // 移动蓝
+        if (status === 3 || status === 4) return "#FFD700"; // 交互黄
+        return "#666666"; // 初始灰
+    }
+
+    Rectangle {
+        anchors.fill: parent
+        color: "#E6111111" 
+        radius: 8
+        border.color: "#3300EBFF" 
+        border.width: 1
+
+        Column {
+            anchors.fill: parent
+            anchors.margins: 10
+            spacing: 5
+
+            // 第一行：标题与状态灯
+            RowLayout {
+                width: parent.width
+                Text {
+                    text: "科技核心状态同步"
+                    color: "#888888"
+                    font.pixelSize: 10
+                }
+                Rectangle {
+                    width: 8; height: 8; radius: 4
+                    color: techCoreSyncOverlay.getStatusColor(dataStore.techCore_status)
+                    SequentialAnimation on opacity {
+                        running: dataStore.techCore_status >= 2 && dataStore.techCore_status <= 4
+                        loops: Animation.Infinite
+                        NumberAnimation { from: 1.0; to: 0.2; duration: 600 }
+                        NumberAnimation { from: 0.2; to: 1.0; duration: 600 }
+                    }
+                }
+            }
+
+            // 第二行：当前状态文字 (status)
+            Text {
+                text: techCoreSyncOverlay.getStatusText(dataStore.techCore_status)
+                color: "#00EBFF"
+                font.pixelSize: 14
+                font.bold: true
+            }
+
+            // 第三行：最高难度 & 敌方状态 (maximum_difficulty_level & enemy_core_status)
+            Row {
+                spacing: 15
+                Text { 
+                    text: "最高难度: Lvl." + dataStore.techCore_maximum_difficulty_level
+                    color: "#FFFFFF"; font.pixelSize: 10 
+                }
+                Text { 
+                    text: "敌方: " + (["无装配", "非4级", "4级"][dataStore.techCore_enemy_core_status] || "未知")
+                    color: dataStore.techCore_enemy_core_status === 2 ? "#FF4444" : "#AAAAAA"
+                    font.pixelSize: 10
+                    font.bold: dataStore.techCore_enemy_core_status === 2
+                }
+            }
+
+            // 第四行：时间信息 (remain_time_all & remain_time_step)
+            // 仅在己方进行四级装配（有剩余时间）时可见
+            Row {
+                visible: dataStore.techCore_remain_time_all > 0
+                spacing: 12
+                Rectangle {
+                    width: 80; height: 16; color: "#33FFD700"; radius: 2
+                    Text {
+                        anchors.centerIn: parent
+                        text: "总计: " + dataStore.techCore_remain_time_all + "s"
+                        color: "#FFD700"; font.pixelSize: 10; font.bold: true
+                    }
+                }
+                Rectangle {
+                    width: 80; height: 16; color: "#33FF4444"; radius: 2
+                    Text {
+                        anchors.centerIn: parent
+                        text: "步余: " + dataStore.techCore_remain_time_step + "s"
+                        color: "#FF4444"; font.pixelSize: 10; font.bold: true
+                    }
+                }
+            }
         }
     }
 }
