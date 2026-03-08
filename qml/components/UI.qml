@@ -2843,4 +2843,128 @@ Item {
         }
     }
 }
+// --- 通用指令交互面板 (H 键触发) ---
+Rectangle {
+    id: commonCmdOverlay
+    anchors.centerIn: parent
+    width: 340
+    height: 400
+    color: "#F21A1A1A" // 深色半透明背景
+    border.color: "#00CCFF" // 赛博蓝边框
+    border.width: 2
+    radius: 10
+    z: 2000 // 确保在最顶层
+    
+    // 绑定到 dataStore 的显示状态
+    visible: dataStore.isCommonCmdVisible
+
+    // 逻辑：当面板显示时，强制获取焦点以允许键盘输入参数
+    onVisibleChanged: {
+        if (visible) {
+            commonCmdOverlay.forceActiveFocus();
+        }
+    }
+
+    // 拦截鼠标事件，防止操作面板时误触底层的地图或按钮
+    MouseArea {
+        anchors.fill: parent
+        onClicked: (mouse) => {
+            mouse.accepted = true;
+            commonCmdOverlay.forceActiveFocus();
+        }
+    }
+
+    ColumnLayout {
+        anchors.fill: parent
+        anchors.margins: 25
+        spacing: 15
+
+        Text {
+            text: "机器人通用指令 (H)"
+            color: "#00CCFF"
+            font.pixelSize: 20
+            font.bold: true
+            Layout.alignment: Qt.AlignHCenter
+        }
+
+        // --- 1. 指令类型选择 (包含所有 6 种协议枚举) ---
+        ComboBox {
+            id: typeSelector
+            Layout.fillWidth: true
+            model: [
+                { text: "1. 兑换17mm弹药", val: 1 },
+                { text: "2. 兑换42mm弹药", val: 2 },
+                { text: "3. 确认复活", val: 3 },
+                { text: "4. 兑换立即复活", val: 4 },
+                { text: "5. 远程兑换发弹量", val: 5 },
+                { text: "6. 远程兑换血量", val: 6 }
+            ]
+            textRole: "text"
+            
+            // 自动切换默认参数逻辑
+            onCurrentIndexChanged: {
+                if (currentIndex === 0) paramInputField.text = "10"; // 17mm 通常以10为单位
+                else if (currentIndex >= 2) paramInputField.text = "1"; // 复活类通常为1
+            }
+        }
+
+        // --- 2. 参数输入框 ---
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 5
+            Text { text: "指令参数 (Param):"; color: "#AAAAAA"; font.pixelSize: 12 }
+            
+            TextField {
+                id: paramInputField
+                Layout.fillWidth: true
+                text: "10"
+                color: "white"
+                placeholderText: "请输入数值..."
+                selectByMouse: true
+                focus: true // 允许获取焦点
+                
+                background: Rectangle {
+                    color: paramInputField.activeFocus ? "#333333" : "#222222"
+                    border.color: paramInputField.activeFocus ? "#00CCFF" : "#555555"
+                    radius: 4
+                }
+            }
+        }
+
+        Item { Layout.fillHeight: true } // 弹性占位
+
+        // --- 3. 操作按钮 ---
+        RowLayout {
+            Layout.fillWidth: true
+            spacing: 10
+
+            Button {
+                text: "确认下发"
+                Layout.fillWidth: true
+                Layout.preferredHeight: 40
+                
+                onClicked: {
+                    // 1. 将界面数据写入 dataStore
+                    dataStore.mqttSend_commonCmdType = typeSelector.model[typeSelector.currentIndex].val;
+                    dataStore.mqttSend_commonCmdParam = parseInt(paramInputField.text) || 0;
+                    
+                    // 2. 触发 MqttDataSender 里的单次发送函数 (不干扰其他定时器)
+                    // 注意：这里的 mqttSender 是 Main.qml 中定义的 id
+                    mqttSender.triggerCommonCommand(); 
+                    
+                    // 3. 关闭面板
+                    dataStore.isCommonCmdVisible = false;
+                    console.log("[UI] 已请求发送指令 Type:", dataStore.mqttSend_commonCmdType);
+                }
+            }
+
+            Button {
+                text: "取消"
+                Layout.fillWidth: true
+                Layout.preferredHeight: 40
+                onClicked: dataStore.isCommonCmdVisible = false
+            }
+        }
+    }
+}
 }

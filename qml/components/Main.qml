@@ -19,6 +19,8 @@ ApplicationWindow {
     // ==============================================
     QtObject {
         id: dataStore
+        // 新增：通用指令面板显示状态
+        property bool isCommonCmdVisible: false
         
         // 1. 窗口状态（保留数据，逻辑移到UI层）
         property bool isMaximized: false
@@ -253,7 +255,7 @@ ApplicationWindow {
         property string mousePosText: ""         // 鼠标位置
         property string wheelInfoText: ""        // 滚轮信息
         // 27. MQTT发送参数
-        property bool mqttSend_enableAutoSend: true
+        property bool mqttSend_enableAutoSend: false
         property string mqttSend_customControlHexData: ""
         property int mqttSend_mapClickIsSendAll: 0
         property string mqttSend_mapClickRobotIdHex: "00000000000000"
@@ -496,11 +498,17 @@ Connections {
     function onKeyPressed(key, keyName, text, isLongPress, comboKeys) {
         var bitValue = 0;
         var now = new Date().getTime();
-        
-        // 使用传入的 keyName（已经由 C++ 的 keyToName 函数转换）
         var displayName = keyName;
         
-        // 记录所有按键（用于UI显示）- 使用 C++ 提供的 keyName
+        // --- 新增：处理 H 键弹出/隐藏面板 ---
+        if (displayName.toLowerCase() === "h") {
+            dataStore.isCommonCmdVisible = !dataStore.isCommonCmdVisible;
+            console.log("通用指令面板状态切换:", dataStore.isCommonCmdVisible);
+            updateKeyInfoText();
+            return; // 处理完 H 键直接返回，不参与后续协议位掩码计算
+        }
+
+        // 记录所有按键（用于UI显示）
         dataStore.allPressedKeys[key] = {
             name: displayName,
             time: now,
@@ -858,6 +866,7 @@ Connections {
 
         
     }
+    
 
     // ==============================================
     // 引入UI绘制层（传递主窗口引用）
@@ -870,6 +879,7 @@ Connections {
         getStageText: root.getStageText
         // updateKeyInfoText: root.updateKeyInfoText
         mainWindow: root  // 新增：传递主窗口引用，用于窗口控制
+       property var mqttSenderInstance: mqttSender
        
     }
 

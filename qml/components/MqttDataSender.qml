@@ -173,14 +173,23 @@ Item {
         onTriggered: sendAirSupportCommand()
     }
 
+// ========== 1. 新增：手动触发接口 ==========
+function triggerCommonCommand() {
+    // 逻辑：立即启动一次定时器
+    // 使用定时器是为了确保在极短时间内连续点击时，能受到 100ms (10Hz) 的协议频率保护
+    commonCommandTimer.restart(); 
+}
     // 10. 通用指令定时器（最高10Hz）
-    Timer {
-        id: commonCommandTimer
-        interval: root.commonCommandSendInterval
-        repeat: true
-        running: root.enableAutoSend
-        onTriggered: sendCommonCommand()
+  //修改：定时器配置 ==========
+Timer {
+    id: commonCommandTimer
+    interval: root.commonCommandSendInterval // 100ms
+    repeat: false // 关键：设置为单次执行
+    running: false // 默认不运行，不随 startAllTimers 启动
+    onTriggered: {
+        sendCommonCommand(); // 时间到，执行真正的 C++ 发送
     }
+}
 
     // ========== 1. 发送键鼠控制数据 ==========
    // 修改 sendKeyboardMouseData 函数
