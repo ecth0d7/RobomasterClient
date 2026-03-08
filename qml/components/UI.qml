@@ -2545,6 +2545,119 @@ Item {
         }
     }
 }
+// ========== 科技核心状态同步面板 (独立模块) ==========
+Item {
+    id: techCoreOverlay
+    // 仅在工程机器人(2, 102)或观测者模式下显示
+    visible: dataStore.robotStatic_robot_id === 2 || dataStore.robotStatic_robot_id === 102 || dataStore.isObserverMode
+    
+    // 绝对定位：参考比分栏(scoreBar)的位置
+    anchors.verticalCenter: scoreBar.verticalCenter 
+    anchors.left: scoreBar.right
+    anchors.leftMargin: 20 // 与比分栏保持一定间距
+    
+    width: 260
+    height: 40
+
+    Rectangle {
+        anchors.fill: parent
+        color: "#CC111111" // 深色半透明背景
+        radius: 6
+        border.color: "#44FFFFFF"
+        border.width: 1
+
+        RowLayout {
+            anchors.fill: parent
+            anchors.margins: 8
+            spacing: 10
+
+            // 1. 状态指示图标
+            Rectangle {
+                width: 12; height: 12; radius: 6
+                color: getStatusColor(dataStore.techCore_status)
+                
+                // 呼吸灯动画：当处于移动中或装配中时闪烁
+                SequentialAnimation on opacity {
+                    running: dataStore.techCore_status >= 2 && dataStore.techCore_status <= 4
+                    loops: Animation.Infinite
+                    NumberAnimation { from: 1.0; to: 0.3; duration: 800 }
+                    NumberAnimation { from: 0.3; to: 1.0; duration: 800 }
+                }
+            }
+
+            // 2. 核心状态文字描述
+            Column {
+                Layout.fillWidth: true
+                Text {
+                    text: "科技核心: " + getStatusText(dataStore.techCore_status)
+                    color: "white"
+                    font.pixelSize: 11
+                    font.bold: true
+                }
+                Text {
+                    text: "最高难度限制: " + ["-", "简单", "中等", "困难", "专家"][dataStore.techCore_maximum_difficulty_level]
+                    color: "#888888"
+                    font.pixelSize: 9
+                }
+            }
+
+            // 3. 倒计时模块 (仅在4级装配有时间时显示)
+            Column {
+                visible: dataStore.techCore_remain_time_all > 0
+                spacing: 0
+                Text {
+                    text: "总 " + dataStore.techCore_remain_time_all + "s"
+                    color: "#FFD700"
+                    font.pixelSize: 10
+                    font.bold: true
+                }
+                Text {
+                    text: "步 " + dataStore.techCore_remain_time_step + "s"
+                    color: "#FF4444"
+                    font.pixelSize: 9
+                }
+            }
+
+            // 4. 敌方状态快照
+            Rectangle {
+                width: 45; height: 28
+                color: "#22FFFFFF"
+                radius: 3
+                Column {
+                    anchors.centerIn: parent
+                    Text { text: "敌方核心"; color: "#FF4444"; font.pixelSize: 7 }
+                    Text { 
+                        text: ["无", "非4级", "4级"][dataStore.techCore_enemy_core_status] || "-"
+                        color: "white"; font.pixelSize: 9; font.bold: true 
+                    }
+                }
+            }
+        }
+    }
+
+    // --- 状态枚举转换逻辑 ---
+    function getStatusText(status) {
+        var map = {
+            1: "未进入装配",
+            2: "核心移动中...",
+            3: "就绪(可开始)",
+            4: "步骤完成(待续)",
+            5: "装配成功",
+            6: "返回中..."
+        };
+        return map[status] || "未知状态";
+    }
+
+    function getStatusColor(status) {
+        switch(status) {
+            case 1: return "#666666"; // 灰色
+            case 2: case 6: return "#00EBFF"; // 青色（移动）
+            case 3: case 4: return "#FFD700"; // 黄色（待交互）
+            case 5: return "#00FF00"; // 绿色（完成）
+            default: return "#FF0000";
+        }
+    }
+}
 // ========== 步兵/英雄/哨兵性能体系面板 (右上角 - 修复逻辑版) ==========
 Item {
     id: perfSelectionOverlay
