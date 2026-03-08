@@ -2545,7 +2545,7 @@ Item {
         }
     }
 }
-// ========== 步兵/英雄/哨兵性能体系面板 (右上角) ==========
+// ========== 步兵/英雄/哨兵性能体系面板 (右上角 - 修复逻辑版) ==========
 Item {
     id: perfSelectionOverlay
     anchors.fill: parent
@@ -2554,52 +2554,78 @@ Item {
     visible: validIds.indexOf(dataStore.robotStatic_robot_id) !== -1
     z: 1001
 
-    // 内部临时变量：用于实现“先选好，点确认再发送”的逻辑
-    property int tempShooter: dataStore.robotPerfSync_shooter
-    property int tempChassis: dataStore.robotPerfSync_chassis
-    property int tempSentry: dataStore.robotPerfSync_sentry_control
+    // 内部临时变量：初始值设为-1，确保第一次加载时能从Sync同步
+    property int tempShooter: -1
+    property int tempChassis: -1
+    property int tempSentry: -1
+
+    // 当面板打开或Sync数据变化且用户还没改时，同步一次数据
+    // 注意：这里用简单的赋值，不要用属性绑定
+    onVisibleChanged: {
+        if (visible) {
+            tempShooter = dataStore.robotPerfSync_shooter
+            tempChassis = dataStore.robotPerfSync_chassis
+            tempSentry = dataStore.robotPerfSync_sentry_control
+        }
+    }
 
     Rectangle {
         id: perfPanel
         anchors.top: parent.top
         anchors.right: parent.right
-        anchors.topMargin: 200 // 位于装配面板下方，避免重叠
+        anchors.topMargin: 200 
         anchors.rightMargin: 20
-        width: 240
-        height: isSentry ? 220 : 180 // 哨兵多一行控制选项
-        color: "#CC1A1A1A"
+        width: 260
+        height: isSentry ? 330 : 260 
+        color: "#E61A1A1A"
         radius: 8
-        border.color: "#44FFFFFF"
+        border.color: "#66FFFFFF"
+        border.width: 1
 
         property bool isSentry: dataStore.robotStatic_robot_id === 7 || dataStore.robotStatic_robot_id === 107
+        
+        // 【核心逻辑修复】：显式判断是否有任何一项不同
+        // 使用具体的 ID 路径确保 QML 引擎能追踪到每一次点击变化
+        property bool hasRealChanges: {
+            var sDiff = (perfSelectionOverlay.tempShooter !== dataStore.robotPerfSync_shooter);
+            var cDiff = (perfSelectionOverlay.tempChassis !== dataStore.robotPerfSync_chassis);
+            var nDiff = isSentry ? (perfSelectionOverlay.tempSentry !== dataStore.robotPerfSync_sentry_control) : false;
+            return sDiff || cDiff || nDiff;
+        }
 
         Column {
             anchors.fill: parent
-            anchors.margins: 12
+            anchors.margins: 15
             spacing: 12
 
             Text {
-                text: "性能体系配置"
-                color: "#FFD700"
-                font.pixelSize: 14
-                font.bold: true
+                text: "性能体系配置 (蓝框为当前)"
+                color: "#FFD700"; font.pixelSize: 14; font.bold: true
             }
 
             // 1. 发射机构 (Shooter)
             Column {
-                spacing: 5
-                Text { text: "发射机构:"; color: "#AAAAAA"; font.pixelSize: 11 }
+                spacing: 4; width: parent.width
+                Text { text: "发射体系:"; color: "#AAAAAA"; font.pixelSize: 10 }
                 Row {
                     spacing: 4
                     Repeater {
                         model: ["冷却", "爆发", "近战", "远程"]
                         Button {
-                            width: 50; height: 26
+                            width: 54; height: 28
                             background: Rectangle {
+                                // 黄色代表你准备改成的
                                 color: (perfSelectionOverlay.tempShooter === index + 1) ? "#FFD700" : "#333333"
-                                radius: 3
+                                radius: 4
+                                // 蓝色框代表服务器现在的
+                                border.color: (dataStore.robotPerfSync_shooter === index + 1) ? "#00EBFF" : "transparent"
+                                border.width: 2
                             }
-                            contentItem: Text { text: modelData; font.pixelSize: 10; color: (perfSelectionOverlay.tempShooter === index + 1) ? "black" : "white"; horizontalAlignment: Text.AlignHCenter }
+                            contentItem: Text { 
+                                text: modelData
+                                color: (perfSelectionOverlay.tempShooter === index + 1) ? "black" : "white"
+                                font.pixelSize: 10; horizontalAlignment: Text.AlignHCenter 
+                            }
                             onClicked: perfSelectionOverlay.tempShooter = index + 1
                         }
                     }
@@ -2608,19 +2634,25 @@ Item {
 
             // 2. 底盘 (Chassis)
             Column {
-                spacing: 5
-                Text { text: "底盘体系:"; color: "#AAAAAA"; font.pixelSize: 11 }
+                spacing: 4; width: parent.width
+                Text { text: "底盘体系:"; color: "#AAAAAA"; font.pixelSize: 10 }
                 Row {
                     spacing: 4
                     Repeater {
                         model: ["血量", "功率", "近战", "远程"]
                         Button {
-                            width: 50; height: 26
+                            width: 54; height: 28
                             background: Rectangle {
                                 color: (perfSelectionOverlay.tempChassis === index + 1) ? "#FFD700" : "#333333"
-                                radius: 3
+                                radius: 4
+                                border.color: (dataStore.robotPerfSync_chassis === index + 1) ? "#00EBFF" : "transparent"
+                                border.width: 2
                             }
-                            contentItem: Text { text: modelData; font.pixelSize: 10; color: (perfSelectionOverlay.tempChassis === index + 1) ? "black" : "white"; horizontalAlignment: Text.AlignHCenter }
+                            contentItem: Text { 
+                                text: modelData
+                                color: (perfSelectionOverlay.tempChassis === index + 1) ? "black" : "white"
+                                font.pixelSize: 10; horizontalAlignment: Text.AlignHCenter 
+                            }
                             onClicked: perfSelectionOverlay.tempChassis = index + 1
                         }
                     }
@@ -2629,38 +2661,48 @@ Item {
 
             // 3. 哨兵控制 (仅哨兵显示)
             Column {
-                spacing: 5
                 visible: perfPanel.isSentry
-                Text { text: "哨兵控制:"; color: "#AAAAAA"; font.pixelSize: 11 }
+                spacing: 4; width: parent.width
+                Text { text: "哨兵模式:"; color: "#AAAAAA"; font.pixelSize: 10 }
                 Row {
                     spacing: 4
                     Repeater {
                         model: ["自动", "半自动"]
                         Button {
-                            width: 104; height: 26
+                            width: 112; height: 28
                             background: Rectangle {
                                 color: (perfSelectionOverlay.tempSentry === index) ? "#FFD700" : "#333333"
-                                radius: 3
+                                radius: 4
+                                border.color: (dataStore.robotPerfSync_sentry_control === index) ? "#00EBFF" : "transparent"
+                                border.width: 2
                             }
-                            contentItem: Text { text: modelData; font.pixelSize: 10; color: (perfSelectionOverlay.tempSentry === index) ? "black" : "white"; horizontalAlignment: Text.AlignHCenter }
+                            contentItem: Text { 
+                                text: modelData
+                                color: (perfSelectionOverlay.tempSentry === index) ? "black" : "white"
+                                font.pixelSize: 10; horizontalAlignment: Text.AlignHCenter 
+                            }
                             onClicked: perfSelectionOverlay.tempSentry = index
                         }
                     }
                 }
             }
 
-            // 确认发送按钮
+            // --- 确认发送按钮 (始终显示，根据 hasRealChanges 变色) ---
             Button {
+                id: finalConfirmBtn
                 width: parent.width
-                height: 35
-                text: "确认修改"
+                height: 40
+                anchors.horizontalCenter: parent.horizontalCenter
                 
+                // 强制刷新：按钮文字直接取决于 hasRealChanges 属性
+                text: perfPanel.hasRealChanges ? "确认修改并下发" : "当前配置已同步"
+
                 background: Rectangle {
-                    // 如果临时值和当前同步值不一致，显示高亮提示需要确认
-                    color: (perfSelectionOverlay.tempShooter !== dataStore.robotPerfSync_shooter || 
-                            perfSelectionOverlay.tempChassis !== dataStore.robotPerfSync_chassis ||
-                            perfSelectionOverlay.tempSentry !== dataStore.robotPerfSync_sentry_control) ? "#FF8C00" : "#444444"
+                    // 有修改：显示鲜艳的橙红色；无修改：显示深灰色
+                    color: perfPanel.hasRealChanges ? "#FF4500" : "#444444"
                     radius: 4
+                    border.color: perfPanel.hasRealChanges ? "white" : "transparent"
+                    border.width: 1
                 }
 
                 contentItem: Text {
@@ -2672,15 +2714,14 @@ Item {
                 }
 
                 onClicked: {
-                    // 只有点确认时，才将临时变量的值赋给 Main.qml 中的发送属性
-                    dataStore.mqttSend_robotPerfShooter = perfSelectionOverlay.tempShooter;
-                    dataStore.mqttSend_robotPerfChassis = perfSelectionOverlay.tempChassis;
-                    dataStore.mqttSend_robotPerfSentryControl = perfSelectionOverlay.tempSentry;
-                    
-                    console.log("[Performance] 已同步选择并触发发送: ", 
-                                dataStore.mqttSend_robotPerfShooter, 
-                                dataStore.mqttSend_robotPerfChassis, 
-                                dataStore.mqttSend_robotPerfSentryControl);
+                    if (perfPanel.hasRealChanges) {
+                        // 真正执行赋值操作，将值塞进 Main.qml 的属性里
+                        dataStore.mqttSend_robotPerfShooter = perfSelectionOverlay.tempShooter
+                        dataStore.mqttSend_robotPerfChassis = perfSelectionOverlay.tempChassis
+                        dataStore.mqttSend_robotPerfSentryControl = perfSelectionOverlay.tempSentry
+                        
+                        console.log("[Performance] 指令已发送: Shooter=" + tempShooter + " Chassis=" + tempChassis)
+                    }
                 }
             }
         }
