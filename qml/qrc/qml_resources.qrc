@@ -20,6 +20,10 @@
         <file>../resources/模块不规范.png</file>
         <file>../resources/地图.png</file>
         <file>../resources/判罚.png</file>
+        <file>../resources/还原.png</file>
+        <file>../resources/比分栏.png</file>
+        <file>../resources/左比分框.png</file>
+        <file>../resources/右比分框.png</file>
     </qresource>
 
 </RCC>

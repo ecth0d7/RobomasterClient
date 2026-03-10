@@ -82,7 +82,8 @@ Item {
         Item {
             anchors.fill: parent
             z: 999
-            visible: dataStore.gameStatus_is_paused || false
+            //苏丹3.2
+            visible: dataStore.gameStatus_is_paused || dataStore.gameStatus_current_stage === 6
 
             Rectangle {
                 anchors.fill: parent
@@ -112,34 +113,48 @@ Item {
             anchors.right: parent.right
             height: 110
             color: "transparent"
-            z: 100
+            z:100
+            clip: false 
 
+            // ========== 新增：比分栏背景图片 ==========苏丹，有问题，置顶不了
+            Image {
+                id: scoreBarBg
+                // 核心：按父组件（比分栏）高度等比缩放
+                anchors.top: root.top  
+                anchors.horizontalCenter: parent.horizontalCenter  // 水平仍居中
+                height: parent.height-40  // 高度和比分栏一致
+                width: implicitWidth   // 宽度按图片原始比例自动计算
+                anchors.centerIn: parent  // 图片在比分栏中居中显示（可选，更美观）
+                
+                
+                // 正确的图片路径（你能显示的那个）
+                //source: "file:///home/suhezhou/hetengchun_202406050127/RobomasterClient/qml/resources/比分栏.png"
+                source: "qrc:/images/resources/比分栏.png"
+                // 关键：保持宽高比，完整显示，不拉伸变形
+                fillMode: Image.PreserveAspectFit
+                smooth: true  // 缩放后更清晰
+                opacity: 1.0
+                z: 99
+                anchors.topMargin: 0
+            }
             // 中间比分/回合/倒计时显示
             Item {
                 id: middleScoreBlock
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: parent.top
-                anchors.topMargin: 10
+                anchors.topMargin: 20
                 width: 120
                 height: 60
-
-                Rectangle {
-                    anchors.fill: parent
-                    color: "#222222"
-                    radius: 10
-                    border.color: "#555555"
-                    border.width: 1
-                    opacity: 0.8
-                }
-
+                z: 101
+                
                 Text {
                     anchors.top: parent.top
                     anchors.horizontalCenter: parent.horizontalCenter
-                    text: "Round: " + (dataStore.gameStatus_current_round > 0 ? dataStore.gameStatus_current_round : "0")
+                    text: "Round: " + (dataStore.gameStatus_current_round > 0 ? dataStore.gameStatus_current_round : "0") + "/" + dataStore.gameStatus_total_rounds
                     font.pixelSize: 9
                     color: "#aaaaaa"
                 }
-
+                //苏丹3.Row Text
                 Row {
                     anchors.centerIn: parent
                     spacing: 8
@@ -147,24 +162,36 @@ Item {
                     Text { text: "-"; font.pixelSize: 14; color: "#ffffff" }
                     Text { text: dataStore.gameStatus_blue_score || 0; font.pixelSize: 18; font.bold: true; color: "#2288ff" }
                 }
-
-                // 比赛倒计时
+                // 比赛倒计时(也是当前阶段倒计时)
                 Text {
                     anchors.bottom: parent.bottom
                     anchors.horizontalCenter: parent.horizontalCenter
-                    text: (dataStore.gameStatus_stage_countdown_sec || 0) + "s"
-                    font.pixelSize: 9
-                    color: (dataStore.gameStatus_stage_countdown_sec || 0) <= 10 ? "#ff3333" : "#ffff00"
+                    // 核心：格式化倒计时为 "m:ss" 格式
+                    text: {
+                        // 获取总秒数，默认0
+                        let totalSec = dataStore.gameStatus_stage_countdown_sec || 0;
+                        // 计算分钟和秒
+                        let minutes = Math.floor(totalSec / 60);
+                        let seconds = totalSec % 60;
+                        // 秒数补0（不足10时显示0x）
+                        let secondsStr = seconds.toString().padStart(2, '0');
+                        // 返回 "分钟:秒" 格式
+                        return `${minutes}:${secondsStr}`;
+                    }
+                    font.pixelSize: 14  // 字体从9放大到14，可根据需要调整
+                    font.bold: true  // 加粗
+                    color: (dataStore.gameStatus_stage_countdown_sec || 0) <= 10 ? "#ff3333" : "#c3f413ff"
+                    // 倒计时≤10秒且处于第4阶段时，闪烁动画（保留原有逻辑）
                     SequentialAnimation on opacity {
                         loops: Animation.Infinite
-                        running: (dataStore.gameStatus_stage_countdown_sec || 0) <= 10 && (dataStore.gameStatus_current_stage || 0) === 4
+                        running: (dataStore.gameStatus_stage_countdown_sec || 0) <= 10 && dataStore.gameStatus_current_stage === 4
                         NumberAnimation { to: 1; duration: 500 }
                         NumberAnimation { to: 0.5; duration: 500 }
                     }
                 }
             }
 
-            // 红方胜利点模块
+            // 红方基地模块（原来是胜利点，现在还按照这个id）
             Item {
                 id: redVictoryPointBar
                 anchors.right: middleScoreBlock.left
@@ -174,28 +201,67 @@ Item {
                 width: 300
                 height: 60
 
-                // 胜利点进度条
+                // 血量进度条
                 Rectangle {
                     id: redProgressBar
                     anchors.bottom: parent.bottom
                     anchors.left: parent.left
                     anchors.right: parent.right
                     height: 20
-                    color: "#550000"
-                    radius: 6
-                    opacity: 0.6
+
+                    // 无敌状态金色边框（仅在 base_status === 0 时显示）
                     Rectangle {
                         anchors.fill: parent
-                        color: "#ff2222"
-                        radius: 6
-                        width: Math.max(0, parent.width * ((dataStore.gameStatus_red_score || 0) / 200))
+                        anchors.margins: -3  // 向外扩展一点，让边框更明显
+                        color: "transparent"
+                        border.color: "#ffd700"  // 金色
+                        border.width: 3
+                        radius: 10
+                        visible: dataStore.globalUnit_base_status === 0
+                        opacity: 0.8
+                        
+                        // 可选：添加呼吸动画效果
                         SequentialAnimation on opacity {
                             loops: Animation.Infinite
-                            running: (dataStore.gameStatus_red_score || 0) <= 0
-                            NumberAnimation { to: 1; duration: 500 }
-                            NumberAnimation { to: 0.3; duration: 500 }
+                            running: dataStore.globalUnit_base_status === 0
+                            NumberAnimation { to: 1; duration: 800 }
+                            NumberAnimation { to: 0.5; duration: 800 }
                         }
                     }
+                    
+                    // 背景色：根据血量值决定
+                    color: {
+                        let health = dataStore.globalUnit_base_health || 0;
+                        return health > 2000 ? "#e05330" : "transparent";  // health>2000时背景为浅红色，否则透明
+                    }
+                    radius: 6
+                    border.width: health > 2000 ? 0 : 1  // 当背景透明时加个边框以便看清
+                    border.color: "#e05330"  // 透明背景时的边框颜色
+                    
+                    // 血量条（前景）
+                    Rectangle {
+                        anchors {
+                            left: parent.left
+                            top: parent.top
+                            bottom: parent.bottom
+                        }
+                        width: Math.min(parent.width, parent.width * (Math.min(dataStore.globalUnit_base_health || 0, 5000) / 5000))
+                        // 血量条颜色：根据血量值决定
+                        color: {
+                            let health = dataStore.globalUnit_base_health || 0;
+                            return health > 2000 ? "#8b0000" : "#e05330";  // >2000深红，≤2000浅红
+                        }
+                        radius: 6
+                    }
+                    
+                    // 可选：显示血量数字（如果需要）
+                    // Text {
+                    //     anchors.centerIn: parent
+                    //     text: (dataStore.globalUnit_base_health || 0) + "/5000"
+                    //     color: "white"
+                    //     font.pixelSize: 10
+                    //     font.bold: true
+                    // }
                 }
 
                 // 校徽（R标）
@@ -204,34 +270,86 @@ Item {
                     anchors.right: redProgressBar.left
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.rightMargin: 10
-                    width: 30
-                    height: 30
+                    width: 40
+                    height: 40
                     source: "data:image/svg+xml;utf8,<svg width='30' height='30'><circle cx='15' cy='15' r='12' fill='#ff2222' stroke='#ffffff' stroke-width='1'/><text x='15' y='20' text-anchor='middle' font-size='16' font-weight='bold' fill='white'>R</text></svg>"
                 }
 
-                // 校名+胜利点数
+                // 校名+战队名
                 Column {
                     anchors.right: redLogo.left
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.rightMargin: 20
                     spacing: 2
                     Text { 
-                        text: "红方战队"; 
+                        text: " 校名"; 
                         font.pixelSize: 12; 
                         color: "#ffffff";
                         horizontalAlignment: Text.AlignRight
                     }
                     Text { 
-                        text: (dataStore.gameStatus_red_score || 0) + " 胜利点"; 
+                        text: " 红方战队"; 
+                        font.pixelSize: 12; 
+                        color: "#ffffff";
+                        horizontalAlignment: Text.AlignRight
+                    }
+                    Text { 
+                        text: " 前哨站血量" ; 
                         font.pixelSize: 14; 
                         font.bold: true; 
-                        color: (dataStore.gameStatus_red_score || 0) <= 0 ? "#ff3333" : "#ffffff";
+                        color: (dataStore.globalUnit_outpost_health || 0) <= 0 ? "#ff3333" : "#ffffff";
+                        horizontalAlignment: Text.AlignRight
+                    }
+                    
+                    // 血量条
+                    Rectangle {
+                        width: 100
+                        height: 8
+                        color: "#550000"
+                        radius: 4
+                        opacity: 0.8
+                        
+                        Rectangle {
+                            anchors.fill: parent
+                            anchors.margins: -2  // 向外扩展一点，让边框更明显
+                            color: "transparent"
+                            border.color: "#ffd700"  // 金色
+                            border.width: 2
+                            radius: 8
+                            visible: dataStore.globalUnit_outpost_status === 0
+                            opacity: 0.8
+                            
+                            // 可选：添加呼吸动画效果
+                            SequentialAnimation on opacity {
+                                loops: Animation.Infinite
+                                running: dataStore.globalUnit_outpost_status === 0
+                                NumberAnimation { to: 1; duration: 800 }
+                                NumberAnimation { to: 0.5; duration: 800 }
+                            }
+                        }
+
+                        Rectangle {
+                            anchors {
+                                left: parent.left
+                                top: parent.top
+                                bottom: parent.bottom
+                            }
+                            width: parent.width * (Math.min(dataStore.globalUnit_outpost_health || 0, 1500) / 1500)
+                            color: "#8b0000"
+                            radius: 4
+                        }
+                    }
+                    Text { 
+                        text: " "+(dataStore.globalUnit_outpost_health || 0); 
+                        font.pixelSize: 14; 
+                        font.bold: true; 
+                        color: "#ff3333";
                         horizontalAlignment: Text.AlignRight
                     }
                 }
             }
 
-            // 蓝方胜利点模块
+            // 蓝方基地模块
             Item {
                 id: blueVictoryPointBar
                 anchors.left: middleScoreBlock.right
@@ -241,58 +359,139 @@ Item {
                 width: redVictoryPointBar.width
                 height: redVictoryPointBar.height
 
-                // 胜利点进度条
+                // 血量进度条
                 Rectangle {
                     id: blueProgressBar
                     anchors.bottom: parent.bottom
                     anchors.left: parent.left
                     anchors.right: parent.right
                     height: 20
-                    color: "#000055"
-                    radius: 6
-                    opacity: 0.6
+
                     Rectangle {
                         anchors.fill: parent
-                        color: "#2288ff"
-                        radius: 6
-                        width: Math.max(0, parent.width * ((dataStore.gameStatus_blue_score || 0) / 200))
+                        anchors.margins: -3  // 向外扩展一点，让边框更明显
+                        color: "transparent"
+                        border.color: "#ffd700"  // 金色
+                        border.width: 3
+                        radius: 10
+                        visible: dataStore.globalUnit_enemy_base_status === 0
+                        opacity: 0.8
+                        
+                        // 可选：添加呼吸动画效果
                         SequentialAnimation on opacity {
                             loops: Animation.Infinite
-                            running: (dataStore.gameStatus_blue_score || 0) <= 0
-                            NumberAnimation { to: 1; duration: 500 }
-                            NumberAnimation { to: 0.3; duration: 500 }
+                            running: dataStore.globalUnit_enemy_base_status === 0
+                            NumberAnimation { to: 1; duration: 800 }
+                            NumberAnimation { to: 0.5; duration: 800 }
                         }
+                    }
+                    
+                    // 背景色：根据血量值决定
+                    color: {
+                        let health = dataStore.globalUnit_enemy_base_health || 0;
+                        return health > 2000 ? "#2288ff" : "transparent";  // health>2000时背景为蓝色，否则透明
+                    }
+                    radius: 6
+                    border.width: health > 2000 ? 0 : 1  // 当背景透明时加个边框以便看清
+                    border.color: "#2288ff"  // 透明背景时的边框颜色
+                    
+                    // 血量条（前景）
+                    Rectangle {
+                        anchors {
+                            left: parent.left
+                            top: parent.top
+                            bottom: parent.bottom
+                        }
+                        width: Math.min(parent.width, parent.width * (Math.min(dataStore.globalUnit_enemy_base_health || 0, 5000) / 5000))
+                        // 血量条颜色：根据血量值决定
+                        color: {
+                            let health = dataStore.globalUnit_enemy_base_health || 0;
+                            return health > 2000 ? "#00008b" : "#2288ff";  // >2000深蓝，≤2000浅蓝
+                        }
+                        radius: 6
                     }
                 }
 
-                // 校徽（B标）
+                // 校徽（R标）
                 Image {
                     id: blueLogo
                     anchors.left: blueProgressBar.right
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.leftMargin: 10
-                    width: 30
-                    height: 30
-                    source: "data:image/svg+xml;utf8,<svg width='30' height='30'><circle cx='15' cy='15' r='12' fill='#2288ff' stroke='#ffffff' stroke-width='1'/><text x='15' y='20' text-anchor='middle' font-size='16' font-weight='bold' fill='white'>B</text></svg>"
+                    width: 40
+                    height: 40
+                    source: "data:image/svg+xml;utf8,<svg width='30' height='30'><circle cx='15' cy='15' r='12' fill='#2288ff' stroke='#ffffff' stroke-width='1'/><text x='15' y='20' text-anchor='middle' font-size='16' font-weight='bold' fill='white'>R</text></svg>"
                 }
 
-                // 校名+胜利点数
+                // 校名+战队名
                 Column {
                     anchors.left: blueLogo.right
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.leftMargin: 20
                     spacing: 2
                     Text { 
-                        text: "蓝方战队"; 
+                        text: " 校名"; 
                         font.pixelSize: 12; 
                         color: "#ffffff";
                         horizontalAlignment: Text.AlignLeft
                     }
                     Text { 
-                        text: (dataStore.gameStatus_blue_score || 0) + " 胜利点"; 
+                        text: " 蓝方战队"; 
+                        font.pixelSize: 12; 
+                        color: "#ffffff";
+                        horizontalAlignment: Text.AlignLeft
+                    }
+                    Text { 
+                        text: " 前哨站血量"; 
                         font.pixelSize: 14; 
                         font.bold: true; 
-                        color: (dataStore.gameStatus_blue_score || 0) <= 0 ? "#2288ff" : "#ffffff";
+                        color: (dataStore.globalUnit_enemy_outpost_health || 0) <= 0 ? "#ff3333" : "#ffffff";
+                        horizontalAlignment: Text.AlignLeft
+                    }
+                    
+                    // 血量条
+                    Rectangle {
+                        width: 100
+                        height: 8
+                        color: "#000055"
+                        radius: 4
+                        opacity: 0.8
+
+                        Rectangle {
+                            anchors.fill: parent
+                            anchors.margins: -2  // 向外扩展一点，让边框更明显
+                            color: "transparent"
+                            border.color: "#ffd700"  // 金色
+                            border.width: 2
+                            radius: 8
+                            visible: dataStore.globalUnit_enemy_outpost_status === 0
+                            opacity: 0.8
+                            
+                            // 可选：添加呼吸动画效果
+                            SequentialAnimation on opacity {
+                                loops: Animation.Infinite
+                                running: dataStore.globalUnit_enemy_outpost_status === 0
+                                NumberAnimation { to: 1; duration: 800 }
+                                NumberAnimation { to: 0.5; duration: 800 }
+                            }
+                        }
+
+                        Rectangle {
+                            anchors {
+                                left: parent.left
+                                top: parent.top
+                                bottom: parent.bottom
+                            }
+                            width: parent.width * (Math.min(dataStore.globalUnit_enemy_outpost_health || 0, 1500) / 1500)
+                            color: "#00008b"
+                            radius: 4
+                        }
+                    }
+                    Text { 
+                        text: " " + (dataStore.globalUnit_enemy_outpost_health || 0); 
+                        font.pixelSize: 14; 
+                        font.bold: true; 
+                        color: "#ff3333";
                         horizontalAlignment: Text.AlignLeft
                     }
                 }
@@ -407,11 +606,11 @@ Item {
             Text { text: "-------------------------"; font.pixelSize: 12; color: "#888888" }
         }
 
-        // 5. 经济显示模块
+        // 5. 经济显示模块（苏丹5）
         Rectangle {
             anchors.left: parent.left
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: 200
+            anchors.bottomMargin: 240
             anchors.leftMargin: 20
             width: 200
             height: 60
@@ -426,7 +625,7 @@ Item {
                 anchors.margins: 10
                 spacing: 10
 
-                // 红方经济
+                // 红方经济 - 注意：协议只提供己方经济，这里假设用remaining_economy显示红方
                 Column {
                     Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
                     spacing: 2
@@ -437,7 +636,7 @@ Item {
                         horizontalAlignment: Text.AlignLeft 
                     }
                     Text { 
-                        text: dataStore.globalLogistics_red_economy || 0;
+                        text: dataStore.globalLogistics_remaining_economy || 0;  // 使用己方剩余经济
                         font.pixelSize: 14; 
                         font.bold: true; 
                         color: "#ffffff";
@@ -445,23 +644,37 @@ Item {
                     }
                 }
 
-                // 占位项
-                Item {
-                    Layout.fillWidth: true
+                // 科技等级显示
+                Column {
+                    Layout.alignment: Qt.AlignHCenter
+                    spacing: 2
+                    Text { 
+                        text: "科技等级"; 
+                        font.pixelSize: 10; 
+                        color: "#ffff00"; 
+                        horizontalAlignment: Text.AlignHCenter 
+                    }
+                    Text { 
+                        text: "Lv." + (dataStore.globalLogistics_tech_level || 0);
+                        font.pixelSize: 14; 
+                        font.bold: true; 
+                        color: "#ffffff";
+                        horizontalAlignment: Text.AlignHCenter 
+                    }
                 }
 
-                // 蓝方经济
+                // 蓝方经济 - 协议中没有对方经济，这里暂时显示加密等级
                 Column {
                     Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
                     spacing: 2
                     Text { 
-                        text: "蓝方经济"; 
+                        text: "加密等级"; 
                         font.pixelSize: 10; 
                         color: "#2288ff"; 
                         horizontalAlignment: Text.AlignRight 
                     }
                     Text { 
-                        text: dataStore.globalLogistics_blue_economy || 0;
+                        text: (dataStore.globalLogistics_encryption_level || 1) + "/3";
                         font.pixelSize: 14; 
                         font.bold: true; 
                         color: "#ffffff";
@@ -471,30 +684,70 @@ Item {
             }
         }
 
-        // 6. 左侧信息面板
-        Column {
-            anchors.left: parent.left
-            anchors.top: scoreBar.bottom
-            anchors.margins: 20
-            spacing: 10
-            z: 11
+// 6. 左侧信息面板
+Column {
+    id: leftInfoPanel
+    anchors.left: parent.left
+    anchors.top: scoreBar.bottom
+    anchors.margins: 20
+    spacing: 10
+    z: 999  // 提高层级，避免被遮挡
 
-            // 系统面板
-            Rectangle {
-                width: 200
-                height: 80
-                color: "#00000080"
-                border.color: "#66666680"
-                border.width: 1
+    // 系统面板
+    Rectangle {
+        width: 200
+        height: 80
+        color: "#00000080"  // 半透明黑（Qt全版本兼容）
+        border.color: "#66666680"
+        border.width: 1
 
-                Text { anchors.top: parent.top; anchors.left: parent.left; anchors.margins: 5; text: "系统"; font.pixelSize: 12; color: "#aaaaaa" }
+        Text {
+            // 锚点：填满父组件，留5px内边距
+            anchors.fill: parent
+            padding: 5
+            // 文字样式（高对比度，确保能看到）
+            font.pixelSize: 12
+            color: "#FF0000"  // 纯红色（Qt全版本兼容的十六进制颜色）
+            // 换行+垂直对齐
+            wrapMode: Text.WordWrap
+            verticalAlignment: Text.AlignTop
+            opacity: 1.0      // 强制不透明
 
-               
+            // 动态显示"系统：比赛状态"（简化逻辑，避免语法错误）
+            text: {
+                
+               // 1. 获取比赛阶段值（强制设为4测试，后续恢复动态值）
+                var stage = 4; 
+                // 后续恢复为动态值：var stage = gameStatus_current_stage || 0;
+                
+                // 2. 获取当前阶段已过时间（秒）
+                var elapsedSec = 50;
+                //var elapsedSec = gameStatus_stage_elapsed_sec || 0;
+                // 3. 格式化已过时间为 "x分xx秒"
+                var minutes = Math.floor(elapsedSec / 60);
+                var seconds = elapsedSec % 60;
+                var secondsStr = seconds.toString().padStart(2, '0');
+                var elapsedText = " 已过" + minutes + "分" + secondsStr + "秒";
+
+                // 4. 匹配比赛阶段文字
+                var stageText = "";
+                if (stage === 0) stageText = "赛前准备阶段";
+                else if (stage === 1) stageText = "准备阶段";
+                else if (stage === 2) stageText = "十五秒裁判系统自检阶段";
+                else if (stage === 3) stageText = "五秒倒计时";
+                else if (stage === 4) stageText = "比赛中";
+                else if (stage === 5) stageText = "比赛结算中";
+                else if (stage === 6) stageText = "比赛暂停";
+                else stageText = "未知状态（" + stage + "）";
+                
+                // 5. 拼接最终文字：系统：状态 + 已过时间
+                return "系统：" + stageText + elapsedText;
             }
+        }
+    }
 
             // 机器人面板
             Rectangle {
-                id:robotStatusPanel
                 width: 200
                 height: 80
                 color: "#00000080"
@@ -513,7 +766,193 @@ Item {
                 
             }
         }
+        // 6.5 全局特殊机制显示（苏丹6）
+        Item {
+            id: specialMechanismDisplay
+            anchors.left: parent.left
+            anchors.top: leftInfoPanel.bottom
+            anchors.topMargin: 20 
+            anchors.leftMargin: 20
+            width: 200
+            height: 80
+            z: 11
+            // visible: dataStore.globalSpecial_mechanism_id && dataStore.globalSpecial_mechanism_id.length > 0
+            visible: true
+            Rectangle {
+                anchors.fill: parent
+                color: "#00000080"
+                border.color: "#ffaa00"
+                border.width: 2
+                radius: 5
 
+                Column {
+                    anchors.fill: parent
+                    anchors.margins: 8
+                    spacing: 5
+
+                    Text {
+                        text: "⚡ 特殊机制"
+                        font.pixelSize: 12
+                        font.bold: true
+                        color: "#ffaa00"
+                    }
+
+                    Repeater {
+                        model: dataStore.globalSpecial_mechanism_id.length
+
+                        Row {
+                            spacing: 10
+                            width: parent.width
+
+                            Text {
+                                text: {
+                                    var id = dataStore.globalSpecial_mechanism_id[index] || 0;
+                                    if (id === 1) return "🔴 己方堡垒被占";
+                                    if (id === 2) return "🔵 对方堡垒被占";
+                                    return "机制" + id;
+                                }
+                                font.pixelSize: 10
+                                color: "#ffffff"
+                                width: 100
+                                elide: Text.ElideRight
+                            }
+
+                            Text {
+                                text: (dataStore.globalSpecial_mechanism_time_sec[index] || 0) + "s"
+                                font.pixelSize: 10
+                                font.bold: true
+                                color: {
+                                    var time = dataStore.globalSpecial_mechanism_time_sec[index] || 0;
+                                    if (time <= 10) return "#ff3333";
+                                    if (time <= 30) return "#ffff00";
+                                    return "#22ff22";
+                                }
+                                SequentialAnimation on opacity {
+                                    loops: Animation.Infinite
+                                    running: (dataStore.globalSpecial_mechanism_time_sec[index] || 0) <= 10
+                                    NumberAnimation { to: 1; duration: 500 }
+                                    NumberAnimation { to: 0.3; duration: 500 }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // 6.6 机器人受伤统计显示（苏丹8）
+        Item {
+            id: robotInjuryDisplay
+            anchors.right: parent.right
+            anchors.top: scoreBar.bottom
+            anchors.topMargin: 10
+            anchors.rightMargin: 20
+            width: 250
+            height: 140
+            z: 11
+            // visible: dataStore.robotInjury_total_damage > 0
+            visible: true
+
+            Rectangle {
+                anchors.fill: parent
+                color: "#80000000"
+                border.color: "#ff3333"
+                border.width: 2
+                radius: 5
+
+                Column {
+                    anchors.fill: parent
+                    anchors.margins: 8
+                    spacing: 3
+
+                    Text {
+                        text: "💔 机器人受伤统计"
+                        font.pixelSize: 12
+                        font.bold: true
+                        color: "#ff3333"
+                    }
+                    // 总伤害单独一行
+                    Rectangle {
+                        width: parent.width
+                        height: 20
+                        color: "#33000000"
+                        border.color: "#ff3333"
+                        border.width: 1
+                        radius: 3
+
+                        Text {
+                            anchors.centerIn: parent
+                            text: "总伤害: " + dataStore.robotInjury_total_damage
+                            font.pixelSize: 11
+                            font.bold: true
+                            color: "#ffffff"
+                        }
+                    }
+
+                    // 其他伤害分两列显示
+                    Grid {
+                        columns: 2
+                        columnSpacing: 15
+                        rowSpacing: 3
+                        width: parent.width
+
+                        // 第一列
+                        Column {
+                            spacing: 3
+                            Row {
+                                spacing: 5
+                                Text { text: "撞击:"; font.pixelSize: 9; color: "#aaaaaa"; width: 45 }
+                                Text { text: dataStore.robotInjury_collision_damage; font.pixelSize: 9; color: "#ffaa00"; width: 30 }
+                            }
+                            Row {
+                                spacing: 5
+                                Text { text: "17mm:"; font.pixelSize: 9; color: "#aaaaaa"; width: 45 }
+                                Text { text: dataStore.robotInjury_small_projectile_damage; font.pixelSize: 9; color: "#ffaa00"; width: 30 }
+                            }
+                            Row {
+                                spacing: 5
+                                Text { text: "42mm:"; font.pixelSize: 9; color: "#aaaaaa"; width: 45 }
+                                Text { text: dataStore.robotInjury_large_projectile_damage; font.pixelSize: 9; color: "#ffaa00"; width: 30 }
+                            }
+                            Row {
+                                spacing: 5
+                                Text { text: "飞镖:"; font.pixelSize: 9; color: "#aaaaaa"; width: 45 }
+                                Text { text: dataStore.robotInjury_dart_splash_damage; font.pixelSize: 9; color: "#ffaa00"; width: 30 }
+                            }
+                            Row {
+                                spacing: 5
+                                Text { text: "模块离线:"; font.pixelSize: 9; color: "#aaaaaa"; width: 45 }
+                                Text { text: dataStore.robotInjury_module_offline_damage; font.pixelSize: 9; color: "#ffaa00"; width: 30 }
+                            }
+                        }
+
+                        // 第二列
+                        Column {
+                            spacing: 3
+                            Row {
+                                spacing: 5
+                                Text { text: "异常离线:"; font.pixelSize: 9; color: "#aaaaaa"; width: 45 }
+                                Text { text: dataStore.robotInjury_offline_damage; font.pixelSize: 9; color: "#ffaa00"; width: 30 }
+                            }
+                            Row {
+                                spacing: 5
+                                Text { text: "判罚:"; font.pixelSize: 9; color: "#aaaaaa"; width: 45 }
+                                Text { text: dataStore.robotInjury_penalty_damage; font.pixelSize: 9; color: "#ffaa00"; width: 30 }
+                            }
+                            Row {
+                                spacing: 5
+                                Text { text: "服务器战亡:"; font.pixelSize: 9; color: "#aaaaaa"; width: 45 }
+                                Text { text: dataStore.robotInjury_server_kill_damage; font.pixelSize: 9; color: "#ffaa00"; width: 30 }
+                            }
+                            Row{
+                                spacing: 5
+                                Text { text: "击杀者ID:"; font.pixelSize: 9; color: "#aaaaaa"; width: 45 }
+                                Text { text: dataStore.robotInjury_killer_id > 0 ? dataStore.robotInjury_killer_id : "无"; font.pixelSize: 9; color: "#ffaa00"; width: 30}
+                            }
+                        }
+                    }
+                }
+            }
+        }
                // 7.5 机器人模块状态显示
         Item {
             id: moduleStatusDisplay
@@ -790,6 +1229,7 @@ Item {
             Row {
                 anchors.bottom: parent.bottom
                 anchors.right: parent.right
+                anchors.rightMargin: 30
                 anchors.margins: 5
                 spacing: 8
 
@@ -815,84 +1255,252 @@ Item {
                 }
             }
         }
-                // 7. 左下角状态条
-        Item {
-            anchors.left: parent.left
-            anchors.bottom: moduleStatusDisplay.top
-            anchors.margins: 20
-            width: 200
-            height: 40
-            z: 11
+        // 7. 左下角状态条
+Item {
+    anchors.left: parent.left
+    anchors.bottom: moduleStatusDisplay.top
+    anchors.leftMargin: 20
+    width: 320  // 再加宽一点以容纳更多信息
+    height: 80  // 加高
+    z: 11
 
-            // 机器人图标
-            Rectangle { 
-                width: 40; 
-                height: 40; 
-                radius: 20; 
-                color: "#111111"; 
-                border.color: "#666666"
-                
-                Text {
-                    anchors.centerIn: parent
-                    text: dataStore.robotStatic_robot_type === 1 ? "英" :
-                          dataStore.robotStatic_robot_type === 2 ? "工" :
-                          dataStore.robotStatic_robot_type === 3 ? "步1" :
-                          dataStore.robotStatic_robot_type === 4 ? "步2" :
-                          dataStore.robotStatic_robot_type === 6 ? "空" :
-                          dataStore.robotStatic_robot_type === 7 ? "哨" : "机"
-                    font.pixelSize: 14
-                    font.bold: true
-                    color: dataStore.robotStatic_alive_state === 1 ? "#22ff22" : 
-                           dataStore.robotStatic_alive_state === 2 ? "#ff2222" : "#aaaaaa"
-                }
+    // 辅助函数：获取机器人类型文字
+    function getRobotTypeText(type) {
+        if (type === 1) return "英";
+        if (type === 2) return "工";
+        if (type === 3) return "步1";
+        if (type === 4) return "步2";
+        if (type === 5) return "哨";
+        if (type === 6) return "飞";
+        if (type === 7) return "雷";
+        if (type === 8) return "前";
+        if (type === 9) return "基";
+        return "机";
+    }
+
+    // 辅助函数：获取发射性能文字
+    function getShooterTypeText(shooter) {
+        if (shooter === 1) return "冷却";
+        if (shooter === 2) return "爆发";
+        if (shooter === 3) return "近战";
+        if (shooter === 4) return "远程";
+        return shooter;
+    }
+
+    // 辅助函数：获取底盘性能文字
+    function getChassisTypeText(chassis) {
+        if (chassis === 1) return "血量";
+        if (chassis === 2) return "功率";
+        if (chassis === 3) return "近战";
+        if (chassis === 4) return "远程";
+        return chassis;
+    }
+
+    // 机器人图标
+    Rectangle { 
+        id: robotIcon
+        width: 50; 
+        height: 50; 
+        radius: 25; 
+        color: "#111111"; 
+        border.color: "#666666"
+        
+        Text {
+            anchors.centerIn: parent
+            text: getRobotTypeText(dataStore.robotStatic_robot_type || 0)
+            font.pixelSize: 16
+            font.bold: true
+            color: {
+                let alive = dataStore.robotStatic_alive_state || 0;
+                if (alive === 1) return "#22ff22";      // 存活
+                if (alive === 2) return "#ff2222";      // 战亡
+                return "#aaaaaa";                         // 未知/未连接
             }
+        }
+    }
+
+    // 右侧信息区域
+    Column {
+        anchors.left: robotIcon.right
+        anchors.leftMargin: 10
+        anchors.verticalCenter: parent.verticalCenter
+        spacing: 3
+
+        // 第一行：血量进度条 + 经验条
+        Column {
+            width: 240
+            spacing: 2
 
             // 血量进度条
             Rectangle {
-                anchors.left: parent.children[0].right
-                anchors.leftMargin: 10
-                anchors.verticalCenter: parent.verticalCenter
-                width: 140
-                height: 15
+                width: parent.width/2
+                height: 12
                 color: "#222222"
-                radius: 7
+                radius: 6
+                border.color: "#444444"
+                border.width: 1
 
                 Rectangle { 
                     anchors.fill: parent; 
                     color: {
-                        let currentHealth = root.getCurrentRobotHealth ? root.getCurrentRobotHealth() : 0;
+                        let currentHealth = dataStore.robotDynamic_current_health || 0;
                         let maxHealth = dataStore.robotStatic_max_health || 1;
                         let ratio = currentHealth / Math.max(1, maxHealth);
                         if (ratio > 0.5) return "#22ff22";
                         else if (ratio > 0.2) return "#ffff22";
                         else return "#ff2222";
                     }
-                    radius: 7; 
+                    radius: 6; 
                     width: Math.max(0, parent.width * (
-                        (root.getCurrentRobotHealth ? root.getCurrentRobotHealth() : 0) / 
+                        (dataStore.robotDynamic_current_health || 0) / 
                         Math.max(1, dataStore.robotStatic_max_health || 1)
                     )) 
-                }
-                
-                // 等级标识
-                Rectangle { 
-                    anchors.bottom: parent.bottom; 
-                    height: 5; 
-                    color: "#2288ff"; 
-                    radius: 3; 
-                    width: Math.min(parent.width, parent.width * ((dataStore.robotStatic_level || 1) / 10))
                 }
 
                 Text {
                     anchors.centerIn: parent
-                    text: (root.getCurrentRobotHealth ? root.getCurrentRobotHealth() : 0) + "/" + 
-                          (dataStore.robotStatic_max_health || 0) + " Lv." + 
-                          (dataStore.robotStatic_level || 1)
-                    font.pixelSize: 10
+                    text: (dataStore.robotDynamic_current_health || 0) + "/" + 
+                          (dataStore.robotStatic_max_health || 0)
+                    font.pixelSize: 8
                     color: "white"
                 }
             }
+
+            // 经验条
+            Rectangle {
+                width: parent.width/2
+                height: 5
+                color: "#333333"
+                radius: 3
+
+                Rectangle {
+                    anchors.fill: parent
+                    color: "#ffaa00"
+                    radius: 3
+                    width: parent.width * Math.min(
+                        (dataStore.robotDynamic_current_experience || 0) / 
+                        Math.max(1, dataStore.robotDynamic_experience_for_upgrade || 1), 1
+                    )
+                }
+            }
         }
+
+        // 第二行：机器人ID、等级、连接状态、脱战状态
+        Row {
+            spacing: 10
+            Text {
+                text: "ID:" + (dataStore.robotStatic_robot_id || 0)
+                font.pixelSize: 9
+                color: "#cccccc"
+            }
+            Text {
+                text: "Lv." + (dataStore.robotStatic_level || 1)
+                font.pixelSize: 9
+                color: "#ffaa00"
+            }
+            Text {
+                text: (dataStore.robotStatic_connection_state || 0) === 1 ? "●" : "○"
+                font.pixelSize: 9
+                color: (dataStore.robotStatic_connection_state || 0) === 1 ? "#22ff22" : "#ff4444"
+            }
+            Text {
+                text: dataStore.robotDynamic_is_out_of_combat ? "脱战" : "战斗"
+                font.pixelSize: 9
+                color: dataStore.robotDynamic_is_out_of_combat ? "#22ff22" : "#ff9900"
+                visible: dataStore.robotDynamic_is_out_of_combat !== undefined
+            }
+            Text {
+                text: dataStore.robotDynamic_out_of_combat_countdown > 0 ? 
+                      "⏱" + dataStore.robotDynamic_out_of_combat_countdown + "s" : ""
+                font.pixelSize: 8
+                color: "#88ccff"
+                visible: dataStore.robotDynamic_out_of_combat_countdown > 0
+            }
+        }
+
+        // 第三行：热量、射速、弹药
+        Row {
+            spacing: 10
+            Text {
+                text: "🔥" + (dataStore.robotDynamic_current_heat || 0).toFixed(0) + 
+                      "/" + (dataStore.robotStatic_max_heat || 0)
+                font.pixelSize: 9
+                color: (dataStore.robotDynamic_current_heat || 0) > 
+                       (dataStore.robotStatic_max_heat || 0) * 0.8 ? "#ff9900" : "#ffaa00"
+            }
+            Text {
+                text: "⚡" + (dataStore.robotDynamic_last_projectile_fire_rate || 0).toFixed(1) + "Hz"
+                font.pixelSize: 9
+                color: "#88ccff"
+            }
+            Text {
+                text: "🔫" + (dataStore.robotDynamic_remaining_ammo || 0)
+                font.pixelSize: 9
+                color: (dataStore.robotDynamic_remaining_ammo || 0) < 100 ? "#ff9900" : "#22ff22"
+            }
+        }
+
+        // 第四行：能量、经验、远程状态
+        Row {
+            spacing: 10
+            Text {
+                text: "⚡" + (dataStore.robotDynamic_current_chassis_energy || 0) + 
+                      "/" + (dataStore.robotStatic_max_chassis_energy || 0)
+                font.pixelSize: 8
+                color: "#aaaaaa"
+            }
+            Text {
+                text: "🔋" + (dataStore.robotDynamic_current_buffer_energy || 0) + 
+                      "/" + (dataStore.robotStatic_max_buffer_energy || 0)
+                font.pixelSize: 8
+                color: "#aaaaaa"
+            }
+            Text {
+                text: "EXP:" + (dataStore.robotDynamic_current_experience || 0) + 
+                      "/" + (dataStore.robotDynamic_experience_for_upgrade || 1)
+                font.pixelSize: 8
+                color: "#ffaa00"
+            }
+        }
+
+        // 第五行：远程状态提示
+        Row {
+            spacing: 10
+            Text {
+                text: dataStore.robotDynamic_can_remote_heal ? "💊可补血" : ""
+                font.pixelSize: 8
+                color: "#22ff22"
+                visible: dataStore.robotDynamic_can_remote_heal
+            }
+            Text {
+                text: dataStore.robotDynamic_can_remote_ammo ? "📦可补弹" : ""
+                font.pixelSize: 8
+                color: "#22ff22"
+                visible: dataStore.robotDynamic_can_remote_ammo
+            }
+            Text {
+                text: "总弹:" + (dataStore.robotDynamic_total_projectiles_fired || 0)
+                font.pixelSize: 8
+                color: "#888888"
+            }
+            Text {
+        text: "🟨黄:" + (penaltySystem.yellowCardTotal || 0)
+        font.pixelSize: 8
+        color: penaltySystem.yellowCardTotal > 0 ? "#FFD700" : "#888888"
+        font.bold: penaltySystem.yellowCardTotal > 0
+        visible: penaltySystem.yellowCardTotal > 0 || penaltySystem.redCardTotal > 0
+    }
+    // 红牌显示
+    Text {
+        text: "🟥红:" + (penaltySystem.redCardTotal || 0)
+        font.pixelSize: 8
+        color: penaltySystem.redCardTotal > 0 ? "#FF4444" : "#888888"
+        font.bold: penaltySystem.redCardTotal > 0
+        visible: penaltySystem.redCardTotal > 0
+    }
+        }
+    }
+}
          // 7. 右下角控制框（修改：展示键鼠信息）
     Item {
         id: keyControlBox
@@ -901,7 +1509,7 @@ Item {
         anchors.bottomMargin: 10
         anchors.rightMargin: 20
         width: 350 // 加宽以容纳更多信息
-        height: 80 // 加高
+        height: 90 // 加高
         z: 12
         
         // 控制框背景图片
@@ -1117,7 +1725,6 @@ Rectangle {
             }
         }
     }
-    
     
     // 添加一个网格线覆盖层（可选，用于调试显示截取区域）
     /*
@@ -1914,6 +2521,394 @@ Item {
     
     opacity: 0
 }
+    // 12. 机器人复活状态面板（新增）（苏丹9）
+    // ==============================================
+// 12. 机器人复活状态面板（内联实现）
+// ==============================================
+Item {
+    id: respawnPanel
+    // 接收外部传入的数据
+    property var dataStore: root.dataStore
+    
+    // 信号：点击复活按钮
+    signal freeRespawnClicked()
+    signal goldRespawnClicked()
+    
+    // 面板尺寸
+    width: 400
+    height: 220
+
+    // 仅当处于待复活状态时显示
+    //visible: dataStore.robotRespawn_is_pending_respawn || false
+    visible: dataStore.robotRespawn_is_pending_respawn === true
+    // 居中显示
+    x: (parent.width - width) / 2
+    y: (parent.height - height) / 2
+    z: 1000001  // 确保在最上层
+    
+    // 浅绿色荧光边背景
+    Rectangle {
+        anchors.fill: parent
+        color: "#3300ff00"  // 半透明浅绿
+        border.color: "#00ff00"
+        border.width: 3
+        radius: 15
+        
+        // 发光效果
+        layer {
+            enabled: true
+            // effect: DropShadow {
+            //     color: "#88ff00ff"
+            //     radius: 20
+            //     samples: 41
+            //     spread: 0.2
+            // }
+        }
+    }
+    
+    // 主内容区域
+    Rectangle {
+        anchors.fill: parent
+        anchors.margins: 5
+        color: "#222222"
+        radius: 12
+        border.color: "#444444"
+        border.width: 1
+        
+        Column {
+            anchors.fill: parent
+            anchors.margins: 20
+            spacing: 15
+            
+            // 标题
+            Text {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: "💀 机器人待复活"
+                font.pixelSize: 18
+                font.bold: true
+                color: "#ffffff"
+            }
+            
+            // 复活进度条
+            Column {
+                width: parent.width
+                spacing: 5
+                
+                Text {
+                    text: "复活进度: " + (dataStore.robotRespawn_current_respawn_progress || 0) + 
+                          "/" + (dataStore.robotRespawn_total_respawn_progress || 100)
+                    font.pixelSize: 12
+                    color: "#cccccc"
+                }
+                
+                Rectangle {
+                    width: parent.width
+                    height: 20
+                    color: "#333333"
+                    radius: 10
+                    border.color: "#555555"
+                    border.width: 1
+                    
+                    Rectangle {
+                        width: parent.width * (Math.min(dataStore.robotRespawn_current_respawn_progress || 0, 
+                                                       dataStore.robotRespawn_total_respawn_progress || 100) / 
+                                              (dataStore.robotRespawn_total_respawn_progress || 100))
+                        height: parent.height
+                        color: "#22ff22"
+                        radius: 10
+                        
+                        // 进度条动画
+                        Behavior on width {
+                            NumberAnimation { duration: 200 }
+                        }
+                    }
+                }
+            }
+            
+            // 复活选项
+            Row {
+                anchors.horizontalCenter: parent.horizontalCenter
+                spacing: 20
+                
+                // 免费复活按钮
+                Button {
+                    id: freeBtn
+                    width: 120
+                    height: 50
+                    enabled: dataStore.robotRespawn_can_free_respawn || false
+                    
+                    background: Rectangle {
+                        color: freeBtn.enabled ? "#22ff22" : "#555555"
+                        opacity: freeBtn.enabled ? 0.8 : 0.4
+                        radius: 8
+                        border.color: freeBtn.enabled ? "#ffffff" : "#888888"
+                        border.width: freeBtn.enabled ? 2 : 1
+                        
+                        // 启用时发光效果
+                        layer {
+                            enabled: freeBtn.enabled
+                            // effect: DropShadow {
+                            //     color: "#88ff00ff"
+                            //     radius: 10
+                            //     samples: 21
+                            //     spread: 0.3
+                            // }
+                        }
+                    }
+                    
+                    contentItem: Column {
+                        anchors.centerIn: parent
+                        spacing: 2
+                        
+                        Text {
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            text: "免费复活"
+                            color: freeBtn.enabled ? "#000000" : "#888888"
+                            font.pixelSize: 14
+                            font.bold: true
+                        }
+                        
+                        Text {
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            text: freeBtn.enabled ? "可用" : "不可用"
+                            color: freeBtn.enabled ? "#000000" : "#888888"
+                            font.pixelSize: 10
+                        }
+                    }
+                    
+                    onClicked: {
+                        if (freeBtn.enabled) {
+                            // 显示确认提示
+                            confirmationPopup.show("确认免费复活？", "free")
+                        }
+                    }
+                }
+                
+                // 金币复活按钮
+                Button {
+                    id: goldBtn
+                    width: 120
+                    height: 50
+                    enabled: dataStore.robotRespawn_can_pay_for_respawn || false
+                    
+                    background: Rectangle {
+                        color: goldBtn.enabled ? "#ffaa00" : "#555555"
+                        opacity: goldBtn.enabled ? 0.8 : 0.4
+                        radius: 8
+                        border.color: goldBtn.enabled ? "#ffffff" : "#888888"
+                        border.width: goldBtn.enabled ? 2 : 1
+                        
+                        // 启用时发光效果
+                        layer {
+                            enabled: goldBtn.enabled
+                            // effect: DropShadow {
+                            //     color: "#88ffaa00"
+                            //     radius: 10
+                            //     samples: 21
+                            //     spread: 0.3
+                            // }
+                        }
+                    }
+                    
+                    contentItem: Column {
+                        anchors.centerIn: parent
+                        spacing: 2
+                        
+                        Text {
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            text: "金币复活"
+                            color: goldBtn.enabled ? "#000000" : "#888888"
+                            font.pixelSize: 14
+                            font.bold: true
+                        }
+                        
+                        Text {
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            text: goldBtn.enabled ? 
+                                  "消耗 " + (dataStore.robotRespawn_gold_cost_for_respawn || 0) + " 金币" : 
+                                  "金币不足"
+                            color: goldBtn.enabled ? "#000000" : "#888888"
+                            font.pixelSize: 10
+                        }
+                    }
+                    
+                    onClicked: {
+                        if (goldBtn.enabled) {
+                            // 显示确认提示
+                            confirmationPopup.show("确认消耗 " + (dataStore.robotRespawn_gold_cost_for_respawn || 0) + " 金币复活？", "gold")
+                        }
+                    }
+                }
+            }
+            
+            // 状态提示
+            Text {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: {
+                    if (dataStore.robotRespawn_is_pending_respawn) {
+                        if (dataStore.robotRespawn_can_free_respawn) return "✨ 可以免费复活"
+                        if (dataStore.robotRespawn_can_pay_for_respawn) return "💰 可以用金币复活"
+                        return "⏳ 等待复活条件..."
+                    }
+                    return ""
+                }
+                font.pixelSize: 12
+                color: {
+                    if (dataStore.robotRespawn_can_free_respawn) return "#22ff22"
+                    if (dataStore.robotRespawn_can_pay_for_respawn) return "#ffaa00"
+                    return "#ff6666"
+                }
+            }
+        }
+    }
+    
+    // 确认弹窗
+    Popup {
+        id: confirmationPopup
+        width: 300
+        height: 150
+        anchors.centerIn: Overlay.overlay
+        modal: true
+        focus: true
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+        
+        property string actionType: ""  // "free" 或 "gold"
+        
+        function show(message, type) {
+            confirmMessage.text = message
+            actionType = type
+            open()
+        }
+        
+        background: Rectangle {
+            color: "#333333"
+            radius: 10
+            border.color: "#00ff00"
+            border.width: 2
+        }
+        
+        contentItem: Column {
+            anchors.fill: parent
+            anchors.margins: 15
+            spacing: 15
+            
+            Text {
+                id: confirmMessage
+                width: parent.width
+                wrapMode: Text.WordWrap
+                font.pixelSize: 14
+                color: "#ffffff"
+                horizontalAlignment: Text.AlignHCenter
+            }
+            
+            Row {
+                anchors.horizontalCenter: parent.horizontalCenter
+                spacing: 20
+                
+                Button {
+                    text: "确认"
+                    width: 80
+                    height: 35
+                    
+                    background: Rectangle {
+                        color: "#22ff22"
+                        radius: 5
+                    }
+                    
+                    contentItem: Text {
+                        text: parent.text
+                        color: "#000000"
+                        font.bold: true
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
+                    
+                    onClicked: {
+                        if (confirmationPopup.actionType === "free") {
+                            respawnPanel.freeRespawnClicked()
+                        } else if (confirmationPopup.actionType === "gold") {
+                            respawnPanel.goldRespawnClicked()
+                        }
+                        confirmationPopup.close()
+                        
+                        // 显示操作成功提示
+                        successToast.show("复活请求已发送")
+                    }
+                }
+                
+                Button {
+                    text: "取消"
+                    width: 80
+                    height: 35
+                    
+                    background: Rectangle {
+                        color: "#ff3333"
+                        radius: 5
+                    }
+                    
+                    contentItem: Text {
+                        text: parent.text
+                        color: "#ffffff"
+                        font.bold: true
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
+                    
+                    onClicked: confirmationPopup.close()
+                }
+            }
+        }
+    }
+    
+    // 成功提示（短暂显示）
+    Popup {
+        id: successToast
+        width: 200
+        height: 50
+        anchors.centerIn: Overlay.overlay
+        modal: false
+        focus: false
+        closePolicy: Popup.NoAutoClose
+        
+        function show(message) {
+            toastText.text = message
+            open()
+            hideTimer.start()
+        }
+        
+        Timer {
+            id: hideTimer
+            interval: 1500
+            onTriggered: successToast.close()
+        }
+        
+        background: Rectangle {
+            color: "#333333"
+            radius: 8
+            border.color: "#22ff22"
+            border.width: 2
+        }
+        
+        contentItem: Text {
+            id: toastText
+            anchors.centerIn: parent
+            color: "#ffffff"
+            font.pixelSize: 14
+        }
+    }
+    
+    // 信号处理
+    onFreeRespawnClicked: {
+        console.log("免费复活点击")
+        // TODO: 调用 C++ 的免费复活接口
+    }
+    
+    onGoldRespawnClicked: {
+        console.log("金币复活点击，消耗:", dataStore.robotRespawn_gold_cost_for_respawn)
+        // TODO: 调用 C++ 的金币复活接口
+    }
+}
+
 // ======================================================
 // 战术雷达图层 (Tactical Radar Layer) - 2026 深度定制版
 // 适配协议：RobotPosition(12), RobotPathPlanInfo(15), RadarInfoToClient(16)
@@ -2141,10 +3136,10 @@ Item {
 }// 19. 自定义数据流显示面板 (独立 Item)
 Rectangle {
     id: customByteBlockPanel
-    x:robotStatusPanel.x+20;
-    y:robotStatusPanel.y+140;
-    width: robotStatusPanel.width;
-    height: robotStatusPanel.height;
+    x:specialMechanismDisplay.x;
+    y:specialMechanismDisplay.y+140;
+    width: specialMechanismDisplay.width;
+    height: specialMechanismDisplay.height;
     z:999;
     clip: true 
     color: "#AA000000" // 半透明黑色背景
@@ -2383,31 +3378,31 @@ Rectangle {
             }
         }
 
-        // ========== UI B: 左下角常驻面板 ==========
-        Rectangle {
-            id: counterPanel
-            anchors.left: parent.left; anchors.bottom: parent.bottom; anchors.margins: 30
-            width: 170; height: 65; color: "#66000000"; radius: 8; border.color: "#33FFFFFF"
-            Column {
-                anchors.centerIn: parent; spacing: 6
-                Row {
-                    spacing: 10
-                    Rectangle { width: 12; height: 16; color: "#FFD700"; radius: 2; anchors.verticalCenter: parent.verticalCenter }
-                    Text {
-                        text: "累计黄牌: " + penaltySystem.yellowCardTotal
-                        color: Qt.rgba(1.0, 0.8, 0.8, 0.8); font.pixelSize: 16; font.bold: true
-                    }
-                }
-                Row {
-                    spacing: 10
-                    Rectangle { width: 12; height: 16; color: "#FF4444"; radius: 2; anchors.verticalCenter: parent.verticalCenter }
-                    Text {
-                        text: "累计红牌: " + penaltySystem.redCardTotal
-                        color: Qt.rgba(1.0, 0.8, 0.8, 0.8); font.pixelSize: 16; font.bold: true
-                    }
-                }
-            }
-        }
+        // // ========== UI B: 左下角常驻面板 ==========
+        // Rectangle {
+        //     id: counterPanel
+        //     anchors.left: parent.left; anchors.bottom: parent.bottom; anchors.margins: 30
+        //     width: 170; height: 65; color: "#66000000"; radius: 8; border.color: "#33FFFFFF"
+        //     Column {
+        //         anchors.centerIn: parent; spacing: 6
+        //         Row {
+        //             spacing: 10
+        //             Rectangle { width: 12; height: 16; color: "#FFD700"; radius: 2; anchors.verticalCenter: parent.verticalCenter }
+        //             Text {
+        //                 text: "累计黄牌: " + penaltySystem.yellowCardTotal
+        //                 color: Qt.rgba(1.0, 0.8, 0.8, 0.8); font.pixelSize: 16; font.bold: true
+        //             }
+        //         }
+        //         Row {
+        //             spacing: 10
+        //             Rectangle { width: 12; height: 16; color: "#FF4444"; radius: 2; anchors.verticalCenter: parent.verticalCenter }
+        //             Text {
+        //                 text: "累计红牌: " + penaltySystem.redCardTotal
+        //                 color: Qt.rgba(1.0, 0.8, 0.8, 0.8); font.pixelSize: 16; font.bold: true
+        //             }
+        //         }
+        //     }
+        // }
     }
 // ========== 独立的工程装配指令模块（右上角） ==========
 Item {
