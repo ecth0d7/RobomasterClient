@@ -839,119 +839,6 @@ Column {
                 }
             }
         }
-        // 6.6 机器人受伤统计显示（苏丹8）
-        Item {
-            id: robotInjuryDisplay
-            anchors.right: parent.right
-            anchors.top: scoreBar.bottom
-            anchors.topMargin: 10
-            anchors.rightMargin: 20
-            width: 250
-            height: 140
-            z: 11
-            visible: dataStore.isInjuryDisplay===true
-           
-            Rectangle {
-                anchors.fill: parent
-                color: "#80000000"
-                border.color: "#ff3333"
-                border.width: 2
-                radius: 5
-
-                Column {
-                    anchors.fill: parent
-                    anchors.margins: 8
-                    spacing: 3
-
-                    Text {
-                        text: "💔 机器人受伤统计"
-                        font.pixelSize: 12
-                        font.bold: true
-                        color: "#ff3333"
-                    }
-                    // 总伤害单独一行
-                    Rectangle {
-                        width: parent.width
-                        height: 20
-                        color: "#33000000"
-                        border.color: "#ff3333"
-                        border.width: 1
-                        radius: 3
-
-                        Text {
-                            anchors.centerIn: parent
-                            text: "总伤害: " + dataStore.robotInjury_total_damage
-                            font.pixelSize: 11
-                            font.bold: true
-                            color: "#ffffff"
-                        }
-                    }
-
-                    // 其他伤害分两列显示
-                    Grid {
-                        columns: 2
-                        columnSpacing: 15
-                        rowSpacing: 3
-                        width: parent.width
-
-                        // 第一列
-                        Column {
-                            spacing: 3
-                            Row {
-                                spacing: 5
-                                Text { text: "撞击:"; font.pixelSize: 9; color: "#aaaaaa"; width: 45 }
-                                Text { text: dataStore.robotInjury_collision_damage; font.pixelSize: 9; color: "#ffaa00"; width: 30 }
-                            }
-                            Row {
-                                spacing: 5
-                                Text { text: "17mm:"; font.pixelSize: 9; color: "#aaaaaa"; width: 45 }
-                                Text { text: dataStore.robotInjury_small_projectile_damage; font.pixelSize: 9; color: "#ffaa00"; width: 30 }
-                            }
-                            Row {
-                                spacing: 5
-                                Text { text: "42mm:"; font.pixelSize: 9; color: "#aaaaaa"; width: 45 }
-                                Text { text: dataStore.robotInjury_large_projectile_damage; font.pixelSize: 9; color: "#ffaa00"; width: 30 }
-                            }
-                            Row {
-                                spacing: 5
-                                Text { text: "飞镖:"; font.pixelSize: 9; color: "#aaaaaa"; width: 45 }
-                                Text { text: dataStore.robotInjury_dart_splash_damage; font.pixelSize: 9; color: "#ffaa00"; width: 30 }
-                            }
-                            Row {
-                                spacing: 5
-                                Text { text: "模块离线:"; font.pixelSize: 9; color: "#aaaaaa"; width: 45 }
-                                Text { text: dataStore.robotInjury_module_offline_damage; font.pixelSize: 9; color: "#ffaa00"; width: 30 }
-                            }
-                        }
-
-                        // 第二列
-                        Column {
-                            spacing: 3
-                            Row {
-                                spacing: 5
-                                Text { text: "异常离线:"; font.pixelSize: 9; color: "#aaaaaa"; width: 45 }
-                                Text { text: dataStore.robotInjury_offline_damage; font.pixelSize: 9; color: "#ffaa00"; width: 30 }
-                            }
-                            Row {
-                                spacing: 5
-                                Text { text: "判罚:"; font.pixelSize: 9; color: "#aaaaaa"; width: 45 }
-                                Text { text: dataStore.robotInjury_penalty_damage; font.pixelSize: 9; color: "#ffaa00"; width: 30 }
-                            }
-                            Row {
-                                spacing: 5
-                                Text { text: "服务器战亡:"; font.pixelSize: 9; color: "#aaaaaa"; width: 45 }
-                                Text { text: dataStore.robotInjury_server_kill_damage; font.pixelSize: 9; color: "#ffaa00"; width: 30 }
-                            }
-                            Row{
-                                spacing: 5
-                                Text { text: "击杀者ID:"; font.pixelSize: 9; color: "#aaaaaa"; width: 45 }
-                                Text { text: dataStore.robotInjury_killer_id > 0 ? dataStore.robotInjury_killer_id : "无"; font.pixelSize: 9; color: "#ffaa00"; width: 30}
-                            }
-                        }
-                    }
-                }
-            }
-        }
                // 7.5 机器人模块状态显示
         Item {
             id: moduleStatusDisplay
@@ -4208,7 +4095,7 @@ Rectangle {
     border.width: 1
     radius: 5
     z: 11
-
+    visible:dataStore.robotStatic_robot_id===1||dataStore.robotStatic_robot_id===101
     RowLayout {
         anchors.fill: parent
         anchors.margins: 8
@@ -4903,5 +4790,428 @@ Rectangle {
                 }
             }
         }
+// 6.6 机器人受伤统计显示（苏丹8）- 单行单类型版 - 不透明版
+Item {
+    id: robotInjuryDisplay
+    anchors.left: parent.left
+    anchors.top: scoreBar.bottom
+    anchors.topMargin: 10
+    anchors.leftMargin: 20
+    width: 450
+    height: 770
+    z: 999999
+    visible: dataStore.isInjuryDisplay === true
+    
+    // 计算总伤害（确保不为0，避免除零错误）
+    property int totalDamage: Math.max(1, dataStore.robotInjury_total_damage || 1)
+    
+    // 辅助函数：计算百分比
+    function getPercentage(value) {
+        return ((value / totalDamage) * 100).toFixed(1)
+    }
+    
+    Rectangle {
+        anchors.fill: parent
+        color: "#FF111122"  // 改为不透明 (FF 代替 CC)
+        border.color: "#FFFF6666"  // 边框改为不透明
+        border.width: 3
+        radius: 8
 
-}
+        Column {
+            anchors.fill: parent
+            anchors.margins: 15
+            spacing: 12
+
+            // 标题
+            Text {
+                text: "💔 机器人受伤统计"
+                font.pixelSize: 22
+                font.bold: true
+                color: "#FFFF6666"  // 改为不透明
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+
+            // 总伤害 - 加大加粗显示
+            Rectangle {
+                width: parent.width
+                height: 50
+                color: "#FF333333"  // 深灰色不透明背景
+                border.color: "#FFFF6666"  // 边框不透明
+                border.width: 2
+                radius: 5
+
+                Row {
+                    anchors.centerIn: parent
+                    spacing: 20
+
+                    Text {
+                        text: "总伤害:"
+                        font.pixelSize: 20
+                        font.bold: true
+                        color: "#FFFFFFFF"  // 纯白
+                    }
+                    
+                    Text {
+                        text: dataStore.robotInjury_total_damage + " 点"
+                        font.pixelSize: 24
+                        font.bold: true
+                        color: "#FFFFAA00"  // 金黄色不透明
+                    }
+                }
+            }
+
+            // 分隔线
+            Rectangle {
+                width: parent.width
+                height: 2
+                color: "#FFFF6666"  // 不透明红色
+                radius: 1
+            }
+
+            // 标题行（类型 | 数值 | 占比 | 进度条）
+            Row {
+                width: parent.width
+                height: 25
+                spacing: 10
+                
+                Text { text: "伤害类型"; width: 90; font.pixelSize: 14; color: "#FFCCCCCC"; font.bold: true }
+                Text { text: "数值"; width: 70; font.pixelSize: 14; color: "#FFCCCCCC"; font.bold: true }
+                Text { text: "占比"; width: 70; font.pixelSize: 14; color: "#FFCCCCCC"; font.bold: true }
+                Text { text: "进度条"; width: 150; font.pixelSize: 14; color: "#FFCCCCCC"; font.bold: true }
+            }
+
+            // 1. 撞击伤害
+            Rectangle {
+                width: parent.width
+                height: 40
+                color: dataStore.robotInjury_collision_damage > 0 ? "#33FFAA00" : "transparent"
+                radius: 3
+                
+                Row {
+                    anchors.fill: parent
+                    anchors.leftMargin: 5
+                    spacing: 10
+                    
+                    Text { text: "💥 撞击"; width: 90; font.pixelSize: 16; color: "#FFFFFFFF"; verticalAlignment: Text.AlignVCenter; height: parent.height }
+                    Text { text: dataStore.robotInjury_collision_damage + "点"; width: 70; font.pixelSize: 16; font.bold: true; color: "#FFFFAA00"; verticalAlignment: Text.AlignVCenter; height: parent.height }
+                    Text { text: robotInjuryDisplay.getPercentage(dataStore.robotInjury_collision_damage) + "%"; width: 70; font.pixelSize: 16; color: "#FFFFAA00"; verticalAlignment: Text.AlignVCenter; height: parent.height }
+                    
+                    // 进度条
+                    Rectangle {
+                        width: 150
+                        height: 16
+                        color: "#FF333333"
+                        radius: 8
+                        anchors.verticalCenter: parent.verticalCenter
+                        
+                        Rectangle {
+                            width: parent.width * (dataStore.robotInjury_collision_damage / robotInjuryDisplay.totalDamage)
+                            height: parent.height
+                            color: "#FFFFAA00"
+                            radius: 8
+                        }
+                    }
+                }
+            }
+
+            // 2. 17mm伤害
+            Rectangle {
+                width: parent.width
+                height: 40
+                color: dataStore.robotInjury_small_projectile_damage > 0 ? "#33FF4444" : "transparent"
+                radius: 3
+                
+                Row {
+                    anchors.fill: parent
+                    anchors.leftMargin: 5
+                    spacing: 10
+                    
+                    Text { text: "🔫 17mm"; width: 90; font.pixelSize: 16; color: "#FFFFFFFF"; verticalAlignment: Text.AlignVCenter; height: parent.height }
+                    Text { text: dataStore.robotInjury_small_projectile_damage + "点"; width: 70; font.pixelSize: 16; font.bold: true; color: "#FFFFAA00"; verticalAlignment: Text.AlignVCenter; height: parent.height }
+                    Text { text: robotInjuryDisplay.getPercentage(dataStore.robotInjury_small_projectile_damage) + "%"; width: 70; font.pixelSize: 16; color: "#FFFFAA00"; verticalAlignment: Text.AlignVCenter; height: parent.height }
+                    
+                    Rectangle {
+                        width: 150
+                        height: 16
+                        color: "#FF333333"
+                        radius: 8
+                        anchors.verticalCenter: parent.verticalCenter
+                        
+                        Rectangle {
+                            width: parent.width * (dataStore.robotInjury_small_projectile_damage / robotInjuryDisplay.totalDamage)
+                            height: parent.height
+                            color: "#FFFF4444"
+                            radius: 8
+                        }
+                    }
+                }
+            }
+
+            // 3. 42mm伤害
+            Rectangle {
+                width: parent.width
+                height: 40
+                color: dataStore.robotInjury_large_projectile_damage > 0 ? "#33FF8888" : "transparent"
+                radius: 3
+                
+                Row {
+                    anchors.fill: parent
+                    anchors.leftMargin: 5
+                    spacing: 10
+                    
+                    Text { text: "🔫 42mm"; width: 90; font.pixelSize: 16; color: "#FFFFFFFF"; verticalAlignment: Text.AlignVCenter; height: parent.height }
+                    Text { text: dataStore.robotInjury_large_projectile_damage + "点"; width: 70; font.pixelSize: 16; font.bold: true; color: "#FFFFAA00"; verticalAlignment: Text.AlignVCenter; height: parent.height }
+                    Text { text: robotInjuryDisplay.getPercentage(dataStore.robotInjury_large_projectile_damage) + "%"; width: 70; font.pixelSize: 16; color: "#FFFFAA00"; verticalAlignment: Text.AlignVCenter; height: parent.height }
+                    
+                    Rectangle {
+                        width: 150
+                        height: 16
+                        color: "#FF333333"
+                        radius: 8
+                        anchors.verticalCenter: parent.verticalCenter
+                        
+                        Rectangle {
+                            width: parent.width * (dataStore.robotInjury_large_projectile_damage / robotInjuryDisplay.totalDamage)
+                            height: parent.height
+                            color: "#FFFF8888"
+                            radius: 8
+                        }
+                    }
+                }
+            }
+
+            // 4. 飞镖伤害
+            Rectangle {
+                width: parent.width
+                height: 40
+                color: dataStore.robotInjury_dart_splash_damage > 0 ? "#3388FF88" : "transparent"
+                radius: 3
+                
+                Row {
+                    anchors.fill: parent
+                    anchors.leftMargin: 5
+                    spacing: 10
+                    
+                    Text { text: "🎯 飞镖"; width: 90; font.pixelSize: 16; color: "#FFFFFFFF"; verticalAlignment: Text.AlignVCenter; height: parent.height }
+                    Text { text: dataStore.robotInjury_dart_splash_damage + "点"; width: 70; font.pixelSize: 16; font.bold: true; color: "#FFFFAA00"; verticalAlignment: Text.AlignVCenter; height: parent.height }
+                    Text { text: robotInjuryDisplay.getPercentage(dataStore.robotInjury_dart_splash_damage) + "%"; width: 70; font.pixelSize: 16; color: "#FFFFAA00"; verticalAlignment: Text.AlignVCenter; height: parent.height }
+                    
+                    Rectangle {
+                        width: 150
+                        height: 16
+                        color: "#FF333333"
+                        radius: 8
+                        anchors.verticalCenter: parent.verticalCenter
+                        
+                        Rectangle {
+                            width: parent.width * (dataStore.robotInjury_dart_splash_damage / robotInjuryDisplay.totalDamage)
+                            height: parent.height
+                            color: "#FF88FF88"
+                            radius: 8
+                        }
+                    }
+                }
+            }
+
+            // 5. 模块离线伤害
+            Rectangle {
+                width: parent.width
+                height: 40
+                color: dataStore.robotInjury_module_offline_damage > 0 ? "#338888FF" : "transparent"
+                radius: 3
+                
+                Row {
+                    anchors.fill: parent
+                    anchors.leftMargin: 5
+                    spacing: 10
+                    
+                    Text { text: "🔌 模块离线"; width: 90; font.pixelSize: 16; color: "#FFFFFFFF"; verticalAlignment: Text.AlignVCenter; height: parent.height }
+                    Text { text: dataStore.robotInjury_module_offline_damage + "点"; width: 70; font.pixelSize: 16; font.bold: true; color: "#FFFFAA00"; verticalAlignment: Text.AlignVCenter; height: parent.height }
+                    Text { text: robotInjuryDisplay.getPercentage(dataStore.robotInjury_module_offline_damage) + "%"; width: 70; font.pixelSize: 16; color: "#FFFFAA00"; verticalAlignment: Text.AlignVCenter; height: parent.height }
+                    
+                    Rectangle {
+                        width: 150
+                        height: 16
+                        color: "#FF333333"
+                        radius: 8
+                        anchors.verticalCenter: parent.verticalCenter
+                        
+                        Rectangle {
+                            width: parent.width * (dataStore.robotInjury_module_offline_damage / robotInjuryDisplay.totalDamage)
+                            height: parent.height
+                            color: "#FF8888FF"
+                            radius: 8
+                        }
+                    }
+                }
+            }
+
+            // 6. 异常离线伤害
+            Rectangle {
+                width: parent.width
+                height: 40
+                color: dataStore.robotInjury_offline_damage > 0 ? "#33FF88FF" : "transparent"
+                radius: 3
+                
+                Row {
+                    anchors.fill: parent
+                    anchors.leftMargin: 5
+                    spacing: 10
+                    
+                    Text { text: "⚠️ 异常离线"; width: 90; font.pixelSize: 16; color: "#FFFFFFFF"; verticalAlignment: Text.AlignVCenter; height: parent.height }
+                    Text { text: dataStore.robotInjury_offline_damage + "点"; width: 70; font.pixelSize: 16; font.bold: true; color: "#FFFFAA00"; verticalAlignment: Text.AlignVCenter; height: parent.height }
+                    Text { text: robotInjuryDisplay.getPercentage(dataStore.robotInjury_offline_damage) + "%"; width: 70; font.pixelSize: 16; color: "#FFFFAA00"; verticalAlignment: Text.AlignVCenter; height: parent.height }
+                    
+                    Rectangle {
+                        width: 150
+                        height: 16
+                        color: "#FF333333"
+                        radius: 8
+                        anchors.verticalCenter: parent.verticalCenter
+                        
+                        Rectangle {
+                            width: parent.width * (dataStore.robotInjury_offline_damage / robotInjuryDisplay.totalDamage)
+                            height: parent.height
+                            color: "#FFFF88FF"
+                            radius: 8
+                        }
+                    }
+                }
+            }
+
+            // 7. 判罚伤害
+            Rectangle {
+                width: parent.width
+                height: 40
+                color: dataStore.robotInjury_penalty_damage > 0 ? "#33FFFF88" : "transparent"
+                radius: 3
+                
+                Row {
+                    anchors.fill: parent
+                    anchors.leftMargin: 5
+                    spacing: 10
+                    
+                    Text { text: "⚖️ 判罚"; width: 90; font.pixelSize: 16; color: "#FFFFFFFF"; verticalAlignment: Text.AlignVCenter; height: parent.height }
+                    Text { text: dataStore.robotInjury_penalty_damage + "点"; width: 70; font.pixelSize: 16; font.bold: true; color: "#FFFFAA00"; verticalAlignment: Text.AlignVCenter; height: parent.height }
+                    Text { text: robotInjuryDisplay.getPercentage(dataStore.robotInjury_penalty_damage) + "%"; width: 70; font.pixelSize: 16; color: "#FFFFAA00"; verticalAlignment: Text.AlignVCenter; height: parent.height }
+                    
+                    Rectangle {
+                        width: 150
+                        height: 16
+                        color: "#FF333333"
+                        radius: 8
+                        anchors.verticalCenter: parent.verticalCenter
+                        
+                        Rectangle {
+                            width: parent.width * (dataStore.robotInjury_penalty_damage / robotInjuryDisplay.totalDamage)
+                            height: parent.height
+                            color: "#FFFFFF88"
+                            radius: 8
+                        }
+                    }
+                }
+            }
+
+            // 8. 服务器战亡伤害
+            Rectangle {
+                width: parent.width
+                height: 40
+                color: dataStore.robotInjury_server_kill_damage > 0 ? "#33FF8888" : "transparent"
+                radius: 3
+                
+                Row {
+                    anchors.fill: parent
+                    anchors.leftMargin: 5
+                    spacing: 10
+                    
+                    Text { text: "💀 服务器战亡"; width: 90; font.pixelSize: 16; color: "#FFFFFFFF"; verticalAlignment: Text.AlignVCenter; height: parent.height }
+                    Text { text: dataStore.robotInjury_server_kill_damage + "点"; width: 70; font.pixelSize: 16; font.bold: true; color: "#FFFFAA00"; verticalAlignment: Text.AlignVCenter; height: parent.height }
+                    Text { text: robotInjuryDisplay.getPercentage(dataStore.robotInjury_server_kill_damage) + "%"; width: 70; font.pixelSize: 16; color: "#FFFFAA00"; verticalAlignment: Text.AlignVCenter; height: parent.height }
+                    
+                    Rectangle {
+                        width: 150
+                        height: 16
+                        color: "#FF333333"
+                        radius: 8
+                        anchors.verticalCenter: parent.verticalCenter
+                        
+                        Rectangle {
+                            width: parent.width * (dataStore.robotInjury_server_kill_damage / robotInjuryDisplay.totalDamage)
+                            height: parent.height
+                            color: "#FFFF8888"
+                            radius: 8
+                        }
+                    }
+                }
+            }
+
+            // 分隔线
+            Rectangle {
+                width: parent.width
+                height: 2
+                color: "#FFFF6666"
+                radius: 1
+            }
+
+            // 击杀者信息
+            Rectangle {
+                width: parent.width
+                height: 50
+                color: "#FF333333"
+                border.color: "#FFFF6666"
+                border.width: 1
+                radius: 5
+
+                Row {
+                    anchors.centerIn: parent
+                    spacing: 20
+                    
+                    Text {
+                        text: "🔪 击杀者ID:"
+                        font.pixelSize: 18
+                        font.bold: true
+                        color: "#FFFFFFFF"
+                    }
+                    
+                    Text {
+                        text: dataStore.robotInjury_killer_id > 0 ? dataStore.robotInjury_killer_id : "无"
+                        font.pixelSize: 22
+                        font.bold: true
+                        color: dataStore.robotInjury_killer_id > 0 ? "#FFFF6666" : "#FFAAAAAA"
+                    }
+                    
+                    Text {
+                        text: dataStore.robotInjury_killer_id > 0 ? 
+                              (dataStore.robotInjury_killer_id < 100 ? "(红方)" : "(蓝方)") : ""
+                        font.pixelSize: 16
+                        color: "#FFFFAA00"
+                        visible: dataStore.robotInjury_killer_id > 0
+                    }
+                }
+            }
+
+            // 图例说明
+            Flow {
+                width: parent.width
+                spacing: 15
+                
+                Row { spacing: 5; Rectangle { width: 16; height: 16; color: "#FFFFAA00"; radius: 3 } 
+                      Text { text: "撞击"; font.pixelSize: 12; color: "#FFCCCCCC"; anchors.verticalCenter: parent.verticalCenter } }
+                Row { spacing: 5; Rectangle { width: 16; height: 16; color: "#FFFF4444"; radius: 3 } 
+                      Text { text: "17mm"; font.pixelSize: 12; color: "#FFCCCCCC"; anchors.verticalCenter: parent.verticalCenter } }
+                Row { spacing: 5; Rectangle { width: 16; height: 16; color: "#FFFF8888"; radius: 3 } 
+                      Text { text: "42mm"; font.pixelSize: 12; color: "#FFCCCCCC"; anchors.verticalCenter: parent.verticalCenter } }
+                Row { spacing: 5; Rectangle { width: 16; height: 16; color: "#FF88FF88"; radius: 3 } 
+                      Text { text: "飞镖"; font.pixelSize: 12; color: "#FFCCCCCC"; anchors.verticalCenter: parent.verticalCenter } }
+                Row { spacing: 5; Rectangle { width: 16; height: 16; color: "#FF8888FF"; radius: 3 } 
+                      Text { text: "模块离线"; font.pixelSize: 12; color: "#FFCCCCCC"; anchors.verticalCenter: parent.verticalCenter } }
+                Row { spacing: 5; Rectangle { width: 16; height: 16; color: "#FFFF88FF"; radius: 3 } 
+                      Text { text: "异常离线"; font.pixelSize: 12; color: "#FFCCCCCC"; anchors.verticalCenter: parent.verticalCenter } }
+                Row { spacing: 5; Rectangle { width: 16; height: 16; color: "#FFFFFF88"; radius: 3 } 
+                      Text { text: "判罚"; font.pixelSize: 12; color: "#FFCCCCCC"; anchors.verticalCenter: parent.verticalCenter } }
+                Row { spacing: 5; Rectangle { width: 16; height: 16; color: "#FFFF8888"; radius: 3 } 
+                      Text { text: "服务器战亡"; font.pixelSize: 12; color: "#FFCCCCCC"; anchors.verticalCenter: parent.verticalCenter } }
+            }
+        }
+    }
+}}
