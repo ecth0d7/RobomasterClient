@@ -21,6 +21,7 @@ ApplicationWindow {
         id: dataStore
         // 新增：通用指令面板显示状态
         property bool isCommonCmdVisible: false
+        property bool isInjuryDisplay:false
         
         // 1. 窗口状态（保留数据，逻辑移到UI层）
         property bool isMaximized: false
@@ -500,13 +501,7 @@ Connections {
         var now = new Date().getTime();
         var displayName = keyName;
         
-        // --- 新增：处理 H 键弹出/隐藏面板 ---
-        if (displayName.toLowerCase() === "h") {
-            dataStore.isCommonCmdVisible = !dataStore.isCommonCmdVisible;
-            console.log("通用指令面板状态切换:", dataStore.isCommonCmdVisible);
-            updateKeyInfoText();
-            return; // 处理完 H 键直接返回，不参与后续协议位掩码计算
-        }
+        
 
         // 记录所有按键（用于UI显示）
         dataStore.allPressedKeys[key] = {
@@ -515,6 +510,18 @@ Connections {
             isLongPress: isLongPress,
             keyCode: key
         };
+        // --- 新增：处理 H 键弹出/隐藏面板 ---
+        if (displayName.toLowerCase() === "h") {
+            dataStore.isCommonCmdVisible = !dataStore.isCommonCmdVisible;
+            console.log("通用指令面板状态切换:", dataStore.isCommonCmdVisible);
+            updateKeyInfoText();
+            // return; // 处理完 H 键直接返回，不参与后续协议位掩码计算
+        }
+        if(displayName==="`"||displayName==="~"){
+            dataStore.isInjuryDisplay=!dataStore.isInjuryDisplay;
+            updateKeyInfoText();
+           
+        }
         
         // 将 Qt 键值转换为位掩码（只处理协议定义的16个按键）
         switch(key) {

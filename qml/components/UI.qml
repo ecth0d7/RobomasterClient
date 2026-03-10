@@ -849,9 +849,8 @@ Column {
             width: 250
             height: 140
             z: 11
-            // visible: dataStore.robotInjury_total_damage > 0
-            visible: true
-
+            visible: dataStore.isInjuryDisplay===true
+           
             Rectangle {
                 anchors.fill: parent
                 color: "#80000000"
@@ -4196,4 +4195,713 @@ Item {
         }
     }
 }
+// 25 26 英雄部署模式控制面板
+Rectangle {
+    id: heroDeployPanel
+    anchors.top: buffStatusBar.bottom
+    anchors.topMargin: 10
+    anchors.left: buffStatusBar.left
+    width: buffStatusBar.width+140
+    height: 60
+    color: "#00000080"
+    border.color: "#66666680"
+    border.width: 1
+    radius: 5
+    z: 11
+
+    RowLayout {
+        anchors.fill: parent
+        anchors.margins: 8
+        spacing: 10
+
+        Column {
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            spacing: 2
+            Text {
+                text: "英雄部署模式"
+                font.pixelSize: 12
+                color: "#aaaaaa"
+            }
+            Text {
+                text: "当前状态: " + (dataStore.deployMode_current_status === 1 ? "已部署" : "未部署")
+                font.pixelSize: 14
+                font.bold: true
+                color: dataStore.deployMode_current_status === 1 ? "#44ff44" : "#aaaaaa"
+            }
+        }
+
+        Item { Layout.fillWidth: true }
+
+        Button {
+            text: "进入部署"
+            enabled: dataStore.deployMode_current_status !== 1
+            onClicked: {
+                dataStore.mqttSend_heroDeployMode = 1;
+                console.log("发送英雄部署模式: 进入");
+            }
+        }
+
+        Button {
+            text: "退出部署"
+            enabled: dataStore.deployMode_current_status !== 0
+            onClicked: {
+                dataStore.mqttSend_heroDeployMode = 0;
+                console.log("发送英雄部署模式: 退出");
+            }
+        }
+    }
+}
+// ===== 合并后的能量机关面板（状态+按钮）===== 27 28
+Rectangle {
+    id: runeCombinedPanel
+    anchors.top: scoreBar.bottom
+    anchors.right: parent.right
+    anchors.topMargin: 10
+    anchors.rightMargin: 20
+    width: 260
+    height: 120
+    color: "#00000080"
+    border.color: "#66666680"
+    border.width: 1
+    radius: 5
+    z: 11
+
+    ColumnLayout {
+        anchors.fill: parent
+        anchors.margins: 8
+        spacing: 6
+
+        // 标题
+        Text {
+            text: "⚡ 能量机关"
+            font.pixelSize: 14
+            font.bold: true
+            color: "#ffffff"
+            Layout.alignment: Qt.AlignHCenter
+        }
+
+        // 状态信息行（一行显示三个状态）
+        RowLayout {
+            Layout.fillWidth: true
+            spacing: 8
+
+            // 状态
+            RowLayout {
+                spacing: 2
+                Text { text: "状态:"; font.pixelSize: 12; color: "#aaaaaa" }
+                Text {
+                    text: {
+                        if (dataStore.runeStatus_rune_status === 1) return "未激活";
+                        if (dataStore.runeStatus_rune_status === 2) return "激活中";
+                        if (dataStore.runeStatus_rune_status === 3) return "已激活";
+                        return "未知";
+                    }
+                    font.pixelSize: 12
+                    font.bold: true
+                    color: {
+                        if (dataStore.runeStatus_rune_status === 3) return "#44ff44";
+                        if (dataStore.runeStatus_rune_status === 2) return "#ffff44";
+                        return "#aaaaaa";
+                    }
+                }
+            }
+
+            // 激活灯臂
+            RowLayout {
+                spacing: 2
+                Text { text: "灯臂:"; font.pixelSize: 12; color: "#aaaaaa" }
+                Text {
+                    text: dataStore.runeStatus_activated_arms + "/6"
+                    font.pixelSize: 12
+                    color: "#ffffff"
+                }
+            }
+
+            // 平均环数
+            RowLayout {
+                spacing: 2
+                Text { text: "环数:"; font.pixelSize: 12; color: "#aaaaaa" }
+                Text {
+                    text: dataStore.runeStatus_average_rings
+                    font.pixelSize: 12
+                    color: "#ffffff"
+                }
+            }
+        }
+
+        // 按钮行
+        RowLayout {
+            Layout.fillWidth: true
+            spacing: 10
+
+            Button {
+                text: "⚡ 激活"
+                Layout.fillWidth: true
+                enabled: dataStore.runeStatus_rune_status === 1
+                onClicked: {
+                    dataStore.mqttSend_runeActivate = 1;
+                    console.log("发送能量机关激活指令: 激活");
+                }
+            }
+
+            Button {
+                text: "✖ 取消"
+                Layout.fillWidth: true
+                enabled: dataStore.runeStatus_rune_status === 1
+                onClicked: {
+                    dataStore.mqttSend_runeActivate = 0;
+                    console.log("发送能量机关激活指令: 取消");
+                }
+            }
+        }
+    }
+}
+
+        // 29 哨兵状态同步面板
+        Rectangle {
+            id: sentryStatusPanel
+            anchors.top: runeCombinedPanel.bottom
+            anchors.topMargin: 10
+            anchors.right: runeCombinedPanel.right
+            width: runeCombinedPanel.width
+            height: 80
+            color: "#00000080"
+            border.color: "#66666680"
+            border.width: 1
+            radius: 5
+            z: 11
+
+            ColumnLayout {
+                anchors.fill: parent
+                anchors.margins: 8
+                spacing: 6
+
+                // 标题
+                Text {
+                    text: "🤖 哨兵状态"
+                    font.pixelSize: 14
+                    font.bold: true
+                    color: "#ffffff"
+                    Layout.alignment: Qt.AlignHCenter
+                }
+
+                // 姿态行
+                RowLayout {
+                    Layout.fillWidth: true
+                    Text {
+                        text: "姿态:"
+                        font.pixelSize: 12
+                        color: "#aaaaaa"
+                    }
+                    Text {
+                        text: {
+                            var posture = dataStore.sentryStatus_posture_id || 1;
+                            switch(posture) {
+                                case 1: return "进攻姿态";
+                                case 2: return "防御姿态";
+                                case 3: return "移动姿态";
+                                default: return "未知姿态";
+                            }
+                        }
+                        font.pixelSize: 12
+                        font.bold: true
+                        color: {
+                            var posture = dataStore.sentryStatus_posture_id || 1;
+                            if (posture === 1) return "#ff4444";   // 红色代表进攻
+                            if (posture === 2) return "#44ff44";   // 绿色代表防御
+                            if (posture === 3) return "#ffff44";   // 黄色代表移动
+                            return "#ffffff";
+                        }
+                    }
+                }
+
+                // 弱化状态行
+                RowLayout {
+                    Layout.fillWidth: true
+                    Text {
+                        text: "状态:"
+                        font.pixelSize: 12
+                        color: "#aaaaaa"
+                    }
+                    Text {
+                        text: dataStore.sentryStatus_is_weakened ? "⚠️ 弱化状态" : "✅ 正常状态"
+                        font.pixelSize: 12
+                        font.bold: true
+                        color: dataStore.sentryStatus_is_weakened ? "#ffaa00" : "#22ff22"
+                    }
+                }
+            }
+        }
+
+// ===== 30 31 飞镖控制面板（指令发送 + 状态显示）=====
+Rectangle {
+    id: dartControlPanel
+    anchors.top: sentryStatusPanel.bottom
+    anchors.topMargin: 10
+    anchors.right: sentryStatusPanel.right
+    width: sentryStatusPanel.width
+    height: 160
+    color: "#00000080"
+    border.color: "#66666680"
+    border.width: 1
+    radius: 5
+    z: 11
+
+    ColumnLayout {
+        anchors.fill: parent
+        anchors.margins: 8
+        spacing: 6
+
+        // 标题
+        Text {
+            text: "🎯 飞镖控制"
+            font.pixelSize: 14
+            font.bold: true
+            color: "#ffffff"
+            Layout.alignment: Qt.AlignHCenter
+        }
+
+        // 状态显示行（当前目标 + 闸门状态）
+        RowLayout {
+            Layout.fillWidth: true
+            spacing: 10
+
+            // 当前目标
+            RowLayout {
+                spacing: 2
+                Text { text: "当前目标:"; font.pixelSize: 12; color: "#aaaaaa" }
+                Text {
+                    text: {
+                        var tid = dataStore.dartTarget_status_target_id || 0;
+                        switch(tid) {
+                            case 1: return "前哨站";
+                            case 2: return "基地固定目标";
+                            case 3: return "基地随机固定目标";
+                            case 4: return "基地随机移动目标";
+                            case 5: return "基地末端移动目标";
+                            default: return "未选择";
+                        }
+                    }
+                    font.pixelSize: 12
+                    font.bold: true
+                    color: "#ffff44"
+                }
+            }
+
+            // 闸门状态
+            RowLayout {
+                spacing: 2
+                Text { text: "闸门:"; font.pixelSize: 12; color: "#aaaaaa" }
+                Text {
+                    text: {
+                        var stat = dataStore.dartTarget_status_open;
+                        if (stat === 0) return "已开启";
+                        if (stat === 1) return "关闭";
+                        if (stat === 2) return "正在动作";
+                        return "未知";
+                    }
+                    font.pixelSize: 12
+                    font.bold: true
+                    color: {
+                        var stat = dataStore.dartTarget_status_open;
+                        if (stat === 0) return "#44ff44";   // 开启 绿色
+                        if (stat === 1) return "#ff4444";   // 关闭 红色
+                        if (stat === 2) return "#ffff44";   // 动作中 黄色
+                        return "#ffffff";
+                    }
+                }
+            }
+        }
+
+        // 分隔线
+        Rectangle {
+            Layout.fillWidth: true
+            height: 1
+            color: "#66666680"
+        }
+
+        // 目标选择
+        RowLayout {
+            Layout.fillWidth: true
+            Text { text: "选择目标:"; font.pixelSize: 12; color: "#aaaaaa" }
+
+            ComboBox {
+                id: targetCombo
+                Layout.fillWidth: true
+                model: ["前哨站", "基地固定目标", "基地随机固定目标", "基地随机移动目标", "基地末端移动目标"]
+                currentIndex: {
+                    var tid = dataStore.mqttSend_dartTargetId || 1;
+                    return tid - 1;  // 索引0对应ID1
+                }
+                onActivated: function(index) {
+                    dataStore.mqttSend_dartTargetId = index + 1;
+                }
+
+                background: Rectangle {
+                    color: "#333333"
+                    border.color: "#666666"
+                    border.width: 1
+                    radius: 3
+                }
+                contentItem: Text {
+                    text: targetCombo.displayText
+                    color: "#ffffff"
+                    font.pixelSize: 12
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignLeft
+                    leftPadding: 8
+                }
+                indicator: Canvas {
+                    implicitWidth: 20
+                    implicitHeight: 20
+                    onPaint: {
+                        var ctx = getContext("2d");
+                        ctx.fillStyle = "#ffffff";
+                        ctx.moveTo(0, 5);
+                        ctx.lineTo(10, 15);
+                        ctx.lineTo(20, 5);
+                        ctx.closePath();
+                        ctx.fill();
+                    }
+                }
+            }
+        }
+
+        // 闸门控制按钮行
+        RowLayout {
+            Layout.fillWidth: true
+            spacing: 10
+
+            Button {
+                text: "🚪 开启闸门"
+                Layout.fillWidth: true
+                onClicked: {
+                    dataStore.mqttSend_dartOpen = true;
+                    console.log("飞镖指令: 开启闸门");
+                }
+            }
+
+            Button {
+                text: "🚪 关闭闸门"
+                Layout.fillWidth: true
+                onClicked: {
+                    dataStore.mqttSend_dartOpen = false;
+                    console.log("飞镖指令: 关闭闸门");
+                }
+            }
+        }
+
+        // 发射确认按钮 + 脉冲重置逻辑
+        RowLayout {
+            Layout.fillWidth: true
+
+            Button {
+                text: "🚀 确认发射"
+                Layout.fillWidth: true
+                enabled: dataStore.dartTarget_status_open === 0  // 仅在闸门已开启时可发射
+                onClicked: {
+                    dataStore.mqttSend_dartLaunchConfirm = true;
+                    console.log("飞镖指令: 确认发射 (脉冲)");
+
+                    // 200ms后自动重置发射确认，避免持续发送
+                    launchResetTimer.start();
+                }
+
+                // 按钮背景色提示
+                background: Rectangle {
+                    color: parent.enabled ? (parent.pressed ? "#44aa44" : "#22ff22") : "#555555"
+                    radius: 4
+                }
+            }
+
+            // 发射状态指示（可选）
+            Text {
+                text: dataStore.mqttSend_dartLaunchConfirm ? "⚡发射信号已发送" : ""
+                font.pixelSize: 10
+                color: "#ffff44"
+                visible: dataStore.mqttSend_dartLaunchConfirm
+            }
+        }
+
+        // 用于重置发射确认的定时器
+        Timer {
+            id: launchResetTimer
+            interval: 200
+            repeat: false
+            onTriggered: {
+                dataStore.mqttSend_dartLaunchConfirm = false;
+                console.log("飞镖发射确认已自动重置");
+            }
+        }
+    }
+}
+
+// ===== 32 33 哨兵控制指令面板（发送请求 + 显示结果）=====
+Rectangle {
+    id: sentryCommandPanel
+    anchors.top: dartControlPanel.bottom
+    anchors.topMargin: 10
+    anchors.right: dartControlPanel.right
+    width: dartControlPanel.width
+    height: 320  // 根据按钮数量调整高度
+    color: "#00000080"
+    border.color: "#66666680"
+    border.width: 1
+    radius: 5
+    z: 11
+
+    ColumnLayout {
+        anchors.fill: parent
+        anchors.margins: 8
+        spacing: 6
+
+        // 标题
+        Text {
+            text: "🤖 哨兵控制指令"
+            font.pixelSize: 14
+            font.bold: true
+            color: "#ffffff"
+            Layout.alignment: Qt.AlignHCenter
+        }
+
+        // 当前指令结果显示
+        RowLayout {
+            Layout.fillWidth: true
+            spacing: 8
+
+            // 最新指令ID
+            RowLayout {
+                spacing: 2
+                Text { text: "最新指令:"; font.pixelSize: 12; color: "#aaaaaa" }
+                Text {
+                    text: dataStore.sentryCtrlResult_command_id || 0
+                    font.pixelSize: 12
+                    font.bold: true
+                    color: "#ffff44"
+                }
+            }
+
+            // 结果码
+            RowLayout {
+                spacing: 2
+                Text { text: "结果:"; font.pixelSize: 12; color: "#aaaaaa" }
+                Text {
+                    text: {
+                        var code = dataStore.sentryCtrlResult_result_code || 0;
+                        return code === 0 ? "成功" : "失败(" + code + ")";
+                    }
+                    font.pixelSize: 12
+                    font.bold: true
+                    color: dataStore.sentryCtrlResult_result_code === 0 ? "#44ff44" : "#ff4444"
+                }
+            }
+        }
+
+        // 分隔线
+        Rectangle {
+            Layout.fillWidth: true
+            height: 1
+            color: "#66666680"
+        }
+
+        // 指令按钮网格（2列，5行）
+        GridLayout {
+            Layout.fillWidth: true
+            columns: 2
+            columnSpacing: 10
+            rowSpacing: 6
+
+            // 辅助函数：生成按钮
+            Component {
+                id: commandButton
+                Button {
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 36
+                    text: modelData.label
+                    onClicked: {
+                        dataStore.mqttSend_sentryCtrlCommandId = modelData.cmd;
+                        console.log("哨兵指令发送:", modelData.label, "指令ID=", modelData.cmd);
+                    }
+
+                    // 高亮当前正在发送的指令
+                    background: Rectangle {
+                        color: dataStore.mqttSend_sentryCtrlCommandId === modelData.cmd ? "#44aa44" : (parent.pressed ? "#555555" : "#333333")
+                        border.color: "#666666"
+                        border.width: 1
+                        radius: 4
+                    }
+                    contentItem: Text {
+                        text: parent.text
+                        color: "#ffffff"
+                        font.pixelSize: 12
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        wrapMode: Text.WordWrap
+                    }
+                }
+            }
+
+            // 按钮数据模型 (label, command_id)
+            Repeater {
+                model: ListModel {
+                    ListElement { label: "补血点补弹"; cmd: 1 }
+                    ListElement { label: "补给站补弹"; cmd: 2 }
+                    ListElement { label: "远程补弹"; cmd: 3 }
+                    ListElement { label: "远程回血"; cmd: 4 }
+                    ListElement { label: "确认复活"; cmd: 5 }
+                    ListElement { label: "金币复活"; cmd: 6 }
+                    ListElement { label: "地图标点"; cmd: 7 }
+                    ListElement { label: "进攻姿态"; cmd: 8 }
+                    ListElement { label: "防御姿态"; cmd: 9 }
+                    ListElement { label: "移动姿态"; cmd: 10 }
+                }
+                delegate: Loader {
+                    sourceComponent: commandButton
+                    property var modelData: model
+                }
+            }
+        }
+
+        // 底部提示文字
+        Text {
+            text: "点击按钮设置指令，将持续以1Hz发送"
+            font.pixelSize: 9
+            color: "#aaaaaa"
+            Layout.alignment: Qt.AlignHCenter
+        }
+    }
+}
+
+        // ===== 34 35 空中支援面板（指令发送 + 状态显示）=====
+        Rectangle {
+            id: airSupportPanel
+            anchors.top: sentryCommandPanel.bottom
+            anchors.topMargin: 10
+            anchors.right: sentryCommandPanel.right
+            width: sentryCommandPanel.width
+            height: 220
+            color: "#00000080"
+            border.color: "#66666680"
+            border.width: 1
+            radius: 5
+            z: 11
+
+            ColumnLayout {
+                anchors.fill: parent
+                anchors.margins: 8
+                spacing: 6
+
+                // 标题
+                Text {
+                    text: "✈️ 空中支援"
+                    font.pixelSize: 14
+                    font.bold: true
+                    color: "#ffffff"
+                    Layout.alignment: Qt.AlignHCenter
+                }
+
+                // 状态信息网格
+                GridLayout {
+                    Layout.fillWidth: true
+                    columns: 2
+                    columnSpacing: 10
+                    rowSpacing: 4
+
+                    Text { text: "当前状态:"; font.pixelSize: 12; color: "#aaaaaa" }
+                    Text {
+                        text: {
+                            var status = dataStore.airSupport_status;
+                            if (status === 0) return "未进行空中支援";
+                            if (status === 1) return "正在空中支援";
+                            return "未知";
+                        }
+                        font.pixelSize: 12
+                        font.bold: true
+                        color: dataStore.airSupport_status === 1 ? "#44ff44" : "#aaaaaa"
+                    }
+
+                    Text { text: "免费剩余时间:"; font.pixelSize: 12; color: "#aaaaaa" }
+                    Text {
+                        text: dataStore.airSupport_left_time + " 秒"
+                        font.pixelSize: 12
+                        color: "#ffffff"
+                    }
+
+                    Text { text: "已花费金币:"; font.pixelSize: 12; color: "#aaaaaa" }
+                    Text {
+                        text: dataStore.airSupport_cost_coins + " 金币"
+                        font.pixelSize: 12
+                        color: "#ffffff"
+                    }
+
+                    Text { text: "激光照射状态:"; font.pixelSize: 12; color: "#aaaaaa" }
+                    Text {
+                        text: dataStore.airSupport_is_being_targeted === 1 ? "被照射" : "未被照射"
+                        font.pixelSize: 12
+                        font.bold: true
+                        color: dataStore.airSupport_is_being_targeted === 1 ? "#ff4444" : "#22ff22"
+                    }
+
+                    Text { text: "发射机构状态:"; font.pixelSize: 12; color: "#aaaaaa" }
+                    Text {
+                        text: dataStore.airSupport_shooter_status === 0 ? "被雷达反制锁定" : "正常未锁定"
+                        font.pixelSize: 12
+                        font.bold: true
+                        color: dataStore.airSupport_shooter_status === 0 ? "#ff4444" : "#22ff22"
+                    }
+                }
+
+                // 分隔线
+                Rectangle {
+                    Layout.fillWidth: true
+                    height: 1
+                    color: "#66666680"
+                }
+
+                // 按钮行
+                RowLayout {
+                    Layout.fillWidth: true
+                    spacing: 8
+
+                    Button {
+                        text: "📞 免费呼叫"
+                        Layout.fillWidth: true
+                        enabled: dataStore.airSupport_status !== 1 // 不在支援中才可呼叫
+                        onClicked: {
+                            dataStore.mqttSend_airSupportCommandId = 1;
+                            console.log("空中支援指令: 免费呼叫");
+                        }
+                    }
+
+                    Button {
+                        text: "💰 付费呼叫"
+                        Layout.fillWidth: true
+                        enabled: dataStore.airSupport_status !== 1
+                        onClicked: {
+                            dataStore.mqttSend_airSupportCommandId = 2;
+                            console.log("空中支援指令: 付费呼叫");
+                        }
+                    }
+
+                    Button {
+                        text: "🛑 中断"
+                        Layout.fillWidth: true
+                        enabled: dataStore.airSupport_status === 1
+                        onClicked: {
+                            dataStore.mqttSend_airSupportCommandId = 3;
+                            console.log("空中支援指令: 中断");
+                        }
+                    }
+                }
+
+                // 底部提示
+                Text {
+                    text: "点击按钮设置指令，将持续以1Hz发送"
+                    font.pixelSize: 9
+                    color: "#aaaaaa"
+                    Layout.alignment: Qt.AlignHCenter
+                }
+            }
+        }
+
 }
