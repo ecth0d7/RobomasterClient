@@ -256,7 +256,7 @@ ApplicationWindow {
         property string mousePosText: ""         // 鼠标位置
         property string wheelInfoText: ""        // 滚轮信息
         // 27. MQTT发送参数
-        property bool mqttSend_enableAutoSend: true
+        property bool mqttSend_enableAutoSend: false
         property string mqttSend_customControlHexData: ""
         property int mqttSend_mapClickIsSendAll: 0
         property string mqttSend_mapClickRobotIdHex: "00000000000000"
@@ -511,13 +511,13 @@ Connections {
             keyCode: key
         };
         // --- 新增：处理 H 键弹出/隐藏面板 ---
-        if (displayName.toLowerCase() === "h") {
+        if (displayName.toLowerCase() === "h"&& !isLongPress) {
             dataStore.isCommonCmdVisible = !dataStore.isCommonCmdVisible;
             console.log("通用指令面板状态切换:", dataStore.isCommonCmdVisible);
             updateKeyInfoText();
             // return; // 处理完 H 键直接返回，不参与后续协议位掩码计算
         }
-        if(displayName==="`"||displayName==="~"){
+        if((displayName==="`"||displayName==="~")&& !isLongPress){
             dataStore.isInjuryDisplay=!dataStore.isInjuryDisplay;
             updateKeyInfoText();
            
@@ -562,7 +562,11 @@ Connections {
         
         // 使用传入的 keyName
         var displayName = keyName;
-        
+        if(displayName==="`"||displayName==="~"){
+            dataStore.isInjuryDisplay=!dataStore.isInjuryDisplay;
+            updateKeyInfoText();
+           
+        }
         // 从所有按键记录中移除
         delete dataStore.allPressedKeys[key];
         
