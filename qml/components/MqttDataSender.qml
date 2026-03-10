@@ -180,7 +180,7 @@ function triggerCommonCommand() {
     commonCommandTimer.restart(); 
 }
     // 10. 通用指令定时器（最高10Hz）
-  //修改：定时器配置 ==========
+  //：定时器配置 ==========
 Timer {
     id: commonCommandTimer
     interval: root.commonCommandSendInterval // 100ms

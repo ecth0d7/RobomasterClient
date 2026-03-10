@@ -2967,4 +2967,238 @@ Rectangle {
         }
     }
 }
+// 在UI.qml中，找到自定义数据流面板（id: customByteBlockPanel）的后面，添加以下Buff状态栏
+// ======================================================
+// Buff状态栏 - 显示机器人当前获得的增益/减益效果
+// 位置：放在自定义数据流面板（customByteBlockPanel）的下方
+// ======================================================
+Item {
+    id: buffStatusBar
+    // 使用绝对坐标定位：基于customByteBlockPanel的坐标
+    x: customByteBlockPanel.x  // 与自定义数据流面板左对齐
+    y: customByteBlockPanel.y + customByteBlockPanel.height + 10  // 面板下方+10像素
+    width: customByteBlockPanel.width  // 与自定义数据流面板同宽
+    height: 80  // 调整为80像素
+    z: 999
+    visible: dataStore.buff_robot_id > 0 && dataStore.buff_left_time > 0  // 有Buff时才显示
+
+    // 背景
+    Rectangle {
+        anchors.fill: parent
+        color: "#AA000000"  // 半透明黑色
+        radius: 4
+        border.color: buffStatusBar.getBuffBorderColor()
+        border.width: 2
+        opacity: 0.9
+    }
+
+    // 辅助函数：根据Buff类型获取边框颜色
+    function getBuffBorderColor() {
+        switch(dataStore.buff_type) {
+            case 1: return "#FFD700";  // 攻击增益 - 金色
+            case 2: return "#4169E1";  // 防御增益 - 皇家蓝
+            case 3: return "#FF4500";  // 热量冷却 - 橙红色
+            case 4: return "#32CD32";  // 底盘功率 - 亮绿色
+            case 5: return "#FF69B4";  // 回血增益 - 粉红色
+            case 6: return "#9370DB";  // 允许发弹量 - 紫色
+            case 7: return "#00CED1";  // 地形跨越 - 深青色
+            default: return "#00FFCC";  // 默认 - 使用自定义数据流边框颜色
+        }
+    }
+
+    // 辅助函数：获取Buff图标（使用emoji或文字表示）
+    function getBuffIcon() {
+        switch(dataStore.buff_type) {
+            case 1: return "⚔️";  // 攻击增益 - 交叉剑
+            case 2: return "🛡️";  // 防御增益 - 盾牌
+            case 3: return "🔥";  // 热量冷却 - 火焰
+            case 4: return "⚡";  // 底盘功率 - 闪电
+            case 5: return "❤️";  // 回血增益 - 爱心
+            case 6: return "🔋";  // 允许发弹量 - 电池
+            case 7: return "⛰️";  // 地形跨越 - 山
+            default: return "✨";  // 默认 - 星星
+        }
+    }
+
+    // 辅助函数：获取Buff名称
+    function getBuffName() {
+        switch(dataStore.buff_type) {
+            case 1: return "攻击增益";
+            case 2: return "防御增益";
+            case 3: return "热量冷却";
+            case 4: return "底盘功率";
+            case 5: return "回血增益";
+            case 6: return "可兑换发弹量";
+            case 7: return "地形跨越";
+            default: return "未知Buff";
+        }
+    }
+
+    // 辅助函数：获取Buff描述
+    function getBuffDescription() {
+        var level = dataStore.buff_level;
+        switch(dataStore.buff_type) {
+            case 1: return "伤害+" + level + "%";
+            case 2: return "减伤+" + level + "%";
+            case 3: return "冷却+" + level + "点/秒";
+            case 4: return "移速+" + level + "%";
+            case 5: return "回血+" + level + "点/秒";
+            case 6: return "弹量+" + level + "发";
+            case 7: return "准备飞坡";
+            default: return "";
+        }
+    }
+
+    // 布局
+    ColumnLayout {
+        anchors.fill: parent
+        anchors.margins: 6  // 减小边距
+        spacing: 3  // 减小间距
+
+        // 标题行
+        RowLayout {
+            Layout.fillWidth: true
+            spacing: 4
+            
+            Rectangle {
+                width: 3
+                height: 12
+                color: buffStatusBar.getBuffBorderColor()
+                anchors.verticalCenter: parent.verticalCenter
+            }
+            
+            Text {
+                text: "Buff状态"
+                color: "#FFFFFF"
+                font.pixelSize: 12
+                font.bold: true
+            }
+            
+            Item { Layout.fillWidth: true }
+            
+            // 机器人ID标签
+            Text {
+                text: "机器人 #" + dataStore.buff_robot_id
+                color: "#AAAAAA"
+                font.pixelSize: 10
+            }
+        }
+
+        // 分割线
+        Rectangle {
+            Layout.fillWidth: true
+            height: 1
+            color: "#33FFFFFF"
+        }
+
+        // Buff图标和主要信息
+        RowLayout {
+            Layout.fillWidth: true
+            spacing: 8
+
+            // Buff图标
+            Text {
+                text: buffStatusBar.getBuffIcon()
+                font.pixelSize: 28  // 减小图标大小
+                Layout.preferredWidth: 35
+                horizontalAlignment: Text.AlignHCenter
+            }
+
+            // Buff详细信息
+            ColumnLayout {
+                Layout.fillWidth: true
+                spacing: 3
+
+                // Buff名称和类型
+                RowLayout {
+                    Layout.fillWidth: true
+                    Text {
+                        text: buffStatusBar.getBuffName()
+                        font.pixelSize: 13
+                        font.bold: true
+                        color: "#FFFFFF"
+                    }
+                    Text {
+                        text: buffStatusBar.getBuffDescription()
+                        font.pixelSize: 11
+                        color: buffStatusBar.getBuffBorderColor()
+                        font.bold: true
+                        Layout.leftMargin: 5
+                    }
+                    Item { Layout.fillWidth: true }
+                }
+
+                // 进度条和倒计时
+                RowLayout {
+                    Layout.fillWidth: true
+                    spacing: 6
+
+                    // 进度条（显示剩余时间比例）
+                    Rectangle {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 8
+                        color: "#333333"
+                        radius: 4
+
+                        Rectangle {
+                            width: parent.width * (dataStore.buff_left_time / Math.max(1, dataStore.buff_max_time))
+                            height: parent.height
+                            radius: 4
+                            color: buffStatusBar.getBuffBorderColor()
+                            
+                            // 进度条动画效果
+                            Behavior on width {
+                                NumberAnimation { duration: 300 }
+                            }
+                        }
+                    }
+
+                    // 倒计时显示
+                    Text {
+                        text: dataStore.buff_left_time + "s/" + dataStore.buff_max_time + "s"  // 去掉空格，减小宽度
+                        font.pixelSize: 11
+                        font.bold: true
+                        color: dataStore.buff_left_time <= 5 ? "#FF4444" : "#FFD700"
+                        
+                        // 倒计时闪烁效果
+                        SequentialAnimation on opacity {
+                            loops: Animation.Infinite
+                            running: dataStore.buff_left_time <= 5
+                            NumberAnimation { to: 1; duration: 300 }
+                            NumberAnimation { to: 0.3; duration: 300 }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Buff效果详细说明（如果有多种效果可以显示在这里）
+        Text {
+            Layout.fillWidth: true
+            text: {
+                if (dataStore.buff_type === 3) {
+                    return "冷却速度提升 " + dataStore.buff_level + " 点/秒";
+                } else if (dataStore.buff_type === 6) {
+                    return "最大允许发弹量增加 " + dataStore.buff_level + " 发";
+                }
+                return "";
+            }
+            font.pixelSize: 9
+            color: "#AAAAAA"
+            visible: text !== ""
+            horizontalAlignment: Text.AlignRight
+        }
+    }
+
+    // 当窗口大小改变时更新位置
+    Connections {
+        target: mainWindow
+        function onWidthChanged() {
+            buffStatusBar.x = customByteBlockPanel.x;
+        }
+        function onHeightChanged() {
+            buffStatusBar.y = customByteBlockPanel.y + customByteBlockPanel.height + 10;
+        }
+    }
+}
 }

@@ -381,8 +381,8 @@ Item {
             root.buff_robot_id = map.robot_id || 0
             root.buff_type = map.buff_type || 0
             root.buff_level = map.buff_level || 0
-            root.buff_max_time = map.max_time || 0
-            root.buff_left_time = map.left_time || 0
+            root.buff_max_time = map.buff_max_time || 0
+            root.buff_left_time = map.buff_left_time || 0
             console.log("[Buff效果] 机器人ID=", root.buff_robot_id,
                         "类型=", root.buff_type, "剩余时间=", root.buff_left_time)
         }
