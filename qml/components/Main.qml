@@ -18,47 +18,148 @@ ApplicationWindow {
     // 结构：dataStore.分类_属性名 = 值
     // ==============================================
     QtObject {
+        
+        // 1. 当前客户端的身份 ID (登录时确定)
+        // Main.qml -> dataStore 内部
         id: dataStore
-        // 新增：通用指令面板显示状态
+        // --- 1. 基础状态与身份 ---
         property bool isCommonCmdVisible: false
-        property bool isInjuryDisplay:false
-        property bool isLoginDisplay:false
-        property bool mqttConnected: false // 追踪连接状态
-        // 1. 窗口状态（保留数据，逻辑移到UI层）
+        property bool isInjuryDisplay: false
+        property bool isLoginDisplay: false
+        property bool isRobotStatusDisplay: false
+        property bool mqttConnected: false 
+        property int clientID: 0              // 登录时确定的机器人ID (如 1 或 101)
+        property bool isRedSide: clientID > 0 && clientID < 100 // 自动判断阵营
+        
+        // 窗口状态
         property bool isMaximized: false
-        property int normalX: 0
-        property int normalY: 0
-        property int normalWidth: 1280
-        property int normalHeight: 720
-        
-      
-        
-        // 2. 比赛全局状态
-        property int gameStatus_current_round: -1
-        property int gameStatus_total_rounds: 0
-        property int gameStatus_red_score: 0
-        property int gameStatus_blue_score: 0
-        property int gameStatus_current_stage: 0
-        property int gameStatus_stage_countdown_sec: 0
-        property int gameStatus_stage_elapsed_sec: 0
-        property bool gameStatus_is_paused: false
-        
-        // 3. 全局单位状态
-        property int globalUnit_base_health: 0
+        property int normalX: 0; property int normalY: 0
+        property int normalWidth: 1280; property int normalHeight: 720
+
+        // --- 2. 多机器人数据中心 ---
+        property var robotDataMap: ({})
+
+        // --- 3. 全局单位状态 (GlobalUnitStatus) ---
+        property int globalUnit_base_health: 5000
         property int globalUnit_base_status: 0
         property int globalUnit_base_shield: 0
-        property int globalUnit_outpost_health: 0
+        property int globalUnit_outpost_health: 1500
         property int globalUnit_outpost_status: 0
-        property int globalUnit_enemy_base_health: 0
+        property int globalUnit_enemy_base_health: 5000
         property int globalUnit_enemy_base_status: 0
         property int globalUnit_enemy_base_shield: 0
-        property int globalUnit_enemy_outpost_health: 0
+        property int globalUnit_enemy_outpost_health: 1500
         property int globalUnit_enemy_outpost_status: 0
-        property var globalUnit_robot_health: []
-        property var globalUnit_robot_bullets: []
+        
+        // 默认血量显示（6个红 + 6个蓝，排除5号和飞镖）
+        property var globalUnit_robot_health: [200, 300, 200, 200, 150, 400, 200, 300, 200, 200, 150, 400]
+        property var globalUnit_robot_bullets: [0, 0, 0, 0, 0, 0]
         property int globalUnit_total_damage_ally: 0
         property int globalUnit_total_damage_enemy: 0
-        
+
+        // --- 9. 机器人固定属性快捷访问 (针对当前 clientID) ---
+        property int robotStatic_connection_state: 0
+        property int robotStatic_field_state: 0
+        property int robotStatic_alive_state: 0
+        property int robotStatic_robot_id: 0
+        property int robotStatic_robot_type: 0
+        property int robotStatic_performance_system_shooter: 1
+        property int robotStatic_performance_system_chassis: 1
+        property int robotStatic_level: 1
+        property int robotStatic_max_health: 0
+        property int robotStatic_max_heat: 0
+        property real robotStatic_heat_cooldown_rate: 0.0
+        property int robotStatic_max_power: 0
+        property int robotStatic_max_buffer_energy: 0
+        property int robotStatic_max_chassis_energy: 0
+
+        // ==============================================
+        // 5. 阵营逻辑辅助函数 (保留用于逻辑判断)
+        // ==============================================
+        function getAllyIds() {
+            return isRedSide ? [1, 2, 3, 4, 6, 7] : [101, 102, 103, 104, 106, 107];
+        }
+
+        function getEnemyIds() {
+            return isRedSide ? [101, 102, 103, 104, 106, 107] : [1, 2, 3, 4, 6, 7];
+        }
+
+        // ==============================================
+        // 6. 数据同步逻辑函数
+        // ==============================================
+
+        // 同步机器人固定属性 (10. RobotStaticStatus)
+        function updateRobotStaticStatus(msg) {
+            if (!msg || msg.robot_id === undefined) return;
+            let id = msg.robot_id;
+            
+            let tempMap = robotDataMap;
+            // 使用 Object.assign 确保不会覆盖 GlobalUpdate 存入的 current_health
+            tempMap[id] = Object.assign(tempMap[id] || {}, msg);
+            robotDataMap = tempMap;
+
+            if (id === clientID) {
+                robotStatic_connection_state = msg.connection_state ?? 0;
+                robotStatic_field_state = msg.field_state ?? 0;
+                robotStatic_alive_state = msg.alive_state ?? 0;
+                robotStatic_robot_id = msg.robot_id ?? 0;
+                robotStatic_robot_type = msg.robot_type ?? 0;
+                robotStatic_performance_system_shooter = msg.performance_system_shooter ?? 1;
+                robotStatic_performance_system_chassis = msg.performance_system_chassis ?? 1;
+                robotStatic_level = msg.level ?? 1;
+                robotStatic_max_health = msg.max_health ?? 0;
+                robotStatic_max_heat = msg.max_heat ?? 0;
+                robotStatic_heat_cooldown_rate = msg.heat_cooldown_rate ?? 0.0;
+                robotStatic_max_power = msg.max_power ?? 0;
+                robotStatic_max_buffer_energy = msg.max_buffer_energy ?? 0;
+                robotStatic_max_chassis_energy = msg.max_chassis_energy ?? 0;
+            }
+        }
+
+        // 同步全场血量与基地状态 (4. GlobalUnitStatus)
+        function updateGlobalUnitStatus(msg) {
+            if (!msg) return;
+
+            globalUnit_base_health = msg.base_health ?? 0;
+            globalUnit_base_status = msg.base_status ?? 0;
+            globalUnit_base_shield = msg.base_shield ?? 0;
+            globalUnit_outpost_health = msg.outpost_health ?? 0;
+            globalUnit_outpost_status = msg.outpost_status ?? 0;
+            globalUnit_enemy_base_health = msg.enemy_base_health ?? 0;
+            globalUnit_enemy_base_status = msg.enemy_base_status ?? 0;
+            globalUnit_enemy_base_shield = msg.enemy_base_shield ?? 0;
+            globalUnit_enemy_outpost_health = msg.enemy_outpost_health ?? 0;
+            globalUnit_enemy_outpost_status = msg.enemy_outpost_status ?? 0;
+
+            globalUnit_robot_health = msg.robot_health ?? [];
+            globalUnit_robot_bullets = msg.robot_bullets ?? [];
+            globalUnit_total_damage_ally = msg.total_damage_ally ?? 0;
+            globalUnit_total_damage_enemy = msg.total_damage_enemy ?? 0;
+
+            // 协议顺序：红(1,2,3,4,6,7) -> 蓝(101,102,103,104,106,107) 
+            let protocolIds = [1, 2, 3, 4, 6, 7, 101, 102, 103, 104, 106, 107];
+            let tempMap = robotDataMap;
+
+            if (msg.robot_health && msg.robot_health.length > 0) {
+                for (let i = 0; i < msg.robot_health.length; i++) {
+                    if (i >= protocolIds.length) break;
+                    let rId = protocolIds[i];
+                    
+                    if (!tempMap[rId]) tempMap[rId] = { robot_id: rId };
+                    tempMap[rId].current_health = msg.robot_health[i];
+
+                    // 处理弹药同步 (robot_bullets 长度通常为 6，对应己方阵营)
+                    let isRedTarget = (rId < 100);
+                    if (isRedTarget === isRedSide) {
+                        let bIdx = isRedSide ? i : (i - 6);
+                        if (msg.robot_bullets && msg.robot_bullets.length > bIdx) {
+                            tempMap[rId].remaining_bullets = msg.robot_bullets[bIdx];
+                        }
+                    }
+                }
+                robotDataMap = tempMap;
+            }
+        }
         // 4. 全局后勤信息
         property int globalLogistics_remaining_economy: 0
         property int globalLogistics_total_economy_obtained: 0
@@ -94,21 +195,21 @@ ApplicationWindow {
         property int robotRespawn_gold_cost_for_respawn: 0
         property bool robotRespawn_can_pay_for_respawn: false
         
-        // 9. 机器人固定属性
-        property int robotStatic_connection_state: 0
-        property int robotStatic_field_state: 0
-        property int robotStatic_alive_state: 0
-        property int robotStatic_robot_id: 0
-        property int robotStatic_robot_type: 0
-        property int robotStatic_performance_system_shooter: 1
-        property int robotStatic_performance_system_chassis: 1
-        property int robotStatic_level: 1
-        property int robotStatic_max_health: 0
-        property int robotStatic_max_heat: 0
-        property real robotStatic_heat_cooldown_rate: 0.0
-        property int robotStatic_max_power: 0
-        property int robotStatic_max_buffer_energy: 0
-        property int robotStatic_max_chassis_energy: 0
+        // // 9. 机器人固定属性
+        // property int robotStatic_connection_state: 0
+        // property int robotStatic_field_state: 0
+        // property int robotStatic_alive_state: 0
+        // property int robotStatic_robot_id: 0
+        // property int robotStatic_robot_type: 0
+        // property int robotStatic_performance_system_shooter: 1
+        // property int robotStatic_performance_system_chassis: 1
+        // property int robotStatic_level: 1
+        // property int robotStatic_max_health: 0
+        // property int robotStatic_max_heat: 0
+        // property real robotStatic_heat_cooldown_rate: 0.0
+        // property int robotStatic_max_power: 0
+        // property int robotStatic_max_buffer_energy: 0
+        // property int robotStatic_max_chassis_energy: 0
         
         // 10. 机器人动态状态
         property int robotDynamic_current_health: 0
@@ -528,6 +629,11 @@ Connections {
             updateKeyInfoText();
            
         }
+        if(displayName==="Tab"&& !isLongPress){
+            dataStore.isRobotStatusDisplay=!dataStore.isRobotStatusDisplay;
+            updateKeyInfoText();
+           
+        }
         // 将 Qt 键值转换为位掩码（只处理协议定义的16个按键）
         switch(key) {
         case Qt.Key_W: bitValue = dataStore.key_W; break;
@@ -569,6 +675,11 @@ Connections {
         var displayName = keyName;
         if(displayName==="`"||displayName==="~"){
             dataStore.isInjuryDisplay=!dataStore.isInjuryDisplay;
+            updateKeyInfoText();
+           
+        }
+         if(displayName==="Tab"){
+            dataStore.isRobotStatusDisplay=!dataStore.isRobotStatusDisplay;
             updateKeyInfoText();
            
         }
@@ -626,7 +737,6 @@ Connections {
     // 1. MQTT数据接收模块（同步到dataStore）
     MqttDataReceiver {
         id: mqttReceiver
-        
         // GameStatus绑定
         onGameStatus_current_roundChanged: dataStore.gameStatus_current_round = mqttReceiver.gameStatus_current_round
         onGameStatus_total_roundsChanged: dataStore.gameStatus_total_rounds = mqttReceiver.gameStatus_total_rounds
