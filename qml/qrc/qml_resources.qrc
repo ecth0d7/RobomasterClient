@@ -24,6 +24,20 @@
         <file>../resources/比分栏.png</file>
         <file>../resources/左比分框.png</file>
         <file>../resources/右比分框.png</file>
+
+        <file>../resources/红方步兵.png</file>
+        <file>../resources/红方血量模版.png</file>
+        <file>../resources/红方英雄.png</file>
+         <file>../resources/红方工程.png</file>
+        <file>../resources/红方哨兵.png</file>
+        <file>../resources/红方空中.png</file>
+
+        <file>../resources/蓝方血量模版.png</file>
+        <file>../resources/蓝方英雄.png</file>
+        <file>../resources/蓝方步兵.png</file>
+        <file>../resources/蓝方哨兵.png</file>
+        <file>../resources/蓝方空中.png</file>
+        <file>../resources/蓝方工程.png</file>
     </qresource>
 
 </RCC>

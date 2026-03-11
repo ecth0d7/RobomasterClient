@@ -22,7 +22,8 @@ ApplicationWindow {
         // 新增：通用指令面板显示状态
         property bool isCommonCmdVisible: false
         property bool isInjuryDisplay:false
-        
+        property bool isLoginDisplay:false
+        property bool mqttConnected: false // 追踪连接状态
         // 1. 窗口状态（保留数据，逻辑移到UI层）
         property bool isMaximized: false
         property int normalX: 0
@@ -522,7 +523,11 @@ Connections {
             updateKeyInfoText();
            
         }
-        
+        if(displayName.toLowerCase() === "p"&& !isLongPress){
+            dataStore.isLoginDisplay=!dataStore.isLoginDisplay;
+            updateKeyInfoText();
+           
+        }
         // 将 Qt 键值转换为位掩码（只处理协议定义的16个按键）
         switch(key) {
         case Qt.Key_W: bitValue = dataStore.key_W; break;

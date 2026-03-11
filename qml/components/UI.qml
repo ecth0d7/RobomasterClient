@@ -497,92 +497,8 @@ Item {
                 }
             }
 
-            // 红方机器人血量条
-            Row {
-                anchors.top: redVictoryPointBar.bottom
-                anchors.left: redVictoryPointBar.left
-                anchors.margins: 3
-                spacing: 5
-                Repeater {
-                    model: 6  // 红方只有6个机器人
-                    Rectangle {
-                        width: 25
-                        height: 10
-                        border.color: "#ff2222"
-                        border.width: 1
-                        radius: 3
-                        opacity: 0.8
-                        Rectangle {
-                            anchors.fill: parent
-                            radius: 2
-                            width: Math.max(0, parent.width * ((dataStore.globalUnit_robot_health[model.index] || 0) / 1000))
-                            color: {
-                                let ratio = (dataStore.globalUnit_robot_health[model.index] || 0) / 1000;
-                                return ratio > 0.5 ? "#22ff22" : (ratio > 0.2 ? "#ffff22" : "#ff2222");
-                            }
-                        }
-                        Text { 
-                            anchors.centerIn: parent; 
-                            text: {
-                                // 显示对应的机器人类型
-                                if (model.index === 0) return "英";
-                                if (model.index === 1) return "工";
-                                if (model.index === 2) return "步1";
-                                if (model.index === 3) return "步2";
-                                if (model.index === 4) return "空";
-                                if (model.index === 5) return "哨";
-                                return model.index + 1;
-                            }
-                            font.pixelSize: 7; 
-                            color: "white" 
-                        }
-                    }
-                }
-            }
-
-            // 蓝方机器人血量条
-            Row {
-                anchors.top: blueVictoryPointBar.bottom
-                anchors.right: blueVictoryPointBar.right
-                anchors.margins: 3
-                spacing: 5
-                Repeater {
-                    model: 6  // 蓝方也有6个机器人
-                    Rectangle {
-                        width: 25
-                        height: 10
-                        border.color: "#2288ff"
-                        border.width: 1
-                        radius: 3
-                        opacity: 0.8
-                        Rectangle {
-                            anchors.fill: parent
-                            radius: 2
-                            // 蓝方机器人在数组中的索引是 6 + model.index
-                            width: Math.max(0, parent.width * ((dataStore.globalUnit_robot_health[6 + model.index] || 0) / 1000))
-                            color: {
-                                let ratio = (dataStore.globalUnit_robot_health[6 + model.index] || 0) / 1000;
-                                return ratio > 0.5 ? "#22ff22" : (ratio > 0.2 ? "#ffff22" : "#ff2222");
-                            }
-                        }
-                        Text { 
-                            anchors.centerIn: parent; 
-                            text: {
-                                // 显示对应的机器人类型
-                                if (model.index === 0) return "英";
-                                if (model.index === 1) return "工";
-                                if (model.index === 2) return "步1";
-                                if (model.index === 3) return "步2";
-                                if (model.index === 4) return "空";
-                                if (model.index === 5) return "哨";
-                                return model.index + 1;
-                            }
-                            font.pixelSize: 7; 
-                            color: "white" 
-                        }
-                    }
-                }
-            }
+          
+          
         }
 
         // 4. 右侧参数显示区域
@@ -688,7 +604,7 @@ Item {
 Column {
     id: leftInfoPanel
     anchors.left: parent.left
-    anchors.top: scoreBar.bottom
+    y: robotHealthManager.y+150
     anchors.margins: 20
     spacing: 10
     z: 999  // 提高层级，避免被遮挡
@@ -4257,7 +4173,7 @@ Rectangle {
             border.width: 1
             radius: 5
             z: 11
-
+            visible:dataStore.robotStatic_robot_id===7||dataStore.robotStatic_robot_id===107
             ColumnLayout {
                 anchors.fill: parent
                 anchors.margins: 8
@@ -4333,7 +4249,7 @@ Rectangle {
     border.width: 1
     radius: 5
     z: 11
-
+    visible:dataStore.robotStatic_robot_id===6||dataStore.robotStatic_robot_id===106
     ColumnLayout {
         anchors.fill: parent
         anchors.margins: 8
@@ -4536,7 +4452,7 @@ Rectangle {
     border.width: 1
     radius: 5
     z: 11
-
+    visible:dataStore.robotStatic_robot_id===7||dataStore.robotStatic_robot_id===107
     ColumnLayout {
         anchors.fill: parent
         anchors.margins: 8
@@ -4672,7 +4588,7 @@ Rectangle {
             border.width: 1
             radius: 5
             z: 11
-
+            visible:dataStore.robotStatic_robot_id===6||dataStore.robotStatic_robot_id===106
             ColumnLayout {
                 anchors.fill: parent
                 anchors.margins: 8
@@ -5214,4 +5130,249 @@ Item {
             }
         }
     }
-}}
+
+}
+
+
+// 机器人血量显示总区域
+Item {
+    id: robotHealthManager
+    width: parent.width
+    height: 120
+    anchors.horizontalCenter: parent.horizontalCenter
+    y: 50 
+
+    // ================= 1. 逻辑函数 =================
+    function getRobotName(idx) {
+        let names = ["英雄", "工程", "步兵", "步兵", "空中", "哨兵"];
+        return names[idx] || "";
+    }
+
+    function getRobotId(idx, isRed) {
+        let ids = [1, 2, 3, 4, 6, 7]; 
+        return isRed ? ids[idx] : ids[idx] + 100;
+    }
+
+    function getMaxHealth(idx) {
+        let healths = [200, 300, 200, 200, 150, 400];
+        return healths[idx] || 200;
+    }
+
+    // ================= 2. 界面布局 =================
+    Row {
+        anchors.centerIn: parent
+        spacing: 200 // 两阵营之间的距离
+
+        // --- 红方机器人组 ---
+        Row {
+            spacing: 0 // 模块间距放小
+            Repeater {
+                model: 6
+                delegate: RobotHealthUnit {
+                    currentHealth: (dataStore.globalUnit_robot_health && dataStore.globalUnit_robot_health.length > index) 
+                                   ? dataStore.globalUnit_robot_health[index] : 0
+                    robotName: robotHealthManager.getRobotName(index)
+                    robotId: robotHealthManager.getRobotId(index, true)
+                    maxHealth: robotHealthManager.getMaxHealth(index)
+                    isRed: true
+                    iconSource: "qrc:/images/resources/红方" + robotName + ".png"
+                    // 传入红方模版路径
+                    templateSource: "qrc:/images/resources/红方血量模版.png"
+                }
+            }
+        }
+
+        // --- 蓝方机器人组 ---
+        Row {
+            spacing: 0 // 模块间距放小
+            Repeater {
+                model: 6
+                delegate: RobotHealthUnit {
+                    property int dataIdx: index + 6
+                    currentHealth: (dataStore.globalUnit_robot_health && dataStore.globalUnit_robot_health.length > dataIdx) 
+                                   ? dataStore.globalUnit_robot_health[dataIdx] : 0
+                    robotName: robotHealthManager.getRobotName(index)
+                    robotId: robotHealthManager.getRobotId(index, false)
+                    maxHealth: robotHealthManager.getMaxHealth(index)
+                    isRed: false
+                    iconSource: "qrc:/images/resources/蓝方" + robotName + ".png"
+                    // 传入蓝方模版路径
+                    templateSource: "qrc:/images/resources/蓝方血量模版.png"
+                }
+            }
+        }
+    }
+
+    // ================= 3. 单个机器人组件 (图层叠加模式) =================
+    component RobotHealthUnit : Item {
+        property string robotName: ""
+        property int robotId: 0
+        property int currentHealth: 0
+        property int maxHealth: 200
+        property bool isRed: true
+        property string iconSource: ""
+        property string templateSource: "" // 新增：模版图片路径属性
+
+        width: 125; height: 125
+
+        // 背景：血量模版 (根据传入的 templateSource 切换图片)
+        Image {
+            id: bgTemplate
+            source: templateSource 
+            anchors.bottom: parent.bottom
+            width: parent.width
+            height: parent.height * 0.4 
+            fillMode: Image.PreserveAspectFit
+
+            // 内部血条
+            Rectangle {
+                // 根据模版位置微调，确保填入血槽
+                x: parent.width * 0.12
+                y: parent.height * 0.35
+                height: parent.height * 0.3
+                width: (parent.width * 0.76) * Math.max(0, Math.min(currentHealth / maxHealth, 1.0))
+                color: isRed ? "#FF4444" : "#4444FF"
+                Behavior on width { NumberAnimation { duration: 300 } }
+            }
+
+            // 血量数值
+            Text {
+                anchors.centerIn: parent
+                text: currentHealth
+                color: "white"
+                font.pixelSize: 10; font.bold: true
+                z: 1
+                style: Text.Outline; styleColor: "black"
+            }
+        }
+
+        // 上层：机器人图片
+        Image {
+            id: robotIcon
+            source: iconSource
+            width: parent.width * 0.7
+            height: parent.height * 0.35
+            
+            anchors.centerIn: bgTemplate 
+            // 调整此偏移量让机器人图片进一步下沉进入模版区域
+            anchors.verticalCenterOffset: -7
+            
+            fillMode: Image.PreserveAspectFit
+            z: 10 
+            opacity: 1 // 保持不透明
+        }
+
+        // 底部 ID
+        Text {
+            text: (isRed ? "R" : "B") + robotId
+            anchors.top: bgTemplate.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: "#FFFFFF"
+            font.pixelSize: 10
+            font.bold: true
+        }
+    }
+}
+//登录界面
+Rectangle {
+    id: loginMask
+    anchors.fill: parent
+    color: "#E61A1A1A"
+    z: 9999
+    visible: !dataStore.mqttConnected||!dataStore.isLoginDisplay
+
+    // 映射表逻辑
+    function calculateIds() {
+        let side = sideBox.currentText // "红方" 或 "蓝方"
+        let type = typeBox.currentText // "英雄", "工程" 等
+        let mqttId = "0x8080"          // 默认服务器 ID
+        let robotId = 0
+
+        if (side === "红方") {
+            if (type === "英雄") { mqttId = "0x0101"; robotId = 1; }
+            else if (type === "工程") { mqttId = "0x0102"; robotId = 2; }
+            else if (type === "步兵3") { mqttId = "0x0103"; robotId = 3; }
+            else if (type === "步兵4") { mqttId = "0x0104"; robotId = 4; }
+            else if (type === "步兵5") { mqttId = "0x0105"; robotId = 5; }
+            else if (type === "空中") { mqttId = "0x0106"; robotId = 6; }
+            else if (type === "哨兵") { robotId = 7; } 
+            else if (type === "雷达") { robotId = 9; }
+        } else { // 蓝方
+            if (type === "英雄") { mqttId = "0x0165"; robotId = 101; }
+            else if (type === "工程") { mqttId = "0x0166"; robotId = 102; }
+            else if (type === "步兵3") { mqttId = "0x0167"; robotId = 103; }
+            else if (type === "步兵4") { mqttId = "0x0168"; robotId = 104; }
+            else if (type === "步兵5") { mqttId = "0x0169"; robotId = 105; }
+            else if (type === "空中") { mqttId = "0x016A"; robotId = 106; }
+            else if (type === "哨兵") { robotId = 107; }
+            else if (type === "雷达") { robotId = 109; }
+        }
+        return { "mqtt": mqttId, "robot": robotId };
+    }
+
+    ColumnLayout {
+        anchors.centerIn: parent
+        spacing: 25
+
+        Text {
+            text: "ROBOMASTER 2026 选手端登录"
+            color: "white"
+            font.pixelSize: 28; font.bold: true
+            Layout.alignment: Qt.AlignHCenter
+        }
+
+        RowLayout {
+            spacing: 15
+            // 阵营选择
+            ComboBox {
+                id: sideBox
+                model: ["红方", "蓝方"]
+                implicitWidth: 120
+            }
+
+            // 机器人选择
+            ComboBox {
+                id: typeBox
+                model: ["英雄", "工程", "步兵3", "步兵4", "步兵5", "空中", "哨兵", "雷达"]
+                implicitWidth: 150
+            }
+        }
+
+        // 登录按钮
+        Button {
+            text: "确认身份并连接"
+            Layout.fillWidth: true
+            implicitHeight: 50
+
+            onClicked: {
+                let res = loginMask.calculateIds();
+                
+                // 1. 设置 C++ MQTT ClientID
+                mqttClient.setClientId(res.mqtt);
+                
+                // 2. 设置全局机器人数字 ID
+                dataStore.robotStatic_robot_id = res.robot;
+                
+                // 3. 执行连接
+                mqttClient.connectToServer();
+                
+                console.log("正在连接: ClientID=" + res.mqtt + " | RobotID=" + res.robot);
+            }
+        }
+
+        Text {
+            text: "提示：哨兵/雷达通常使用服务器授权 ID (0x8080)"
+            color: "#888"
+            font.pixelSize: 12
+            Layout.alignment: Qt.AlignHCenter
+        }
+    }
+
+    // 状态监听
+    Connections {
+        target: mqttClient
+        function onConnected() { dataStore.mqttConnected = true;dataStore.isLoginDisplay=true }
+        function onDisconnected() { dataStore.mqttConnected = false }
+    }
+}
+}
