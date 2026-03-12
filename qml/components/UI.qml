@@ -209,7 +209,7 @@ Item {
                     anchors.left: parent.left
                     anchors.right: parent.right
                     height: 20
-
+                    property int health:dataStore.globalUnit_base_health || 0
                     // 无敌状态金色边框（仅在 base_status === 0 时显示）
                     Rectangle {
                         anchors.fill: parent
@@ -232,7 +232,7 @@ Item {
                     
                     // 背景色：根据血量值决定
                     color: {
-                        let health = dataStore.globalUnit_base_health || 0;
+                        
                         return health > 2000 ? "#e05330" : "transparent";  // health>2000时背景为浅红色，否则透明
                     }
                     radius: 6
@@ -367,7 +367,7 @@ Item {
                     anchors.left: parent.left
                     anchors.right: parent.right
                     height: 20
-
+                    property int health :dataStore.globalUnit_enemy_base_health || 0
                     Rectangle {
                         anchors.fill: parent
                         anchors.margins: -3  // 向外扩展一点，让边框更明显
@@ -389,7 +389,7 @@ Item {
                     
                     // 背景色：根据血量值决定
                     color: {
-                        let health = dataStore.globalUnit_enemy_base_health || 0;
+                        
                         return health > 2000 ? "#2288ff" : "transparent";  // health>2000时背景为蓝色，否则透明
                     }
                     radius: 6
@@ -1321,7 +1321,7 @@ Item {
         Image {
             anchors.fill: parent
             source: "qrc:/images/resources/控制框.png"
-            fillMode: Image.StretchToCover
+            fillMode: Image.Stretch
             mipmap: true
             
             onStatusChanged: {
@@ -1395,14 +1395,15 @@ Item {
                     color: "#ffffff"
                     Layout.preferredWidth: 150
                 }
-                Text {
-                    text: Qt.binding(() => {
+              Text {
+                    // 直接写表达式，QML 会自动建立对 dataStore 属性的监听
+                    text: {
                         let btns = [];
                         if (dataStore.input_leftBtnDown) btns.push("左键");
                         if (dataStore.input_rightBtnDown) btns.push("右键");
                         if (dataStore.input_midBtnDown) btns.push("中键");
                         return btns.length > 0 ? "按下：" + btns.join(",") : "无按键按下";
-                    })
+                    }
                     font.pixelSize: 11
                     color: "#ffff00"
                     Layout.fillWidth: true
