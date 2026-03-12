@@ -11,6 +11,7 @@ Item {
     property var getStageText: function() {}
     property var mainWindow: null  // 新增：主窗口引用
     property var globalInputFilter: null // 接收输入过滤器实例
+    
 
     // ==============================================
     // 窗口控制逻辑
@@ -191,7 +192,7 @@ Item {
                 }
             }
 
-            // 红方基地模块（原来是胜利点，现在还按照这个id）
+            // 红方基地模块
             Item {
                 id: redVictoryPointBar
                 anchors.right: middleScoreBlock.left
@@ -1060,6 +1061,7 @@ Column {
         }
         // 7. 左下角状态条
 Item {
+    id:zuo
     anchors.left: parent.left
     anchors.bottom: moduleStatusDisplay.top
     anchors.leftMargin: 20
@@ -1110,7 +1112,7 @@ Item {
         
         Text {
             anchors.centerIn: parent
-            text: getRobotTypeText(dataStore.robotStatic_robot_type || 0)
+            text: zuo.getRobotTypeText(dataStore.robotStatic_robot_type || 0)
             font.pixelSize: 16
             font.bold: true
             color: {
@@ -5139,6 +5141,7 @@ Item {
     id: robotHealthManager
     width: parent.width; height: 120; y: 50
     anchors.horizontalCenter: parent.horizontalCenter
+    z:10
 
     // 辅助函数
     function getRobotNameById(rId) {
@@ -5149,8 +5152,19 @@ Item {
 
     function getDefaultMaxHealthById(rId) {
         let baseId = rId > 100 ? rId - 100 : rId;
-        let healths = {1: 200, 2: 300, 3: 200, 4: 200, 6: 150, 7: 400};
+        // 这里的数值可以保留作为兜底，或者直接从 dataStore 获取
+        let healths = {1: 600, 2: 300, 3: 200, 4: 200, 6: 150, 7: 400};
         return healths[baseId] || 200;
+    }
+
+    // 新增：根据机器人 ID 计算在 globalUnit_robot_health 数组中的索引
+    function getHealthIndexById(rId) {
+        if (rId >= 1 && rId <= 7) {
+            return rId - 1; // 己方：1->0, 2->1, ... 7->6
+        } else if (rId >= 101 && rId <= 107) {
+            return (rId - 101) + 5; // 对方：101->7, 102->8, ... 107->13
+        }
+        return -1;
     }
 
     Row {
@@ -5168,14 +5182,19 @@ Item {
                     isRed: true
                     isMe: (modelData === dataStore.clientID)
                     
-                    maxHealth: {
-                        var liveData = dataStore.robotDataMap[modelData];
-                        return liveData ? (liveData.max_health || robotHealthManager.getDefaultMaxHealthById(modelData)) : robotHealthManager.getDefaultMaxHealthById(modelData);
-                    }
+                    // 绑定到 dataStore 的数组属性
                     currentHealth: {
+                        let idx = robotHealthManager.getHealthIndexById(robotId);
+                        return (idx !== -1 && dataStore.globalUnit_robot_health[idx] !== undefined) 
+                                ? dataStore.globalUnit_robot_health[idx] 
+                                : 0;
+                    }
+
+                    maxHealth: {
+                        // MaxHealth 通常来自实时 map，如果 map 没数据则使用本地默认值
                         var liveData = dataStore.robotDataMap[modelData];
-                        var maxH = liveData ? (liveData.max_health || robotHealthManager.getDefaultMaxHealthById(modelData)) : robotHealthManager.getDefaultMaxHealthById(modelData);
-                        return liveData ? (liveData.current_health !== undefined ? liveData.current_health : maxH) : maxH;
+                        return liveData ? (liveData.max_health || robotHealthManager.getDefaultMaxHealthById(modelData)) 
+                                        : robotHealthManager.getDefaultMaxHealthById(modelData);
                     }
                     
                     iconSource: "qrc:/images/resources/红方" + (robotName.indexOf("步兵") !== -1 ? "步兵" : robotName) + ".png"
@@ -5195,14 +5214,18 @@ Item {
                     isRed: false
                     isMe: (modelData === dataStore.clientID)
                     
+                    // 绑定到 dataStore 的数组属性
+                    currentHealth: {
+                        let idx = robotHealthManager.getHealthIndexById(robotId);
+                        return (idx !== -1 && dataStore.globalUnit_robot_health[idx] !== undefined) 
+                                ? dataStore.globalUnit_robot_health[idx] 
+                                : 0;
+                    }
+
                     maxHealth: {
                         var liveData = dataStore.robotDataMap[modelData];
-                        return liveData ? (liveData.max_health || robotHealthManager.getDefaultMaxHealthById(modelData)) : robotHealthManager.getDefaultMaxHealthById(modelData);
-                    }
-                    currentHealth: {
-                        var liveData = dataStore.robotDataMap[modelData];
-                        var maxH = liveData ? (liveData.max_health || robotHealthManager.getDefaultMaxHealthById(modelData)) : robotHealthManager.getDefaultMaxHealthById(modelData);
-                        return liveData ? (liveData.current_health !== undefined ? liveData.current_health : maxH) : maxH;
+                        return liveData ? (liveData.max_health || robotHealthManager.getDefaultMaxHealthById(modelData)) 
+                                        : robotHealthManager.getDefaultMaxHealthById(modelData);
                     }
                     
                     iconSource: "qrc:/images/resources/蓝方" + (robotName.indexOf("步兵") !== -1 ? "步兵" : robotName) + ".png"
@@ -5210,6 +5233,7 @@ Item {
                 }
             }
         }
+    
     }
 
     // 内部组件定义
@@ -5219,11 +5243,31 @@ Item {
         property bool isRed: true; property bool isMe: false 
         property string iconSource: ""; property string templateSource: ""
         width: 125; height: 125
+// --- 修改后的弹药绑定逻辑 ---
+    readonly property int currentBullets: {
+        // 根据协议，robot_bullets 数组索引 0-5 对应己方的 1,2,3,4,6,7 号机器人
+        // 我们通过 ID 映射到 0-5 的索引
+        let bulletIdx = -1;
+        let baseId = robotId > 100 ? robotId - 100 : robotId;
+        
+        // 建立 ID 到 bullets 数组索引的映射 (1->0, 2->1, 3->2, 4->3, 6->4, 7->5)
+        let idMap = {1:0, 2:1, 3:2, 4:3, 6:4, 7:5};
+        bulletIdx = idMap[baseId];
 
+        // 逻辑：只有当该机器人属于己方阵营时，才从 dataStore 取弹药数
+        // 假设 dataStore.clientID < 100 表示我是红方，> 100 表示我是蓝方
+        let isAlly = (dataStore.clientID < 100) ? isRed : !isRed;
+
+        if (isAlly && bulletIdx !== undefined && dataStore.globalUnit_robot_bullets[bulletIdx] !== undefined) {
+            return dataStore.globalUnit_robot_bullets[bulletIdx];
+        }
+        return 0;
+    }
         // “我”的标识 (ME)
         Rectangle {
             visible: isMe; anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top; width: 30; height: 14; color: "#FFD700"; radius: 2; z: 20
+            anchors.topMargin:50
             Text { text: "ME"; anchors.centerIn: parent; font.pixelSize: 9; font.bold: true }
         }
 
@@ -5260,7 +5304,25 @@ Item {
                 style: Text.Outline
                 styleColor: "black"
             }
+            // --- 弹药显示 (无论是哪一方，只要是己方阵营就显示) ---
+        Text {
+            id: bulletValueText
+            // 判断是否显示：如果是己方机器人才显示弹药
+            visible: (dataStore.clientID < 100) ? isRed : !isRed 
+            
+            anchors.top: healthValueText.bottom
+            anchors.topMargin: 1
+            anchors.horizontalCenter: healthValueText.horizontalCenter
+            
+            text: "B: " + currentBullets // B 代表 Bullets
+            color: currentBullets < 20 ? "#FF4444" : "#00FF7F" 
+            font.pixelSize: 9
+            font.bold: true
+            style: Text.Outline; styleColor: "black"
         }
+    
+        }
+        
 
         // 机器人图标
         Image {
@@ -5369,6 +5431,7 @@ Rectangle {
                 mqttClient.connectToServer();
                 
                 console.log("登录请求 -> ClientID: " + res.mqtt + " | 绑定机器人 ID: " + res.robot);
+                
             }
         }
 
@@ -5402,13 +5465,13 @@ Rectangle {
     anchors.centerIn: parent
     width: 1180
     height: 680
-    color: "#F2121212" // 极深灰色，符合机甲大师风格
+    color: "#F2121212" 
     border.color: "#33FFFFFF"
     border.width: 1
     radius: 10
     visible: dataStore.isRobotStatusDisplay // 绑定 TAB 显示开关
-
-    // --- 1. 顶部全局对比栏 (GlobalUnitStatus) ---
+    z:999990
+    // --- 1. 顶部全局对比栏 ---
     Rectangle {
         id: topBar
         width: parent.width
@@ -5416,7 +5479,7 @@ Rectangle {
         color: "transparent"
         anchors.top: parent.top
 
-        // 红方总血量 (己方)
+        // 左侧：红方统计
         ColumnLayout {
             anchors.left: parent.left
             anchors.leftMargin: 50
@@ -5432,7 +5495,7 @@ Rectangle {
             }
         }
 
-        // 中间 VS 标志与伤害差
+        // 中间：伤害数值对比
         RowLayout {
             anchors.centerIn: parent
             spacing: 30
@@ -5447,14 +5510,14 @@ Rectangle {
             }
         }
 
-        // 蓝方总血量 (对方)
+        // 右侧：蓝方统计
         ColumnLayout {
             anchors.right: parent.right
             anchors.rightMargin: 50
             anchors.verticalCenter: parent.verticalCenter
             spacing: 2
             Text { 
-                text: "飞镖命中: 0 / 4" // 蓝方飞镖
+                text: "对方飞镖命中未知" 
                 color: "#4444FF"; Layout.alignment: Qt.AlignRight
             }
             Text { 
@@ -5473,158 +5536,145 @@ Rectangle {
         anchors.margins: 20
         spacing: 25
 
-        // 左侧：红方 (ID: 1-7)
+        // 左侧：红方 (已剔除 5 号)
         TeamPanel {
-            teamName: "RED ALLY"
+            teamName: "RED SIDE"
             teamColor: "#FF4444"
-            robotIds: [1, 2, 3, 4, 5, 6, 7]
-            dataMap: dataStore.robotDataMap
+            robotIds: [1, 2, 3, 4, 6, 7] // 排除 5 号
+            isAllySide: dataStore.isRedSide
             Layout.fillWidth: true
             Layout.fillHeight: true
         }
 
-        // 右侧：蓝方 (ID: 101-107)
+        // 右侧：蓝方 (已剔除 105 号)
         TeamPanel {
-            teamName: "BLUE ENEMY"
+            teamName: "BLUE SIDE"
             teamColor: "#4444FF"
-            robotIds: [101, 102, 103, 104, 105, 106, 107]
-            dataMap: dataStore.robotDataMap
+            robotIds: [101, 102, 103, 104, 106, 107] // 排除 105 号
+            isAllySide: !dataStore.isRedSide
             Layout.fillWidth: true
             Layout.fillHeight: true
         }
     }
 
-    // --- 底部提示 ---
     Text {
         text: "按 [TAB] 键隐藏面板"
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 10
+        anchors.bottom: parent.bottom; anchors.bottomMargin: 10
         anchors.horizontalCenter: parent.horizontalCenter
-        color: "#666"
-        font.pixelSize: 12
+        color: "#666"; font.pixelSize: 12
     }
 }
 
 // ==============================================
-// 复用组件：TeamPanel (左右两方的列表)
+// 复用组件：TeamPanel
 // ==============================================
 component TeamPanel : ColumnLayout {
     property string teamName: ""
     property color teamColor: "white"
     property var robotIds: []
-    property var dataMap: ({})
+    property bool isAllySide: false // 用于判断是否显示弹药量
 
     spacing: 10
 
-    // 列表标题
     Rectangle {
-        Layout.fillWidth: true
-        height: 30
-        color: teamColor
-        opacity: 0.8
-        radius: 3
-        Text {
-            text: teamName
-            anchors.centerIn: parent
-            color: "white"
-            font.bold: true
-        }
+        Layout.fillWidth: true; height: 30; color: teamColor; opacity: 0.8; radius: 3
+        Text { text: teamName; anchors.centerIn: parent; color: "white"; font.bold: true }
     }
 
-    // 表头文字 (修正 horizontalAlignment)
     RowLayout {
         Layout.fillWidth: true
         Text { text: "ID"; color: "#888"; font.pixelSize: 12; Layout.preferredWidth: 35 }
         Text { text: "机型/血量"; color: "#888"; font.pixelSize: 12; Layout.fillWidth: true }
-        Text { text: "功率"; color: "#888"; font.pixelSize: 12; Layout.preferredWidth: 45; horizontalAlignment: Text.AlignHCenter }
-        Text { text: "热量"; color: "#888"; font.pixelSize: 12; Layout.preferredWidth: 45; horizontalAlignment: Text.AlignHCenter }
-        Text { text: "冷却"; color: "#888"; font.pixelSize: 12; Layout.preferredWidth: 45; horizontalAlignment: Text.AlignHCenter }
+        Text { text: "弹药"; color: "#888"; font.pixelSize: 12; Layout.preferredWidth: 40; horizontalAlignment: Text.AlignHCenter }
+        Text { text: "功率"; color: "#888"; font.pixelSize: 12; Layout.preferredWidth: 40; horizontalAlignment: Text.AlignHCenter }
+        Text { text: "热量"; color: "#888"; font.pixelSize: 12; Layout.preferredWidth: 40; horizontalAlignment: Text.AlignHCenter }
+        Text { text: "冷却"; color: "#888"; font.pixelSize: 12; Layout.preferredWidth: 40; horizontalAlignment: Text.AlignHCenter }
         Text { text: "上限"; color: "#888"; font.pixelSize: 12; Layout.preferredWidth: 35; horizontalAlignment: Text.AlignHCenter }
     }
 
-    // 机器人列表
     Repeater {
         model: robotIds
         delegate: Rectangle {
-            Layout.fillWidth: true
-            height: 50
-            color: (modelData === dataStore.clientID) ? "#33FFFFFF" : "#12FFFFFF" // 只有当前 ID 高亮
+            Layout.fillWidth: true; height: 52
+            // 只有当前控制的机器人才高亮
+            color: (modelData === dataStore.clientID) ? "#33FFFFFF" : "#12FFFFFF"
             border.color: (modelData === dataStore.clientID) ? teamColor : "transparent"
-            radius: 4
+            border.width: 1; radius: 4
 
-            // 从 robotDataMap 中安全提取数据
-            property var rData: dataMap[modelData] || {}
+            // 使用 dataStore.robotDataMap 进行数据绑定
+            readonly property var rData: dataStore.robotDataMap[modelData] || {}
 
             RowLayout {
-                anchors.fill: parent
-                anchors.leftMargin: 8
-                anchors.rightMargin: 8
+                anchors.fill: parent; anchors.margins: 8
 
                 // 1. ID
-                Text { 
-                    text: modelData; color: teamColor; font.bold: true
-                    Layout.preferredWidth: 35 
-                }
+                Text { text: modelData; color: teamColor; font.bold: true; Layout.preferredWidth: 35 }
 
-                // 2. 名称与血量
+                // 2. 名称与血量条
                 ColumnLayout {
-                    Layout.fillWidth: true
-                    spacing: 2
-                    Text { 
-                        text: getRobotTypeStr(rData.robot_type || 0) + " Lv." + (rData.level || 1)
-                        color: "white"; font.pixelSize: 13 
+                    Layout.fillWidth: true; spacing: 2
+                    RowLayout {
+                        Text { 
+                            text: getRobotTypeStr(rData.robot_type || 0) + " Lv." + (rData.level || 1)
+                            color: "white"; font.pixelSize: 11 
+                        }
+                        Item { Layout.fillWidth: true }
+                        Text { 
+                            text: (rData.current_health || 0) + "/" + (rData.max_health || 1)
+                            color: "#AAA"; font.pixelSize: 10 
+                        }
                     }
-                    // 血量条 (对应 robot_health 数组)
                     Rectangle {
-                        Layout.fillWidth: true
-                        height: 6; color: "#222"; radius: 3
+                        Layout.fillWidth: true; height: 6; color: "#222"; radius: 3
                         Rectangle {
                             height: 6; radius: 3
-                            width: parent.width * Math.min(1, (rData.current_health || 0) / (rData.max_health || 1))
+                            // 绑定当前血量比例
+                            width: parent.width * Math.max(0, Math.min(1, (rData.current_health || 0) / (rData.max_health || 1)))
                             color: teamColor
+                            Behavior on width { NumberAnimation { duration: 300 } }
                         }
                     }
                 }
 
-                // 3. 底盘功率上限 (max_power)
+                // 3. 弹药 (仅己方显示)
+                Text { 
+                    text: isAllySide ? (rData.remaining_bullets || 0) : "--"
+                    color: isAllySide && rData.remaining_bullets < 20 ? "#FF4444" : "white"
+                    Layout.preferredWidth: 40; horizontalAlignment: Text.AlignHCenter 
+                }
+
+                // 4. 底盘功率 (max_power)
                 Text { 
                     text: (rData.max_power || 0); color: "white"
-                    Layout.preferredWidth: 45; horizontalAlignment: Text.AlignHCenter 
+                    Layout.preferredWidth: 40; horizontalAlignment: Text.AlignHCenter 
                 }
 
-                // 4. 热量上限 (max_heat)
+                // 5. 热量上限 (max_heat)
                 Text { 
                     text: (rData.max_heat || 0); color: "white"
-                    Layout.preferredWidth: 45; horizontalAlignment: Text.AlignHCenter 
+                    Layout.preferredWidth: 40; horizontalAlignment: Text.AlignHCenter 
                 }
 
-                // 5. 热量冷却 (heat_cooldown_rate)
+                // 6. 热量冷却 (heat_cooldown_rate)
                 Text { 
                     text: (rData.heat_cooldown_rate || 0).toFixed(0)
-                    color: "white"; Layout.preferredWidth: 45; horizontalAlignment: Text.AlignHCenter 
+                    color: "white"; Layout.preferredWidth: 40; horizontalAlignment: Text.AlignHCenter 
                 }
 
-                // 6. 射速上限 (根据类型或静态属性)
+                // 7. 射速上限 (不再硬编码)
                 Text { 
-                    text: "30"; color: "white" // 默认30
+                    text: (rData.shoot_speed_limit || 30); color: "white"
                     Layout.preferredWidth: 35; horizontalAlignment: Text.AlignHCenter 
                 }
             }
         }
     }
 
-    Item { Layout.fillHeight: true } // 底部填充
+    Item { Layout.fillHeight: true }
 
-    // 机器人类型转换函数
     function getRobotTypeStr(type) {
-        switch(type) {
-            case 1: return "英雄";
-            case 2: return "工程";
-            case 3: return "步兵";
-            case 4: return "空中";
-            case 5: return "哨兵";
-            default: return "未上场";
-        }
+        let names = { 1: "英雄", 2: "工程", 3: "步兵", 4: "空中", 5: "哨兵", 6: "飞镖", 7: "雷达" };
+        return names[type] || "未上场";
     }
 }
 }

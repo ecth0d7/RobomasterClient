@@ -16,18 +16,21 @@ Item {
     property bool gameStatus_is_paused: false
 
     // ========== 2. GlobalUnitStatus（基地/前哨站/机器人全局状态） ==========
-    property int globalUnit_base_health: 0
+ 
+    property int globalUnit_base_health: 5000
     property int globalUnit_base_status: 0
     property int globalUnit_base_shield: 0
-    property int globalUnit_outpost_health: 0
+    property int globalUnit_outpost_health: 1500
     property int globalUnit_outpost_status: 0
-    property int globalUnit_enemy_base_health: 0
+    property int globalUnit_enemy_base_health: 5000
     property int globalUnit_enemy_base_status: 0
     property int globalUnit_enemy_base_shield: 0
-    property int globalUnit_enemy_outpost_health: 0
+    property int globalUnit_enemy_outpost_health: 1500
     property int globalUnit_enemy_outpost_status: 0
-    property var globalUnit_robot_health: []  // 动态数组，对应repeated uint32
-    property var globalUnit_robot_bullets: [] // 动态数组，对应repeated int32
+    
+    // 默认血量显示（6个红 + 6个蓝，排除5号和飞镖）
+    property var globalUnit_robot_health: [200, 300, 200, 200, 150, 400, 200, 300, 200, 200, 150, 400]
+    property var globalUnit_robot_bullets: [100, 100, 100, 100, 100, 100]
     property int globalUnit_total_damage_ally: 0
     property int globalUnit_total_damage_enemy: 0
 
