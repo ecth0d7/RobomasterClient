@@ -2,6 +2,7 @@ import QtQuick 6.2
 import QtQuick.Controls 6.2
 import QtQuick.Layouts 6.2
 
+
 // RoboMaster 2026 自定义客户端 - UI绘制层
 Item {
     id: root
@@ -1605,6 +1606,7 @@ Rectangle {
 }
        
     }
+    
 
     // 9. 准星
     Item {
@@ -1613,7 +1615,7 @@ Rectangle {
         y: (parent.height - 60) / 2
         width: 60
         height: 60
-        z: 99999
+        z: 999
 
         function updatePos() {
             crosshairItem.x = (parent.width - crosshairItem.width) / 2
@@ -3640,6 +3642,93 @@ Item {
         }
     }
 }
+// 帮助面板容器（确保它可以获得焦点）
+Item {
+    id: helpPanelContainer
+    anchors.fill: parent
+    focus: true  // 使该容器能接收键盘事件
+    z:20000
+
+    // 按下 F12 显示面板
+    Keys.onPressed: (event) => {
+        if (event.key === Qt.Key_F12) {
+            helpPanel.visible = true;
+            event.accepted = true;
+        }
+    }
+
+    // 松开 F12 隐藏面板
+    Keys.onReleased: (event) => {
+        if (event.key === Qt.Key_F12) {
+            helpPanel.visible = false;
+            event.accepted = true;
+        }
+    }
+
+    // 帮助面板（居中显示）
+    Rectangle {
+        id: helpPanel
+        visible: false
+        width: 450
+        height: 350
+        color: "#151414ff"          // 偏黑灰色
+        radius: 10
+        border.color: "#444"
+        border.width: 1
+        anchors.centerIn: parent
+        
+
+        // 标题
+        Text {
+            text: "帮助提示"
+            color: "white"
+            font.pixelSize: 22
+            font.bold: true
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.margins: 20
+        }
+
+        // 图标与说明列表
+        Column {
+            anchors.top: parent.top
+            anchors.topMargin: 60
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.margins: 20
+            spacing: 15
+
+            Repeater {
+                model: [
+                    { icon: "P", desc: "待说明" },
+                    { icon: "I", desc: "待说明" },
+                    { icon: "H", desc: "待说明" },
+                    { icon: "Tab", desc: "待说明" },
+                    { icon: "~", desc: "待说明" }
+                ]
+
+                delegate: Row {
+                    spacing: 12
+                    Text {
+                        text: modelData.icon
+                        color: "#ebe2e2ff"        //图标颜色
+                        font.pixelSize: 20
+                        font.bold: true
+                        width: 40
+                        horizontalAlignment: Text.AlignHCenter
+                    }
+                    Text {
+                        text: modelData.desc
+                        color: "white"
+                        font.pixelSize: 14
+                        width: helpPanel.width - 90   // 自动换行
+                        wrapMode: Text.WordWrap
+                    }
+                }
+            }
+        }
+    }
+}
 // --- 通用指令交互面板 (H 键触发) ---
 Rectangle {
     id: commonCmdOverlay
@@ -3650,7 +3739,7 @@ Rectangle {
     border.color: "#00CCFF" // 赛博蓝边框
     border.width: 2
     radius: 10
-    z: 2000 // 确保在最顶层
+    z: 20000 // 确保在最顶层
     
     // 绑定到 dataStore 的显示状态
     visible: dataStore.isCommonCmdVisible
