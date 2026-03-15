@@ -5340,8 +5340,8 @@ Rectangle {
     color: "#E61A1A1A"
     z: 9999000
     // 逻辑：如果 MQTT 未连接 或者 登录界面显示开关被打开（!isLoginDisplay意为处于登录流程中）
-    visible: !dataStore.mqttConnected || !dataStore.isLoginDisplay
-
+    //visible: !dataStore.mqttConnected || !dataStore.isLoginDisplay
+    visible: false
     // 映射表逻辑：计算 MQTT 客户端 ID 和 机器人的数字 ID
     function calculateIds() {
         let side = sideBox.currentText // "红方" 或 "蓝方"
