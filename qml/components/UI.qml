@@ -83,7 +83,6 @@ Item {
         Item {
             anchors.fill: parent
             z: 999
-            //苏丹3.2
             visible: dataStore.gameStatus_is_paused || dataStore.gameStatus_current_stage === 6
 
             Rectangle {
@@ -155,7 +154,6 @@ Item {
                     font.pixelSize: 9
                     color: "#aaaaaa"
                 }
-                //苏丹3.Row Text
                 Row {
                     anchors.centerIn: parent
                     spacing: 8
@@ -524,7 +522,7 @@ Item {
             // Text { text: "-------------------------"; font.pixelSize: 12; color: "#888888" }
         }
 
-        // 5. 经济显示模块（苏丹5）
+        // 5. 经济显示模块
         Rectangle {
             anchors.left: parent.left
             anchors.bottom: parent.bottom
@@ -684,7 +682,7 @@ Column {
                 
             }
         }
-        // 6.5 全局特殊机制显示（苏丹6）
+        // 6.5 全局特殊机制显示
         Item {
             id: specialMechanismDisplay
             anchors.left: parent.left
@@ -2327,8 +2325,6 @@ Item {
     
     opacity: 0
 }
-    // 12. 机器人复活状态面板（新增）（苏丹9）
-    // ==============================================
 // 12. 机器人复活状态面板（内联实现）
 // ==============================================
 Item {
@@ -4710,7 +4706,7 @@ Rectangle {
                 }
             }
         }
-// 6.6 机器人受伤统计显示（苏丹8）- 单行单类型版 - 不透明版
+// 6.6 机器人受伤统计显示- 单行单类型版 - 不透明版
 Item {
     id: robotInjuryDisplay
     anchors.left: parent.left
