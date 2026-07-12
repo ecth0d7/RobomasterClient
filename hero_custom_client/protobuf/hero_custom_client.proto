@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package robomaster.hero_client;
+
+// 机器人 0x0310 原始数据的 MQTT 外壳。
+message CustomByteBlock {
+  optional bytes data = 1;
+}
+
+// 自定义客户端 0x0311 原始数据的 MQTT 外壳。
+message CustomControl {
+  optional bytes data = 1;
+}
