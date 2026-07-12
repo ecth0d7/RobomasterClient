@@ -287,8 +287,6 @@ function sendKeyboardMouseData() {
             enemyId: root.mapClickEnemyId,
             ascii: root.mapClickAscii,
             type: root.mapClickType,
-            screenX: root.mapClickScreenX,
-            screenY: root.mapClickScreenY,
             mapX: root.mapClickMapX,
             mapY: root.mapClickMapY
         };
@@ -297,7 +295,7 @@ function sendKeyboardMouseData() {
             mapClickInfoHandler.parseFromQmlMap(dataMap);
             mapClickInfoHandler.send();
             root.lastMapClickTime = currentTime; // 更新最后发送时间
-            root.dataSent("MapClickInfo");
+            root.dataSent("MapClickCmd");
             console.log("[地图点击标记发送] 坐标(", root.mapClickMapX, ",", root.mapClickMapY, ")");
         } catch (e) {
             root.sendFailed("MapClickInfo", e.toString());

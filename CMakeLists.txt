@@ -5,15 +5,9 @@ project(RoboMasterMqttTest LANGUAGES CXX C)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# ========================= Qt6配置（参考配置风格） =========================
-# 强制指定Qt6.9.3路径（保留你的原有配置）
-set(Qt6_DIR "/home/suhezhou/Qt/6.9.3/gcc_64/lib/cmake/Qt6" CACHE PATH "Qt6配置文件目录" FORCE)
-# find_package(Qt6 REQUIRED COMPONENTS Core Gui Qml Quick)#直接用qt creator打开
-if(NOT EXISTS "${Qt6_DIR}/Qt6Config.cmake")
-    message(FATAL_ERROR "Qt6配置文件不存在！请检查路径：${Qt6_DIR}")
-endif()
-
-# 查找Qt6组件（参考配置用Core/Widgets/Network/Gui，补充Quick相关适配QML）
+# ========================= Qt6配置 =========================
+# 不固定 Qt 安装目录。CMake 会使用 Qt Creator 工具链、CMAKE_PREFIX_PATH、
+# Qt6_DIR 缓存参数或系统默认搜索路径查找 Qt。
 find_package(Qt6 6.5 REQUIRED COMPONENTS
     Core
     Widgets
@@ -42,9 +36,29 @@ pkg_check_modules(MOSQUITTO REQUIRED libmosquitto)
 find_package(Protobuf REQUIRED)
 
 # ========================= Protobuf代码生成=========================
-protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS 
+set(ROBOMASTER_PROTO
     ${CMAKE_CURRENT_SOURCE_DIR}/mqtt/protobuf/robomaster_custom_client.proto
 )
+
+# 协议 V2.0.0 使用 proto3 optional，官方要求 protoc >= 3.15。
+# Ubuntu 20.04/22.04 常见的 3.12 编译器需要显式启用其兼容开关。
+if(Protobuf_VERSION VERSION_LESS 3.15)
+    set(PROTO_SRCS ${CMAKE_CURRENT_BINARY_DIR}/robomaster_custom_client.pb.cc)
+    set(PROTO_HDRS ${CMAKE_CURRENT_BINARY_DIR}/robomaster_custom_client.pb.h)
+    add_custom_command(
+        OUTPUT ${PROTO_SRCS} ${PROTO_HDRS}
+        COMMAND ${Protobuf_PROTOC_EXECUTABLE}
+                --experimental_allow_proto3_optional
+                --cpp_out=${CMAKE_CURRENT_BINARY_DIR}
+                --proto_path=${CMAKE_CURRENT_SOURCE_DIR}/mqtt/protobuf
+                ${ROBOMASTER_PROTO}
+        DEPENDS ${ROBOMASTER_PROTO}
+        COMMENT "Generating RoboMaster V2 protobuf sources"
+        VERBATIM
+    )
+else()
+    protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ${ROBOMASTER_PROTO})
+endif()
 
 # ========================= 源文件/头文件配置=========================
 # 源文件列表
@@ -156,5 +170,5 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
 endif()
 
 # ========================= QML配置=========================
-set(QML_IMPORT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/qml CACHE STRING "QML导入路径" FORCE)
-set(QML2_IMPORT_PATH ${QML_IMPORT_PATH} CACHE STRING "QML2导入路径" FORCE)
+set(QML_IMPORT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/qml CACHE STRING "QML导入路径")
+set(QML2_IMPORT_PATH ${QML_IMPORT_PATH} CACHE STRING "QML2导入路径")

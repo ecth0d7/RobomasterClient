@@ -1,6 +1,6 @@
 import QtQuick 6.2
 
-// MQTT数据接收模块（完整支持RoboMaster 2026通信协议V1.2.0）
+// MQTT数据接收模块（RoboMaster 2026 通信协议 V2.0.0）
 // 核心修正：所有信号处理函数名严格匹配C++发射的信号名
 Item {
     id: root
@@ -14,6 +14,8 @@ Item {
     property int gameStatus_stage_countdown_sec: 0
     property int gameStatus_stage_elapsed_sec: 0
     property bool gameStatus_is_paused: false
+    property int gameStatus_game_result: 255
+    property int gameStatus_end_reason: 255
 
     // ========== 2. GlobalUnitStatus（基地/前哨站/机器人全局状态） ==========
  
@@ -117,6 +119,7 @@ Item {
     property real robotPosition_y: 0.0
     property real robotPosition_z: 0.0
     property real robotPosition_yaw: 0.0
+    property int robotPosition_robot_id: 0
 
     // ========== 12. Buff（Buff效果信息） ==========
     property int buff_robot_id: 0
@@ -139,18 +142,17 @@ Item {
     property int robotPath_sender_id: 0
 
     // ========== 15. RadarInfoToClient（雷达机器人位置信息） ==========
-    property int radar_target_robot_id: 0
-    property real radar_target_pos_x: 0.0
-    property real radar_target_pos_y: 0.0
-    property real radar_toward_angle: 0.0
-    property int radar_is_high_light: 0
+    property var radar_robots: []
 
     // ========== 16. CustomByteBlock（自定义数据流） ==========
     property string customByteBlock_data: ""  // 二进制数据转16进制字符串存储
 
     // ========== 17. TechCoreMotionStateSync（科技核心运动状态同步） ==========
     property int techCore_maximum_difficulty_level: 1
-    property int techCore_status: 1
+    property int techCore_basic_state: 1
+    property int techCore_putin_state: 0
+    property int techCore_move_state: 0
+    property int techCore_rotate_state: 0
     property int techCore_enemy_core_status: 0
     property int techCore_remain_time_all: 0
     property int techCore_remain_time_step: 0
@@ -166,11 +168,12 @@ Item {
     // ========== 20. RuneStatusSync（能量机关状态同步） ==========
     property int runeStatus_rune_status: 1
     property int runeStatus_activated_arms: 0
-    property int runeStatus_average_rings: 0
+    property real runeStatus_average_rings: 0.0
 
     // ========== 21. SentryStatusSync（哨兵状态同步） ==========
     property int sentryStatus_posture_id: 1
     property bool sentryStatus_is_weakened: false
+    property bool sentryStatus_is_powered: false
 
     // ========== 22. DartSelectTargetStatusSync（飞镖目标选择状态同步） ==========
     property int dartTarget_status_target_id: 0
@@ -200,6 +203,8 @@ Item {
             root.gameStatus_stage_countdown_sec = map.stage_countdown_sec || 0
             root.gameStatus_stage_elapsed_sec = map.stage_elapsed_sec || 0
             root.gameStatus_is_paused = map.is_paused || false
+            root.gameStatus_game_result = map.game_result === undefined ? 255 : map.game_result
+            root.gameStatus_end_reason = map.end_reason === undefined ? 255 : map.end_reason
             console.log("[GameStatus更新] 局数=", root.gameStatus_current_round, 
                         "红方分数=", root.gameStatus_red_score, 
                         "阶段=", root.gameStatus_current_stage)
@@ -372,6 +377,7 @@ Item {
             root.robotPosition_y = map.y || 0.0
             root.robotPosition_z = map.z || 0.0
             root.robotPosition_yaw = map.yaw || 0.0
+            root.robotPosition_robot_id = map.robot_id || 0
             console.log("[机器人位置] X=", root.robotPosition_x, "Y=", root.robotPosition_y,
                         "朝向=", root.robotPosition_yaw)
         }
@@ -422,14 +428,8 @@ Item {
     Connections {
         target: radarInfoHandler
         function onRadarInfoUpdated(map) {
-            root.radar_target_robot_id = map.target_robot_id || 0
-            root.radar_target_pos_x = map.target_pos_x || 0.0
-            root.radar_target_pos_y = map.target_pos_y || 0.0
-            root.radar_toward_angle = map.torward_angle || 0.0
-            root.radar_is_high_light = map.is_high_light || 0
-            console.log("[雷达信息] 目标ID=", root.radar_target_robot_id,
-                        "坐标(", root.radar_target_pos_x, ",", root.radar_target_pos_y, ")",
-                        "角度",root.radar_toward_angle)
+            root.radar_robots = map.robots || []
+            console.log("[雷达信息] 机器人数量=", root.radar_robots.length)
         }
     }
 
@@ -448,12 +448,15 @@ Item {
         target: techCoreMotionHandler
         function onTechCoreMotionUpdated(map) {
             root.techCore_maximum_difficulty_level = map.maximum_difficulty_level || 1
-            root.techCore_status = map.status || 1
+            root.techCore_basic_state = map.basic_state || 1
+            root.techCore_putin_state = map.putin_state || 0
+            root.techCore_move_state = map.move_state || 0
+            root.techCore_rotate_state = map.rotate_state || 0
             root.techCore_enemy_core_status = map.enemy_core_status || 0
             root.techCore_remain_time_all = map.remain_time_all || 0
             root.techCore_remain_time_step = map.remain_time_step || 0
             console.log("[科技核心] 最高难度=", root.techCore_maximum_difficulty_level,
-                        "状态=", root.techCore_status, "剩余总时间=", root.techCore_remain_time_all)
+                        "基础状态=", root.techCore_basic_state, "剩余总时间=", root.techCore_remain_time_all)
         }
     }
 
@@ -496,6 +499,7 @@ Item {
         function onSentryStatusUpdated(map) {
             root.sentryStatus_posture_id = map.posture_id || 1
             root.sentryStatus_is_weakened = map.is_weakened || false
+            root.sentryStatus_is_powered = map.is_powered || false
             console.log("[哨兵状态] 姿态ID=", root.sentryStatus_posture_id,
                         "弱化状态=", root.sentryStatus_is_weakened)
         }

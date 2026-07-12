@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include <memory>
 #include <vector>
+#include <atomic>
 #include <QString>
 #include "IMqttHandler.h"
 
@@ -17,7 +18,7 @@ class MqttClient : public QObject
 public:
     // 构造函数
     explicit MqttClient(const std::string& clientId = "robomaster_default", 
-                       const std::string& host = "127.0.0.1",
+                       const std::string& host = "192.168.12.1",
                        int port = 3333,
                        QObject *parent = nullptr);
     ~MqttClient() override;
@@ -80,7 +81,8 @@ private:
     std::string m_clientId;                   
     std::string m_host;                       
     int m_port;                               
-    bool m_isConnected = false;               
+    std::atomic_bool m_isConnected{false};
+    bool m_loopStarted = false;
     
     // 存储所有处理器
     std::unordered_map<std::string, std::shared_ptr<IMqttHandler>> m_handlers;

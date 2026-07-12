@@ -13,7 +13,6 @@ MqttClient::MqttClient(const std::string& clientId, const std::string& host, int
     , m_clientId(clientId)     // 2. ID
     , m_host(host)             // 3. Host
     , m_port(port)             // 4. Port
-    , m_isConnected(false)
 {
     mosquitto_lib_init();
 }
@@ -84,22 +83,34 @@ bool MqttClient::connectToServer()
 
     qInfo() << "正在连接 MQTT 服务器:" << QString::fromStdString(m_host) << ":" << m_port;
 
-    int rc = mosquitto_connect(m_mosq, m_host.c_str(), m_port, 60);
+    // connect_async 只提交连接请求，不在 Qt UI 线程等待网络超时。
+    int rc = mosquitto_connect_async(m_mosq, m_host.c_str(), m_port, 60);
     if (rc != MOSQ_ERR_SUCCESS) {
         std::string errorMsg = "连接发起失败: " + std::string(mosquitto_strerror(rc));
         emit errorOccurred(errorMsg);
         return false;
     }
 
-    mosquitto_loop_start(m_mosq);
+    if (!m_loopStarted) {
+        rc = mosquitto_loop_start(m_mosq);
+        if (rc != MOSQ_ERR_SUCCESS) {
+            std::string errorMsg = "MQTT网络循环启动失败: " + std::string(mosquitto_strerror(rc));
+            emit errorOccurred(errorMsg);
+            return false;
+        }
+        m_loopStarted = true;
+    }
     return true;
 }
 
 void MqttClient::disconnectFromServer()
 {
     if (m_mosq) {
-        mosquitto_disconnect(m_mosq);
-        mosquitto_loop_stop(m_mosq, true);
+        if (m_loopStarted) {
+            mosquitto_disconnect(m_mosq);
+            mosquitto_loop_stop(m_mosq, true);
+            m_loopStarted = false;
+        }
         m_isConnected = false;
         qInfo() << "MQTT 连接已断开";
     }

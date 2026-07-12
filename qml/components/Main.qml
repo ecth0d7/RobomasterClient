@@ -22,12 +22,25 @@ ApplicationWindow {
         // 1. 当前客户端的身份 ID (登录时确定)
         // Main.qml -> dataStore 内部
         id: dataStore
+        // 2. 比赛全局状态
+        property int gameStatus_current_round: -1
+        property int gameStatus_total_rounds: 0
+        property int gameStatus_red_score: 0
+        property int gameStatus_blue_score: 0
+        property int gameStatus_current_stage: 0
+        property int gameStatus_stage_countdown_sec: 0
+        property int gameStatus_stage_elapsed_sec: 0
+        property bool gameStatus_is_paused: false
+        property int gameStatus_game_result: 255
+        property int gameStatus_end_reason: 255
         // --- 1. 基础状态与身份 ---
         property bool isCommonCmdVisible: false
         property bool isInjuryDisplay: false
         property bool isLoginDisplay: false
         property bool isRobotStatusDisplay: false
-        property bool mqttConnected: false 
+        property bool mqttConnected: false
+        property bool mqttConnecting: false
+        property string mqttStatusMessage: "未连接"
         property int clientID: 0              // 登录时确定的机器人ID (如 1 或 101)
         property bool isRedSide: clientID > 0 && clientID < 100 // 自动判断阵营
         
@@ -142,6 +155,7 @@ ApplicationWindow {
         property real robotPosition_y: 0.0
         property real robotPosition_z: 0.0
         property real robotPosition_yaw: 0.0
+        property int robotPosition_robot_id: 0
         
         // 13. Buff信息
         property int buff_robot_id: 0
@@ -164,18 +178,17 @@ ApplicationWindow {
         property int robotPath_sender_id: 0
         
         // 16. 雷达信息
-        property int radar_target_robot_id: 0
-        property real radar_target_pos_x: 0.0
-        property real radar_target_pos_y: 0.0
-        property real radar_toward_angle: 0.0
-        property int radar_is_high_light: 0
+        property var radar_robots: []
         
         // 17. 自定义数据流
         property string customByteBlock_data: ""
         
         // 18. 科技核心状态
         property int techCore_maximum_difficulty_level: 1
-        property int techCore_status: 1
+        property int techCore_basic_state: 1
+        property int techCore_putin_state: 0
+        property int techCore_move_state: 0
+        property int techCore_rotate_state: 0
         property int techCore_enemy_core_status: 0
         property int techCore_remain_time_all: 0
         property int techCore_remain_time_step: 0
@@ -191,11 +204,12 @@ ApplicationWindow {
         // 21. 能量机关状态
         property int runeStatus_rune_status: 1
         property int runeStatus_activated_arms: 0
-        property int runeStatus_average_rings: 0
+        property real runeStatus_average_rings: 0.0
         
         // 22. 哨兵状态
         property int sentryStatus_posture_id: 1
         property bool sentryStatus_is_weakened: false
+        property bool sentryStatus_is_powered: false
         
         // 23. 飞镖目标状态
         property int dartTarget_status_target_id: 0
@@ -644,6 +658,8 @@ Connections {
         onGameStatus_stage_countdown_secChanged: dataStore.gameStatus_stage_countdown_sec = mqttReceiver.gameStatus_stage_countdown_sec
         onGameStatus_stage_elapsed_secChanged: dataStore.gameStatus_stage_elapsed_sec = mqttReceiver.gameStatus_stage_elapsed_sec
         onGameStatus_is_pausedChanged: dataStore.gameStatus_is_paused = mqttReceiver.gameStatus_is_paused
+        onGameStatus_game_resultChanged: dataStore.gameStatus_game_result = mqttReceiver.gameStatus_game_result
+        onGameStatus_end_reasonChanged: dataStore.gameStatus_end_reason = mqttReceiver.gameStatus_end_reason
 
         // GlobalUnitStatus绑定
         onGlobalUnit_base_healthChanged: dataStore.globalUnit_base_health = mqttReceiver.globalUnit_base_health
@@ -744,6 +760,7 @@ Connections {
         onRobotPosition_yChanged: dataStore.robotPosition_y = mqttReceiver.robotPosition_y
         onRobotPosition_zChanged: dataStore.robotPosition_z = mqttReceiver.robotPosition_z
         onRobotPosition_yawChanged: dataStore.robotPosition_yaw = mqttReceiver.robotPosition_yaw
+        onRobotPosition_robot_idChanged: dataStore.robotPosition_robot_id = mqttReceiver.robotPosition_robot_id
 
         // Buff绑定
         onBuff_robot_idChanged: dataStore.buff_robot_id = mqttReceiver.buff_robot_id
@@ -766,18 +783,17 @@ Connections {
         onRobotPath_sender_idChanged: dataStore.robotPath_sender_id = mqttReceiver.robotPath_sender_id
 
         // RadarInfoToClient绑定
-        onRadar_target_robot_idChanged: dataStore.radar_target_robot_id = mqttReceiver.radar_target_robot_id
-        onRadar_target_pos_xChanged: dataStore.radar_target_pos_x = mqttReceiver.radar_target_pos_x
-        onRadar_target_pos_yChanged: dataStore.radar_target_pos_y = mqttReceiver.radar_target_pos_y
-        onRadar_toward_angleChanged: dataStore.radar_toward_angle = mqttReceiver.radar_toward_angle
-        onRadar_is_high_lightChanged: dataStore.radar_is_high_light = mqttReceiver.radar_is_high_light
+        onRadar_robotsChanged: dataStore.radar_robots = mqttReceiver.radar_robots
 
         // CustomByteBlock绑定
         onCustomByteBlock_dataChanged: dataStore.customByteBlock_data = mqttReceiver.customByteBlock_data
 
         // TechCoreMotionStateSync绑定
         onTechCore_maximum_difficulty_levelChanged: dataStore.techCore_maximum_difficulty_level = mqttReceiver.techCore_maximum_difficulty_level
-        onTechCore_statusChanged: dataStore.techCore_status = mqttReceiver.techCore_status
+        onTechCore_basic_stateChanged: dataStore.techCore_basic_state = mqttReceiver.techCore_basic_state
+        onTechCore_putin_stateChanged: dataStore.techCore_putin_state = mqttReceiver.techCore_putin_state
+        onTechCore_move_stateChanged: dataStore.techCore_move_state = mqttReceiver.techCore_move_state
+        onTechCore_rotate_stateChanged: dataStore.techCore_rotate_state = mqttReceiver.techCore_rotate_state
         onTechCore_enemy_core_statusChanged: dataStore.techCore_enemy_core_status = mqttReceiver.techCore_enemy_core_status
         onTechCore_remain_time_allChanged: dataStore.techCore_remain_time_all = mqttReceiver.techCore_remain_time_all
         onTechCore_remain_time_stepChanged: dataStore.techCore_remain_time_step = mqttReceiver.techCore_remain_time_step
@@ -798,6 +814,7 @@ Connections {
         // SentryStatusSync绑定
         onSentryStatus_posture_idChanged: dataStore.sentryStatus_posture_id = mqttReceiver.sentryStatus_posture_id
         onSentryStatus_is_weakenedChanged: dataStore.sentryStatus_is_weakened = mqttReceiver.sentryStatus_is_weakened
+        onSentryStatus_is_poweredChanged: dataStore.sentryStatus_is_powered = mqttReceiver.sentryStatus_is_powered
 
         // DartSelectTargetStatusSync绑定
         onDartTarget_status_target_idChanged: dataStore.dartTarget_status_target_id = mqttReceiver.dartTarget_status_target_id

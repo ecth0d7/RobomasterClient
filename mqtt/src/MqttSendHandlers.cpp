@@ -159,7 +159,7 @@ void CustomControlSendHandler::setCustomData(const QByteArray& data) {
 }
 
 // ===================== 3. 云台手地图点击标记发送处理器 =====================
-MapClickInfoSendHandler::MapClickInfoSendHandler(MqttClient* client, QObject *parent)
+MapClickCmdSendHandler::MapClickCmdSendHandler(MqttClient* client, QObject *parent)
     : BaseMqttSendHandler(client, parent)
 {
     // 初始化默认值
@@ -168,8 +168,6 @@ MapClickInfoSendHandler::MapClickInfoSendHandler(MqttClient* client, QObject *pa
     m_msg.set_enemy_id(0);
     m_msg.set_ascii(0);
     m_msg.set_type(0);
-    m_msg.set_screen_x(0);
-    m_msg.set_screen_y(0);
     m_msg.set_map_x(0.0f);
     m_msg.set_map_y(0.0f);
     
@@ -178,15 +176,15 @@ MapClickInfoSendHandler::MapClickInfoSendHandler(MqttClient* client, QObject *pa
     m_msg.set_robot_id(robotId);
 }
 
-std::string MapClickInfoSendHandler::getTopicName() const {
+std::string MapClickCmdSendHandler::getTopicName() const {
     return TOPIC;
 }
 
-QByteArray MapClickInfoSendHandler::serialize() {
+QByteArray MapClickCmdSendHandler::serialize() {
     return serializeProto(m_msg);
 }
 
-void MapClickInfoSendHandler::parseFromQmlMap(const QVariantMap& dataMap) {
+void MapClickCmdSendHandler::parseFromQmlMap(const QVariantMap& dataMap) {
     // 解析基础字段
     if (dataMap.contains("isSendAll")) {
         m_msg.set_is_send_all(static_cast<uint32_t>(dataMap["isSendAll"].toUInt()));
@@ -202,12 +200,6 @@ void MapClickInfoSendHandler::parseFromQmlMap(const QVariantMap& dataMap) {
     }
     if (dataMap.contains("type")) {
         m_msg.set_type(static_cast<uint32_t>(dataMap["type"].toUInt()));
-    }
-    if (dataMap.contains("screenX")) {
-        m_msg.set_screen_x(static_cast<uint32_t>(dataMap["screenX"].toUInt()));
-    }
-    if (dataMap.contains("screenY")) {
-        m_msg.set_screen_y(static_cast<uint32_t>(dataMap["screenY"].toUInt()));
     }
     if (dataMap.contains("mapX")) {
         m_msg.set_map_x(static_cast<float>(dataMap["mapX"].toDouble()));
@@ -236,17 +228,14 @@ void MapClickInfoSendHandler::parseFromQmlMap(const QVariantMap& dataMap) {
              << "坐标(" << m_msg.map_x() << "," << m_msg.map_y() << ")";
 }
 
-void MapClickInfoSendHandler::setMapClickInfo(uint32_t isSendAll, const QByteArray& robotId,
-                                             uint32_t mode, uint32_t enemyId, uint32_t ascii,
-                                             uint32_t type, uint32_t screenX, uint32_t screenY,
-                                             float mapX, float mapY) {
+void MapClickCmdSendHandler::setMapClickCmd(uint32_t isSendAll, const QByteArray& robotId,
+                                           uint32_t mode, uint32_t enemyId, uint32_t ascii,
+                                           uint32_t type, float mapX, float mapY) {
     m_msg.set_is_send_all(isSendAll);
     m_msg.set_mode(mode);
     m_msg.set_enemy_id(enemyId);
     m_msg.set_ascii(ascii);
     m_msg.set_type(type);
-    m_msg.set_screen_x(screenX);
-    m_msg.set_screen_y(screenY);
     m_msg.set_map_x(mapX);
     m_msg.set_map_y(mapY);
     

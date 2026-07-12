@@ -79,23 +79,22 @@ private:
 };
 
 // ===================== 3. 云台手地图点击标记发送处理器 =====================
-class MapClickInfoSendHandler : public BaseMqttSendHandler
+class MapClickCmdSendHandler : public BaseMqttSendHandler
 {
     Q_OBJECT
 public:
-    explicit MapClickInfoSendHandler(MqttClient* client, QObject *parent = nullptr);
+    explicit MapClickCmdSendHandler(MqttClient* client, QObject *parent = nullptr);
     std::string getTopicName() const override;
     QByteArray serialize() override;
     Q_INVOKABLE void parseFromQmlMap(const QVariantMap& dataMap) override;
 
-    Q_INVOKABLE void setMapClickInfo(uint32_t isSendAll, const QByteArray& robotId,
+    Q_INVOKABLE void setMapClickCmd(uint32_t isSendAll, const QByteArray& robotId,
                                     uint32_t mode, uint32_t enemyId, uint32_t ascii,
-                                    uint32_t type, uint32_t screenX, uint32_t screenY,
-                                    float mapX, float mapY);
+                                    uint32_t type, float mapX, float mapY);
 
 private:
-    robomaster::custom_client::MapClickInfoNotify m_msg;
-    static constexpr const char* TOPIC = "MapClickInfoNotify"; // 地图点击标记消息名
+    robomaster::custom_client::MapClickCmd m_msg;
+    static constexpr const char* TOPIC = "MapClickCmd";
     static constexpr int ROBOT_ID_LEN = 7; // 协议规定robot_id固定7字节
 };
 

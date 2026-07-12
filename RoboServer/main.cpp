@@ -15,7 +15,7 @@ extern "C" {
 }
 
 const char* VIDEO_FILE = "../test.mp4";
-const char* TARGET_IP = "127.0.0.1";
+const char* TARGET_IP = "192.168.12.1";
 const int TARGET_PORT = 3334; // 与接收端端口一致
 const int PAYLOAD_SIZE = 1392; // 关键修改：载荷1392 + 头8 = 1400字节
 

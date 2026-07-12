@@ -117,6 +117,48 @@ Item {
             z:100
             clip: false 
 
+            // MQTT 连接状态标志
+            Rectangle {
+                id: mqttStatusBadge
+                anchors.top: parent.top
+                anchors.right: parent.right
+                anchors.topMargin: 12
+                anchors.rightMargin: 18
+                width: mqttStatusRow.implicitWidth + 20
+                height: 28
+                radius: 14
+                color: "#CC181818"
+                border.width: 1
+                border.color: dataStore.mqttConnected ? "#35D07F"
+                              : (dataStore.mqttConnecting ? "#F5C451" : "#FF5B5B")
+                z: 1000
+
+                Row {
+                    id: mqttStatusRow
+                    anchors.centerIn: parent
+                    spacing: 7
+
+                    Rectangle {
+                        width: 9; height: 9; radius: 5
+                        color: dataStore.mqttConnected ? "#35D07F"
+                               : (dataStore.mqttConnecting ? "#F5C451" : "#FF5B5B")
+                        SequentialAnimation on opacity {
+                            running: dataStore.mqttConnecting
+                            loops: Animation.Infinite
+                            NumberAnimation { from: 1.0; to: 0.25; duration: 450 }
+                            NumberAnimation { from: 0.25; to: 1.0; duration: 450 }
+                        }
+                    }
+
+                    Text {
+                        text: "MQTT " + dataStore.mqttStatusMessage
+                        color: "white"
+                        font.pixelSize: 12
+                        font.bold: true
+                    }
+                }
+            }
+
             // ========== 新增：比分栏背景图片 ==========苏丹，有问题，置顶不了
             Image {
                 id: scoreBarBg
@@ -2898,37 +2940,26 @@ Item {
         Connections {
             target: dataStore
             function updateRobotData() {
-                var rid = dataStore.radar_target_robot_id;
-                if (rid === 0) return;
-
-                var found = false;
-                for (var i = 0; i < robotListModel.count; i++) {
-                    if (robotListModel.get(i).robotId === rid) {
-                        robotListModel.setProperty(i, "posX", dataStore.radar_target_pos_x);
-                        robotListModel.setProperty(i, "posY", dataStore.radar_target_pos_y);
-                        // 确保 angle 真的被写入了
-                        robotListModel.setProperty(i, "angle", dataStore.radar_toward_angle);
-                        robotListModel.setProperty(i, "isHighLight", dataStore.radar_is_high_light);
-                        found = true;
-                        break;
-                    }
-                }
-
-                if (!found) {
+                var robots = dataStore.radar_robots || [];
+                // 协议顺序：对方 1/2/3/4/6/7，随后己方 1/2/3/4/6/7。
+                var types = [1, 2, 3, 4, 6, 7];
+                var ownBlue = Number(dataStore.clientID) >= 100;
+                robotListModel.clear();
+                for (var i = 0; i < robots.length && i < 12; ++i) {
+                    var isEnemy = i < 6;
+                    var blue = isEnemy ? !ownBlue : ownBlue;
+                    var rid = types[i % 6] + (blue ? 100 : 0);
+                    var robot = robots[i];
                     robotListModel.append({
                         "robotId": rid,
-                        "posX": dataStore.radar_target_pos_x,
-                        "posY": dataStore.radar_target_pos_y,
-                        "angle": dataStore.radar_toward_angle,
-                        "isHighLight": dataStore.radar_is_high_light
+                        "posX": Number(robot.target_pos_x || 0) / 100.0,
+                        "posY": Number(robot.target_pos_y || 0) / 100.0,
+                        "angle": 0,
+                        "isHighLight": Number(robot.is_high_light || 0)
                     });
                 }
             }
-
-            // 关键点 4：除了坐标，还要监听角度信号变化
-            function onRadar_target_pos_xChanged() { updateRobotData() }
-            function onRadar_target_pos_yChanged() { updateRobotData() }
-            function onRadar_toward_angleChanged() { updateRobotData() }
+            function onRadar_robotsChanged() { updateRobotData() }
         }
     }
     // 19. 自定义数据流显示面板 (独立 Item)
@@ -3357,20 +3388,16 @@ Item {
         // --- 内部逻辑函数 ---
         function getStatusText(status) {
             var map = {
-                1: "未进入装配状态",
-                2: "核心前往装配位...",
-                3: "就绪 (可开始首步)",
-                4: "步骤完成 (待下步)",
-                5: "装配成功 ✅",
-                6: "任务结束 (返回中)"
+                1: "初始位置",
+                2: "运动中...",
+                3: "已到达对应位姿"
             };
             return map[status] || "未知状态";
         }
 
         function getStatusColor(status) {
-            if (status === 5) return "#00FF00"; // 成功绿
-            if (status === 2 || status === 6) return "#00EBFF"; // 移动蓝
-            if (status === 3 || status === 4) return "#FFD700"; // 交互黄
+            if (status === 3) return "#00FF00";
+            if (status === 2) return "#00EBFF";
             return "#666666"; // 初始灰
         }
 
@@ -3396,9 +3423,9 @@ Item {
                     }
                     Rectangle {
                         width: 8; height: 8; radius: 4
-                        color: techCoreSyncOverlay.getStatusColor(dataStore.techCore_status)
+                        color: techCoreSyncOverlay.getStatusColor(dataStore.techCore_basic_state)
                         SequentialAnimation on opacity {
-                            running: dataStore.techCore_status >= 2 && dataStore.techCore_status <= 4
+                            running: dataStore.techCore_basic_state === 2
                             loops: Animation.Infinite
                             NumberAnimation { from: 1.0; to: 0.2; duration: 600 }
                             NumberAnimation { from: 0.2; to: 1.0; duration: 600 }
@@ -3408,7 +3435,7 @@ Item {
 
                 // 第二行：当前状态文字 (status)
                 Text {
-                    text: techCoreSyncOverlay.getStatusText(dataStore.techCore_status)
+                    text: techCoreSyncOverlay.getStatusText(dataStore.techCore_basic_state)
                     color: "#00EBFF"
                     font.pixelSize: 14
                     font.bold: true
@@ -3427,6 +3454,13 @@ Item {
                         font.pixelSize: 10
                         font.bold: dataStore.techCore_enemy_core_status === 2
                     }
+                }
+
+                Text {
+                    text: "放入:" + dataStore.techCore_putin_state
+                          + "  平移:" + dataStore.techCore_move_state
+                          + "  旋转:" + dataStore.techCore_rotate_state
+                    color: "#CCCCCC"; font.pixelSize: 10
                 }
 
                 // 第四行：时间信息 (remain_time_all & remain_time_step)
@@ -4310,10 +4344,12 @@ Item {
                     color: "#aaaaaa"
                 }
                 Text {
-                    text: dataStore.sentryStatus_is_weakened ? "⚠️ 弱化状态" : "✅ 正常状态"
+                    text: dataStore.sentryStatus_is_weakened ? "⚠️ 弱化状态"
+                          : (dataStore.sentryStatus_is_powered ? "⚡ 强化状态" : "✅ 正常状态")
                     font.pixelSize: 12
                     font.bold: true
-                    color: dataStore.sentryStatus_is_weakened ? "#ffaa00" : "#22ff22"
+                    color: dataStore.sentryStatus_is_weakened ? "#ffaa00"
+                           : (dataStore.sentryStatus_is_powered ? "#00ccff" : "#22ff22")
                 }
             }
         }
@@ -5414,9 +5450,9 @@ Item {
         anchors.fill: parent
         color: "#E61A1A1A"
         z: 9999000
-        // 逻辑：如果 MQTT 未连接 或者 登录界面显示开关被打开（!isLoginDisplay意为处于登录流程中）
-        //visible: !dataStore.mqttConnected || !dataStore.isLoginDisplay
-        visible: false
+        // 登录只负责选择身份；提交后连接结果不再阻塞主界面。
+        visible: !dataStore.isLoginDisplay
+        
         // 映射表逻辑：计算 MQTT 客户端 ID 和 机器人的数字 ID
         function calculateIds() {
             let side = sideBox.currentText // "红方" 或 "蓝方"
@@ -5502,9 +5538,17 @@ Item {
                     
                     // 2. 修改：设置当前客户端的专属 ID（用于从 DataMap 中筛选自己的数据）
                     dataStore.clientID = res.robot;
-                    
-                    // 3. 执行连接
-                    mqttClient.connectToServer();
+
+                    // 3. 立即进入主界面，MQTT 在后台连接。
+                    dataStore.isLoginDisplay = true;
+                    dataStore.mqttConnected = false;
+                    dataStore.mqttConnecting = true;
+                    dataStore.mqttStatusMessage = "连接中";
+                    let started = mqttClient.connectToServer();
+                    if (!started) {
+                        dataStore.mqttConnecting = false;
+                        dataStore.mqttStatusMessage = "连接失败";
+                    }
                     
                     console.log("登录请求 -> ClientID: " + res.mqtt + " | 绑定机器人 ID: " + res.robot);
                     
@@ -5522,16 +5566,23 @@ Item {
         // 状态监听
         Connections {
             target: mqttClient
-            // 当连接成功时，更新连接状态并隐藏登录面板
             function onConnected() { 
-                dataStore.mqttConnected = true; 
-                dataStore.isLoginDisplay = true; 
-                console.log("MQTT 已连接，登录界面隐藏");
+                dataStore.mqttConnected = true;
+                dataStore.mqttConnecting = false;
+                dataStore.mqttStatusMessage = "已连接";
+                console.log("MQTT 已连接");
             }
-            // 当断开连接时，显示登录面板
             function onDisconnected() { 
-                dataStore.mqttConnected = false; 
+                dataStore.mqttConnected = false;
+                dataStore.mqttConnecting = false;
+                dataStore.mqttStatusMessage = "已断开";
                 console.log("MQTT 已断开");
+            }
+            function onErrorOccurred(errorMsg) {
+                dataStore.mqttConnected = false;
+                dataStore.mqttConnecting = false;
+                dataStore.mqttStatusMessage = "连接失败";
+                console.error("MQTT 错误:", errorMsg);
             }
         }
     }

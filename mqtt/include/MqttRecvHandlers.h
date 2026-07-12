@@ -334,7 +334,26 @@ private:
     static constexpr const char* TOPIC = "RobotPathPlanInfo"; // 哨兵轨迹规划消息名
 };
 
-// ===================== 15. 雷达位置信息处理器 =====================
+// ===================== 15. 地图点击标记信息处理器 =====================
+class MapClickInfoRecvHandler : public BaseMqttRecvHandler
+{
+    Q_OBJECT
+public:
+    explicit MapClickInfoRecvHandler(QObject *parent = nullptr);
+    std::string getTopicName() const override;
+    void handleMessage(const std::string& topic, const std::string& payload) override;
+
+signals:
+    void mapClickInfoReceived(const robomaster::custom_client::MapClickInfo& info);
+    void mapClickInfoUpdated(const QVariantMap& infoMap);
+
+private:
+    QVariantMap toQmlMap(const robomaster::custom_client::MapClickInfo& info);
+    robomaster::custom_client::MapClickInfo m_info;
+    static constexpr const char* TOPIC = "MapClickInfo";
+};
+
+// ===================== 16. 雷达位置信息处理器 =====================
 class RadarInfoRecvHandler : public BaseMqttRecvHandler
 {
     Q_OBJECT

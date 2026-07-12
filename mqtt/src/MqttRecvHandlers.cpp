@@ -33,6 +33,8 @@ QVariantMap GameStatusRecvHandler::toQmlMap(const robomaster::custom_client::Gam
     map["stage_countdown_sec"] = static_cast<int>(status.stage_countdown_sec());
     map["stage_elapsed_sec"] = static_cast<int>(status.stage_elapsed_sec());
     map["is_paused"] = static_cast<bool>(status.is_paused());
+    map["game_result"] = static_cast<int>(status.game_result());
+    map["end_reason"] = static_cast<int>(status.end_reason());
     return map;
 }
 
@@ -62,6 +64,7 @@ void GameStatusRecvHandler::handleMessage(const std::string& topic, const std::s
     qDebug() << "当前阶段：" << m_status.current_stage() << "(" << stageDesc << ")";
     qDebug() << "阶段剩余时间：" << m_status.stage_countdown_sec() << "s 阶段已过时间：" << m_status.stage_elapsed_sec() << "s";
     qDebug() << "比赛是否暂停：" << (m_status.is_paused() ? "是" : "否");
+    qDebug() << "当局结果：" << m_status.game_result() << "比赛结束原因：" << m_status.end_reason();
     
     // 发射信号
     emit gameStatusReceived(m_status);
@@ -583,6 +586,7 @@ QVariantMap RobotPositionRecvHandler::toQmlMap(const robomaster::custom_client::
     map["y"] = static_cast<float>(pos.y());
     map["z"] = static_cast<float>(pos.z());
     map["yaw"] = static_cast<float>(pos.yaw());
+    map["robot_id"] = static_cast<int>(pos.robot_id());
     return map;
 }
 
@@ -599,6 +603,7 @@ void RobotPositionRecvHandler::handleMessage(const std::string& topic, const std
              << QString::number(m_pos.y(), 'f', 2) << "," 
              << QString::number(m_pos.z(), 'f', 2) << "米";
     qDebug() << "朝向角度：" << QString::number(m_pos.yaw(), 'f', 1) << "°（正北为0度，顺时针递增）";
+    qDebug() << "坐标归属机器人：" << m_pos.robot_id();
     
     // 发射信号
     emit robotPositionReceived(m_pos);
@@ -758,7 +763,41 @@ void RobotPathPlanRecvHandler::handleMessage(const std::string& topic, const std
     emit robotPathPlanUpdated(toQmlMap(m_info));
 }
 
-// ===================== 15. RadarInfoRecvHandler =====================
+// ===================== 15. MapClickInfoRecvHandler =====================
+MapClickInfoRecvHandler::MapClickInfoRecvHandler(QObject *parent) : BaseMqttRecvHandler(parent) {}
+
+std::string MapClickInfoRecvHandler::getTopicName() const {
+    return TOPIC;
+}
+
+QVariantMap MapClickInfoRecvHandler::toQmlMap(const robomaster::custom_client::MapClickInfo& info) {
+    QVariantMap map;
+    map["is_send_all"] = static_cast<int>(info.is_send_all());
+    map["robot_id"] = QByteArray(info.robot_id().data(), static_cast<int>(info.robot_id().size())).toHex();
+    map["mode"] = static_cast<int>(info.mode());
+    map["enemy_id"] = static_cast<int>(info.enemy_id());
+    map["ascii"] = static_cast<int>(info.ascii());
+    map["type"] = static_cast<int>(info.type());
+    map["map_x"] = static_cast<float>(info.map_x());
+    map["map_y"] = static_cast<float>(info.map_y());
+    return map;
+}
+
+void MapClickInfoRecvHandler::handleMessage(const std::string& topic, const std::string& payload) {
+    Q_UNUSED(topic);
+    if (!deserialize(payload, m_info)) {
+        qWarning() << "解析MapClickInfo消息失败！";
+        return;
+    }
+    qDebug() << "========== MapClickInfo 数据 ==========";
+    qDebug() << "发送范围：" << m_info.is_send_all()
+             << "标记类型：" << m_info.mode()
+             << "地图坐标：" << m_info.map_x() << m_info.map_y();
+    emit mapClickInfoReceived(m_info);
+    emit mapClickInfoUpdated(toQmlMap(m_info));
+}
+
+// ===================== 16. RadarInfoRecvHandler =====================
 RadarInfoRecvHandler::RadarInfoRecvHandler(QObject *parent) : BaseMqttRecvHandler(parent) {}
 
 std::string RadarInfoRecvHandler::getTopicName() const { 
@@ -767,11 +806,15 @@ std::string RadarInfoRecvHandler::getTopicName() const {
 
 QVariantMap RadarInfoRecvHandler::toQmlMap(const robomaster::custom_client::RadarInfoToClient& info) {
     QVariantMap map;
-    map["target_robot_id"] = static_cast<int>(info.target_robot_id());
-    map["target_pos_x"] = static_cast<float>(info.target_pos_x());
-    map["target_pos_y"] = static_cast<float>(info.target_pos_y());
-    map["torward_angle"] = static_cast<float>(info.torward_angle());
-    map["is_high_light"] = static_cast<int>(info.is_high_light());
+    QVariantList robots;
+    for (const auto& robot : info.radar_single_robot_info()) {
+        QVariantMap robotMap;
+        robotMap["target_pos_x"] = static_cast<int>(robot.target_pos_x());
+        robotMap["target_pos_y"] = static_cast<int>(robot.target_pos_y());
+        robotMap["is_high_light"] = static_cast<int>(robot.is_high_light());
+        robots.append(robotMap);
+    }
+    map["robots"] = robots;
     return map;
 }
 
@@ -784,19 +827,12 @@ void RadarInfoRecvHandler::handleMessage(const std::string& topic, const std::st
     
     // 日志打印逻辑
     qDebug() << "========== RadarInfoToClient 数据 ==========";
-    qDebug() << "目标机器人ID：" << m_info.target_robot_id();
-    qDebug() << "目标机器人坐标(X,Y)：" << QString::number(m_info.target_pos_x(), 'f', 2) << "," 
-             << QString::number(m_info.target_pos_y(), 'f', 2) << "米";
-    qDebug() << "目标机器人朝向角度：" << QString::number(m_info.torward_angle(), 'f', 1) << "°（正北为0度，顺时针递增）";
-    
-    QString highLightDesc;
-    switch (m_info.is_high_light()) {
-        case 0: highLightDesc = "否"; break;
-        case 1: highLightDesc = "是"; break;
-        case 2: highLightDesc = "是但目标定位模块离线"; break;
-        default: highLightDesc = "未知状态"; break;
+    qDebug() << "机器人位置数量：" << m_info.radar_single_robot_info_size();
+    for (int i = 0; i < m_info.radar_single_robot_info_size(); ++i) {
+        const auto& robot = m_info.radar_single_robot_info(i);
+        qDebug() << "机器人[" << i << "]坐标(cm)：" << robot.target_pos_x() << robot.target_pos_y()
+                 << "特殊标识：" << robot.is_high_light();
     }
-    qDebug() << "目标机器人是否被特殊标识：" << m_info.is_high_light() << "(" << highLightDesc << ")";
     
     // 发射信号
     emit radarInfoReceived(m_info);
@@ -850,7 +886,10 @@ std::string TechCoreMotionRecvHandler::getTopicName() const {
 QVariantMap TechCoreMotionRecvHandler::toQmlMap(const robomaster::custom_client::TechCoreMotionStateSync& status) {
     QVariantMap map;
     map["maximum_difficulty_level"] = static_cast<int>(status.maximum_difficulty_level());
-    map["status"] = static_cast<int>(status.status());
+    map["basic_state"] = static_cast<int>(status.basic_state());
+    map["putin_state"] = static_cast<int>(status.putin_state());
+    map["move_state"] = static_cast<int>(status.move_state());
+    map["rotate_state"] = static_cast<int>(status.rotate_state());
     map["enemy_core_status"] = static_cast<int>(status.enemy_core_status());
     map["remain_time_all"] = static_cast<int>(status.remain_time_all());
     map["remain_time_step"] = static_cast<int>(status.remain_time_step());
@@ -868,17 +907,10 @@ void TechCoreMotionRecvHandler::handleMessage(const std::string& topic, const st
     qDebug() << "========== TechCoreMotionStateSync 数据 ==========";
     qDebug() << "当前可选择的最高装配难度等级：" << m_status.maximum_difficulty_level() << "级（1=简单，2=中等，3=困难，4=专家）";
     
-    QString coreStatusDesc;
-    switch (m_status.status()) {
-        case 1: coreStatusDesc = "未进入装配状态（初始状态，未选择装配难度）"; break;
-        case 2: coreStatusDesc = "已选择装配难度，科技核心移动中（前往装配位置）"; break;
-        case 3: coreStatusDesc = "科技核心移动完成，可进行首个装配步骤"; break;
-        case 4: coreStatusDesc = "上一个装配步骤已完成，可进行下一个装配步骤"; break;
-        case 5: coreStatusDesc = "所有装配步骤已完成（装配成功）"; break;
-        case 6: coreStatusDesc = "已确认装配，科技核心移动中（装配完成后返回初始位置）"; break;
-        default: coreStatusDesc = "未知状态"; break;
-    }
-    qDebug() << "己方科技核心状态：" << m_status.status() << "(" << coreStatusDesc << ")";
+    qDebug() << "科技核心基础状态：" << m_status.basic_state()
+             << "放入：" << m_status.putin_state()
+             << "平移：" << m_status.move_state()
+             << "旋转：" << m_status.rotate_state();
     
     QString enemyCoreDesc;
     switch (m_status.enemy_core_status()) {
@@ -959,7 +991,8 @@ std::string DeployModeStatusRecvHandler::getTopicName() const {
 
 QVariantMap DeployModeStatusRecvHandler::toQmlMap(const robomaster::custom_client::DeployModeStatusSync& status) {
     QVariantMap map;
-    map["current_status"] = static_cast<int>(status.current_status());
+    // 保留 QML 键名 current_status，数据来自新版字段 status。
+    map["current_status"] = static_cast<int>(status.status());
     return map;
 }
 
@@ -972,8 +1005,8 @@ void DeployModeStatusRecvHandler::handleMessage(const std::string& topic, const 
     
     // 日志打印逻辑
     qDebug() << "========== DeployModeStatusSync 数据 ==========";
-    QString statusDesc = m_status.current_status() == 0 ? "未部署（正常状态）" : "已部署（狙击/防御状态）";
-    qDebug() << "英雄部署模式状态：" << m_status.current_status() << "(" << statusDesc << ")";
+    QString statusDesc = m_status.status() == 0 ? "未部署（正常状态）" : "已部署（狙击/防御状态）";
+    qDebug() << "英雄部署模式状态：" << m_status.status() << "(" << statusDesc << ")";
     
     // 发射信号
     emit deployModeStatusReceived(m_status);
@@ -991,7 +1024,7 @@ QVariantMap RuneStatusRecvHandler::toQmlMap(const robomaster::custom_client::Run
     QVariantMap map;
     map["rune_status"] = static_cast<int>(status.rune_status());
     map["activated_arms"] = static_cast<int>(status.activated_arms());
-    map["average_rings"] = static_cast<int>(status.average_rings());
+    map["average_rings"] = static_cast<float>(status.average_rings());
     return map;
 }
 
@@ -1030,6 +1063,7 @@ QVariantMap SentryStatusRecvHandler::toQmlMap(const robomaster::custom_client::S
     QVariantMap map;
     map["posture_id"] = static_cast<int>(status.posture_id());
     map["is_weakened"] = static_cast<bool>(status.is_weakened());
+    map["is_powered"] = static_cast<bool>(status.is_powered());
     return map;
 }
 
@@ -1051,6 +1085,7 @@ void SentryStatusRecvHandler::handleMessage(const std::string& topic, const std:
     }
     qDebug() << "哨兵当前姿态：" << m_status.posture_id() << "(" << postureDesc << ")";
     qDebug() << "哨兵是否弱化：" << (m_status.is_weakened() ? "是（属性下降）" : "否（正常状态）");
+    qDebug() << "哨兵是否强化：" << (m_status.is_powered() ? "是" : "否");
     
     // 发射信号
     emit sentryStatusReceived(m_status);
@@ -1093,9 +1128,9 @@ void DartTargetStatusRecvHandler::handleMessage(const std::string& topic, const 
     
     QString gateDesc;
     switch (m_status.open()) {
-        case 0: gateDesc = "已开启"; break;
-        case 1: gateDesc = "关闭"; break;
-        case 2: gateDesc = "正在开启/关闭中"; break;
+        case 0: gateDesc = "关闭"; break;
+        case 1: gateDesc = "开启中"; break;
+        case 2: gateDesc = "已开启"; break;
         default: gateDesc = "未知状态"; break;
     }
     qDebug() << "飞镖闸门状态：" << m_status.open() << "(" << gateDesc << ")";

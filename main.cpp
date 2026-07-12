@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 
     // ===================== 4. 配置MQTT客户端 (不立即连接) =====================
     // 默认构造，ID和地址稍后通过 UI 设置
-    MqttClient mqttClient("robomaster_server2client_001", "127.0.0.1", 3333);
+    MqttClient mqttClient("robomaster_server2client_001", "192.168.12.1", 3333);
     
     // 将 mqttClient 暴露给 QML，以便在登录界面设置 clientId 和调用 connect
     engine.rootContext()->setContextProperty("mqttClient", &mqttClient);
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
     // ===================== 5. 创建并注册所有MQTT处理器 =====================
     std::vector<std::shared_ptr<IMqttHandler>> allHandlers;
 
-    // -------------------- 5.1 接收处理器 (24个) --------------------
+    // -------------------- 5.1 接收处理器 (25个) --------------------
     auto gameStatusHandler = std::make_shared<GameStatusRecvHandler>();
     engine.rootContext()->setContextProperty("gameStatusHandler", gameStatusHandler.get());
     allHandlers.emplace_back(gameStatusHandler);
@@ -111,6 +111,10 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("robotPathPlanHandler", robotPathPlanHandler.get());
     allHandlers.emplace_back(robotPathPlanHandler);
 
+    auto mapClickInfoHandler = std::make_shared<MapClickInfoRecvHandler>();
+    engine.rootContext()->setContextProperty("mapClickInfoRecvHandler", mapClickInfoHandler.get());
+    allHandlers.emplace_back(mapClickInfoHandler);
+
     auto radarInfoHandler = std::make_shared<RadarInfoRecvHandler>();
     engine.rootContext()->setContextProperty("radarInfoHandler", radarInfoHandler.get());
     allHandlers.emplace_back(radarInfoHandler);
@@ -160,9 +164,10 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("customControlHandler", customControlHandler.get());
     allHandlers.emplace_back(customControlHandler);
 
-    auto mapClickInfoHandler = std::make_shared<MapClickInfoSendHandler>(&mqttClient);
-    engine.rootContext()->setContextProperty("mapClickInfoHandler", mapClickInfoHandler.get());
-    allHandlers.emplace_back(mapClickInfoHandler);
+    auto mapClickCmdHandler = std::make_shared<MapClickCmdSendHandler>(&mqttClient);
+    // 保留旧 QML 上下文名，底层 topic 已更新为 MapClickCmd。
+    engine.rootContext()->setContextProperty("mapClickInfoHandler", mapClickCmdHandler.get());
+    allHandlers.emplace_back(mapClickCmdHandler);
 
     auto assemblyCommandHandler = std::make_shared<AssemblyCommandSendHandler>(&mqttClient);
     engine.rootContext()->setContextProperty("assemblyCommandHandler", assemblyCommandHandler.get());
