@@ -4,6 +4,7 @@ import QtQuick 6.5
 import QtQuick.Controls 6.5
 import QtQuick.Layouts 6.5
 import QtQuick.Window 6.5
+import "."
 
 ApplicationWindow {
     id: root
@@ -12,7 +13,7 @@ ApplicationWindow {
     minimumWidth: 960
     minimumHeight: 600
     visible: true
-    color: "#05080b"
+    color: Theme.background
     title: "HNU 英雄机器人副屏"
     flags: Qt.FramelessWindowHint | Qt.Window
 
@@ -29,6 +30,8 @@ ApplicationWindow {
     property bool fullScreenMode: false
     property bool resetFeedbackActive: false
     property bool expectedMismatchVisible: false
+    // 鼠标按钮使用当前步长；键盘组合键仍可直接发送 1/2/4 步。
+    property int selectedTrimStep: 1
 
     function modeName(mode) {
         return ["IDLE", "AUTO AIM", "SMALL BUFF", "BIG BUFF", "DEPLOY"][mode] || "UNKNOWN"
@@ -69,6 +72,7 @@ ApplicationWindow {
     }
 
     function sendStep(step) {
+        root.selectedTrimStep = Math.abs(step)
         root.activeFeedbackStep = step
         root.feedbackAccepted = root.clientBackend.connected && root.stepReady && Number(root.tlm.mode) === 4
         feedbackReset.restart()
@@ -162,13 +166,59 @@ ApplicationWindow {
         }
     }
 
+    // 兼容软件渲染的“液态玻璃”表面：透明渐变、内反光和高光边替代实时模糊。
+    component GlassLayer: Item {
+        id: glassLayer
+        property real cornerRadius: Theme.radiusPanel
+        anchors.fill: parent
+
+        Rectangle {
+            anchors.fill: parent
+            radius: glassLayer.cornerRadius
+            gradient: Gradient {
+                GradientStop { position: 0.0; color: Theme.glassTop }
+                GradientStop { position: 0.38; color: Theme.glassMiddle }
+                GradientStop { position: 1.0; color: Theme.glassBottom }
+            }
+        }
+
+        // 双层边缘形成玻璃厚度；只使用基础图元，不触发 shader 渲染。
+        Rectangle {
+            anchors.fill: parent
+            anchors.margins: 1
+            radius: Math.max(0, glassLayer.cornerRadius - 1)
+            color: "transparent"
+            border.width: 1
+            border.color: Theme.glassInnerHighlight
+            opacity: 0.62
+        }
+
+        Rectangle {
+            anchors.left: parent.left
+            anchors.leftMargin: glassLayer.cornerRadius
+            anchors.right: parent.right
+            anchors.rightMargin: glassLayer.cornerRadius
+            anchors.top: parent.top
+            anchors.topMargin: 2
+            height: 1
+            gradient: Gradient {
+                orientation: Gradient.Horizontal
+                GradientStop { position: 0.0; color: "transparent" }
+                GradientStop { position: 0.28; color: Theme.glassSpecular }
+                GradientStop { position: 0.72; color: Theme.glassSpecular }
+                GradientStop { position: 1.0; color: "transparent" }
+            }
+            opacity: 0.78
+        }
+    }
+
     // 固定宽度的数据行，数值变化时不会推动标签或面板位置。
     component DataRow: Item {
         id: dataRow
         required property string label
         required property string value
-        property color valueColor: "#f2f7fa"
-        width: 224
+        property color valueColor: Theme.textPrimary
+        Layout.fillWidth: true
         height: 27
 
         Text {
@@ -176,7 +226,7 @@ ApplicationWindow {
             anchors.verticalCenter: parent.verticalCenter
             width: 96
             text: dataRow.label
-            color: "#9badbc"
+            color: Theme.textSecondary
             font.pixelSize: 12
             elide: Text.ElideRight
         }
@@ -200,12 +250,22 @@ ApplicationWindow {
         id: stateRow
         required property string label
         required property bool active
-        width: 224
+        Layout.fillWidth: true
         height: 30
-        radius: 3
-        color: stateRow.active ? "#9920523c" : "#99291922"
+        radius: Theme.radiusSmall
+        color: "transparent"
         border.width: 1
-        border.color: stateRow.active ? "#7ce9ae" : "#8b5260"
+        border.color: stateRow.active ? "#a87ce9ae" : "#8f8b5260"
+        gradient: Gradient {
+            GradientStop {
+                position: 0.0
+                color: stateRow.active ? "#8f39725c" : "#80463242"
+            }
+            GradientStop {
+                position: 1.0
+                color: stateRow.active ? "#7a173a2c" : "#70201520"
+            }
+        }
 
         Rectangle {
             anchors.left: parent.left
@@ -224,44 +284,133 @@ ApplicationWindow {
             anchors.rightMargin: 8
             anchors.verticalCenter: parent.verticalCenter
             text: stateRow.label
-            color: "#eef5f8"
+            color: Theme.textPrimary
             font.pixelSize: 12
             font.bold: true
             elide: Text.ElideRight
         }
     }
 
-    component TrimButton: Button {
-        id: trimButton
+    // 步长只负责选择幅度，方向由两个固定大按钮表达，降低临场误触概率。
+    component StepChip: Button {
+        id: stepChip
         required property int stepValue
-        width: 58
-        height: 40
+        Layout.preferredWidth: 54
+        Layout.preferredHeight: 30
         focusPolicy: Qt.NoFocus
-        enabled: root.clientBackend.connected && root.stepReady
-        text: (stepValue > 0 ? "+" : "−") + Math.abs(stepValue)
-        onClicked: root.sendStep(stepValue)
+        text: stepValue + " 步"
+        onClicked: root.selectedTrimStep = stepValue
 
         contentItem: Text {
-            text: trimButton.text
-            color: trimButton.enabled ? "#ffffff" : "#68747e"
+            text: stepChip.text
+            color: root.selectedTrimStep === stepChip.stepValue ? Theme.textPrimary : Theme.textSecondary
             font.family: "DejaVu Sans Mono"
-            font.pixelSize: 15
+            font.pixelSize: 11
             font.bold: true
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
         }
 
         background: Rectangle {
-            radius: 4
-            color: trimButton.down ? "#397fb9"
-                 : (root.activeFeedbackStep === trimButton.stepValue
-                    ? (root.feedbackAccepted ? "#297052" : "#743044")
-                    : "#b3111a23")
+            radius: Theme.radiusSmall
+            color: "transparent"
             border.width: 1
-            border.color: trimButton.activeFocus ? "#85c8ff" : "#667b8c"
-            scale: trimButton.down || root.activeFeedbackStep === trimButton.stepValue ? 0.95 : 1.0
-            Behavior on scale { NumberAnimation { duration: 70 } }
-            Behavior on color { ColorAnimation { duration: 100 } }
+            border.color: root.selectedTrimStep === stepChip.stepValue ? Theme.accent : Theme.borderSoft
+            scale: stepChip.down ? 0.94 : 1.0
+            gradient: Gradient {
+                GradientStop {
+                    position: 0.0
+                    color: stepChip.down ? "#d04d9bc3"
+                          : (root.selectedTrimStep === stepChip.stepValue
+                             ? "#a84891b7" : Theme.glassButton)
+                }
+                GradientStop {
+                    position: 1.0
+                    color: stepChip.down ? Theme.accentDeep
+                          : (root.selectedTrimStep === stepChip.stepValue
+                             ? "#99214f69" : "#75101f2b")
+                }
+            }
+            Behavior on scale { NumberAnimation { duration: Theme.motionFast; easing.type: Easing.OutCubic } }
+            Behavior on border.color { ColorAnimation { duration: Theme.motionNormal } }
+        }
+    }
+
+    component TrimDirectionButton: Button {
+        id: directionButton
+        required property int direction
+        readonly property bool feedbackActive: direction > 0
+                                               ? root.activeFeedbackStep > 0
+                                               : root.activeFeedbackStep < 0
+        Layout.preferredWidth: 58
+        Layout.preferredHeight: 52
+        focusPolicy: Qt.NoFocus
+        enabled: root.clientBackend.connected && root.stepReady
+        onClicked: root.sendStep(direction * root.selectedTrimStep)
+        scale: directionButton.down || directionButton.feedbackActive ? 0.92 : 1.0
+
+        ToolTip.visible: hovered
+        ToolTip.delay: 400
+        ToolTip.text: (direction > 0 ? "上调  +" : "下调  −")
+                      + root.selectedTrimStep + " 步"
+
+        contentItem: Text {
+            text: directionButton.direction > 0 ? "↑" : "↓"
+            color: !directionButton.enabled ? Theme.textMuted
+                 : (directionButton.feedbackActive ? "#ffffff" : Theme.textPrimary)
+            font.family: "DejaVu Sans"
+            font.pixelSize: 25
+            font.bold: true
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
+
+        background: Rectangle {
+            radius: 9
+            color: "transparent"
+            border.width: directionButton.feedbackActive ? 2 : 1
+            border.color: directionButton.feedbackActive
+                          ? (root.feedbackAccepted ? Theme.success : Theme.danger)
+                          : Theme.border
+            gradient: Gradient {
+                GradientStop {
+                    position: 0.0
+                    color: directionButton.down ? "#e14b98be"
+                          : (directionButton.feedbackActive
+                             ? (root.feedbackAccepted ? "#d0449c76" : "#d0873c52")
+                             : "#dc405464")
+                }
+                GradientStop {
+                    position: 1.0
+                    color: directionButton.down ? Theme.accentDeep
+                          : (directionButton.feedbackActive
+                             ? (root.feedbackAccepted ? Theme.successDeep : Theme.dangerDeep)
+                             : "#db162630")
+                }
+            }
+
+            // OBS 键位提示风格的键帽底沿，按下时会变薄。
+            Rectangle {
+                anchors.left: parent.left
+                anchors.leftMargin: 7
+                anchors.right: parent.right
+                anchors.rightMargin: 7
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 3
+                height: directionButton.down ? 1 : 3
+                radius: 2
+                color: directionButton.feedbackActive
+                       ? (root.feedbackAccepted ? Theme.success : Theme.danger)
+                       : "#b6a6bac7"
+                opacity: directionButton.enabled ? 0.72 : 0.30
+                Behavior on height { NumberAnimation { duration: Theme.motionFast } }
+            }
+
+            Behavior on border.color { ColorAnimation { duration: Theme.motionNormal } }
+        }
+
+        Behavior on scale {
+            NumberAnimation { duration: Theme.motionFast; easing.type: Easing.OutBack }
         }
     }
 
@@ -285,17 +434,41 @@ ApplicationWindow {
         ToolTip.text: tipText
 
         background: Rectangle {
-            radius: 5
+            radius: 18
             color: windowButton.down
-                   ? (windowButton.danger ? "#d9364d" : "#435562")
+                   ? (windowButton.danger ? "#d9364d" : Theme.glassButtonHover)
                    : (windowButton.hovered
-                      ? (windowButton.danger ? "#b92d42" : "#344550")
-                      : "#8f101820")
+                      ? (windowButton.danger ? "#b92d42" : Theme.glassButtonHover)
+                      : Theme.glassButton)
             border.width: 1
             border.color: windowButton.hovered
                           ? (windowButton.danger ? "#ff7a8d" : "#8298a7")
                           : "#4f6574"
             Behavior on color { ColorAnimation { duration: 100 } }
+        }
+    }
+
+    component GlassTextField: TextField {
+        id: glassField
+        color: Theme.textPrimary
+        placeholderTextColor: Theme.textMuted
+        selectionColor: Theme.accentDeep
+        leftPadding: 16
+        rightPadding: 16
+        font.pixelSize: 13
+        Layout.fillWidth: true
+        Layout.preferredHeight: 42
+
+        background: Rectangle {
+            radius: 14
+            color: "transparent"
+            border.width: glassField.activeFocus ? 2 : 1
+            border.color: glassField.activeFocus ? Theme.accent : Theme.borderSoft
+            gradient: Gradient {
+                GradientStop { position: 0.0; color: glassField.activeFocus ? "#9b365f78" : Theme.glassButton }
+                GradientStop { position: 1.0; color: "#8a0d1a25" }
+            }
+            Behavior on border.color { ColorAnimation { duration: Theme.motionNormal } }
         }
     }
 
@@ -367,9 +540,10 @@ ApplicationWindow {
             anchors.right: parent.right
             height: 54
             z: 10
-            color: "#8f071019"
-            border.color: "#6f8292"
-            border.width: 1
+            color: "transparent"
+            border.width: 0
+
+            GlassLayer { cornerRadius: 0 }
 
             Text {
                 anchors.left: parent.left
@@ -389,9 +563,13 @@ ApplicationWindow {
                 anchors.verticalCenter: parent.verticalCenter
                 width: 170
                 height: 32
-                radius: 3
-                color: Number(root.tlm.mode) === 4 ? "#b34e3515" : "#b3232930"
-                border.color: Number(root.tlm.mode) === 4 ? "#e9a94f" : "#768692"
+                radius: 16
+                color: "transparent"
+                border.color: Number(root.tlm.mode) === 4 ? "#cce9b35f" : Theme.borderSoft
+                gradient: Gradient {
+                    GradientStop { position: 0.0; color: Number(root.tlm.mode) === 4 ? "#a67c572b" : Theme.glassButtonHover }
+                    GradientStop { position: 1.0; color: Number(root.tlm.mode) === 4 ? "#8a342814" : "#7010202c" }
+                }
 
                 Text {
                     anchors.centerIn: parent
@@ -416,9 +594,13 @@ ApplicationWindow {
                 Rectangle {
                     width: 190
                     height: 32
-                    radius: 3
-                    color: "#a30a1118"
+                    radius: 16
+                    color: "transparent"
                     border.color: root.clientBackend.connected ? "#55ef9f" : "#ef657a"
+                    gradient: Gradient {
+                        GradientStop { position: 0.0; color: Theme.glassButtonHover }
+                        GradientStop { position: 1.0; color: "#7010202c" }
+                    }
 
                     Rectangle {
                         x: 10
@@ -444,9 +626,13 @@ ApplicationWindow {
                 Rectangle {
                     width: 156
                     height: 32
-                    radius: 3
-                    color: "#a30a1118"
+                    radius: 16
+                    color: "transparent"
                     border.color: root.clientBackend.telemetryOnline ? "#55ef9f" : "#ef657a"
+                    gradient: Gradient {
+                        GradientStop { position: 0.0; color: Theme.glassButtonHover }
+                        GradientStop { position: 1.0; color: "#7010202c" }
+                    }
 
                     Rectangle {
                         x: 10
@@ -475,12 +661,21 @@ ApplicationWindow {
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
                 height: 2
-                color: "#6a9fb9"
-                opacity: 0.55
+                color: Theme.glassSpecular
+                opacity: 0.38
             }
         }
 
-        // 左上先展示瞄准所需的目标与解算结果，符合从目标到误差的阅读顺序。
+        // 左侧信息按“目标解算 → 武器反馈”排列，操作手可沿同一阅读轴扫视。
+        Rectangle {
+            anchors.fill: targetSolutionPanel
+            anchors.leftMargin: 2
+            anchors.topMargin: 4
+            z: 9
+            radius: Theme.radiusPanel
+            color: Theme.shadow
+        }
+
         Rectangle {
             id: targetSolutionPanel
             anchors.left: parent.left
@@ -490,34 +685,31 @@ ApplicationWindow {
             width: 252
             height: 190
             z: 10
-            radius: 5
-            color: "#a5081017"
-            border.color: "#738999"
+            radius: Theme.radiusPanel
+            color: "transparent"
+            border.color: Theme.border
             border.width: 1
 
-            Rectangle {
-                anchors.left: parent.left
-                anchors.top: parent.top
-                width: 58
-                height: 2
-                color: "#63b8dc"
-            }
+            GlassLayer {}
+            Rectangle { anchors.left: parent.left; anchors.leftMargin: 18; anchors.top: parent.top; width: 68; height: 2; radius: 1; color: Theme.accent }
 
-            Text {
-                x: 14
-                y: 12
-                width: 224
-                height: 22
-                text: "目标与解算"
-                color: "#ffffff"
-                font.pixelSize: 15
-                font.bold: true
-            }
-
-            Column {
-                x: 14
-                y: 42
+            ColumnLayout {
+                anchors.fill: parent
+                anchors.margins: Theme.panelPadding
                 spacing: 1
+
+                RowLayout {
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 26
+                    spacing: 9
+                    Image { source: "qrc:/images/target.svg"; sourceSize: Qt.size(20, 20); Layout.preferredWidth: 20; Layout.preferredHeight: 20 }
+                    Text { text: "目标与解算"; color: Theme.textPrimary; font.pixelSize: 15; font.bold: true; Layout.fillWidth: true }
+                    Text {
+                        text: Number(root.tlm.solver_status) === 0 ? "READY" : "CHECK"
+                        color: Number(root.tlm.solver_status) === 0 ? Theme.success : Theme.danger
+                        font.family: "DejaVu Sans Mono"; font.pixelSize: 9; font.bold: true
+                    }
+                }
 
                 DataRow { label: "水平距离"; value: (root.tlm.radar_fresh || root.tlm.radar_hold) ? root.fmt(root.tlm.distance_m, 2, " m") : "无雷达" }
                 DataRow { label: "高度差"; value: (root.tlm.radar_fresh || root.tlm.radar_hold) ? root.fmt(root.tlm.height_m, 2, " m") : "无雷达" }
@@ -527,8 +719,17 @@ ApplicationWindow {
             }
         }
 
-        // 武器与云台参数放在目标解算下方，作为二级确认信息。
         Rectangle {
+            anchors.fill: weaponPanel
+            anchors.leftMargin: 2
+            anchors.topMargin: 4
+            z: 9
+            radius: Theme.radiusPanel
+            color: Theme.shadow
+        }
+
+        Rectangle {
+            id: weaponPanel
             anchors.left: parent.left
             anchors.leftMargin: 18
             anchors.top: targetSolutionPanel.bottom
@@ -536,34 +737,26 @@ ApplicationWindow {
             width: 252
             height: 128
             z: 10
-            radius: 5
-            color: "#a5081017"
-            border.color: "#738999"
+            radius: Theme.radiusPanel
+            color: "transparent"
+            border.color: Theme.border
             border.width: 1
 
-            Rectangle {
-                anchors.left: parent.left
-                anchors.top: parent.top
-                width: 58
-                height: 2
-                color: "#d6ad62"
-            }
+            GlassLayer {}
+            Rectangle { anchors.left: parent.left; anchors.leftMargin: 18; anchors.top: parent.top; width: 68; height: 2; radius: 1; color: Theme.warning }
 
-            Text {
-                x: 14
-                y: 12
-                width: 224
-                height: 22
-                text: "武器与云台"
-                color: "#ffffff"
-                font.pixelSize: 15
-                font.bold: true
-            }
-
-            Column {
-                x: 14
-                y: 42
+            ColumnLayout {
+                anchors.fill: parent
+                anchors.margins: Theme.panelPadding
                 spacing: 1
+
+                RowLayout {
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 26
+                    spacing: 9
+                    Image { source: "qrc:/images/gauge.svg"; sourceSize: Qt.size(20, 20); Layout.preferredWidth: 20; Layout.preferredHeight: 20 }
+                    Text { text: "武器与云台"; color: Theme.textPrimary; font.pixelSize: 15; font.bold: true; Layout.fillWidth: true }
+                }
 
                 DataRow { label: "实测弹速"; value: root.fmt(root.tlm.bullet_speed_rx, 2, " m/s") }
                 DataRow { label: "RK45 弹速"; value: root.fmt(root.tlm.solver_v0, 2, " m/s") }
@@ -571,8 +764,18 @@ ApplicationWindow {
             }
         }
 
-        // 右侧按视觉决策链顺序展示，操作手从上到下即可定位阻断环节。
+        // 右侧从上到下就是视觉安全链的判定顺序。
         Rectangle {
+            anchors.fill: safetyPanel
+            anchors.leftMargin: 2
+            anchors.topMargin: 4
+            z: 9
+            radius: Theme.radiusPanel
+            color: Theme.shadow
+        }
+
+        Rectangle {
+            id: safetyPanel
             anchors.right: parent.right
             anchors.rightMargin: 18
             anchors.top: topBar.bottom
@@ -580,34 +783,31 @@ ApplicationWindow {
             width: 252
             height: 260
             z: 10
-            radius: 5
-            color: "#a5081017"
-            border.color: "#738999"
+            radius: Theme.radiusPanel
+            color: "transparent"
+            border.color: Theme.border
             border.width: 1
 
-            Rectangle {
-                anchors.right: parent.right
-                anchors.top: parent.top
-                width: 58
-                height: 2
-                color: "#62d49a"
-            }
+            GlassLayer {}
+            Rectangle { anchors.right: parent.right; anchors.rightMargin: 18; anchors.top: parent.top; width: 68; height: 2; radius: 1; color: Theme.success }
 
-            Text {
-                x: 14
-                y: 12
-                width: 224
-                height: 22
-                text: "发射安全链"
-                color: "#ffffff"
-                font.pixelSize: 15
-                font.bold: true
-            }
-
-            Column {
-                x: 14
-                y: 42
+            ColumnLayout {
+                anchors.fill: parent
+                anchors.margins: Theme.panelPadding
                 spacing: 6
+
+                RowLayout {
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 26
+                    spacing: 9
+                    Image { source: "qrc:/images/shield-check.svg"; sourceSize: Qt.size(20, 20); Layout.preferredWidth: 20; Layout.preferredHeight: 20 }
+                    Text { text: "发射安全链"; color: Theme.textPrimary; font.pixelSize: 15; font.bold: true; Layout.fillWidth: true }
+                    Text {
+                        text: root.tlm.fire_allowed ? "GO" : "HOLD"
+                        color: root.tlm.fire_allowed ? Theme.success : Theme.danger
+                        font.family: "DejaVu Sans Mono"; font.pixelSize: 10; font.bold: true
+                    }
+                }
 
                 StateRow { label: "核心已检测"; active: !!root.tlm.core_ok }
                 StateRow { label: root.tlm.radar_hold ? "雷达短时保持" : "雷达数据新鲜"; active: !!(root.tlm.radar_fresh || root.tlm.radar_hold) }
@@ -641,9 +841,13 @@ ApplicationWindow {
             width: 142
             height: 38
             z: 20
-            radius: 3
-            color: root.tlm.fire_allowed ? "#bd16573f" : "#bd431d29"
+            radius: 19
+            color: "transparent"
             border.color: root.tlm.fire_allowed ? "#69f0ae" : "#ff6b81"
+            gradient: Gradient {
+                GradientStop { position: 0.0; color: root.tlm.fire_allowed ? "#a7438a6c" : "#a47a3b4d" }
+                GradientStop { position: 1.0; color: root.tlm.fire_allowed ? "#8a153e30" : "#8a351823" }
+            }
 
             Text {
                 anchors.centerIn: parent
@@ -663,9 +867,13 @@ ApplicationWindow {
             width: 210
             height: 28
             z: 20
-            radius: 3
-            color: "#9e071019"
+            radius: 14
+            color: "transparent"
             border.color: Number(root.tlm.solver_status) === 0 ? "#65dca0" : "#e06b7e"
+            gradient: Gradient {
+                GradientStop { position: 0.0; color: Theme.glassButtonHover }
+                GradientStop { position: 1.0; color: "#8510202c" }
+            }
 
             Text {
                 anchors.centerIn: parent
@@ -680,178 +888,225 @@ ApplicationWindow {
             }
         }
 
-        // 底部控制区悬浮在视频上方，宽高固定，避免回传值变化导致抖动。
+        // 底部把“方向”和“步长”拆开：两个方向键始终固定，按下后明确高亮。
         Rectangle {
+            anchors.fill: trimPanel
+            anchors.leftMargin: 2
+            anchors.topMargin: 5
+            z: 19
+            radius: Theme.radiusPanel
+            color: Theme.shadow
+        }
+
+        Rectangle {
+            id: trimPanel
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 18
-            width: 760
-            height: 136
+            width: Math.min(820, parent.width - 40)
+            height: 158
             z: 20
-            radius: 6
-            color: "#b8071018"
-            border.color: "#8295a3"
+            radius: Theme.radiusPanel
+            color: "transparent"
+            border.color: Theme.border
             border.width: 1
+
+            GlassLayer {}
 
             Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: parent.top
-                width: 180
-                height: 2
-                color: "#d6ad62"
-            }
-
-            Item {
-                x: 18
-                y: 14
-                width: 196
-                height: 108
-
-                Text {
-                    x: 0
-                    y: 0
-                    width: 196
-                    height: 18
-                    text: "PITCH TRIM · 回传真值"
-                    color: "#a9bac7"
-                    font.pixelSize: 11
-                    font.bold: true
-                }
-
-                Text {
-                    x: 0
-                    y: 22
-                    width: 196
-                    height: 46
-                    text: root.fmt(root.tlm.pitch_trim_deg, 2, "°")
-                    color: root.tlm.trim_at_limit ? "#ff7187" : "#ffffff"
-                    font.family: "DejaVu Sans Mono"
-                    font.pixelSize: 34
-                    font.bold: true
-                    verticalAlignment: Text.AlignVCenter
-                    elide: Text.ElideRight
-                }
-
-                Text {
-                    x: 0
-                    y: 74
-                    width: 196
-                    height: 18
-                    text: root.tlm.trim_at_limit ? "已到视觉限幅"
-                          : (root.tlm.trim_active ? "TRIM ACTIVE" : "TRIM STANDBY")
-                    color: root.tlm.trim_at_limit ? "#ff7187" : "#65e3a5"
-                    font.pixelSize: 11
-                    font.bold: true
-                    elide: Text.ElideRight
-                }
-
-                Text {
-                    x: 0
-                    y: 92
-                    width: 196
-                    height: 16
-                    visible: root.expectedMismatchVisible
-                    text: "期望值与回传暂不一致"
-                    color: "#ff7187"
-                    font.pixelSize: 10
-                    elide: Text.ElideRight
-                }
-            }
-
-            Rectangle {
-                x: 224
-                y: 14
-                width: 1
-                height: 108
-                color: "#637786"
-            }
-
-            Row {
-                x: 246
-                y: 14
-                spacing: 8
-
-                TrimButton { stepValue: -4 }
-                TrimButton { stepValue: -2 }
-                TrimButton { stepValue: -1 }
-                TrimButton { stepValue: 1 }
-                TrimButton { stepValue: 2 }
-                TrimButton { stepValue: 4 }
-            }
-
-            Button {
-                id: resetButton
-                x: 642
-                y: 14
-                width: 100
-                height: 40
-                focusPolicy: Qt.NoFocus
-                enabled: root.clientBackend.connected
-                text: root.resetFeedbackActive ? "清零 ✓" : "ENTER 清零"
-                onClicked: root.resetTrim()
-
-                contentItem: Text {
-                    text: resetButton.text
-                    color: resetButton.enabled ? "#ffffff" : "#68747e"
-                    font.pixelSize: 12
-                    font.bold: true
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                }
-
-                background: Rectangle {
-                    radius: 4
-                    color: resetButton.down || root.resetFeedbackActive ? "#276e52" : "#ad321d28"
-                    border.color: root.resetFeedbackActive ? "#70efb0" : "#b86a78"
-                    scale: resetButton.down || root.resetFeedbackActive ? 0.95 : 1.0
-                    Behavior on scale { NumberAnimation { duration: 80 } }
-                    Behavior on color { ColorAnimation { duration: 100 } }
-                }
-            }
-
-            Text {
-                id: trimFeedback
-                x: 246
-                y: 62
                 width: 210
-                height: 22
-                visible: root.activeFeedbackStep !== 0
-                text: root.activeFeedbackStep > 0 ? "▲ 上调 " + root.activeFeedbackStep + " 步"
-                                                  : "▼ 下调 " + Math.abs(root.activeFeedbackStep) + " 步"
-                color: root.feedbackAccepted ? "#65e3a5" : "#ff7187"
-                font.pixelSize: 14
-                font.bold: true
-                opacity: 0
+                height: 2
+                radius: 1
+                color: Theme.warning
+            }
 
-                SequentialAnimation {
-                    id: trimFeedbackAnimation
-                    NumberAnimation { target: trimFeedback; property: "opacity"; from: 0; to: 1; duration: 70 }
-                    PauseAnimation { duration: 300 }
-                    NumberAnimation { target: trimFeedback; property: "opacity"; from: 1; to: 0; duration: 180 }
+            RowLayout {
+                anchors.fill: parent
+                anchors.margins: Theme.panelPadding
+                spacing: 16
+
+                ColumnLayout {
+                    Layout.preferredWidth: 186
+                    Layout.fillHeight: true
+                    spacing: 1
+
+                    RowLayout {
+                        spacing: 8
+                        Image { source: "qrc:/images/adjustments-horizontal.svg"; sourceSize: Qt.size(18, 18); Layout.preferredWidth: 18; Layout.preferredHeight: 18 }
+                        Text { text: "PITCH TRIM · 回传真值"; color: Theme.textSecondary; font.pixelSize: 10; font.bold: true }
+                    }
+
+                    Text {
+                        text: root.fmt(root.tlm.pitch_trim_deg, 2, "°")
+                        color: root.tlm.trim_at_limit ? Theme.danger : Theme.textPrimary
+                        font.family: "DejaVu Sans Mono"
+                        font.pixelSize: 34
+                        font.bold: true
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 45
+                        verticalAlignment: Text.AlignVCenter
+                        elide: Text.ElideRight
+                    }
+
+                    Text {
+                        text: root.tlm.trim_at_limit ? "已到视觉限幅"
+                              : (root.tlm.trim_active ? "TRIM ACTIVE" : "TRIM STANDBY")
+                        color: root.tlm.trim_at_limit ? Theme.danger : Theme.success
+                        font.pixelSize: 10
+                        font.bold: true
+                    }
+
+                    Text {
+                        visible: root.expectedMismatchVisible
+                        text: "期望值与回传暂不一致"
+                        color: Theme.danger
+                        font.pixelSize: 9
+                    }
                 }
-            }
 
-            Text {
-                x: 246
-                y: 88
-                width: 496
-                height: 18
-                text: root.commandHint
-                color: "#bac7d0"
-                font.family: "DejaVu Sans Mono"
-                font.pixelSize: 10
-                elide: Text.ElideRight
-            }
+                Rectangle { Layout.preferredWidth: 1; Layout.fillHeight: true; color: Theme.borderSoft }
 
-            Text {
-                x: 246
-                y: 108
-                width: 496
-                height: 16
-                text: "↑/↓ 1步 · Shift 2步 · Ctrl 4步 · Enter 清零 · ESC 退出全屏"
-                color: "#7f909d"
-                font.pixelSize: 10
-                elide: Text.ElideRight
+                ColumnLayout {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    spacing: 7
+
+                    RowLayout {
+                        Layout.fillWidth: true
+                        spacing: 8
+
+                        Text { text: "步长"; color: Theme.textSecondary; font.pixelSize: 10; font.bold: true }
+                        StepChip { stepValue: 1 }
+                        StepChip { stepValue: 2 }
+                        StepChip { stepValue: 4 }
+                        Item { Layout.fillWidth: true }
+                        Text {
+                            id: trimFeedback
+                            Layout.preferredWidth: 126
+                            text: root.activeFeedbackStep > 0 ? "▲ 上调 " + root.activeFeedbackStep + " 步"
+                                                              : "▼ 下调 " + Math.abs(root.activeFeedbackStep) + " 步"
+                            color: root.feedbackAccepted ? Theme.success : Theme.danger
+                            font.pixelSize: 12
+                            font.bold: true
+                            horizontalAlignment: Text.AlignRight
+                            opacity: 0
+
+                            SequentialAnimation {
+                                id: trimFeedbackAnimation
+                                NumberAnimation { target: trimFeedback; property: "opacity"; from: 0; to: 1; duration: 70 }
+                                PauseAnimation { duration: 300 }
+                                NumberAnimation { target: trimFeedback; property: "opacity"; from: 1; to: 0; duration: 180 }
+                            }
+                        }
+                    }
+
+                    RowLayout {
+                        Layout.fillWidth: true
+                        spacing: 14
+
+                        RowLayout {
+                            Layout.preferredWidth: 142
+                            spacing: 9
+
+                            TrimDirectionButton { direction: -1 }
+
+                            ColumnLayout {
+                                spacing: 0
+                                Text { text: "下调"; color: Theme.textMuted; font.pixelSize: 9; font.bold: true }
+                                Text {
+                                    text: "−" + root.selectedTrimStep + " 步"
+                                    color: Theme.textPrimary
+                                    font.family: "DejaVu Sans Mono"
+                                    font.pixelSize: 13
+                                    font.bold: true
+                                }
+                                Text {
+                                    text: "−" + (root.selectedTrimStep * 0.05).toFixed(2) + "°"
+                                    color: Theme.textSecondary
+                                    font.family: "DejaVu Sans Mono"
+                                    font.pixelSize: 9
+                                }
+                            }
+                        }
+
+                        RowLayout {
+                            Layout.preferredWidth: 142
+                            spacing: 9
+
+                            TrimDirectionButton { direction: 1 }
+
+                            ColumnLayout {
+                                spacing: 0
+                                Text { text: "上调"; color: Theme.textMuted; font.pixelSize: 9; font.bold: true }
+                                Text {
+                                    text: "+" + root.selectedTrimStep + " 步"
+                                    color: Theme.textPrimary
+                                    font.family: "DejaVu Sans Mono"
+                                    font.pixelSize: 13
+                                    font.bold: true
+                                }
+                                Text {
+                                    text: "+" + (root.selectedTrimStep * 0.05).toFixed(2) + "°"
+                                    color: Theme.textSecondary
+                                    font.family: "DejaVu Sans Mono"
+                                    font.pixelSize: 9
+                                }
+                            }
+                        }
+
+                        Item { Layout.fillWidth: true }
+
+                        Button {
+                            id: resetButton
+                            Layout.preferredWidth: 104
+                            Layout.preferredHeight: 48
+                            focusPolicy: Qt.NoFocus
+                            enabled: root.clientBackend.connected
+                            text: root.resetFeedbackActive ? "清零 ✓" : "ENTER 清零"
+                            onClicked: root.resetTrim()
+
+                            contentItem: Text {
+                                text: resetButton.text
+                                color: resetButton.enabled ? Theme.textPrimary : Theme.textMuted
+                                font.pixelSize: 11; font.bold: true
+                                horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter
+                            }
+
+                            background: Rectangle {
+                                radius: Theme.radiusSmall
+                                color: "transparent"
+                                border.color: root.resetFeedbackActive ? Theme.success : "#b86a78"
+                                scale: resetButton.down || root.resetFeedbackActive ? 0.96 : 1.0
+                                gradient: Gradient {
+                                    GradientStop {
+                                        position: 0.0
+                                        color: resetButton.down || root.resetFeedbackActive
+                                               ? "#bd479d79" : "#a15e3544"
+                                    }
+                                    GradientStop {
+                                        position: 1.0
+                                        color: resetButton.down || root.resetFeedbackActive
+                                               ? Theme.successDeep : "#80251620"
+                                    }
+                                }
+                                Behavior on scale { NumberAnimation { duration: Theme.motionFast; easing.type: Easing.OutBack } }
+                                Behavior on border.color { ColorAnimation { duration: Theme.motionNormal } }
+                            }
+                        }
+                    }
+
+                    Text {
+                        Layout.fillWidth: true
+                        text: root.commandHint.length > 0 ? root.commandHint
+                              : "↑/↓ 1步 · Shift 2步 · Ctrl 4步 · Enter 清零 · ESC 退出全屏"
+                        color: root.commandHint.length > 0 ? Theme.textSecondary : Theme.textMuted
+                        font.family: "DejaVu Sans Mono"
+                        font.pixelSize: 9
+                        elide: Text.ElideRight
+                    }
+                }
             }
         }
     }
@@ -861,15 +1116,32 @@ ApplicationWindow {
         anchors.fill: parent
         z: 1000
         visible: !root.loggedIn
-        color: "#ed05090d"
+        color: "transparent"
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: "#f0071420" }
+            GradientStop { position: 0.5; color: "#e90b1b29" }
+            GradientStop { position: 1.0; color: "#f003080e" }
+        }
 
         Rectangle {
+            anchors.fill: loginCard
+            anchors.leftMargin: 5
+            anchors.topMargin: 8
+            radius: 24
+            color: Theme.shadow
+        }
+
+        Rectangle {
+            id: loginCard
             anchors.centerIn: parent
             width: 440
             height: 310
-            radius: 8
-            color: "#f00d1720"
-            border.color: "#708493"
+            radius: 24
+            color: "transparent"
+            border.color: Theme.border
+            border.width: 1
+
+            GlassLayer { cornerRadius: 24 }
 
             ColumnLayout {
                 anchors.fill: parent
@@ -891,21 +1163,20 @@ ApplicationWindow {
                     Layout.alignment: Qt.AlignHCenter
                 }
 
-                TextField {
+                GlassTextField {
                     id: hostInput
                     text: "192.168.12.1"
                     placeholderText: "MQTT Broker"
-                    Layout.fillWidth: true
                 }
 
-                TextField {
+                GlassTextField {
                     id: clientInput
                     text: "0x0101"
                     placeholderText: "MQTT Client ID"
-                    Layout.fillWidth: true
                 }
 
                 Button {
+                    id: loginButton
                     text: "确认身份并进入"
                     focusPolicy: Qt.NoFocus
                     Layout.fillWidth: true
@@ -914,6 +1185,33 @@ ApplicationWindow {
                         root.loggedIn = true
                         root.clientBackend.connectToServer(clientInput.text, hostInput.text, 3333)
                         scene.forceActiveFocus()
+                    }
+
+                    contentItem: Text {
+                        text: loginButton.text
+                        color: Theme.textPrimary
+                        font.pixelSize: 13
+                        font.bold: true
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
+
+                    background: Rectangle {
+                        radius: 16
+                        color: "transparent"
+                        border.width: 1
+                        border.color: loginButton.hovered ? "#d9dff7ff" : Theme.accent
+                        scale: loginButton.down ? 0.98 : 1.0
+                        gradient: Gradient {
+                            GradientStop {
+                                position: 0.0
+                                color: loginButton.down ? "#d0448bb2"
+                                      : (loginButton.hovered ? "#c14b94ba" : "#a93c7c9e")
+                            }
+                            GradientStop { position: 1.0; color: "#b21c4c68" }
+                        }
+                        Behavior on scale { NumberAnimation { duration: Theme.motionFast; easing.type: Easing.OutCubic } }
+                        Behavior on border.color { ColorAnimation { duration: Theme.motionNormal } }
                     }
                 }
 

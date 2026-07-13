@@ -1,137 +1,168 @@
 # HNU 英雄机器人自定义客户端
 
-这是一个独立于仓库原客户端的 Qt/QML 应用，只实现英雄副屏当前需要的两个 MQTT topic：
+这是面向英雄机器人副屏的独立 Qt/QML 客户端。它只负责当前 Jetson 自定义客户端链路，不承载比赛全局信息，也不改变电控现有的 SEASKY 协议。
 
-- 订阅 `CustomByteBlock`：解析 HNU-TLM 46B 遥测和 HNU-VID H.264 分片。
-- 发布 `CustomControl`：发送固定 30B 的 trim step、trim reset 和 1Hz heartbeat。
-
-客户端不解析比赛全局信息，不发送键鼠数据，也不参与 SEASKY `0x0001/0x0002`。最终发射安全裁决仍属于视觉安全链和电控。
-
-## 构建
-
-在 Qt Creator 中直接打开本目录的 `CMakeLists.txt`，或执行：
-
-```bash
-cmake -S hero_custom_client -B build-hero -DCMAKE_PREFIX_PATH=/path/to/Qt/6.x/gcc_64
-cmake --build build-hero -j
-```
-
-## UI 内容
-
-- MQTT 与视觉遥测在线状态。
-- HNU-VID 落点观察视频。
-- DEPLOY/RK45、安全条件、距离、高度、弹速、TOF 和误差遥测。
-- 以车端 HNU-TLM 回传为真值的 pitch trim。
-- `-4/-2/-1/+1/+2/+4` 步进和清零控制。
-- 每客户端独立持久化的命令序号。
-
-## Pitch Trim 操作
-
-每一步对应 `0.05°`，可以使用界面按钮或键盘快捷键操作：
-
-| 操作 | 向上微调 | 向下微调 |
-|---|---:|---:|
-| 普通方向键 | `↑`：`+1` 步 | `↓`：`-1` 步 |
-| Shift + 方向键 | `Shift+↑`：`+2` 步 | `Shift+↓`：`-2` 步 |
-| Ctrl + 方向键 | `Ctrl+↑`：`+4` 步 | `Ctrl+↓`：`-4` 步 |
-| 鼠标按钮 | `+1/+2/+4` | `-1/-2/-4` |
-
-点击“清零 Pitch Trim”会发送 `trim_reset`。客户端连接 MQTT 后还会自动每秒发送一次 heartbeat。
-
-其他快捷键：
-
-- `Enter` 或小键盘 `Enter`：发送 `trim_reset`，将 pitch trim 清零。
-- `Esc`：退出全屏并恢复普通窗口，不会关闭客户端。
-- 双击顶部区域：切换真正的全屏/普通窗口。Linux下使用Software场景图，避免150%等分数缩放时OpenGL全屏动态重绘出现黑屏。
-- 右上角窗口控制按钮在鼠标进入热区时显示，离开后自动隐藏。
-
-### UI 操作反馈
-
-- 鼠标按下时，按钮会缩放并变色。
-- 键盘操作会高亮对应的步进按钮。
-- 上调显示 `▲` 动画，下调显示 `▼` 动画。
-- 命令满足发送条件时显示绿色反馈。
-- 命令被客户端安全条件阻止时显示红色反馈，并显示具体原因。
-- UI 当前 trim 数值只使用 HNU-TLM 中机器人回传的 `pitch_trim_deg`，不会把本地按键累计值当作真实值。
-- 本地期望值与机器人回传值不一致时，界面会显示红色提示。
-
-### Trim 安全条件
-
-客户端不会通过 trim 操作绕过视觉或电控安全条件：
-
-- 只有 HNU-TLM 报告 `mode == 4`（DEPLOY）时才发送 `trim_step`。
-- MQTT 未连接时不发送命令。
-- 两次成功步进之间至少间隔 `0.2s`。
-- 单条命令参数限制为 `[-4,+4]`，且不能为 `0`。
-- RK45 解算失败、雷达过期、核心丢失或状态机未就绪时，是否接受 trim 仍由视觉侧裁决。
-- 最终是否发弹仍由电控的热量、弹速和发射机构安全门控裁决。
-
-按钮在 MQTT 未连接或 `0.2s` 冷却期间会暂时禁用。非 DEPLOY 模式下按钮仍可点击以显示原因，但客户端不会发送 `trim_step`。
-
-## 状态排查
-
-如果按键后回传 trim 没有变化，请依次检查：
-
-1. 顶部 MQTT 状态是否为“已连接”。
-2. 视觉遥测是否在线。
-3. 当前模式是否为 `DEPLOY`。
-4. 是否触发了 `0.2s` 操作限频。
-5. 是否已经到达视觉侧 trim 限幅。
-6. RK45、雷达、核心检测和状态机安全条件是否满足。
-
-命令即使被视觉侧拒绝也会消耗并持久化序号，客户端不会使用相同序号重发。最终显示应始终以 HNU-TLM 回传为准。
-
-## 本地联调测试服务器
-
-`test_server` 提供了一个仅用于联调的最小服务器。它同时实现：
-
-- 监听 `0.0.0.0:3333` 的最小 MQTT 3.1.1 Broker。
-- `CONNECT/CONNACK`、`SUBSCRIBE/SUBACK`、QoS 1 `PUBLISH/PUBACK` 和心跳响应。
-- 10Hz HNU-TLM 模拟遥测，默认处于 DEPLOY 模式。
-- `core_ok`、`radar_fresh`、`deploy_solved`、`yaw_converged` 和 `fire_allowed` 模拟状态。
-- 实时生成的 H.264 彩色测试视频，并按 HNU-VID 规则分片。
-- HNU-CMD 长度、magic 和 CRC16 检查。
-- 命令序号防重放检查。
-- `trim_step`、`trim_reset` 和 heartbeat 处理。
-- `trim_step` 的 0.2 秒限频与 `[-1.0,+1.0]°` 限幅。
-- heartbeat 超过 2 秒后的 trim 自动清零。
-
-它不实现比赛服务器、裁判系统或其他 MQTT topic，不能作为正式比赛服务器使用。
-
-### 构建测试服务器
-
-```bash
-cmake -S hero_custom_client/test_server \
-      -B hero_custom_client/test_server/build
-cmake --build hero_custom_client/test_server/build -j
-```
-
-### 启动测试服务器
-
-```bash
-./hero_custom_client/test_server/build/HeroProtocolTestServer
-```
-
-正常启动后会显示：
+正式链路如下：
 
 ```text
-英雄协议测试服务器监听 "0.0.0.0" 3333
-模拟状态: DEPLOY, RK45 SUCCESS, fire_allowed=true
-连接客户端后自动发布 HNU-TLM 10Hz 与 HNU-VID 5fps
+图传发送端串口（921600 8N1）
+        │
+        ▼
+      Jetson ── 0x0310 / CustomByteBlock ──► 本客户端（遥测、H.264 视频）
+        ▲
+        └────── 0x0311 / CustomControl ◄──── 本客户端（trim、reset、heartbeat）
+
+      Jetson ── SEASKY 0x0001 ──► 电控（最终 yaw / pitch / target_state）
+      Jetson ◄─ SEASKY 0x0002 ─── 电控（work_mode 等状态）
 ```
 
-如果客户端和测试服务器在同一台电脑，将客户端 Broker 地址填写为 `127.0.0.1`。如果在不同电脑，填写测试服务器所在电脑的局域网 IP，并确认防火墙允许 TCP 3333。
+## 功能边界
 
-### 联调顺序
+- 订阅 MQTT topic `CustomByteBlock`，解析 protobuf 外壳中的 raw payload。
+- 解析 46B `HNU-TLM` 遥测，并显示模式、RK45、安全链、距离、高度、弹速、TOF、误差和 `pitch_trim_deg`。
+- 按 `frame_id / slice_id / frame_total` 重组 `HNU-VID`，将 H.264 帧送入 FFmpeg 解码并全屏铺底显示。
+- 发布 MQTT topic `CustomControl`，发送固定 30B `HNU-CMD`：`trim_step`、`trim_reset` 和 1Hz heartbeat。
+- 持久化每个 MQTT Client ID 的命令序号，防止客户端重启后复用旧序号。
+- MQTT 网络循环运行在 libmosquitto 后台线程，连接失败不会阻塞 QML 主线程或停留在登录页。
 
-1. 启动测试服务器，再启动 `HeroCustomClient`。
-2. 客户端连接 `127.0.0.1:3333`，顶部 MQTT 状态应变为“已连接”。
-3. 服务器终端应打印 `已订阅 CustomByteBlock`。
-4. 客户端视觉遥测状态应变为在线，并持续显示 DEPLOY、距离、高度、弹速、TOF 和 trim。
-5. 视频区域应显示持续变化的 H.264 彩色测试画面。
-6. 点击 `+1/+2/+4`，服务器应打印 `trim_step`，客户端回传 trim 随后增加。
-7. 点击清零，服务器应打印 `trim_reset`，客户端回传 trim 回到 `0.00°`。
-8. 先把 trim 调成非零，然后关闭客户端或断开 MQTT，使客户端停止发送 heartbeat。
-9. 超过 2 秒后，测试服务器应打印自动清零日志。重新连接客户端后，HNU-TLM 中的 `pitch_trim_deg` 应为 `0.00°`。
+客户端不解析比赛服务器其他 topic，不直接参与 `0x0001/0x0002`，也没有最终开火裁决权。
 
-自动清零在测试服务器模拟的 Jetson/视觉接收端执行，不在客户端执行。客户端正常连接期间固定以 1Hz 发送 heartbeat，也不会在本地篡改 HNU-TLM 的回传值。
+## 目录结构
+
+```text
+hero_custom_client/
+├── CMakeLists.txt
+├── main.cpp                       # 注册后端、视频 Provider，并启用软件场景图
+├── protobuf/
+│   └── hero_custom_client.proto   # 两个 MQTT topic 的 protobuf 外壳
+├── include/                       # C++ 接口
+├── src/
+│   ├── HeroClient.cpp             # MQTT、heartbeat、视频分片重组
+│   ├── HeroProtocol.cpp           # HNU-TLM / HNU-CMD raw 协议
+│   ├── H264Decoder.cpp            # FFmpeg H.264 解码与 RGB 转换
+│   └── VideoImageProvider.cpp     # 将最新画面提供给 QML
+├── qml/
+│   ├── HeroMain.qml               # HUD、窗口控制与操作交互
+│   ├── Theme.qml                  # 全局颜色、间距、圆角与动效令牌
+│   └── icons/                     # 本地 SVG 图标与许可证
+└── qml.qrc
+
+hero_test_server/                  # 与正式客户端分离的最小联调服务器
+├── CMakeLists.txt
+└── main.cpp
+```
+
+`hero_test_server` 是仓库根目录下的兄弟工程，不会被正式客户端构建或打包。
+
+## UI 布局与交互
+
+视频流始终位于最底层并按窗口裁切铺满，准星固定在画面几何中心。HUD 的信息层级按操作顺序安排：
+
+- 顶部：DEPLOY 模式、MQTT 状态、视觉遥测在线状态。
+- 左侧：目标与 RK45 解算，其下是武器和云台反馈。
+- 中央：准星、开火请求和 RK45 结果，只显示最关键状态。
+- 右侧：核心、雷达、RK45、Yaw、FULL ADJUST、视觉开火许可组成的安全链。
+- 底部：车端回传的 pitch trim 真值、固定上下调按钮、步长选择和清零。
+
+数据标签和值使用固定列宽，遥测内容变化时只更新文字和颜色，不改变控件位置或大小。面板内部使用 `RowLayout/ColumnLayout`，可随窗口尺寸稳定排版。阴影使用普通半透明矩形模拟，不依赖 GPU shader。
+
+HUD 采用适合视频叠加的“液态玻璃”视觉：圆角玻璃面板由透明渐变、内侧反光边、顶部高光和柔和投影组成，状态与按钮使用胶囊形态。这里没有启用实时背景模糊或 `MultiEffect`；这种实现既保留玻璃层次，也兼容当前 Software scene graph，避免 Linux 分数缩放全屏下重新出现黑屏。
+
+### Pitch Trim 按钮
+
+底部使用类似 OBS 键盘映射提示的两个方向键帽：键帽内部只显示 `↓/↑`，方向名称、当前步数和对应角度固定显示在键帽右侧。先选择 `1/2/4` 步，再点击方向；每步为 `0.05°`。
+
+- 按下时键帽下沉、底沿变薄并高亮。
+- 命令满足发送条件时，对应方向按钮绿色高亮。
+- 命令因断线、非 DEPLOY 或限频而未发送时，按钮红色高亮并显示原因。
+- 键盘操作也会高亮对应方向，并同步界面的步长选择。
+- UI 不在本地累加 trim；主数值始终以 HNU-TLM 回传的 `pitch_trim_deg` 为准。
+- 命令发送后预留 600ms 遥测回环时间，避免旧遥测帧造成“不一致”提示闪烁。
+
+### 快捷键
+
+| 按键 | 功能 | UI 反馈 |
+|---|---|---|
+| `↑` / `↓` | 上调 / 下调 1 步 | 对应方向按钮高亮，步长切到 1 |
+| `Shift + ↑/↓` | 上调 / 下调 2 步 | 对应方向按钮高亮，步长切到 2 |
+| `Ctrl + ↑/↓` | 上调 / 下调 4 步 | 对应方向按钮高亮，步长切到 4 |
+| `Enter` / 小键盘 `Enter` | 发送 `trim_reset` | 清零按钮短暂显示“清零 ✓” |
+| `Esc` | 退出全屏，恢复普通窗口 | 不关闭程序 |
+| 双击顶部拖动区 | 普通窗口 / 真全屏切换 | 保持键盘焦点在主画面 |
+
+右上角窗口控制区默认隐藏；鼠标进入热区后显示最小化、全屏/还原、关闭按钮，移出后淡出。
+
+## Trim 安全约束
+
+- 客户端仅在 MQTT 已连接且 HNU-TLM 报告 `mode == 4`（DEPLOY）时发送 `trim_step`。
+- 单条 `trim_step` 参数范围为 `[-4,+4]`，不能为 0；两次成功步进至少间隔 0.2s。
+- trim 只能由视觉侧叠加在 RK45 成功解出的 pitch 上。
+- RK45 失败、雷达过期、核心丢失、状态机未就绪等条件仍由视觉侧否决。
+- 电控继续保留热量、弹速、发射机构安全等最终发射否决权。
+- 客户端连接后每秒发送 heartbeat。停止 heartbeat 超过 2s 后自动清零 trim 的逻辑属于 Jetson/视觉接收端；测试服务器也实现了同样行为。客户端不会伪造或本地修改 HNU-TLM。
+
+## 构建客户端
+
+依赖 Qt 6.5+、CMake 3.19+、Protobuf、libmosquitto 和 FFmpeg 的 `libavcodec/libavutil/libswscale` 开发包。
+
+在 Qt Creator 中打开 `hero_custom_client/CMakeLists.txt` 并选择 Qt 6 Kit，或在仓库根目录执行：
+
+```bash
+cmake -S hero_custom_client -B build-hero
+cmake --build build-hero -j
+./build-hero/HeroCustomClient
+```
+
+CMake 优先使用 Qt Creator Kit、`CMAKE_PREFIX_PATH` 或 `Qt6_DIR`。均未设置时，它会扫描 `$HOME/Qt/*/gcc_64` 和 `$HOME/Qt/*/linux_gcc_64`，不绑定用户名或具体 Qt 版本。
+
+如果 Qt 安装在其他位置：
+
+```bash
+cmake -S hero_custom_client -B build-hero \
+      -DCMAKE_PREFIX_PATH=/path/to/Qt/6.x/gcc_64
+```
+
+程序使用 Qt Quick Software scene graph。这是为 Linux X11 分数缩放环境保留的兼容方案，可避免 150% 显示比例下全屏后按键触发 OpenGL 重绘时出现左上角小画面和大面积黑屏。不要在 `main.cpp` 创建窗口之后再切换渲染后端，也不要随意加入依赖 shader 的 `MultiEffect/DropShadow`。
+
+## 使用
+
+1. 启动客户端。
+2. Broker 默认填写 `192.168.12.1`，端口固定为 `3333`；Client ID 默认 `0x0101`。
+3. 点击“确认身份并进入”。登录层立即关闭，不等待 MQTT 连接完成。
+4. 通过顶部状态判断 MQTT 是否连通，通过“视觉遥测”判断 HNU-TLM 是否持续到达。
+5. 只有进入 DEPLOY 后再执行 trim 操作。
+
+## 本地联调服务器
+
+`hero_test_server` 只用于完整验证当前两个 topic，提供最小 MQTT 3.1.1 Broker、10Hz HNU-TLM、HNU-VID 测试视频、命令检查、序号防重放、trim 限频/限幅，以及 heartbeat 超过 2s 后自动清零。它不是比赛服务器，不能用于正式部署。
+
+构建与启动：
+
+```bash
+cmake -S hero_test_server -B build-hero-test
+cmake --build build-hero-test -j
+./build-hero-test/HeroProtocolTestServer
+```
+
+同机联调时将客户端 Broker 改为 `127.0.0.1`；跨设备时填写服务器所在电脑的局域网地址，并允许 TCP 3333。
+
+建议按以下顺序验收：
+
+1. MQTT 连接成功，并订阅 `CustomByteBlock`。
+2. HNU-TLM 持续刷新，模式为 DEPLOY，数据字段显示合理。
+3. HNU-VID 测试画面持续解码。
+4. 点击上调/下调，服务器收到 30B `CustomControl`，回传 trim 随后改变。
+5. 按 Enter，回传 trim 回到 0。
+6. 先调成非零，再停止客户端 heartbeat；超过 2s 后服务器日志应显示自动清零，重连后回传值为 0。
+
+## 常见排查
+
+- **按键没有改变 trim**：依次检查 MQTT、视觉遥测、DEPLOY 模式、0.2s 限频、视觉 trim 限幅和安全链。
+- **命令已发布但数值没变化**：最终结果以车端回传为准，视觉侧可能因 RK45、雷达、核心或状态机条件拒绝该命令。
+- **等待视频**：检查 `CustomByteBlock` 中是否持续收到 magic `0x5A`、type `0x02`，以及分片的 frame/slice/seq 是否连续。
+- **Qt6 找不到**：在 Qt Creator 选择正确 Kit，或显式传入 `CMAKE_PREFIX_PATH/Qt6_DIR`。
+- **全屏黑屏**：确认 `main.cpp` 仍在创建 `QGuiApplication` 后、加载 QML 前调用 `QQuickWindow::setGraphicsApi(QSGRendererInterface::Software)`。
+
+## 图标资源
+
+HUD 的 target、gauge、shield-check、adjustments 图标采用 Tabler Icons 的 24×24 线框风格并随项目本地打包。Tabler Icons 使用 MIT License，许可证副本位于 `qml/icons/LICENSE.tabler-icons.txt`。窗口控制与准星继续复用原客户端 qrc 资源，避免运行时依赖网络。

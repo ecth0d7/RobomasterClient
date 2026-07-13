@@ -1,6 +1,12 @@
 <RCC>
   <qresource prefix="/">
     <file alias="HeroMain.qml">qml/HeroMain.qml</file>
+    <file alias="Theme.qml">qml/Theme.qml</file>
+    <file alias="qmldir">qml/qmldir</file>
+    <file alias="images/target.svg">qml/icons/target.svg</file>
+    <file alias="images/gauge.svg">qml/icons/gauge.svg</file>
+    <file alias="images/shield-check.svg">qml/icons/shield-check.svg</file>
+    <file alias="images/adjustments-horizontal.svg">qml/icons/adjustments-horizontal.svg</file>
     <file alias="images/crosshair.png">../qml/resources/准星.png</file>
     <file alias="images/minimize.png">../qml/resources/缩小.png</file>
     <file alias="images/fullscreen.png">../qml/resources/大窗.png</file>
