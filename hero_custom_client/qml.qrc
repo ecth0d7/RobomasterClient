@@ -1,5 +1,10 @@
 <RCC>
   <qresource prefix="/">
     <file alias="HeroMain.qml">qml/HeroMain.qml</file>
+    <file alias="images/crosshair.png">../qml/resources/准星.png</file>
+    <file alias="images/minimize.png">../qml/resources/缩小.png</file>
+    <file alias="images/fullscreen.png">../qml/resources/大窗.png</file>
+    <file alias="images/restore.png">../qml/resources/还原.png</file>
+    <file alias="images/close.png">../qml/resources/关闭.png</file>
   </qresource>
 </RCC>

@@ -8,6 +8,27 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # ========================= Qt6配置 =========================
 # 不固定 Qt 安装目录。CMake 会使用 Qt Creator 工具链、CMAKE_PREFIX_PATH、
 # Qt6_DIR 缓存参数或系统默认搜索路径查找 Qt。
+
+# 优先使用 Qt Creator Kit、-DCMAKE_PREFIX_PATH 或 -DQt6_DIR 提供的路径。
+# 如果外部没有配置，则自动寻找 Qt Online Installer 的常见用户安装目录，
+# 不绑定具体用户名、Qt 版本或编译套件。
+if(DEFINED Qt6_DIR AND Qt6_DIR MATCHES "-NOTFOUND$")
+    unset(Qt6_DIR CACHE)
+endif()
+if(NOT Qt6_DIR AND NOT CMAKE_PREFIX_PATH)
+    file(GLOB _qt6_user_candidates LIST_DIRECTORIES true
+        "$ENV{HOME}/Qt/*/gcc_64/lib/cmake/Qt6"
+        "$ENV{HOME}/Qt/*/linux_gcc_64/lib/cmake/Qt6"
+    )
+    if(_qt6_user_candidates)
+        list(SORT _qt6_user_candidates COMPARE NATURAL ORDER DESCENDING)
+        list(GET _qt6_user_candidates 0 _qt6_auto_dir)
+        set(Qt6_DIR "${_qt6_auto_dir}" CACHE PATH "Auto-detected Qt6 package directory")
+        message(STATUS "Auto-detected Qt6: ${Qt6_DIR}")
+    endif()
+endif()
+
+find_package(Qt6 6.5 REQUIRED COMPONENTS Core Gui Qml Quick QuickControls2 QuickLayouts)
 find_package(Qt6 6.5 REQUIRED COMPONENTS
     Core
     Widgets

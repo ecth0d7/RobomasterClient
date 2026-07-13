@@ -272,11 +272,26 @@ private:
             qWarning() << "拒绝重复或倒退 seq:" << sequence << "last=" << m_lastCommandSequence;
             return;
         }
+        const bool validStep = command == 0x01 && parameter >= -4 && parameter <= 4 && parameter != 0;
+        const bool validReset = command == 0x02 && parameter == 0;
+        const bool validHeartbeat = command == 0x03 && parameter == 0;
+        if (!validStep && !validReset && !validHeartbeat) {
+            qWarning() << "拒绝未知或参数非法的 HNU-CMD: cmd=" << command
+                       << "param=" << parameter;
+            return;
+        }
+
         m_lastCommandSequence = sequence;
         m_haveCommandSequence = true;
+
+        // 视觉侧安全计时器：任何合法 HNU-CMD（包括被 0.2s 限频拒绝的
+        // trim_step）都会刷新 heartbeat。超过 2s 没有合法命令时由接收端
+        // 清零 m_trim，随后发布的 HNU-TLM 会自然回传 pitch_trim_deg=0。
         m_lastHeartbeat.restart();
         m_haveHeartbeat = true;
-        if (command == 0x01 && parameter >= -4 && parameter <= 4 && parameter != 0) {
+        m_heartbeatTimedOut = false;
+
+        if (validStep) {
             if (m_haveStep && m_lastStep.elapsed() < 200) {
                 qWarning() << "trim_step 被 0.2s 限频拒绝, seq=" << sequence;
                 return;
@@ -285,10 +300,10 @@ private:
             m_haveStep = true;
             m_trim = qBound(-1.0f, m_trim + parameter * 0.05f, 1.0f);
             qInfo() << "trim_step seq=" << sequence << "steps=" << parameter << "trim=" << m_trim;
-        } else if (command == 0x02) {
+        } else if (validReset) {
             m_trim = 0;
             qInfo() << "trim_reset seq=" << sequence;
-        } else if (command == 0x03) {
+        } else if (validHeartbeat) {
             qInfo() << "heartbeat seq=" << sequence;
         }
     }
@@ -355,10 +370,13 @@ private:
 
     void checkHeartbeat()
     {
-        if (m_haveHeartbeat && m_lastHeartbeat.elapsed() > 2000 && std::fabs(m_trim) > 0.001f) {
-            m_trim = 0;
-            qWarning() << "heartbeat 超过 2s，模拟视觉已自动清零 trim";
-        }
+        if (!m_haveHeartbeat || m_heartbeatTimedOut || m_lastHeartbeat.elapsed() < 2000) return;
+
+        const float previousTrim = m_trim;
+        m_trim = 0.0f;
+        m_heartbeatTimedOut = true;
+        qWarning() << "超过 2s 未收到合法 HNU-CMD，模拟视觉已自动清零 trim; previous="
+                   << previousTrim;
     }
 
     QTcpServer m_server;
@@ -369,6 +387,7 @@ private:
     QElapsedTimer m_lastHeartbeat;
     QElapsedTimer m_lastStep;
     bool m_haveHeartbeat = false;
+    bool m_heartbeatTimedOut = false;
     bool m_haveStep = false;
     bool m_haveCommandSequence = false;
     quint16 m_lastCommandSequence = 0;

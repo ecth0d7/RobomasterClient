@@ -2,7 +2,8 @@
 #include "VideoImageProvider.h"
 
 #include <QImage>
-#include <QDebug>
+
+#include <cstring>
 
 H264Decoder::H264Decoder(VideoImageProvider *provider, QObject *parent)
     : QObject(parent), m_provider(provider)
@@ -35,8 +36,15 @@ void H264Decoder::decode(const QByteArray &data)
     if (!m_context || data.isEmpty()) return;
     AVPacket *packet = av_packet_alloc();
     if (!packet) return;
-    packet->data = reinterpret_cast<uint8_t *>(const_cast<char *>(data.constData()));
-    packet->size = data.size();
+
+    // 由 FFmpeg 分配 AVPacket 数据区，确保码流尾部具有其解码器要求的
+    // AV_INPUT_BUFFER_PADDING_SIZE 零填充，不能直接借用 QByteArray 内存。
+    if (av_new_packet(packet, data.size()) < 0) {
+        av_packet_free(&packet);
+        return;
+    }
+    std::memcpy(packet->data, data.constData(), static_cast<size_t>(data.size()));
+
     if (avcodec_send_packet(m_context, packet) < 0) {
         av_packet_free(&packet);
         reset();

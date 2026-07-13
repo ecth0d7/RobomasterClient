@@ -38,6 +38,13 @@ cmake --build build-hero -j
 
 点击“清零 Pitch Trim”会发送 `trim_reset`。客户端连接 MQTT 后还会自动每秒发送一次 heartbeat。
 
+其他快捷键：
+
+- `Enter` 或小键盘 `Enter`：发送 `trim_reset`，将 pitch trim 清零。
+- `Esc`：退出全屏并恢复普通窗口，不会关闭客户端。
+- 双击顶部区域：切换真正的全屏/普通窗口。Linux下使用Software场景图，避免150%等分数缩放时OpenGL全屏动态重绘出现黑屏。
+- 右上角窗口控制按钮在鼠标进入热区时显示，离开后自动隐藏。
+
 ### UI 操作反馈
 
 - 鼠标按下时，按钮会缩放并变色。
@@ -124,20 +131,7 @@ cmake --build hero_custom_client/test_server/build -j
 5. 视频区域应显示持续变化的 H.264 彩色测试画面。
 6. 点击 `+1/+2/+4`，服务器应打印 `trim_step`，客户端回传 trim 随后增加。
 7. 点击清零，服务器应打印 `trim_reset`，客户端回传 trim 回到 `0.00°`。
-8. 先把 trim 调成非零，再点击“暂停 Heartbeat（仅联调）”。MQTT 和 HNU-TLM 订阅会继续保持；超过 2 秒后，服务器打印自动清零日志，客户端 `pitch_trim_deg` 应回到 `0.00°`。
-9. 点击“恢复 Heartbeat”后，客户端会立即发送一次 heartbeat，并恢复 1Hz 定时发送。
+8. 先把 trim 调成非零，然后关闭客户端或断开 MQTT，使客户端停止发送 heartbeat。
+9. 超过 2 秒后，测试服务器应打印自动清零日志。重新连接客户端后，HNU-TLM 中的 `pitch_trim_deg` 应为 `0.00°`。
 
-### 无界面自动测试
-
-客户端还提供仅供联调使用的环境变量入口：
-
-```bash
-QT_QPA_PLATFORM=offscreen \
-HERO_TEST_AUTOCONNECT=1 \
-HERO_TEST_HOST=127.0.0.1 \
-timeout 7s ./hero_custom_client/build/HeroCustomClient
-```
-
-自动测试会依次连接、发送 `trim_step +2`、发送 reset、发送 `trim_step +1`，然后仅暂停 heartbeat，保持 MQTT 和遥测订阅。服务器终端应能看到完整命令以及 2 秒超时自动清零日志，客户端仍能收到 trim 回到 0 的 HNU-TLM。
-
-“暂停 Heartbeat”按钮仅用于本地协议联调。正式比赛运行时应保持 heartbeat 开启。
+自动清零在测试服务器模拟的 Jetson/视觉接收端执行，不在客户端执行。客户端正常连接期间固定以 1Hz 发送 heartbeat，也不会在本地篡改 HNU-TLM 的回传值。

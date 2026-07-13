@@ -25,7 +25,7 @@ find_package(Protobuf REQUIRED)
 pkg_check_modules(AVCODEC REQUIRED libavcodec)
 pkg_check_modules(AVUTIL REQUIRED libavutil)
 
-set(HERO_PROTO ${CMAKE_CURRENT_LIST_DIR}/../protobuf/hero_custom_client.proto)
+set(HERO_PROTO ${CMAKE_CURRENT_LIST_DIR}/../hero_custom_client/protobuf/hero_custom_client.proto)
 if(Protobuf_VERSION VERSION_LESS 3.15)
     set(PROTO_SRCS ${CMAKE_CURRENT_BINARY_DIR}/hero_custom_client.pb.cc)
     set(PROTO_HDRS ${CMAKE_CURRENT_BINARY_DIR}/hero_custom_client.pb.h)
@@ -34,7 +34,7 @@ if(Protobuf_VERSION VERSION_LESS 3.15)
         COMMAND ${Protobuf_PROTOC_EXECUTABLE}
                 --experimental_allow_proto3_optional
                 --cpp_out=${CMAKE_CURRENT_BINARY_DIR}
-                --proto_path=${CMAKE_CURRENT_LIST_DIR}/../protobuf
+                --proto_path=${CMAKE_CURRENT_LIST_DIR}/../hero_custom_client/protobuf
                 ${HERO_PROTO}
         DEPENDS ${HERO_PROTO}
         VERBATIM)

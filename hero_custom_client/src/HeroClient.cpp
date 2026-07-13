@@ -12,9 +12,7 @@ HeroClient::HeroClient(H264Decoder *decoder, QObject *parent)
 {
     mosquitto_lib_init();
     m_heartbeat.setInterval(1000);
-    connect(&m_heartbeat, &QTimer::timeout, this, [this] {
-        if (m_heartbeatEnabled) sendCommand(0x03);
-    });
+    connect(&m_heartbeat, &QTimer::timeout, this, [this] { sendCommand(0x03); });
     m_telemetryWatchdog.setInterval(1000);
     m_telemetryWatchdog.setSingleShot(true);
     connect(&m_telemetryWatchdog, &QTimer::timeout, this, [this] {
@@ -91,21 +89,9 @@ void HeroClient::trimStep(int steps)
 
 void HeroClient::trimReset() { sendCommand(0x02); }
 
-void HeroClient::setHeartbeatEnabled(bool enabled)
-{
-    if (m_heartbeatEnabled == enabled) return;
-    m_heartbeatEnabled = enabled;
-    if (enabled && m_connected) {
-        sendCommand(0x03);
-        m_heartbeat.start();
-    } else {
-        m_heartbeat.stop();
-    }
-    emit heartbeatEnabledChanged();
-}
-
 quint16 HeroClient::nextSequence()
 {
+    // u16 自然回绕符合协议；先持久化再发布，发布失败也不复用旧序号。
     ++m_commandSequence;
     const QString clientId = m_settings.value("active_client_id").toString();
     m_settings.setValue("sequence/" + clientId, m_commandSequence);
@@ -121,6 +107,8 @@ void HeroClient::sendCommand(quint8 command, qint8 parameter)
     }
     const quint16 sequence = nextSequence();
     const QByteArray raw = HeroProtocol::makeCommand(sequence, command, parameter);
+
+    // MQTT payload 是 protobuf 外壳，data 内才是固定 30B 的 0x0311 raw payload。
     robomaster::hero_client::CustomControl envelope;
     envelope.set_data(raw.constData(), raw.size());
     std::string bytes;
@@ -136,16 +124,15 @@ void HeroClient::sendCommand(quint8 command, qint8 parameter)
 void HeroClient::onConnect(mosquitto *mosq, void *context, int rc)
 {
     auto *self = static_cast<HeroClient *>(context);
+    // QTimer 和 QML 属性只能在 QObject 所属的 Qt 主线程更新。
     QMetaObject::invokeMethod(self, [self, mosq, rc] {
         if (rc == 0) {
             self->m_connected = true;
             mosquitto_subscribe(mosq, nullptr, "CustomByteBlock", 1);
             self->setStatus("已连接");
             emit self->connectedChanged();
-            if (self->m_heartbeatEnabled) {
-                self->m_heartbeat.start();
-                self->sendCommand(0x03);
-            }
+            self->m_heartbeat.start();
+            self->sendCommand(0x03);
         } else {
             self->m_connected = false;
             self->setStatus(QString("连接失败(%1)").arg(rc));
@@ -168,6 +155,7 @@ void HeroClient::onMessage(mosquitto *, void *context, const mosquitto_message *
 {
     if (!message || !message->payload || QString::fromUtf8(message->topic) != "CustomByteBlock") return;
     auto *self = static_cast<HeroClient *>(context);
+    // 在网络线程复制 payload，随后交给主线程解析，避免消息回调返回后悬空。
     const QByteArray bytes(static_cast<const char *>(message->payload), message->payloadlen);
     QMetaObject::invokeMethod(self, [self, bytes] {
         robomaster::hero_client::CustomByteBlock envelope;
@@ -178,6 +166,7 @@ void HeroClient::onMessage(mosquitto *, void *context, const mosquitto_message *
 
 void HeroClient::handlePayload(const QByteArray &payload)
 {
+    // HNU-TLM 与 HNU-VID 共用 magic，通过 type 字段分流。
     if (payload.size() < 2 || static_cast<quint8>(payload[0]) != 0x5A) return;
     if (static_cast<quint8>(payload[1]) == 0x01) {
         QVariantMap telemetry;
@@ -196,6 +185,10 @@ void HeroClient::handlePayload(const QByteArray &payload)
 void HeroClient::handleVideo(const QByteArray &p)
 {
     if (p.size() < HeroProtocol::VideoHeaderSize) return;
+
+    const int sliceBytes = p.size() - HeroProtocol::VideoHeaderSize;
+    if (sliceBytes <= 0 || sliceBytes > HeroProtocol::VideoSliceSize) return;
+
     const quint16 seq = qFromLittleEndian<quint16>(p.constData() + 2);
     const quint16 frameId = qFromLittleEndian<quint16>(p.constData() + 4);
     const quint16 sliceId = qFromLittleEndian<quint16>(p.constData() + 6);
@@ -203,6 +196,7 @@ void HeroClient::handleVideo(const QByteArray &p)
     if (total == 0 || total > 4U * 1024U * 1024U) return;
 
     if (sliceId == 0) {
+        // slice 0 开启新帧；未完成的旧帧直接丢弃。
         m_frameId = frameId;
         m_nextSlice = 0;
         m_frameTotal = total;
@@ -211,18 +205,31 @@ void HeroClient::handleVideo(const QByteArray &p)
     }
     if (frameId != m_frameId || sliceId != m_nextSlice
         || (m_nextSlice > 0 && static_cast<quint16>(m_videoSequence + 1) != seq)) {
+        // frame/slice/seq 任一不连续时，本帧不再可信，等待后续新帧恢复。
         m_frameBuffer.clear();
+        m_frameTotal = 0;
+        m_nextSlice = 0;
         m_decoder->reset();
         return;
     }
+
+    if (static_cast<quint64>(m_frameBuffer.size()) + static_cast<quint64>(sliceBytes)
+        > m_frameTotal) {
+        m_frameBuffer.clear();
+        m_frameTotal = 0;
+        m_nextSlice = 0;
+        m_decoder->reset();
+        return;
+    }
+
     m_videoSequence = seq;
     ++m_nextSlice;
-    m_frameBuffer.append(p.constData() + HeroProtocol::VideoHeaderSize,
-                         p.size() - HeroProtocol::VideoHeaderSize);
-    if (static_cast<quint32>(m_frameBuffer.size()) >= m_frameTotal) {
-        m_frameBuffer.truncate(static_cast<int>(m_frameTotal));
+    m_frameBuffer.append(p.constData() + HeroProtocol::VideoHeaderSize, sliceBytes);
+    if (static_cast<quint32>(m_frameBuffer.size()) == m_frameTotal) {
         m_decoder->decode(m_frameBuffer);
         m_frameBuffer.clear();
+        m_frameTotal = 0;
+        m_nextSlice = 0;
     }
 }
 
