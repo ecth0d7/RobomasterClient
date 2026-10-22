@@ -1,0 +1,10 @@
+@PACKAGE_INIT@
+include(CMakeFindDependencyMacro)
+find_dependency(Qt6 6.5 COMPONENTS Core Gui Network)
+include("${CMAKE_CURRENT_LIST_DIR}/ClientPluginSDKTargets.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/RoboMasterExtensionPackage.cmake")
+set(ClientPluginSDK_TerminalTeam_FOUND FALSE)
+if(TARGET RoboMaster::terminal_team_aggregation AND TARGET RoboMaster::terminal_team_verifier)
+    set(ClientPluginSDK_TerminalTeam_FOUND TRUE)
+endif()
+check_required_components(ClientPluginSDK)

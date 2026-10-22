@@ -1,0 +1,1 @@
+{"id":"video.ffmpeg","role":"video","apiVersion":1,"version":"1.2.0","description":"Bounded UDP assembly with fragment reordering, parameter-confirmed HEVC/H.264 auto detection and reusable decoded-image storage","contracts":["org.robomaster.client.EncodedVideoFactory/1.0","org.robomaster.client.EncodedVideoInput/1.0"]}

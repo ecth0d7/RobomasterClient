@@ -1,0 +1,11 @@
+{
+  "enabled": false,
+  "color": "bright",
+  "roi": [
+    0.04,
+    0.04,
+    0.92,
+    0.92
+  ],
+  "exclude_regions": []
+}

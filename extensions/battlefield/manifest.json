@@ -1,0 +1,15 @@
+{
+  "id": "situation.process.v1",
+  "version": "1.0.0",
+  "optional": true,
+  "lifecycle": "explicit start; bounded asynchronous ingress; stop retires all modules",
+  "contracts": ["rm.situation.config/1", "rm.situation/1", "rm.situation.view/1", "rm.situation.fused/1"],
+  "modules": {
+    "model": {"providers": ["none", "rules", "openai-compatible"], "default_enabled": false},
+    "voice": {"providers": ["espeak-ng"], "default_enabled": false},
+    "sensors": {"providers": ["authenticated-udp", "official-read-only-radar"], "default_enabled": false},
+    "vision": {"providers": ["yolo-v5", "yolo-v8", "rp26-armor-v8"], "default_enabled": false}
+  },
+  "runtime_dependencies": {"base": "Python 3.10+ standard library", "vision": "numpy, opencv-python-headless, onnxruntime", "voice": "libespeak-ng with voice data; paplay for playback"},
+  "data_policy": "display and optional team sharing only; no official command or input endpoint"
+}

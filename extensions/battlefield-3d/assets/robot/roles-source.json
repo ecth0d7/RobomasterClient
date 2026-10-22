@@ -1,0 +1,116 @@
+{
+  "authorship": "Original procedural display assets, Blender 4.5.9",
+  "purpose": "Role silhouettes only; not measured CAD, identification weights or motor-state indicators",
+  "role_convention": "Retained 2026 client IDs: 1 hero, 2 engineer, 3-5 infantry, 6 aerial, 7 sentry; no claim of unpublished 2027 protocol roles",
+  "units": "metres",
+  "qt_scale": 100,
+  "qt_forward": "-Z",
+  "generator": "ProjectSupport/RobomasterClient/tools/robot-art/model_robot_roles.py",
+  "roles": {
+    "infantry": {
+      "triangles": 3720,
+      "mesh_nodes": 3,
+      "qt_bounds_cm": {
+        "min": [
+          -34.99999940395355,
+          0.4999993368983269,
+          -53.450000286102295
+        ],
+        "max": [
+          34.99999940395355,
+          46.25000059604645,
+          35.9000027179718
+        ]
+      },
+      "files": [
+        "robot-red.glb",
+        "robot-blue.glb",
+        "robot-neutral.glb"
+      ]
+    },
+    "hero": {
+      "triangles": 3720,
+      "mesh_nodes": 3,
+      "qt_bounds_cm": {
+        "min": [
+          -37.92000114917755,
+          0.4999993368983269,
+          -61.94999814033508
+        ],
+        "max": [
+          37.92000114917755,
+          49.25000071525574,
+          38.2099986076355
+        ]
+      },
+      "files": [
+        "hero-red.glb",
+        "hero-blue.glb",
+        "hero-neutral.glb"
+      ]
+    },
+    "engineer": {
+      "triangles": 3880,
+      "mesh_nodes": 3,
+      "qt_bounds_cm": {
+        "min": [
+          -36.16800010204315,
+          0.4999993368983269,
+          -54.57654595375061
+        ],
+        "max": [
+          36.16800010204315,
+          60.7077956199646,
+          36.823999881744385
+        ]
+      },
+      "files": [
+        "engineer-red.glb",
+        "engineer-blue.glb",
+        "engineer-neutral.glb"
+      ]
+    },
+    "aerial": {
+      "triangles": 1784,
+      "mesh_nodes": 3,
+      "qt_bounds_cm": {
+        "min": [
+          -38.970205187797546,
+          0.8999999612569809,
+          -38.970205187797546
+        ],
+        "max": [
+          38.970205187797546,
+          27.549999952316284,
+          38.970205187797546
+        ]
+      },
+      "files": [
+        "aerial-red.glb",
+        "aerial-blue.glb",
+        "aerial-neutral.glb"
+      ]
+    },
+    "sentry": {
+      "triangles": 4204,
+      "mesh_nodes": 3,
+      "qt_bounds_cm": {
+        "min": [
+          -34.99999940395355,
+          0.4999993368983269,
+          -53.450000286102295
+        ],
+        "max": [
+          34.99999940395355,
+          66.50000214576721,
+          35.9000027179718
+        ]
+      },
+      "files": [
+        "sentry-red.glb",
+        "sentry-blue.glb",
+        "sentry-neutral.glb"
+      ]
+    }
+  }
+}

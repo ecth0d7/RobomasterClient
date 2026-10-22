@@ -1,0 +1,3315 @@
+{
+  "source": "用户确认的 RoboMasterEngine 12.0.0.137_Student",
+  "assets": [
+    {
+      "file": "sprites/Time_Freeze4.png",
+      "name": "Time_Freeze4",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/atlas_assets_atlas/demol_53ee675a9b3ec2d809195d992187b031.bundle",
+      "asset_file": "CAB-f0c04975b7acf922b6cc9cd0f4c7501c",
+      "path_id": -7519397378092575416,
+      "width": 279,
+      "height": 310,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/Time_Freeze1.png",
+      "name": "Time_Freeze1",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/atlas_assets_atlas/demol_53ee675a9b3ec2d809195d992187b031.bundle",
+      "asset_file": "CAB-f0c04975b7acf922b6cc9cd0f4c7501c",
+      "path_id": -2324009175247615219,
+      "width": 157,
+      "height": 310,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/Time_Freeze5.png",
+      "name": "Time_Freeze5",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/atlas_assets_atlas/demol_53ee675a9b3ec2d809195d992187b031.bundle",
+      "asset_file": "CAB-f0c04975b7acf922b6cc9cd0f4c7501c",
+      "path_id": 2911535191514432822,
+      "width": 288,
+      "height": 310,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/Time_Freeze2.png",
+      "name": "Time_Freeze2",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/atlas_assets_atlas/demol_53ee675a9b3ec2d809195d992187b031.bundle",
+      "asset_file": "CAB-f0c04975b7acf922b6cc9cd0f4c7501c",
+      "path_id": 6577117914147565430,
+      "width": 288,
+      "height": 310,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/Time_Freeze3.png",
+      "name": "Time_Freeze3",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/atlas_assets_atlas/demol_53ee675a9b3ec2d809195d992187b031.bundle",
+      "asset_file": "CAB-f0c04975b7acf922b6cc9cd0f4c7501c",
+      "path_id": 8270096008590868504,
+      "width": 288,
+      "height": 310,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_CheckNormal.png",
+      "name": "ServerUI_CheckNormal",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -9070421072852152754,
+      "width": 32,
+      "height": 32,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_PhoneTextBg.png",
+      "name": "ServerUI_PhoneTextBg",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -8789279324838545656,
+      "width": 888,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_Check.png",
+      "name": "ServerUI_Check",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -8463923065881000797,
+      "width": 32,
+      "height": 25,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/icon_common.png",
+      "name": "icon_common",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -8415610430843890722,
+      "width": 84,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/login_qrcode.png",
+      "name": "login_qrcode",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -8299911847295385587,
+      "width": 216,
+      "height": 216,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_WebCloseDecorate.png",
+      "name": "ServerUI_WebCloseDecorate",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -8082125802615983204,
+      "width": 84,
+      "height": 20,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ButtonRedNormal.png",
+      "name": "ServerUI_ButtonRedNormal",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -7418308520454601949,
+      "width": 240,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_WhiteInfoTip.png",
+      "name": "ServerUI_WhiteInfoTip",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -7409638727242558372,
+      "width": 60,
+      "height": 60,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/icon_lineup.png",
+      "name": "icon_lineup",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -7161605713312058934,
+      "width": 84,
+      "height": 84,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_Delete.png",
+      "name": "ServerUI_Delete",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -6990118713613103074,
+      "width": 28,
+      "height": 32,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ButtonLightPressed.png",
+      "name": "ServerUI_ButtonLightPressed",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -5992014158547039077,
+      "width": 240,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_LoginOut.png",
+      "name": "ServerUI_LoginOut",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -5837136959942320158,
+      "width": 166,
+      "height": 70,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ButtonGreenNormal.png",
+      "name": "ServerUI_ButtonGreenNormal",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -5438922054766195889,
+      "width": 240,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ErrorTipBgA.png",
+      "name": "ServerUI_ErrorTipBgA",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -5352734923446034816,
+      "width": 608,
+      "height": 160,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_TestPass.png",
+      "name": "ServerUI_TestPass",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -5059707907257959055,
+      "width": 46,
+      "height": 46,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ButtonGreenPressed.png",
+      "name": "ServerUI_ButtonGreenPressed",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -4582544836479329617,
+      "width": 240,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_CheckNormal_x1.png",
+      "name": "ServerUI_CheckNormal_x1",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -4504863522510949673,
+      "width": 16,
+      "height": 16,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_WeChartQR2.png",
+      "name": "ServerUI_WeChartQR2",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -4433462394195746680,
+      "width": 300,
+      "height": 300,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RobotPanelBG322.png",
+      "name": "ServerUI_RobotPanelBG322",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -4218396311908182849,
+      "width": 960,
+      "height": 644,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RobotPanelBG382.png",
+      "name": "ServerUI_RobotPanelBG382",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -4031786648076496182,
+      "width": 960,
+      "height": 764,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RobotPanelSelectBorderDark.png",
+      "name": "ServerUI_RobotPanelSelectBorderDark",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -3908704432811112302,
+      "width": 32,
+      "height": 32,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ButtonRedFramePressed.png",
+      "name": "ServerUI_ButtonRedFramePressed",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -3673195050010873228,
+      "width": 240,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_TestError.png",
+      "name": "ServerUI_TestError",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -3172949394121770265,
+      "width": 40,
+      "height": 36,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ErrorTipBg.png",
+      "name": "ServerUI_ErrorTipBg",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -3138589371825914166,
+      "width": 608,
+      "height": 96,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_SwitchBgGray.png",
+      "name": "ServerUI_SwitchBgGray",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -3134107721762901308,
+      "width": 144,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ButtonWhiteNormal.png",
+      "name": "ServerUI_ButtonWhiteNormal",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -3108698236191571143,
+      "width": 256,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_PopTip.png",
+      "name": "ServerUI_PopTip",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -2906669057442751314,
+      "width": 396,
+      "height": 221,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RobotPanelGreenBg.png",
+      "name": "ServerUI_RobotPanelGreenBg",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -2425515731419221356,
+      "width": 192,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_Close.png",
+      "name": "ServerUI_Close",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -2328872505074451945,
+      "width": 34,
+      "height": 34,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ButtonLightNormal.png",
+      "name": "ServerUI_ButtonLightNormal",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -2260858827010959685,
+      "width": 240,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_AddLevel.png",
+      "name": "ServerUI_AddLevel",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -2209456210024561657,
+      "width": 48,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_Add.png",
+      "name": "ServerUI_Add",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -1985734681874770257,
+      "width": 24,
+      "height": 24,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_PopupBg.png",
+      "name": "ServerUI_PopupBg",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -1886640063122485286,
+      "width": 1000,
+      "height": 600,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/icon_exception.png",
+      "name": "icon_exception",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -1682349803311135403,
+      "width": 77,
+      "height": 84,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/icon.png",
+      "name": "icon",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -1647060419214478364,
+      "width": 256,
+      "height": 256,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/robomaster.png",
+      "name": "robomaster",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -1277297249081247057,
+      "width": 589,
+      "height": 40,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/icon_checklist.png",
+      "name": "icon_checklist",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -1165669989965722762,
+      "width": 83,
+      "height": 84,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_WebCloseBg.png",
+      "name": "ServerUI_WebCloseBg",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -1156289591352892797,
+      "width": 2048,
+      "height": 129,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_WarnYellow.png",
+      "name": "ServerUI_WarnYellow",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -1078321001009681446,
+      "width": 32,
+      "height": 32,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ButtonRedFrameNormal.png",
+      "name": "ServerUI_ButtonRedFrameNormal",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -1056992324138613873,
+      "width": 320,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_CloseButton.png",
+      "name": "ServerUI_CloseButton",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -924518735909910479,
+      "width": 65,
+      "height": 65,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RobotPanelRed.png",
+      "name": "ServerUI_RobotPanelRed",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -674940496188382618,
+      "width": 168,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/UIMask.png",
+      "name": "UIMask",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -426171492875694260,
+      "width": 28,
+      "height": 28,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_Loading.png",
+      "name": "ServerUI_Loading",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -400858642702145578,
+      "width": 32,
+      "height": 32,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI__TextInputBg.png",
+      "name": "ServerUI__TextInputBg",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -318486931816545688,
+      "width": 188,
+      "height": 56,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/icon_mechanism.png",
+      "name": "icon_mechanism",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -248671933575140583,
+      "width": 84,
+      "height": 64,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/icon_punishment.png",
+      "name": "icon_punishment",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -141976102315092481,
+      "width": 84,
+      "height": 93,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_DropBg.png",
+      "name": "ServerUI_DropBg",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 60463831251717507,
+      "width": 832,
+      "height": 848,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ButtonGreenHighlighted.png",
+      "name": "ServerUI_ButtonGreenHighlighted",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 364141074448057188,
+      "width": 240,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RobotPanelGreen.png",
+      "name": "ServerUI_RobotPanelGreen",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 749756017935002356,
+      "width": 168,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ButtonRedDisabled.png",
+      "name": "ServerUI_ButtonRedDisabled",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 955836070393187889,
+      "width": 240,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_Checked.png",
+      "name": "ServerUI_Checked",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 1190283362183662551,
+      "width": 32,
+      "height": 32,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ButtonRedHighlighted.png",
+      "name": "ServerUI_ButtonRedHighlighted",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 1197561105239956024,
+      "width": 240,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RobotPanelGray.png",
+      "name": "ServerUI_RobotPanelGray",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 1254487759520013111,
+      "width": 144,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_Save.png",
+      "name": "ServerUI_Save",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 1373219550562779357,
+      "width": 46,
+      "height": 46,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ErrorTipBgB.png",
+      "name": "ServerUI_ErrorTipBgB",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 1455493947581074326,
+      "width": 798,
+      "height": 160,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_LoginBg.png",
+      "name": "ServerUI_LoginBg",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 1475155218266465296,
+      "width": 1920,
+      "height": 1080,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_DropdownBg.png",
+      "name": "ServerUI_DropdownBg",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 1601325477199520335,
+      "width": 800,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ButtonGreenDisabled.png",
+      "name": "ServerUI_ButtonGreenDisabled",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 1631531395540671132,
+      "width": 240,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/Background.png",
+      "name": "Background",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 1660267235368898380,
+      "width": 32,
+      "height": 32,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RobotPanelLinePoint.png",
+      "name": "ServerUI_RobotPanelLinePoint",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 1838245986479567550,
+      "width": 8,
+      "height": 9,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ButtonRedFrameDisabled.png",
+      "name": "ServerUI_ButtonRedFrameDisabled",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 2079714972630262695,
+      "width": 240,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/DropdownArrow.png",
+      "name": "DropdownArrow",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 2243129044327272268,
+      "width": 24,
+      "height": 16,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ButtonYellowDisabled.png",
+      "name": "ServerUI_ButtonYellowDisabled",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 2277075939180856338,
+      "width": 240,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/icon_region.png",
+      "name": "icon_region",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 2493099499968771125,
+      "width": 84,
+      "height": 84,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_WhiteFile.png",
+      "name": "ServerUI_WhiteFile",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 2501950166344674803,
+      "width": 64,
+      "height": 64,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RobotPanelSelectDot.png",
+      "name": "ServerUI_RobotPanelSelectDot",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 2693579506824590291,
+      "width": 16,
+      "height": 16,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RobotPanelBG241.png",
+      "name": "ServerUI_RobotPanelBG241",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 2823990030573380281,
+      "width": 960,
+      "height": 482,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RobotPanelSolidLine.png",
+      "name": "ServerUI_RobotPanelSolidLine",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 3015301188246953891,
+      "width": 814,
+      "height": 2,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_Quit.png",
+      "name": "ServerUI_Quit",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 3461661203239928895,
+      "width": 27,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_StepConPageBg.png",
+      "name": "ServerUI_StepConPageBg",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 3526383296875282909,
+      "width": 1256,
+      "height": 408,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RobotPanelGrayBg.png",
+      "name": "ServerUI_RobotPanelGrayBg",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 3928556029108216301,
+      "width": 192,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/start_content.png",
+      "name": "start_content",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 3983148899353943109,
+      "width": 30,
+      "height": 30,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ButtonWhiteDisabled.png",
+      "name": "ServerUI_ButtonWhiteDisabled",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 4387671514700819757,
+      "width": 256,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ButtonLightDisabled.png",
+      "name": "ServerUI_ButtonLightDisabled",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 4392907170256497491,
+      "width": 240,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RobotPanel.png",
+      "name": "ServerUI_RobotPanel",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 4448653228577091201,
+      "width": 2048,
+      "height": 1457,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/clientopt.png",
+      "name": "clientopt",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 4608259997471729168,
+      "width": 44,
+      "height": 43,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RobotPanelYellowBg.png",
+      "name": "ServerUI_RobotPanelYellowBg",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 4724334196024390112,
+      "width": 192,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_SwitchBgBlue.png",
+      "name": "ServerUI_SwitchBgBlue",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 4762702550459081399,
+      "width": 144,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_NetWorkGreenImage.png",
+      "name": "ServerUI_NetWorkGreenImage",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 4819505933908043871,
+      "width": 64,
+      "height": 64,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_Logo.png",
+      "name": "ServerUI_Logo",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 4933644701834209708,
+      "width": 311,
+      "height": 36,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_TriangleBg.png",
+      "name": "ServerUI_TriangleBg",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 5133181329503068081,
+      "width": 21,
+      "height": 16,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/clear_button.png",
+      "name": "clear_button",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 5160427564062688637,
+      "width": 32,
+      "height": 32,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ButtonLightHighlighted.png",
+      "name": "ServerUI_ButtonLightHighlighted",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 5187447162563380191,
+      "width": 240,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_Success.png",
+      "name": "ServerUI_Success",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 5244758820497130481,
+      "width": 32,
+      "height": 32,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ButtonYellowNormal.png",
+      "name": "ServerUI_ButtonYellowNormal",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 5342001422647394015,
+      "width": 240,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_WeChartQR.png",
+      "name": "ServerUI_WeChartQR",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 5356313245135136920,
+      "width": 200,
+      "height": 200,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/arrow-double-right.png",
+      "name": "arrow-double-right",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 5740828622838939034,
+      "width": 44,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/UISprite.png",
+      "name": "UISprite",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 5837791642106728268,
+      "width": 32,
+      "height": 32,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ButtonYellowHighlighted.png",
+      "name": "ServerUI_ButtonYellowHighlighted",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 5899074865148985993,
+      "width": 240,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ButtonYellowPressed.png",
+      "name": "ServerUI_ButtonYellowPressed",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 5916203490379512653,
+      "width": 240,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RobotPanelSelectBorder.png",
+      "name": "ServerUI_RobotPanelSelectBorder",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 5941396779356025117,
+      "width": 32,
+      "height": 32,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ButtonRedFrameHighlighted.png",
+      "name": "ServerUI_ButtonRedFrameHighlighted",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 6001640395312220790,
+      "width": 240,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ButtonRedPressed.png",
+      "name": "ServerUI_ButtonRedPressed",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 6315700409405293363,
+      "width": 240,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RobotPanelDottedLine.png",
+      "name": "ServerUI_RobotPanelDottedLine.png",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 6376006044295759814,
+      "width": 814,
+      "height": 2,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/Checkmark.png",
+      "name": "Checkmark",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 6419449077939965772,
+      "width": 27,
+      "height": 23,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_LoginStatusBg.png",
+      "name": "ServerUI_LoginStatusBg",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 6549290240124093753,
+      "width": 652,
+      "height": 160,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_StepPageBg.png",
+      "name": "ServerUI_StepPageBg",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 6660830599818110694,
+      "width": 1336,
+      "height": 816,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ButtonWhitePressed.png",
+      "name": "ServerUI_ButtonWhitePressed",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 6840655156652040903,
+      "width": 256,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_WarnWhite.png",
+      "name": "ServerUI_WarnWhite",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 7002136866357132082,
+      "width": 32,
+      "height": 32,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_LoginPageBg.png",
+      "name": "ServerUI_LoginPageBg",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 7074803177849341613,
+      "width": 1400,
+      "height": 1000,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ButtonWhiteHighlighted.png",
+      "name": "ServerUI_ButtonWhiteHighlighted",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 7092461651740795158,
+      "width": 256,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_WhiteCircle.png",
+      "name": "ServerUI_WhiteCircle",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 7362885454252311946,
+      "width": 64,
+      "height": 64,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_LoginMask.png",
+      "name": "ServerUI_LoginMask",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 7866285112271419087,
+      "width": 1920,
+      "height": 1080,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RobotPanelYellow.png",
+      "name": "ServerUI_RobotPanelYellow",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 8029638038003406446,
+      "width": 168,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_GMInput.png",
+      "name": "ServerUI_GMInput",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 8084204269330269434,
+      "width": 1240,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_Setting.png",
+      "name": "ServerUI_Setting",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 8329506652708536540,
+      "width": 46,
+      "height": 46,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/InputFieldBackground.png",
+      "name": "InputFieldBackground",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 8385535716932718412,
+      "width": 32,
+      "height": 32,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/Img-Bg-S1KV 1.png",
+      "name": "Img-Bg-S1KV 1",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 8395956263292548817,
+      "width": 1920,
+      "height": 1204,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_BlueCheck.png",
+      "name": "ServerUI_BlueCheck",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 8549076317895730938,
+      "width": 38,
+      "height": 28,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_MinusLevel.png",
+      "name": "ServerUI_MinusLevel",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 8643475469889667964,
+      "width": 48,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_NetWorkRedImage.png",
+      "name": "ServerUI_NetWorkRedImage",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": 8728195352557979366,
+      "width": 64,
+      "height": 64,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/setting_bg_1.png",
+      "name": "setting_bg_1",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/popmanager_assets_all_5f629c7a76a1c27a3b924b6d77e00545.bundle",
+      "asset_file": "CAB-9337952430693c1b36fa6eaf25b6a189",
+      "path_id": -8957436759952087523,
+      "width": 2048,
+      "height": 857,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/UI.png",
+      "name": "UI",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/popmanager_assets_all_5f629c7a76a1c27a3b924b6d77e00545.bundle",
+      "asset_file": "CAB-9337952430693c1b36fa6eaf25b6a189",
+      "path_id": -7929143092851232066,
+      "width": 1575,
+      "height": 882,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/tab_header_hurt.png",
+      "name": "tab_header_hurt",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/popmanager_assets_all_5f629c7a76a1c27a3b924b6d77e00545.bundle",
+      "asset_file": "CAB-9337952430693c1b36fa6eaf25b6a189",
+      "path_id": -7111546763645309747,
+      "width": 1000,
+      "height": 132,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/tab_background.png",
+      "name": "tab_background",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/popmanager_assets_all_5f629c7a76a1c27a3b924b6d77e00545.bundle",
+      "asset_file": "CAB-9337952430693c1b36fa6eaf25b6a189",
+      "path_id": -5654315749644383034,
+      "width": 1364,
+      "height": 724,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/MaskTips-Warning-560.png",
+      "name": "MaskTips-Warning-560",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/popmanager_assets_all_5f629c7a76a1c27a3b924b6d77e00545.bundle",
+      "asset_file": "CAB-9337952430693c1b36fa6eaf25b6a189",
+      "path_id": -4850837774844843181,
+      "width": 584,
+      "height": 124,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/supply_gb.png",
+      "name": "supply_gb",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/popmanager_assets_all_5f629c7a76a1c27a3b924b6d77e00545.bundle",
+      "asset_file": "CAB-9337952430693c1b36fa6eaf25b6a189",
+      "path_id": -2767652346292285394,
+      "width": 500,
+      "height": 303,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/background_style_1.png",
+      "name": "background_style_1",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/popmanager_assets_all_5f629c7a76a1c27a3b924b6d77e00545.bundle",
+      "asset_file": "CAB-9337952430693c1b36fa6eaf25b6a189",
+      "path_id": -1139126487918536882,
+      "width": 1920,
+      "height": 1080,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RobotClose.png",
+      "name": "ServerUI_RobotClose",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -9155086220440814782,
+      "width": 34,
+      "height": 34,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_BlueBaseOpen.png",
+      "name": "ServerUI_BlueBaseOpen",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -9021974935166391593,
+      "width": 64,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_InfoCircle.png",
+      "name": "ServerUI_InfoCircle",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -9018442082501711466,
+      "width": 32,
+      "height": 32,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RedSupply.png",
+      "name": "ServerUI_RedSupply",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -8860029417451549382,
+      "width": 57,
+      "height": 53,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RedBaseOpen.png",
+      "name": "ServerUI_RedBaseOpen",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -8613664711276768686,
+      "width": 64,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2022_16.png",
+      "name": "rune_2022_16",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -8603344580742229975,
+      "width": 80,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2022_cool_UP.png",
+      "name": "buff_2022_cool_UP",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -8457053026283360674,
+      "width": 59,
+      "height": 64,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_guard_defence.png",
+      "name": "buff_guard_defence",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -8342055989637047653,
+      "width": 109,
+      "height": 124,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/none_warn.png",
+      "name": "none_warn",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -7998665761081821037,
+      "width": 188,
+      "height": 64,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_EXP_1.5.png",
+      "name": "buff_EXP_1.5",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -7857369447989882949,
+      "width": 72,
+      "height": 54,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_BlueAirBg_Light.png",
+      "name": "ServerUI_BlueAirBg_Light",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -7840532815531907607,
+      "width": 574,
+      "height": 342,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/debuff_2023_shield_40.png",
+      "name": "debuff_2023_shield_40",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -7745348087311315437,
+      "width": 116,
+      "height": 133,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RedBaseShield.png",
+      "name": "ServerUI_RedBaseShield",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -7564885397064521465,
+      "width": 35,
+      "height": 40,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_BloodBG.png",
+      "name": "ServerUI_BloodBG",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -7476840570034751800,
+      "width": 752,
+      "height": 56,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2020_shield_100.png",
+      "name": "buff_2020_shield_100",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -7260638498068427653,
+      "width": 44,
+      "height": 52,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RedCircle.png",
+      "name": "ServerUI_RedCircle",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -7254537043399651679,
+      "width": 24,
+      "height": 24,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ExShooterWarn.png",
+      "name": "ServerUI_ExShooterWarn",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -7211101751234231852,
+      "width": 48,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_Life.png",
+      "name": "ServerUI_Life",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -7075726461862247061,
+      "width": 44,
+      "height": 40,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_BlueBroadcast.png",
+      "name": "ServerUI_BlueBroadcast",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -6949927497655856134,
+      "width": 116,
+      "height": 96,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2020_fly_cyan.png",
+      "name": "buff_2020_fly_cyan",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -6874042609691178602,
+      "width": 66,
+      "height": 38,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2023_defense_25.png",
+      "name": "rune_2023_defense_25",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -6818027142355315778,
+      "width": 55,
+      "height": 65,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2020_cool_2.png",
+      "name": "buff_2020_cool_2",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -6654062697538436453,
+      "width": 53,
+      "height": 58,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/red_warn.png",
+      "name": "red_warn",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -6630273885018091147,
+      "width": 188,
+      "height": 64,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_GoldMineIcon.png",
+      "name": "ServerUI_GoldMineIcon",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -6603838442674660185,
+      "width": 56,
+      "height": 56,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2023_shield_75.png",
+      "name": "buff_2023_shield_75",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -6589481639915275824,
+      "width": 55,
+      "height": 65,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/BGLine.png",
+      "name": "BGLine",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -6281789147314244160,
+      "width": 1464,
+      "height": 2,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2023_attack_160.png",
+      "name": "rune_2023_attack_160",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -5753961286551441225,
+      "width": 53,
+      "height": 69,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2020_fly_green.png",
+      "name": "buff_2020_fly_green",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -5743392546323286261,
+      "width": 66,
+      "height": 38,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RedFlycat.png",
+      "name": "ServerUI_RedFlycat",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -5725774325976599919,
+      "width": 56,
+      "height": 52,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2022_18.png",
+      "name": "rune_2022_18",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -5601941362075545068,
+      "width": 80,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_big_2022.png",
+      "name": "rune_big_2022",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -5529148771773654491,
+      "width": 80,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/mask.png",
+      "name": "mask",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -5470841760507730289,
+      "width": 192,
+      "height": 192,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_restore.png",
+      "name": "buff_restore",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -5418049215531635413,
+      "width": 60,
+      "height": 60,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_BlueExchangeStation.png",
+      "name": "ServerUI_BlueExchangeStation",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -5396194257870175572,
+      "width": 64,
+      "height": 62,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/red.png",
+      "name": "red",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -5231599033892022274,
+      "width": 120,
+      "height": 120,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RedBlood.png",
+      "name": "ServerUI_RedBlood",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -5216643050784139639,
+      "width": 735,
+      "height": 40,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ExShooterRedWarn.png",
+      "name": "ServerUI_ExShooterRedWarn",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -5186820391232536368,
+      "width": 48,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_BlueCircle.png",
+      "name": "ServerUI_BlueCircle",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -4956373767509594673,
+      "width": 24,
+      "height": 24,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2020_addhp_5.png",
+      "name": "buff_2020_addhp_5",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -4913383046620436192,
+      "width": 54,
+      "height": 65,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_Winner.png",
+      "name": "ServerUI_Winner",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -4788523195278680254,
+      "width": 187,
+      "height": 77,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_Robot42mm.png",
+      "name": "ServerUI_Robot42mm",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -4744872736579442517,
+      "width": 48,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2022_12.png",
+      "name": "rune_2022_12",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -4560161536725833003,
+      "width": 80,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_centralPoint_stage1.png",
+      "name": "buff_centralPoint_stage1",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -4494521680982323565,
+      "width": 80,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_BlueOutpostBlood.png",
+      "name": "ServerUI_BlueOutpostBlood",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -4477767957960899104,
+      "width": 210,
+      "height": 40,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/thumb.png",
+      "name": "thumb",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -4339391480061600063,
+      "width": 48,
+      "height": 49,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_NotifySuccess.png",
+      "name": "ServerUI_NotifySuccess",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -4124536976188289166,
+      "width": 60,
+      "height": 60,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2022_fly_green.png",
+      "name": "buff_2022_fly_green",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -4049773252894099020,
+      "width": 88,
+      "height": 88,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_wifislash.png",
+      "name": "ServerUI_wifislash",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -4038720826645271233,
+      "width": 40,
+      "height": 36,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2023_attack_180.png",
+      "name": "rune_2023_attack_180",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -4024666208534399886,
+      "width": 52,
+      "height": 69,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_TCLow.png",
+      "name": "ServerUI_TCLow",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -3955792444947019801,
+      "width": 40,
+      "height": 36,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_defendence80percent.png",
+      "name": "buff_defendence80percent",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -3743011864754136694,
+      "width": 60,
+      "height": 60,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ValidateRobotRed.png",
+      "name": "ServerUI_ValidateRobotRed",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -3731270530440095363,
+      "width": 200,
+      "height": 24,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RedBlueCircle.png",
+      "name": "ServerUI_RedBlueCircle",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -3714394381826168975,
+      "width": 24,
+      "height": 24,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2022_42_11.png",
+      "name": "rune_2022_42_11",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -3645495724425436966,
+      "width": 80,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2022_42_13.png",
+      "name": "rune_2022_42_13",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -3553579212922760951,
+      "width": 80,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/debuff_2023_shield_15.png",
+      "name": "debuff_2023_shield_15",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -3506040722341065197,
+      "width": 60,
+      "height": 69,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_GripperOpen.png",
+      "name": "ServerUI_GripperOpen",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -3310849169345216214,
+      "width": 39,
+      "height": 41,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_TCWarning.png",
+      "name": "ServerUI_TCWarning",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -3299002516201255987,
+      "width": 40,
+      "height": 36,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2022_fly_cyan.png",
+      "name": "buff_2022_fly_cyan",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -3283538133388472213,
+      "width": 88,
+      "height": 88,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_BlueAirBg.png",
+      "name": "ServerUI_BlueAirBg",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -3263291503434783444,
+      "width": 574,
+      "height": 342,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/debuff_2023_shield_20.png",
+      "name": "debuff_2023_shield_20",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -3122942628959352410,
+      "width": 116,
+      "height": 133,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_BloodMiddleBG.png",
+      "name": "ServerUI_BloodMiddleBG",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -2930996172785270658,
+      "width": 744,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RedBase.png",
+      "name": "ServerUI_RedBase",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -2926531038353418501,
+      "width": 64,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_EXP_2.png",
+      "name": "buff_EXP_2",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -2739497009547654241,
+      "width": 71,
+      "height": 54,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2024_fly_gonglu_green.png",
+      "name": "buff_2024_fly_gonglu_green",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -2659371173055764201,
+      "width": 66,
+      "height": 37,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2023_defense_30.png",
+      "name": "rune_2023_defense_30",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -2654618658541661269,
+      "width": 55,
+      "height": 65,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_BlueBaseShield.png",
+      "name": "ServerUI_BlueBaseShield",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -2654347633576586871,
+      "width": 35,
+      "height": 40,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RedAirBg_Light.png",
+      "name": "ServerUI_RedAirBg_Light",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -2589728152522994284,
+      "width": 575,
+      "height": 342,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_GripperClose.png",
+      "name": "ServerUI_GripperClose",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -2548419026737744188,
+      "width": 34,
+      "height": 41,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_GainPointActive.png",
+      "name": "ServerUI_GainPointActive",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -2441678528874563661,
+      "width": 54,
+      "height": 60,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2024_fly_gonglu_blue.png",
+      "name": "buff_2024_fly_gonglu_blue",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -2387126727342349750,
+      "width": 65,
+      "height": 37,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2023_defense_50.png",
+      "name": "rune_2023_defense_50",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -2259467908688579521,
+      "width": 55,
+      "height": 65,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2023_attack_400.png",
+      "name": "rune_2023_attack_400",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -2104972873815153352,
+      "width": 47,
+      "height": 65,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2020_addhp_10.png",
+      "name": "buff_2020_addhp_10",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -1960462633745060332,
+      "width": 54,
+      "height": 65,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2020_cirle_empty.png",
+      "name": "buff_2020_cirle_empty",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -1951912103757659628,
+      "width": 80,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2023_attack_100.png",
+      "name": "rune_2023_attack_100",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -1914089111139313322,
+      "width": 47,
+      "height": 69,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_guard_attack.png",
+      "name": "buff_guard_attack",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -1884345846283395185,
+      "width": 105,
+      "height": 88,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ExShooter.png",
+      "name": "ServerUI_ExShooter",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -1758036569929377401,
+      "width": 48,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2024_gold_1.5.png",
+      "name": "buff_2024_gold_1.5",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -1724831394956219272,
+      "width": 53,
+      "height": 63,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ExceptionTipBg.png",
+      "name": "ServerUI_ExceptionTipBg",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -1593620176720265981,
+      "width": 594,
+      "height": 96,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_BlueFlycat.png",
+      "name": "ServerUI_BlueFlycat",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -1243778566888168964,
+      "width": 56,
+      "height": 52,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_BlueOutpost.png",
+      "name": "ServerUI_BlueOutpost",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -1176127366540633952,
+      "width": 44,
+      "height": 58,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/yellow_warn.png",
+      "name": "yellow_warn",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -1110832865472247863,
+      "width": 188,
+      "height": 64,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2020_shield_50.png",
+      "name": "buff_2020_shield_50",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -1063290430057042660,
+      "width": 55,
+      "height": 65,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2023_attack_50.png",
+      "name": "rune_2023_attack_50",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -1037090614277015423,
+      "width": 54,
+      "height": 69,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_LongPopTip.png",
+      "name": "ServerUI_LongPopTip",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -1028364346661157629,
+      "width": 612,
+      "height": 64,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ValidateRobotBlue.png",
+      "name": "ServerUI_ValidateRobotBlue.png",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -995150832060431433,
+      "width": 200,
+      "height": 24,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2023_defense_35.png",
+      "name": "rune_2023_defense_35",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -982763798834412167,
+      "width": 55,
+      "height": 65,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2023_shield_60.png",
+      "name": "buff_2023_shield_60",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -919676404576564972,
+      "width": 55,
+      "height": 65,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2023_attack_200.png",
+      "name": "rune_2023_attack_200",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -895349913212913177,
+      "width": 47,
+      "height": 65,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/border_time_green.png",
+      "name": "border_time_green",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -890026352658057900,
+      "width": 90,
+      "height": 90,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_BlueLaunch.png",
+      "name": "ServerUI_BlueLaunch",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -882585820859202612,
+      "width": 58,
+      "height": 53,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_BuyBlood.png",
+      "name": "ServerUI_BuyBlood",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -826536835763771571,
+      "width": 36,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_SilverMineIcon.png",
+      "name": "ServerUI_SilverMineIcon",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -801676056780527746,
+      "width": 56,
+      "height": 56,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2023_attack_75.png",
+      "name": "rune_2023_attack_75",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -762927114607900450,
+      "width": 65,
+      "height": 69,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_BlueRune.png",
+      "name": "ServerUI_BlueRune",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -732856676667232756,
+      "width": 60,
+      "height": 52,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2023_defense_45.png",
+      "name": "rune_2023_defense_45",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -624896902302314392,
+      "width": 55,
+      "height": 65,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_NotifyShrinkHighlighted.png",
+      "name": "ServerUI_NotifyShrinkHighlighted",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -584661765958451733,
+      "width": 68,
+      "height": 68,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2024_fly_gaodi_green.png",
+      "name": "buff_2024_fly_gaodi_green",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -488583977225054530,
+      "width": 75,
+      "height": 45,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2023_defense_100.png",
+      "name": "rune_2023_defense_100",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -381902120678666378,
+      "width": 70,
+      "height": 78,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_BlueBaseOff.png",
+      "name": "ServerUI_BlueBaseOff",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -147670993998343256,
+      "width": 64,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2020_cool_5.png",
+      "name": "buff_2020_cool_5",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -124245558701492763,
+      "width": 53,
+      "height": 58,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_OutpostBloodBG.png",
+      "name": "ServerUI_OutpostBloodBG",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -25483593325579335,
+      "width": 226,
+      "height": 56,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2022_cool_5.png",
+      "name": "buff_2022_cool_5",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -23892123008284773,
+      "width": 88,
+      "height": 88,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_NotifyExpandHighlighted.png",
+      "name": "ServerUI_NotifyExpandHighlighted",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": -11923942351852296,
+      "width": 68,
+      "height": 68,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_NoTuChuan.png",
+      "name": "ServerUI_NoTuChuan",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 819805900081495,
+      "width": 40,
+      "height": 36,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_NotifyExpand.png",
+      "name": "ServerUI_NotifyExpand",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 36153519812748703,
+      "width": 68,
+      "height": 68,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/debuff_2023_shield_30.png",
+      "name": "debuff_2023_shield_30",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 216663412790298814,
+      "width": 60,
+      "height": 69,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_heavydefendence.png",
+      "name": "buff_heavydefendence",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 288861262072822978,
+      "width": 54,
+      "height": 54,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2023_attack_60.png",
+      "name": "rune_2023_attack_60",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 373826187097836003,
+      "width": 53,
+      "height": 69,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RedAirBg.png",
+      "name": "ServerUI_RedAirBg",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 560131828243850816,
+      "width": 575,
+      "height": 342,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_DevExceptionBg.png",
+      "name": "ServerUI_DevExceptionBg",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 739103217791908203,
+      "width": 280,
+      "height": 44,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/whiteline.png",
+      "name": "whiteline",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 764362376477256638,
+      "width": 188,
+      "height": 4,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_Expand.png",
+      "name": "ServerUI_Expand",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 827842966501313526,
+      "width": 32,
+      "height": 21,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_bullet.png",
+      "name": "buff_bullet",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 917288767450304736,
+      "width": 60,
+      "height": 60,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/track_white.png",
+      "name": "track_white",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 940883925062481550,
+      "width": 720,
+      "height": 4,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2026_tunnel_ac.png",
+      "name": "buff_2026_tunnel_ac",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 1034150931030673840,
+      "width": 92,
+      "height": 108,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buffBigRune.png",
+      "name": "buffBigRune",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 1125200216046572559,
+      "width": 58,
+      "height": 60,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_NotifyInfo.png",
+      "name": "ServerUI_NotifyInfo",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 1325631758844036495,
+      "width": 60,
+      "height": 60,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_BlueBlood.png",
+      "name": "ServerUI_BlueBlood",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 1369332173579484830,
+      "width": 735,
+      "height": 40,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RobotExceptionBg.png",
+      "name": "ServerUI_RobotExceptionBg",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 1384278315925858052,
+      "width": 280,
+      "height": 44,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2023_defense_40.png",
+      "name": "rune_2023_defense_40",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 1670132652186555870,
+      "width": 55,
+      "height": 65,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_NotifyWarning.png",
+      "name": "ServerUI_NotifyWarning",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 2045885458447100352,
+      "width": 60,
+      "height": 60,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_NotifyError.png",
+      "name": "ServerUI_NotifyError",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 2048820730222331363,
+      "width": 60,
+      "height": 56,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RobotYellowCard.png",
+      "name": "ServerUI_RobotYellowCard",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 2066732791318056767,
+      "width": 32,
+      "height": 46,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_normal_15.png",
+      "name": "rune_normal_15",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 2110742759166447789,
+      "width": 80,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2020_cirle_cyan.png",
+      "name": "buff_2020_cirle_cyan",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 2123293851970494885,
+      "width": 80,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2024_gold_2.png",
+      "name": "buff_2024_gold_2",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 2351033917187262562,
+      "width": 52,
+      "height": 63,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_guard_move.png",
+      "name": "buff_guard_move",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 2352518625773604664,
+      "width": 118,
+      "height": 110,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2022_attack15.png",
+      "name": "buff_2022_attack15",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 2778504658233425830,
+      "width": 67,
+      "height": 73,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ShortPopTip.png",
+      "name": "ServerUI_ShortPopTip",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 2800405741300831391,
+      "width": 414,
+      "height": 64,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_GainPoint.png",
+      "name": "ServerUI_GainPoint",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 2967597024189136918,
+      "width": 54,
+      "height": 60,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2023_attack_140.png",
+      "name": "rune_2023_attack_140",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 3018740523080865440,
+      "width": 52,
+      "height": 69,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/track_black.png",
+      "name": "track_black",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 3111873908408212454,
+      "width": 720,
+      "height": 4,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2022_14.png",
+      "name": "rune_2022_14",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 3187298159044670299,
+      "width": 80,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_smallrune.png",
+      "name": "buff_smallrune",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 3200849386687865900,
+      "width": 54,
+      "height": 60,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2023_attack_280.png",
+      "name": "rune_2023_attack_280",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 3454224422829288699,
+      "width": 52,
+      "height": 69,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RobotBullets.png",
+      "name": "ServerUI_RobotBullets",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 3476898082110450312,
+      "width": 40,
+      "height": 41,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2023_attack_55.png",
+      "name": "rune_2023_attack_55",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 3567319316053429741,
+      "width": 65,
+      "height": 69,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2020_addhp_2.png",
+      "name": "buff_2020_addhp_2",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 3699874485495207313,
+      "width": 50,
+      "height": 57,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_NotifyShrinkPressed.png",
+      "name": "ServerUI_NotifyShrinkPressed",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 3818976400452667703,
+      "width": 68,
+      "height": 68,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RedOutpostBlood.png",
+      "name": "ServerUI_RedOutpostBlood",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 3825522462550193820,
+      "width": 210,
+      "height": 40,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2020_rune_big.png",
+      "name": "buff_2020_rune_big",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 3933201034626781620,
+      "width": 42,
+      "height": 60,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RedLaunch.png",
+      "name": "ServerUI_RedLaunch",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 3949049166635834294,
+      "width": 58,
+      "height": 53,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_42mmNum.png",
+      "name": "ServerUI_42mmNum",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 3952337096709977108,
+      "width": 48,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_TCSpeed.png",
+      "name": "ServerUI_TCSpeed",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 4239193422618268465,
+      "width": 84,
+      "height": 60,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_NotifyShrink.png",
+      "name": "ServerUI_NotifyShrink",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 4378119651533661952,
+      "width": 68,
+      "height": 68,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_Network.png",
+      "name": "ServerUI_Network",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 4483341774786514477,
+      "width": 48,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2020_cirle_green.png",
+      "name": "buff_2020_cirle_green",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 4489459144576734804,
+      "width": 80,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_BlueSupply.png",
+      "name": "ServerUI_BlueSupply",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 4521413995542448022,
+      "width": 57,
+      "height": 53,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_17mmNum.png",
+      "name": "ServerUI_17mmNum",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 4743888626598018568,
+      "width": 48,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_lightdefendence.png",
+      "name": "buff_lightdefendence",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 4761251210667995003,
+      "width": 60,
+      "height": 60,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_Sheild.png",
+      "name": "ServerUI_Sheild",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 4831340820248853319,
+      "width": 144,
+      "height": 40,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RedPK.png",
+      "name": "ServerUI_RedPK",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 4863162383190861638,
+      "width": 145,
+      "height": 82,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_NotifyClearHighlighted.png",
+      "name": "ServerUI_NotifyClearHighlighted",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 4889715284076530854,
+      "width": 84,
+      "height": 84,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/debuff_2023_shield_100.png",
+      "name": "debuff_2023_shield_100",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 5049476196475056914,
+      "width": 72,
+      "height": 69,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_BlueBase.png",
+      "name": "ServerUI_BlueBase",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 5120889367221253276,
+      "width": 64,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ShowTip.png",
+      "name": "ServerUI_ShowTip",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 5207876963235284322,
+      "width": 28,
+      "height": 32,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RedRune.png",
+      "name": "ServerUI_RedRune",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 5221758684393523742,
+      "width": 60,
+      "height": 52,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2022_42_12.png",
+      "name": "rune_2022_42_12",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 5383522179425356433,
+      "width": 80,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_Buy17mm.png",
+      "name": "ServerUI_Buy17mm",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 5439197343023883466,
+      "width": 52,
+      "height": 52,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ValidateMiddleBlue.png",
+      "name": "ServerUI_ValidateMiddleBlue",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 5464229271051419288,
+      "width": 800,
+      "height": 24,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2023_attack_360.png",
+      "name": "rune_2023_attack_360",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 5596851117269148798,
+      "width": 53,
+      "height": 69,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_YellowCircle.png",
+      "name": "ServerUI_YellowCircle",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 5620725399197302279,
+      "width": 24,
+      "height": 24,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2020_42.png",
+      "name": "buff_2020_42",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 5809718112350569104,
+      "width": 60,
+      "height": 60,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ValidateBloodBg.png",
+      "name": "ServerUI_ValidateBloodBg",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 5846554285155820926,
+      "width": 200,
+      "height": 24,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_NotifyClear.png",
+      "name": "ServerUI_NotifyClear",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 5894857694132561486,
+      "width": 84,
+      "height": 84,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_normal_12.png",
+      "name": "rune_normal_12",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 5956259793589002879,
+      "width": 80,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2020_addhp_25.png",
+      "name": "buff_2020_addhp_25",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 5976502371305022898,
+      "width": 54,
+      "height": 65,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/debuff_2023_shield_25.png",
+      "name": "debuff_2023_shield_25",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 6071965749512350520,
+      "width": 116,
+      "height": 133,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2022_42_14.png",
+      "name": "rune_2022_42_14",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 6098624439911630933,
+      "width": 80,
+      "height": 80,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_ValidateMiddleRed.png",
+      "name": "ServerUI_ValidateMiddleRed",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 6177505801824371854,
+      "width": 800,
+      "height": 24,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_NotifyClearPressed.png",
+      "name": "ServerUI_NotifyClearPressed",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 6379208613416254853,
+      "width": 84,
+      "height": 84,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_Revive.png",
+      "name": "ServerUI_Revive",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 6471981072465724465,
+      "width": 240,
+      "height": 32,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2020_cirle_orange.png",
+      "name": "buff_2020_cirle_orange",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 6531073374253141852,
+      "width": 176,
+      "height": 176,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_NoTip.png",
+      "name": "ServerUI_NoTip",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 6614044877127322394,
+      "width": 26,
+      "height": 32,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_BaseInvincible.png",
+      "name": "ServerUI_BaseInvincible",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 6629987370157774433,
+      "width": 760,
+      "height": 56,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RedBroadcast.png",
+      "name": "ServerUI_RedBroadcast",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 6826138561340601014,
+      "width": 116,
+      "height": 96,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_NotifyExpandPressed.png",
+      "name": "ServerUI_NotifyExpandPressed",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 6944992237786025480,
+      "width": 68,
+      "height": 68,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2023_attack_240.png",
+      "name": "rune_2023_attack_240",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 7200915560824559667,
+      "width": 52,
+      "height": 69,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_NoClient.png",
+      "name": "ServerUI_NoClient",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 7522232600577558377,
+      "width": 40,
+      "height": 36,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_BluePK.png",
+      "name": "ServerUI_BluePK",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 7706712486456968012,
+      "width": 145,
+      "height": 82,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_WarnTip.png",
+      "name": "ServerUI_WarnTip",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 7723083180830419976,
+      "width": 24,
+      "height": 24,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2022_cool_2.png",
+      "name": "buff_2022_cool_2",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 7774381049127867261,
+      "width": 88,
+      "height": 88,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_OutpostBloodMiddleBG.png",
+      "name": "ServerUI_OutpostBloodMiddleBG",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 7781015609969071956,
+      "width": 218,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2020_addhp_100.png",
+      "name": "buff_2020_addhp_100",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 7869076502523250857,
+      "width": 54,
+      "height": 50,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2020_rune_small.png",
+      "name": "buff_2020_rune_small",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 7898215366244471566,
+      "width": 47,
+      "height": 60,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2024_fly_gaodi_blue.png",
+      "name": "buff_2024_fly_gaodi_blue",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 8096493127974341627,
+      "width": 75,
+      "height": 45,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_Buy42mm.png",
+      "name": "ServerUI_Buy42mm",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 8119387970319039629,
+      "width": 52,
+      "height": 52,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RedOutpost.png",
+      "name": "ServerUI_RedOutpost",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 8162042054218079005,
+      "width": 44,
+      "height": 58,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2022_cool_3.png",
+      "name": "buff_2022_cool_3",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 8172876458150371441,
+      "width": 88,
+      "height": 88,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/blue.png",
+      "name": "blue",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 8192330085794889913,
+      "width": 120,
+      "height": 120,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2026_tunnel_b.png",
+      "name": "buff_2026_tunnel_b",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 8237913021433657286,
+      "width": 92,
+      "height": 108,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/border_time_blue.png",
+      "name": "border_time_blue",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 8407131913652057822,
+      "width": 90,
+      "height": 90,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_cooling.png",
+      "name": "buff_cooling",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 8671487997921281591,
+      "width": 59,
+      "height": 60,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2023_attack_120.png",
+      "name": "rune_2023_attack_120",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 8681302888824163003,
+      "width": 52,
+      "height": 69,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/rune_2023_attack_320.png",
+      "name": "rune_2023_attack_320",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 8714978252120816815,
+      "width": 52,
+      "height": 69,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_Shrink.png",
+      "name": "ServerUI_Shrink",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 8814349737216743820,
+      "width": 32,
+      "height": 21,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RedExchangeStation.png",
+      "name": "ServerUI_RedExchangeStation",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 8834801794811503105,
+      "width": 64,
+      "height": 62,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_flyslope.png",
+      "name": "buff_flyslope",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 8849461316715534210,
+      "width": 60,
+      "height": 51,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/border_time_red.png",
+      "name": "border_time_red",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 8993287198409355083,
+      "width": 90,
+      "height": 90,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2022_attack25.png",
+      "name": "buff_2022_attack25",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 8997761881068555864,
+      "width": 88,
+      "height": 88,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/ServerUI_RedBaseOff.png",
+      "name": "ServerUI_RedBaseOff",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 9013287683565688147,
+      "width": 64,
+      "height": 48,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/buff_2020_cool_3.png",
+      "name": "buff_2020_cool_3",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/serverui_assets_all_bb017a8914817005f8b807a489e4e18c.bundle",
+      "asset_file": "CAB-a92a199ab38cfbf20dff81302d1e462d",
+      "path_id": 9192204395482886411,
+      "width": 53,
+      "height": 58,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/Img-Bg-HomeKV.png",
+      "name": "Img-Bg-HomeKV",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/splashpage_assets_all_8b0b5de4faff2b66d2ce01601301176d.bundle",
+      "asset_file": "CAB-5bfe49e63deb2f936cc298bd6703a475",
+      "path_id": 4568321525129546336,
+      "width": 1920,
+      "height": 1204,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/Elements-Slider-Active_2x.png",
+      "name": "Elements-Slider-Active@2x",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/splashpage_assets_all_8b0b5de4faff2b66d2ce01601301176d.bundle",
+      "asset_file": "CAB-5bfe49e63deb2f936cc298bd6703a475",
+      "path_id": 4745139963357204367,
+      "width": 576,
+      "height": 8,
+      "transformation": "原始导出 PNG，未重新绘制"
+    },
+    {
+      "file": "sprites/Elements-Slider-Norm_2x.png",
+      "name": "Elements-Slider-Norm@2x",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/splashpage_assets_all_8b0b5de4faff2b66d2ce01601301176d.bundle",
+      "asset_file": "CAB-5bfe49e63deb2f936cc298bd6703a475",
+      "path_id": 5928367022247695909,
+      "width": 576,
+      "height": 8,
+      "transformation": "原始导出 PNG，未重新绘制"
+    }
+  ]
+}

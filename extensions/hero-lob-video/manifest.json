@@ -1,0 +1,14 @@
+{
+  "apiVersion": 1,
+  "id": "hero.lob.video",
+  "role": "hero-video",
+  "host": "HeroVideoHost",
+  "buildOption": "ROBOMASTER_BUILD_HERO_LOB_VIDEO",
+  "configuration": {
+    "enabled": true,
+    "format": "annexb"
+  },
+  "configurationPath": "plugins.video.hero_video",
+  "lifecycle": "The compiled optional host creates an independent decoder only for a fresh connected own 2026 hero deployment. Exit, identity/session/rule retirement or disable joins the decoder worker and clears old images. Missing EncodedVideoFactory disables only this feature. Primary UDP/MQTT/QML remain independent.",
+  "contract": "CustomByteBlock.data contains up to300 bytes at up to50Hz. Explicit annexb or compact framing; no format sniffing, serial CRC invention, ROS sequence fields or synthetic trajectories. EncodedVideoFactory/1.0 creates a new unparented UI-thread endpoint; EncodedVideoInput/1.0 admits bounded compressed bytes and clears prior images on discontinuity. The manifest describes this compiled feature; it is not a native library discovery record or an installable rmplugin package."
+}

@@ -1,0 +1,12 @@
+{
+  "apiVersion": 1,
+  "id": "shark.local.roster",
+  "role": "local-ui-metadata",
+  "entry": "qml/SharkRoster.qml",
+  "configuration": {
+    "endpoint": "http://127.0.0.1:2026/api/roster",
+    "intervalMs": 1000
+  },
+  "lifecycle": "Start only for a connected loopback MQTT session; abort requests and clear items on disconnect. Missing extension or HTTP endpoint leaves core MQTT and HUD operational.",
+  "contract": "Supplemental local roster/registration/card/protection/rune/static/respawn, hero cooldown, aerial call, exchange quote/result, structure-display, dart lifecycle, rune hit history/count/window, explicit sentry RFID and engineer assembly run/partner/reward and explicit unit/settlement/zone metadata and explicit per-seat map position/heading/alive/localization metadata from the same simulator. Not additional official MQTT fields, official ACK or source attestation. Current HP/status/free support balance/spent coins, dart target/gate, rune average/arms and own core steps remain MQTT data. Own-sentry posture budgets and per-command eligibility/quotes/quantity are local supplements, qualified against fresh official posture flags; no gimbal-to-peer control implied. Explicit loopback gimbal-to-ally sentry views include real activation, prices and order states; quantity/activation use same-server local HTTP, never extra official MQTT fields or HTTP-generated official ACK. Optional rune_map supplies two explicit local positions and chosen real infantry-source models, qualified by source round/stage and wire/model consistency; never inferred from the observing seat RuneStatus or exported as official terrain coordinates. buff_views exposes the same models complete collection for known Buff types1..7 including independent positive/negative defence, plus separate explicit terrain sensor state. The original five-field MQTT Buff remains latest-only; no invented official collection packet, terrain enum or combat-effect computation."
+}

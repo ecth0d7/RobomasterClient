@@ -1,0 +1,13 @@
+import QmlProject 1.1
+
+// 可视化编辑沿用保留的26版HUD；此入口不创建生产后端。
+// 正式客户端和两个运行时UI入口请打开 ../CMakeLists.txt 构建运行。
+Project {
+    mainFile: "components/Player2026ReferenceWindow.qml"
+    mainUiFile: "components/UIForm.ui.qml"
+    importPaths: ["components", "imports"]
+    QmlFiles { directory: "components" }
+    QmlFiles { directory: "imports" }
+    ImageFiles { directory: "resources" }
+    qt6Project: true
+}

@@ -1,0 +1,10 @@
+{
+    "apiVersion": 1,
+    "id": "renderer.terminal.2d.v1",
+    "role": "terminal-renderer",
+    "contract": "org.robomaster.client.ExtensionPlugin/1.0",
+    "name": "Terminal normalized 2D renderer",
+    "version": "1.0.0",
+    "description": "Optional project scene projection; no official protocol, actions or UE dependency.",
+    "capabilities": ["renderer-scene/1", "renderer-projection/1", "normalized-2d", "text-only-fallback", "diagnostic-mock"]
+}

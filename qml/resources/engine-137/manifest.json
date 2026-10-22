@@ -1,0 +1,44 @@
+{
+  "source": "用户本地下载并确认的 RoboMasterEngine 12.0.0.137_Student.zip",
+  "version": "12.0.0.137_Student",
+  "archive_sha256": "61586fb4083399cbc5607f17e895af42b43b5199ee09522087f628e3354ea933",
+  "extractor": "UnityPy1.25.4",
+  "assets": [
+    {
+      "file": "checkbox-empty.png",
+      "name": "ServerUI_CheckNormal",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -9070421072852152754,
+      "sha256": "6fef0cef14365f00007dd0db9555bc5e5ea831113d05cd23d081d884e68b7717",
+      "bytes": 183,
+      "width": 32,
+      "height": 32,
+      "transformation": "原导出 PNG 字节保留"
+    },
+    {
+      "file": "checkbox-checked.png",
+      "name": "ServerUI_Check",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -8463923065881000797,
+      "sha256": "e38c02305a6c89eb48bd44c4027807a26904e0ce68d1e303f98461d92771bb1b",
+      "bytes": 284,
+      "width": 32,
+      "height": 25,
+      "transformation": "原导出 PNG 字节保留"
+    },
+    {
+      "file": "settings.png",
+      "name": "icon_common",
+      "source_bundle": "RoboMasterEngine_Data/StreamingAssets/aa/StandaloneWindows64/loginpage_assets_all_7d895f54cc15132c92dd6012b6a99b4b.bundle",
+      "asset_file": "CAB-8919b0959f7bf191580ef2196b355b08",
+      "path_id": -8415610430843890722,
+      "sha256": "c62a9fbca10ce0abd9afce0789c8de6b88b4c0b3dc976d6ab5249f5e8d9b92c0",
+      "bytes": 1525,
+      "width": 84,
+      "height": 80,
+      "transformation": "原导出 PNG 字节保留"
+    }
+  ]
+}

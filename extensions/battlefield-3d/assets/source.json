@@ -1,0 +1,23 @@
+{
+  "schema": "rm.field.asset/1",
+  "release": "rmuc2027-simplified-glb-20261018",
+  "url": "https://github.com/hxyulin/rm-map-tools/releases/tag/rmuc2027-simplified-glb-20261018",
+  "asset_file": "field-2027.glb",
+  "asset_sha256": "ef40412bae1324475aab47e908e150b7b21d66f233740561232df5adf7919882",
+  "geometry_terms": "DJI / RoboMaster source geometry and appearance; see CAD-NOTICE.md",
+  "presentation_frame": "centred Y-up, retained in GLB root; outer viewer rotates 180 degrees around Y",
+  "map_frame": "rm2027.field",
+  "source_data_frame": "rm2026.field",
+  "coordinate_adapter": "centred 28m x 15m presentation only; no claimed 2027 venue calibration",
+  "display_only": true,
+  "source_cad_sha256": "a5ad3ede3b7674fc98f2e73b71717216383cb2b4b5dcdbe900c2038918bea8e0",
+  "placed_triangles": 880181,
+  "model_floor_extent_m": [
+    28,
+    16.00313
+  ],
+  "viewer_2027_frame": "field.2027: lower-left XY metres, width28 height16; producer must supply venue calibration",
+  "legacy_2026_adapter": "field.2026: width28 height15; centred in model, preserves metric scale, explicitly illustrative",
+  "runtime_conversion": "Static opaque geometry batched by equivalent material and 7m spatial tile. Original asset retained as compatibility fallback; see field-2027-batched.source.json.",
+  "runtime_asset_file": "field-2027-batched.glb"
+}

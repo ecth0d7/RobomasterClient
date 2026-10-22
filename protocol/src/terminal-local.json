@@ -1,0 +1,10 @@
+{
+  "id": "protocol.terminal.local.v1",
+  "role": "protocol",
+  "apiVersion": 1,
+  "version": "1.0.0",
+  "name": "项目本地观测JSON / 非官方2027协议",
+  "wireFamily": "project.terminal.observation.json.v1",
+  "officialProtocol": false,
+  "robotCommands": false
+}

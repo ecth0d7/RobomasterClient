@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "release_tag": "rmuc2027-simplified-glb-20261018",
+  "tool_repository": "https://github.com/hxyulin/rm-map-tools",
+  "tool_commit": "c4f6edc68643666ae737ed733e18d777977240ec",
+  "source_cad_sha256": "a5ad3ede3b7674fc98f2e73b71717216383cb2b4b5dcdbe900c2038918bea8e0",
+  "visual_input": "out/rmuc2027-equipment-shells/candidate-field.glb",
+  "visual_input_sha256": "ef40412bae1324475aab47e908e150b7b21d66f233740561232df5adf7919882",
+  "source_pipeline": "benchmarks/2026-10-17-equipment-shells/README.md",
+  "placed_visual_triangles": 880181,
+  "stored_visual_triangles": 475807,
+  "mesh_definitions": 2819,
+  "material_primitives": 3027,
+  "embedded_images": 1,
+  "units": "metres",
+  "presentation_frame": "centred Y-up through retained root transform",
+  "source_origin_m": [
+    7.20660500064696e-06,
+    1.6243436764999997,
+    -1.640343675041
+  ],
+  "scope": "Higher-fidelity simplified static visual scene before experimental Low LOD; no collider or simulator binding package.",
+  "archive_policy": {
+    "format": "tar.zst",
+    "level": 22,
+    "frame_checksum": true,
+    "normalized_tar_metadata": true,
+    "member_sha256_readback": true
+  },
+  "archive_helper_sha256": "0c3c8f313a6758a2e1129815963ad0ebe37f47b2b407e71f44e5873c38f578ea",
+  "packaging_script_sha256": "51ba3b83875631a77ee9b7f5987c5dd4bfd87bd48e1dabbcf0d3c5e20a0df127",
+  "files_sha256": {
+    "NOTICE.md": "844b63428ffac42931603e056a8431bb4cca423a8e366c19df1d54436a214143",
+    "README.txt": "ebb2697b574472bb47e39cad1833dbbdc5d5feb5d925b21c0bb708b06f88fbed",
+    "composition.json": "4fd28401002ea2c1a1c6a9a9ced41f8304f4aaa8b1fc723480293b96eee1defa",
+    "field.glb": "ef40412bae1324475aab47e908e150b7b21d66f233740561232df5adf7919882",
+    "summary.json": "855f559352cec5075f7eba65fa8aef282333d096092ead58eec11a9f8b9e9232",
+    "validation.json": "d409ee318ddb3fa8ee23d10b8dc1023d4b14744995e087a6013aadcf7962aa31"
+  }
+}

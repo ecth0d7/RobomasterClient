@@ -1,0 +1,10 @@
+{
+  "id": "map.visual-estimates",
+  "version": "1.0.0",
+  "optional": true,
+  "default_enabled": true,
+  "host": "lazy QML map overlay; no QtQuick3D dependency",
+  "input": "accepted rm.situation.view/1 snapshots; field.2026 only on the retained 2D field",
+  "output": "display-only hollow markers, source details and estimated error footprints",
+  "lifecycle": "loaded only with accepted situation snapshots; missing files preserve the original map"
+}

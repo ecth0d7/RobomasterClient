@@ -1,0 +1,146 @@
+{
+  "schema": "rm.situation.config/1",
+  "python": "/usr/bin/python3",
+  "node_id": "operator-red-1",
+  "team_id": "local-team",
+  "match_id": "practice-01",
+  "frame_id": "field.2026",
+  "display_only_confirmed": true,
+  "share_official": false,
+  "share_vision": false,
+  "share_fused": false,
+  "team": {
+    "enabled": false,
+    "bind": "127.0.0.1",
+    "port": 45670,
+    "key_env": "SITUATION_NODE_KEY",
+    "trusted_lan_confirmed": false,
+    "relay": false,
+    "peers": []
+  },
+  "model": {
+    "enabled": false,
+    "provider": "none",
+    "model": "",
+    "strategy": "conservative",
+    "endpoint": "http://127.0.0.1:11434/v1/chat/completions",
+    "key_env": "SITUATION_MODEL_KEY",
+    "external_data_consent": false,
+    "automatic": false,
+    "structured_output": false
+  },
+  "voice": {
+    "enabled": false,
+    "voice": "cmn",
+    "device": "",
+    "muted": false,
+    "synthesize_only": false,
+    "send_team": false,
+    "receive_team": false,
+    "automatic_advice": false
+  },
+  "vision": {
+    "enabled": false,
+    "model_file": "",
+    "format": "yolo-v5",
+    "confidence": 0.55,
+    "threads": 2,
+    "calibration": {
+      "acknowledged": false,
+      "fixed_camera_confirmed": false,
+      "id": "unconfigured",
+      "frame_id": "field.2026",
+      "anchor": "bbox-bottom-center",
+      "homography": [],
+      "uncertainty_m": 2.0
+    },
+    "labels": [
+      {
+        "label": "机器人整机",
+        "robot": true,
+        "team": "unknown",
+        "target_id": "unknown"
+      },
+      {
+        "label": "装甲板",
+        "robot": false
+      },
+      {
+        "label": "忽略区域",
+        "robot": false
+      },
+      {
+        "label": "哨兵整机候选",
+        "robot": true,
+        "team": "unknown",
+        "target_id": "unknown"
+      },
+      {
+        "label": "基地",
+        "robot": false
+      }
+    ],
+    "projection": {
+      "enabled": false,
+      "acknowledged": false,
+      "image_model_confirmed": false,
+      "method": "ground-plane",
+      "frame_id": "field.2026",
+      "calibration_id": "unconfigured",
+      "normalized_intrinsics": [],
+      "distortion": [],
+      "camera_height_m": 0,
+      "pitch_down_deg": null,
+      "camera_yaw_offset_deg": 0,
+      "roll_clockwise_deg": 0,
+      "pose_heading_clockwise": null,
+      "rigid_camera_confirmed": false,
+      "gimbal_node_id": "",
+      "gimbal_source_id": "",
+      "pose_node_id": "",
+      "pose_source_id": "",
+      "pose_max_age_ms": 1100,
+      "pose_uncertainty_m": 0.3,
+      "yaw_uncertainty_deg": 3,
+      "pitch_uncertainty_deg": 2,
+      "height_uncertainty_m": 0.1,
+      "pixel_uncertainty_normalized": 0.006,
+      "max_target_speed_mps": 5,
+      "max_range_m": 25,
+      "max_uncertainty_m": 8,
+      "pose_target_id": "",
+      "gimbal_target_id": "camera.main",
+      "max_observer_speed_mps": 5,
+      "max_observer_yaw_rate_degps": 180,
+      "max_camera_yaw_rate_degps": 360
+    },
+    "identity": {
+      "enabled": false,
+      "model_file": "",
+      "confidence": 0.65,
+      "minimum_hits": 3
+    },
+    "filter": {
+      "mode": "enemy_and_unknown"
+    }
+  },
+  "viewer": {
+    "enabled": false,
+    "port": 45700
+  },
+  "projectile": {
+    "enabled": false,
+    "share": false,
+    "color": "bright",
+    "roi": [
+      0.04,
+      0.04,
+      0.92,
+      0.92
+    ],
+    "exclude_regions": []
+  },
+  "journal": {
+    "enabled": false
+  }
+}

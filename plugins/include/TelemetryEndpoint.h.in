@@ -1,0 +1,67 @@
+#pragma once
+#include <QObject>
+#include <QVariantMap>
+#include <QPointer>
+
+class TelemetryEndpoint : public QObject {
+    Q_OBJECT
+    Q_PROPERTY(QVariantMap robotData READ robotData NOTIFY robotDataChanged)
+    Q_PROPERTY(QVariantMap freshness READ freshness NOTIFY freshnessChanged)
+@TELEMETRY_PROPERTIES@
+public:
+    using QObject::QObject;
+
+    // 合并本次实际收到的字段；缺失的 optional 字段不能补为 0。
+    virtual void apply(const QString &messageType, const QVariantMap &fields) = 0;
+    // 换身份时清空旧值和时效。
+    virtual void reset() = 0;
+    virtual void setClientId(int id) = 0;
+    virtual void updateFreshness() = 0;
+    virtual QVariantMap group(const QString &name) const = 0;
+
+    QVariantMap robotData() const {
+        return group(QStringLiteral("robotData"));
+    }
+
+    QVariantMap freshness() const {
+        return group(QStringLiteral("freshness"));
+    }
+
+    // 读接口与生成属性共用 TelemetryGroups.def，避免手写重复分组。
+#define RM_TELEMETRY_GROUP(name, type) \
+    QVariantMap name() const { \
+        return group(QStringLiteral(#name)); \
+    }
+#include "TelemetryGroups.def"
+#undef RM_TELEMETRY_GROUP
+
+signals:
+    void robotDataChanged();
+    void freshnessChanged();
+    void eventReceived(int id, const QString &parameter);
+    void penaltyReceived(int type, int seconds, int count);
+@TELEMETRY_SIGNALS@
+
+protected:
+    void notifyGroup(const QString &name) {
+#define RM_TELEMETRY_GROUP(groupName, type) \
+        if (name == QLatin1String(#groupName)) { \
+            emit groupName##Changed(); \
+            return; \
+        }
+#include "TelemetryGroups.def"
+#undef RM_TELEMETRY_GROUP
+    }
+
+    void notifyAllGroups() {
+        // 发出通知后可能被接收者删除，继续循环前检查对象存活。
+        QPointer<TelemetryEndpoint> lifetime(this);
+#define RM_TELEMETRY_GROUP(name, type) \
+        emit name##Changed(); \
+        if (!lifetime) { \
+            return; \
+        }
+#include "TelemetryGroups.def"
+#undef RM_TELEMETRY_GROUP
+    }
+};

@@ -1,0 +1,16 @@
+{
+  "authorship": "Original RoboMasterClient display asset, procedurally authored in Blender 4.5.9",
+  "purpose": "Original role silhouettes for display, not measured CAD or identification weights",
+  "gltf_units": "metres",
+  "qt_forward": "-Z",
+  "source_generator": "ProjectSupport/RobomasterClient/tools/robot-art/model_robot_roles.py",
+  "runtime_format": "glTF 2.0, three merged mesh nodes; avoids Qt-version-specific binary mesh format",
+  "variants": [
+    "red",
+    "blue",
+    "neutral"
+  ],
+  "qt_scene_units": "centimetres",
+  "qt_runtime_scale": 100,
+  "role_metadata": "roles-source.json"
+}

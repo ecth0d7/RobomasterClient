@@ -1,0 +1,115 @@
+{
+  "source": "原工程 qrc 资源；用户说明由官方选手端提取，允许沿用此方式",
+  "official_client_version": "未记录，不能据此确定版本",
+  "transformation": "原始字节保留，仅迁移为外部 UI 包资源",
+  "assets": [
+    {
+      "file": "红方英雄.png",
+      "original_path": "qml/resources/红方英雄.png",
+      "sha256": "9965336c5c65827c536267acc711b7a66338bf530ad19070171c87f3dfbdcb46",
+      "bytes": 58909
+    },
+    {
+      "file": "红方工程.png",
+      "original_path": "qml/resources/红方工程.png",
+      "sha256": "d0d5bc4a924a7e4c3537e1c6d9e2ac7a8c0811acd58a266e846ea6fb8dd42e04",
+      "bytes": 69125
+    },
+    {
+      "file": "红方步兵.png",
+      "original_path": "qml/resources/红方步兵.png",
+      "sha256": "a2e155c06f831f546178bef6702b7402022073dc90f343b76a7f1e4dbfbfc0b1",
+      "bytes": 53081
+    },
+    {
+      "file": "红方空中.png",
+      "original_path": "qml/resources/红方空中.png",
+      "sha256": "3ff3c4ccebf9acf4298e7ef2f6f2a630fd17a30425018e7ac72fe83098423980",
+      "bytes": 26010
+    },
+    {
+      "file": "蓝方英雄.png",
+      "original_path": "qml/resources/蓝方英雄.png",
+      "sha256": "3964de38add4a690313bd836fe2f7c011eff59f8e7d781a82fbb0f66697fb2fc",
+      "bytes": 56644
+    },
+    {
+      "file": "蓝方工程.png",
+      "original_path": "qml/resources/蓝方工程.png",
+      "sha256": "1485108490820dbf7b807deccb44d2d2ad345d6701115287941d35dfdce022ec",
+      "bytes": 65419
+    },
+    {
+      "file": "蓝方步兵.png",
+      "original_path": "qml/resources/蓝方步兵.png",
+      "sha256": "d931def431b4a4faf012106439c59886b72890f3120590a38b2915d913639db7",
+      "bytes": 52172
+    },
+    {
+      "file": "蓝方空中.png",
+      "original_path": "qml/resources/蓝方空中.png",
+      "sha256": "4db5cac44556e8355a5a4d2c1cb2d793e56ccbe1dcb35b485feb52e6fc356e26",
+      "bytes": 22728
+    },
+    {
+      "file": "比分栏.png",
+      "original_path": "qml/resources/比分栏.png",
+      "sha256": "edf2b61ecd98913f33536d0545d7b3ea76357e0ab1d8d8ed9d2ba875792ff0db",
+      "bytes": 22358
+    },
+    {
+      "file": "左比分框.png",
+      "original_path": "qml/resources/左比分框.png",
+      "sha256": "cbab736dfc9beb1c6a016bdc5fc70e427f64a7b8c9c093e6520ca95128da25d6",
+      "bytes": 7439
+    },
+    {
+      "file": "右比分框.png",
+      "original_path": "qml/resources/右比分框.png",
+      "sha256": "7118ee83f4132b119e4e5a1016afe543f85a46d551e5f074a704b526ca7e8fdf",
+      "bytes": 7589
+    },
+    {
+      "file": "红方血量模版.png",
+      "original_path": "qml/resources/红方血量模版.png",
+      "sha256": "29010fc77d77f517eb29c6be0ca7ca39343a025922f638b26dd35c4b34082948",
+      "bytes": 30664
+    },
+    {
+      "file": "蓝方血量模版.png",
+      "original_path": "qml/resources/蓝方血量模版.png",
+      "sha256": "52a7c865c56f5d76c6fd64bb118eccf7e21306fab4f2a4e3adabef9c284ee4ae",
+      "bytes": 25394
+    },
+    {
+      "file": "控制框.png",
+      "original_path": "qml/resources/控制框.png",
+      "sha256": "bc549c97cc8d0f0b9e269b5e999debe4741a05e9d72baec159c95957ef8fa96f",
+      "bytes": 434
+    },
+    {
+      "file": "准星.png",
+      "original_path": "qml/resources/准星.png",
+      "sha256": "92f1e13d8ec66d859c7678ea440e3be6e027fa0fb9a8e4fe84e7863c867a15f5",
+      "bytes": 1970
+    },
+    {
+      "file": "模块在线.png",
+      "original_path": "qml/resources/模块在线.png",
+      "sha256": "c80f0d87600256bc2dc20174e8b4d75b9b168f3d49dc9f14174ba8124ee73517",
+      "bytes": 2549
+    },
+    {
+      "file": "模块离线.png",
+      "original_path": "qml/resources/模块离线.png",
+      "sha256": "c4aae0abb65f6a2766182f2ebfc9d37ed57b786eed0cd6c75e71f8359da8fa59",
+      "bytes": 2974
+    },
+    {
+      "file": "模块不规范.png",
+      "original_path": "qml/resources/模块不规范.png",
+      "sha256": "a028ed639aeca30cf98639bb18ad1132afeb8ac30e34831230053813c9d7132f",
+      "bytes": 2491
+    }
+  ]
+}

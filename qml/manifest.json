@@ -1,0 +1,38 @@
+{
+  "id": "ui.operator",
+  "apiVersion": 1,
+  "version": "3.0.0-drawing.1",
+  "entry": "components/Player2026WorkspaceWindow.qml",
+  "views": {
+    "terminal-2027": {
+      "entry": "components/Main.qml",
+      "title": "2027终端工作区",
+      "kind": "operator"
+    },
+    "player-2026": {
+      "entry": "components/Player2026WorkspaceWindow.qml",
+      "title": "2026选手端操作界面",
+      "kind": "operator"
+    },
+    "player-2026-reference": {
+      "entry": "components/Player2026ReferenceWindow.qml",
+      "title": "2026选手端保留界面",
+      "kind": "reference"
+    },
+    "player-2026-workspace": {
+      "entry": "components/Player2026WorkspaceWindow.qml",
+      "title": "26版HUD原生功能工作台",
+      "kind": "operator"
+    }
+  },
+  "designerEntry": "RoboMasterUi.qmlproject",
+  "context": [
+    "clientBackend",
+    "inputController",
+    "videoReceiver",
+    "extensionServices",
+    "localUiSettings",
+    "uiViewController",
+    "battlefieldHost"
+  ]
+}

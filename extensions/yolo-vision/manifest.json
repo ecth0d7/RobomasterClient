@@ -1,0 +1,16 @@
+{
+  "id": "vision.yolo.onnx",
+  "version": "1.0.0",
+  "optional": true,
+  "host": "optional battlefield coordinator; independent image worker process",
+  "default_enabled": false,
+  "lifecycle": "independent explicit start/stop; bounded private IPC; crash/timeout scoped to this worker; outbound sequences retained across worker restarts",
+  "dependencies": [
+    "numpy",
+    "opencv-python-headless",
+    "onnxruntime"
+  ],
+  "input": "actual decoded main UDP video frames",
+  "output": "rm.situation/1 vision observations; video.main image boxes, or explicitly configured mobile ground estimates with uncertainty and original expiry",
+  "data_policy": "local display and explicitly authenticated team sharing only"
+}

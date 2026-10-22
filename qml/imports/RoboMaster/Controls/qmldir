@@ -1,0 +1,15 @@
+module RoboMaster.Controls
+singleton Theme 1.0 Theme.qml
+Text 1.0 Text.qml
+Button 1.0 Button.qml
+CloseButton 1.0 CloseButton.qml
+Input 1.0 Input.qml
+Select 1.0 Select.qml
+CheckBox 1.0 CheckBox.qml
+Slider 1.0 Slider.qml
+TextArea 1.0 TextArea.qml
+PanelFrame 1.0 PanelFrame.qml
+Section 1.0 Section.qml
+ScrollableColumn 1.0 ScrollableColumn.qml
+Glyph 1.0 Glyph.qml
+Outline 1.0 Outline.qml

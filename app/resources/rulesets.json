@@ -1,0 +1,591 @@
+{
+  "schema": 1,
+  "default_profile_id": "rmuc2026-v2.0.0",
+  "metadata_contract": "The active UI and wire integration target is RMUC 2026 V2.0.0; 2027 protocol work is deferred. profiles is the sole selectable runtime catalogue; historical_reference_metadata is archival source context, never a fallback or compatibility mode. Semantic role and opportunity IDs are not official wire IDs, protobuf fields, telemetry, user consent or robot-control authorization. Terminal counts describe operator-seat planning; shared seats do not create extra terminal allocations. Transport readiness describes an implemented adapter, not a verified deployment. Coordinates require independent source/frame calibration.",
+  "profiles": [
+    {
+      "id": "rmuc2026-v2.0.0",
+      "event": "RMUC",
+      "season": 2026,
+      "competition_stage": "national",
+      "rules_version": "V2.0.0",
+      "document_status": "formal",
+      "released_on": "2025-10-15",
+      "rules_document_id": "rmuc2026-rules-v2.0.0",
+      "protocol_document_id": "rmuc2026-protocol-v2.0.0",
+      "ui_document_id": "",
+      "capability_revision": "rmuc2026-v2.0.0-catalog-1",
+      "field_profile_id": "rmuc2026-v2.0.0-field",
+      "topology": "engine_terminal",
+      "official_transport_ready": true,
+      "codec_ids": [
+        "protocol.rm2026.v2"
+      ],
+      "protocol_families": [
+        "MQTT + ProtoBuf",
+        "UDP video"
+      ],
+      "field": {
+        "width_m": 28,
+        "height_m": 15,
+        "frame_id": "rmuc2026.field.v1",
+        "coordinate_mapping_verified": true
+      },
+      "roster": [
+        {
+          "role_id": "hero",
+          "role": "hero",
+          "rule_number_label": "1",
+          "title": "英雄机器人",
+          "count": 1,
+          "terminal_count": 1,
+          "ground": true
+        },
+        {
+          "role_id": "engineer",
+          "role": "engineer",
+          "rule_number_label": "2",
+          "title": "工程机器人",
+          "count": 1,
+          "terminal_count": 1,
+          "ground": true
+        },
+        {
+          "role_id": "infantry",
+          "role": "infantry",
+          "rule_number_label": "3/4/5",
+          "title": "步兵机器人",
+          "count": 3,
+          "terminal_count": 3,
+          "ground": true
+        },
+        {
+          "role_id": "air_support",
+          "role": "air_support",
+          "rule_number_label": "6",
+          "title": "空中支援",
+          "count": 1,
+          "terminal_count": 1,
+          "ground": false
+        },
+        {
+          "role_id": "sentry",
+          "role": "sentry",
+          "rule_number_label": "7",
+          "title": "哨兵机器人",
+          "count": 1,
+          "terminal_count": 0,
+          "ground": true
+        },
+        {
+          "role_id": "dart",
+          "role": "dart",
+          "rule_number_label": "8",
+          "title": "飞镖系统",
+          "count": 1,
+          "terminal_count": 0,
+          "ground": false
+        },
+        {
+          "role_id": "radar",
+          "role": "radar",
+          "rule_number_label": "9",
+          "title": "雷达系统",
+          "count": 1,
+          "terminal_count": 0,
+          "ground": false
+        }
+      ],
+      "constraints": {
+        "wired_only": true,
+        "outside_operator_room_forbidden": true,
+        "terminal_interconnect": "wired_room_only"
+      },
+      "documents": [],
+      "capabilities": [],
+      "data_opportunities": []
+    },
+    {
+      "id": "rmuc2027-regional-v1.0.0",
+      "event": "RMUC",
+      "season": 2027,
+      "competition_stage": "regional",
+      "rules_version": "V1.0.0",
+      "document_status": "formal",
+      "released_on": "2026-10-15",
+      "rules_document_id": "rmuc2027-rules-v1.0.0-20261015",
+      "protocol_document_id": "",
+      "ui_document_id": "",
+      "capability_revision": "rmuc2027-regional-v1.0.0-catalog-1",
+      "field_profile_id": "rmuc2027-regional-v1.0.0-field",
+      "topology": "engine_terminal",
+      "official_transport_ready": false,
+      "codec_ids": [
+        "protocol.rm2026.v2"
+      ],
+      "protocol_families": [
+        "MQTT + ProtoBuf",
+        "UDP video"
+      ],
+      "field": {
+        "width_m": 28,
+        "height_m": 15,
+        "frame_id": "rmuc2027.regional.field.v1",
+        "coordinate_mapping_verified": false
+      },
+      "roster": [
+        {
+          "role_id": "heavy",
+          "role": "heavy",
+          "rule_number_label": "1",
+          "title": "重装机器人",
+          "count": 1,
+          "terminal_count": 1,
+          "ground": true
+        },
+        {
+          "role_id": "infantry",
+          "role": "infantry",
+          "rule_number_label": "3/4",
+          "title": "步兵机器人",
+          "count": 2,
+          "terminal_count": 2,
+          "ground": true
+        },
+        {
+          "role_id": "air_system",
+          "role": "air_system",
+          "rule_number_label": "6",
+          "title": "空中系统（机库与空中机器人）",
+          "count": 1,
+          "terminal_count": 1,
+          "ground": false,
+          "terminal_note": "指挥手操作位；与飞镖系统共用，不代表飞行单元数量或额外操作位"
+        },
+        {
+          "role_id": "sentry",
+          "role": "sentry",
+          "rule_number_label": "7",
+          "title": "哨兵机器人",
+          "count": 1,
+          "terminal_count": 0,
+          "ground": true
+        },
+        {
+          "role_id": "dart",
+          "role": "dart",
+          "rule_number_label": "8",
+          "title": "飞镖系统",
+          "count": 1,
+          "terminal_count": 0,
+          "ground": false,
+          "terminal_note": "共用指挥手操作位"
+        },
+        {
+          "role_id": "radar",
+          "role": "radar",
+          "rule_number_label": "9",
+          "title": "雷达系统",
+          "count": 1,
+          "terminal_count": 0,
+          "ground": false
+        }
+      ],
+      "constraints": {
+        "wired_only": true,
+        "outside_operator_room_forbidden": true,
+        "terminal_interconnect": "wired_room_only"
+      },
+      "documents": [
+        {
+          "id": "rmuc2027-rules-v1.0.0-20261015",
+          "title": "RoboMaster 2027 机甲大师超级对抗赛比赛规则手册",
+          "version": "V1.0.0",
+          "status": "formal",
+          "published_on": "2026-10-15",
+          "source_url": "https://hz-rm-bbs-web-prod.oss-cn-hangzhou.aliyuncs.com/451e5737ba5d4463909a3013456a4e551792055647969/RoboMaster 2027 机甲大师超级对抗赛比赛规则手册V1.0.0（20261015）.pdf",
+          "local_path": "docs/references/rm2027/rmuc2027-rules-v1.0.0-20261015.pdf"
+        },
+        {
+          "id": "rmu2027-specifications-v1.0.0-20261015",
+          "title": "RoboMaster 2027 机甲大师高校系列赛机器人制作规范手册",
+          "version": "V1.0.0",
+          "status": "formal",
+          "published_on": "2026-10-15",
+          "source_url": "https://hz-rm-bbs-web-prod.oss-cn-hangzhou.aliyuncs.com/fe96f58dd62543caa97436a233ec3aab1792048283121/RoboMaster 2027 机甲大师高校系列赛机器人制作规范手册V1.0.0（20261015）.pdf",
+          "local_path": "docs/references/rm2027/rm2027-robot-specifications-v1.0.0-20261015.pdf"
+        },
+        {
+          "id": "rmuc2027-participant-v1.0.0-20261015",
+          "title": "RoboMaster 2027 机甲大师超级对抗赛参赛手册",
+          "version": "V1.0.0",
+          "status": "formal",
+          "published_on": "2026-10-15",
+          "source_url": "https://hz-rm-bbs-web-prod.oss-cn-hangzhou.aliyuncs.com/e6b4f4bbb6db4f6a8b05dac2407e49ef1792056738415/RoboMaster 2027 机甲大师超级对抗赛参赛手册V1.0.0（20261015）.pdf",
+          "local_path": "docs/references/rm2027/rmuc2027-participant-v1.0.0-20261015.pdf"
+        },
+        {
+          "id": "rmu2027-protocol-publication-status",
+          "title": "RMU 2027 通信协议栏目（仅标题，未取得附件）",
+          "version": "",
+          "status": "publication_pending",
+          "published_on": "",
+          "source_url": "https://bbs.robomaster.com/wiki/20204847/1969151",
+          "local_path": ""
+        }
+      ],
+      "capabilities": [
+        {
+          "id": "engine_terminal_transport",
+          "title": "赛事引擎与自定义终端",
+          "summary": "正式规则允许 RJ45 有线接入及终端独立完成比赛；MQTT+ProtoBuf／UDP 传输类型已明确，具体线路表未取得。",
+          "rule_state": "confirmed",
+          "data_state": "protocol_pending",
+          "page": "规则 p.28；制作规范 pp.17–18"
+        },
+        {
+          "id": "heavy_assembly_module",
+          "title": "重装装配与模块化发射机构",
+          "summary": "英雄与工程合并；装配进度、难度解锁、机构安装和裁判系统首发确认分别保留来源。",
+          "rule_state": "confirmed",
+          "data_state": "protocol_pending",
+          "page": "规则 pp.22–23、77–89、108"
+        },
+        {
+          "id": "air_system_hangar",
+          "title": "机库与空中单元",
+          "summary": "空中系统按机库和各飞行单元建模，指挥手／安全员职责独立；不沿用旧空中支援购买页。",
+          "rule_state": "confirmed",
+          "data_state": "protocol_pending",
+          "page": "规则 pp.20–21、27；制作规范空中系统章节"
+        },
+        {
+          "id": "adaptive_armor",
+          "title": "自适应装甲",
+          "summary": "强化机会、选择圈、激活及有效条件分别记录；本地视觉不能声明官方强化状态。",
+          "rule_state": "confirmed",
+          "data_state": "protocol_pending",
+          "page": "规则 pp.72–73"
+        },
+        {
+          "id": "field_control_score",
+          "title": "阵地控制与胜负依据",
+          "summary": "四阵地的暂时／完全控制、争夺和累计控制度独立于基地血量；推算必须显式标记 derived。",
+          "rule_state": "confirmed",
+          "data_state": "protocol_pending",
+          "page": "规则 pp.94、96–97、114"
+        },
+        {
+          "id": "logistics_link_budget",
+          "title": "后勤系数与链路质量",
+          "summary": "后勤影响复活、回血、机器人交互带宽和图传有效像素；本地实测质量与规则公式推算分开。",
+          "rule_state": "confirmed",
+          "data_state": "protocol_pending",
+          "page": "规则 pp.94–95，表 5-19"
+        },
+        {
+          "id": "dart_radar_objectives",
+          "title": "飞镖、雷达与机关",
+          "summary": "按 2027 规则重建事件与角色视图；目标枚举、数据方向、参数和可写权限等待官方协议。",
+          "rule_state": "confirmed",
+          "data_state": "protocol_pending",
+          "page": "规则 pp.110–114"
+        },
+        {
+          "id": "custom_terminal_sharing",
+          "title": "操作间有线终端共享",
+          "summary": "允许操作间终端有线互联；共享需新的赛季／场地／协议握手，旧 team.aggregate.v2 不自动兼容。",
+          "rule_state": "confirmed",
+          "data_state": "versioned_handshake_pending",
+          "page": "规则 p.28、p.129；制作规范 S50"
+        },
+        {
+          "id": "local_discovery_sources",
+          "title": "本地传感器与视觉发现",
+          "summary": "合规链路经独立适配器进入来源簿；没有设备协议时保持未接入，模拟必须明确 mock。",
+          "rule_state": "source_contract_required",
+          "data_state": "adapter_pending",
+          "page": "制作规范 pp.12、14、17–18；项目来源合同"
+        },
+        {
+          "id": "versioned_map_renderer",
+          "title": "新版二维／UE 场地接口",
+          "summary": "场地尺寸 28×15m 不等于坐标已标定；新 frame 与变换独立，未知坐标不显示目标位置。",
+          "rule_state": "confirmed",
+          "data_state": "calibration_pending",
+          "page": "规则 pp.29–32；项目 renderer 合同"
+        },
+        {
+          "id": "competition_external_services",
+          "title": "比赛本机模型与语音边界",
+          "summary": "赛中禁止操作间外通信；比赛配置默认限制云模型／语音是项目策略推导，本地 CLI 不证明离线推理。",
+          "rule_state": "confirmed",
+          "data_state": "deployment_verification_required",
+          "page": "规则 p.129，R31–R33"
+        }
+      ],
+      "data_opportunities": [
+        {
+          "id": "official_robot_state",
+          "title": "官方机器人、比赛与资源状态",
+          "source_kinds": [
+            "official_engine"
+          ],
+          "producer_status": "protocol_pending",
+          "refresh": "等待 2027 字段／频率；沿实际接收时刻记录逐字段寿命，未知产生时间不伪造。",
+          "trust": "官方机制已确认；尚无可用 2027 解码器，不能用 2026 消息数组或编号解释。",
+          "uses": [
+            "hud",
+            "alerts",
+            "localAi",
+            "share"
+          ],
+          "rule_reference": "规则 pp.20–28；制作规范表 2-4；官方协议节点 1969151 当前无附件。"
+        },
+        {
+          "id": "heavy_assembly_progress",
+          "title": "重装装配任务与难度解锁",
+          "source_kinds": [
+            "official_engine",
+            "local_sensor",
+            "local_vision"
+          ],
+          "producer_status": "official_protocol_and_device_adapters_pending",
+          "refresh": "装配事件／阶段变化触发，各传感器观测有自己的产生、接收时刻与 TTL；不猜官方刷新频率。",
+          "trust": "官方成功／解锁与夹爪、锁扣、视觉观察分开；缺少必要证据时仅呈现已知部分。",
+          "uses": [
+            "hud",
+            "alerts",
+            "localAi",
+            "share"
+          ],
+          "rule_reference": "规则 pp.77–89、108；候选项目合同，不是 Protobuf 字段名。"
+        },
+        {
+          "id": "heavy_launcher_confirmation",
+          "title": "模块化发射机构安装与首发确认",
+          "source_kinds": [
+            "official_engine",
+            "local_sensor",
+            "local_vision"
+          ],
+          "producer_status": "official_protocol_and_device_adapters_pending",
+          "refresh": "安装、锁定、授权和裁判系统检测到第一发分别建事件，不用后到的重复消息刷新旧事件。",
+          "trust": "本地机构就绪或视觉安装判断不等于官方发射授权或首发确认。",
+          "uses": [
+            "hud",
+            "alerts",
+            "localAi",
+            "share"
+          ],
+          "rule_reference": "规则 pp.22–23、108；实际电控反馈／2027 线路定义待提供。"
+        },
+        {
+          "id": "air_system_unit_state",
+          "title": "机库与空中单元状态",
+          "source_kinds": [
+            "official_engine",
+            "local_sensor",
+            "local_vision"
+          ],
+          "producer_status": "official_protocol_and_flight_adapters_pending",
+          "refresh": "机库和每个单元独立 ID／session／seq／TTL；就绪、出库、回收、失联分别记录。",
+          "trust": "规则不提供飞控遥测；飞行姿态、电量、位置需合规链路及设备适配器，安全员权限另行限定。",
+          "uses": [
+            "hud",
+            "alerts",
+            "localAi",
+            "share"
+          ],
+          "rule_reference": "规则 pp.20–21、27；制作规范空中系统章节、S17／S22／S50。"
+        },
+        {
+          "id": "adaptive_armor_state",
+          "title": "自适应装甲机会、选择与强化",
+          "source_kinds": [
+            "official_engine",
+            "local_sensor",
+            "local_vision"
+          ],
+          "producer_status": "protocol_pending",
+          "refresh": "机会变化、选择圈与激活／失效事件独立计时；只有有效事件依据才绘制倒计时。",
+          "trust": "权威强化状态待官方字段；命中次数、灯色及视觉观察不能自行升级为官方激活。",
+          "uses": [
+            "hud",
+            "alerts",
+            "localAi",
+            "share"
+          ],
+          "rule_reference": "规则 pp.72–73；正式机制已确认，字段／枚举／事件频率待协议。"
+        },
+        {
+          "id": "field_control_state",
+          "title": "四阵地控制与计分依据",
+          "source_kinds": [
+            "official_engine",
+            "local_vision",
+            "derived"
+          ],
+          "producer_status": "protocol_pending",
+          "refresh": "官方控制度与阵地事件待协议；预测引用完整依赖快照，依赖过期、冲突或撤回即失效。",
+          "trust": "临时／完全控制、争夺冻结与所属方分开；视觉与推算不得冒充官方积分或赛果。",
+          "uses": [
+            "hud",
+            "alerts",
+            "localAi",
+            "share"
+          ],
+          "rule_reference": "规则 pp.94、96–97、114。"
+        },
+        {
+          "id": "logistics_link_budget",
+          "title": "后勤系数、带宽与图传质量",
+          "source_kinds": [
+            "official_engine",
+            "derived"
+          ],
+          "producer_status": "protocol_and_measurement_integration_pending",
+          "refresh": "规则推算依赖当前基地血量和公式版本；接收速率、队列年龄、丢包及解码恢复来自独立本机实测。",
+          "trust": "λ 与 λ² 的公式值不等于服务端下发值或实际画质；未知图传信令保持待核验。",
+          "uses": [
+            "hud",
+            "alerts",
+            "localAi",
+            "share"
+          ],
+          "rule_reference": "规则 pp.94–95，表 5-19；本机链路诊断仅代表本机观察。"
+        },
+        {
+          "id": "terrain_objective_events",
+          "title": "隧道、高地与能量机关事件",
+          "source_kinds": [
+            "official_engine",
+            "local_sensor",
+            "local_vision"
+          ],
+          "producer_status": "protocol_pending",
+          "refresh": "保留卡顺序、真实事件时刻、来源与生命周期；同名事件不得无条件刷新已有增益计时。",
+          "trust": "官方增益和本地路线／视觉发现分开，未知位置不按旧地图猜测。",
+          "uses": [
+            "hud",
+            "alerts",
+            "localAi",
+            "share"
+          ],
+          "rule_reference": "规则场地与增益章节；2027 增益枚举、方向及时间消息待协议。"
+        },
+        {
+          "id": "dart_target_events",
+          "title": "飞镖目标、闸门与命中事件",
+          "source_kinds": [
+            "official_engine",
+            "local_sensor"
+          ],
+          "producer_status": "protocol_pending",
+          "refresh": "闸门、目标选择和发射／命中各事件独立来源、序号和截止期；不沿用旧命令枚举。",
+          "trust": "机构反馈不代表官方命中判定；指挥手请求仍受明确授权和人工确认守卫。",
+          "uses": [
+            "hud",
+            "alerts",
+            "localAi",
+            "share"
+          ],
+          "rule_reference": "规则飞镖系统章节 pp.110–111；线路参数及可写权限待协议。"
+        },
+        {
+          "id": "radar_observations",
+          "title": "雷达标记、易伤与信息波",
+          "source_kinds": [
+            "official_engine",
+            "local_sensor",
+            "derived"
+          ],
+          "producer_status": "protocol_and_receiver_adapters_pending",
+          "refresh": "标记、截获信息及密钥事件各自记录产生／接收时间；迟到、重复、冲突与撤回不得续命。",
+          "trust": "雷达接收与推导结果标明原接收器和置信度；不把 2026 信息波结构重命名为 2027。",
+          "uses": [
+            "hud",
+            "alerts",
+            "localAi",
+            "share"
+          ],
+          "rule_reference": "规则 pp.112–114；正式文本将具体信息波结构交由 2027 通信协议定义。"
+        },
+        {
+          "id": "local_sensor_events",
+          "title": "本地电控、姿态与执行器事件",
+          "source_kinds": [
+            "local_sensor"
+          ],
+          "producer_status": "adapter_pending",
+          "refresh": "实际适配器提供机器人／传感器、schema、session／seq、产生／接收时间、单位、置信度及 TTL。",
+          "trust": "无真实源时仅明确 mock；机器人非官方无线链路不因终端有线共享而自动获准。",
+          "uses": [
+            "hud",
+            "alerts",
+            "localAi",
+            "share"
+          ],
+          "rule_reference": "制作规范 S17／S22／S50；项目数据源合同，真实设备协议待提供。"
+        },
+        {
+          "id": "local_vision_discoveries",
+          "title": "本地视觉目标、障碍与提示",
+          "source_kinds": [
+            "local_vision"
+          ],
+          "producer_status": "adapter_pending",
+          "refresh": "逐目标时间、置信度、验证状态、坐标系／标定、TTL 与撤回；帧重放不产生新观察。",
+          "trust": "观察与官方状态分开；只提示人，不凭未核验发现自动驱动机器人动作。",
+          "uses": [
+            "hud",
+            "alerts",
+            "localAi",
+            "share"
+          ],
+          "rule_reference": "项目独立视觉来源合同；规则允许的信息共享不提供视觉检测算法或设备协议。"
+        },
+        {
+          "id": "spatial_frame_mapping",
+          "title": "2027 地图坐标与渲染接口",
+          "source_kinds": [
+            "official_engine",
+            "local_sensor",
+            "local_vision",
+            "derived"
+          ],
+          "producer_status": "calibration_pending",
+          "refresh": "每个坐标源绑定 frame／单位／原点／transform ID、标定修订及期限；场地或版本变化即重新核验。",
+          "trust": "场地仍为 28×15m，但旧飞坡／停机坪拓扑和旧变换不能继承；未知映射只显示事件文本。",
+          "uses": [
+            "hud",
+            "alerts",
+            "localAi",
+            "share"
+          ],
+          "rule_reference": "规则 pp.29–32；项目二维／UE renderer 合同，无 UE 依赖或已完成标定声明。"
+        },
+        {
+          "id": "validated_team_snapshot",
+          "title": "先整合后建议的队伍快照",
+          "source_kinds": [
+            "official_engine",
+            "local_sensor",
+            "local_vision",
+            "derived"
+          ],
+          "producer_status": "versioned_team_handshake_and_proofs_pending",
+          "refresh": "先验证队伍／发送者、赛季／场地／协议上下文、逐字段时效和原始证明，再原子发布完整 cut；本机路径不等待队友。",
+          "trust": "原机器人／适配器来源可追溯；汇总者签名不能替代各源证明，队友推导不得升级成权威值。",
+          "uses": [
+            "hud",
+            "alerts",
+            "localAi",
+            "share"
+          ],
+          "rule_reference": "规则 p.28、R32–R33；旧 team.aggregate.v2 尚无新赛季握手，不声明已兼容。"
+        }
+      ]
+    }
+  ]
+}

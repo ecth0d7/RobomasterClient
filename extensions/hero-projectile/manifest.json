@@ -1,0 +1,16 @@
+{
+  "id": "hero-projectile",
+  "version": "1.0.0",
+  "optional": true,
+  "default_enabled": false,
+  "host": "optional battlefield coordinator; independent image worker process",
+  "lifecycle": "independent explicit start/stop; bounded private IPC; crash/timeout scoped to this worker; outbound sequences retained across worker restarts",
+  "dependencies": [
+    "numpy",
+    "opencv-python-headless"
+  ],
+  "input": "actual decoded hero video frames; source timestamp; no server trajectory coordinates",
+  "output": "local bounded temporal motion-pixel overlay; rm.situation/1 vision observation with optional normalized image_trail; original timestamp and 450ms TTL",
+  "limits": "motion trails are not bullet classification; receiver cannot recover pixels lost before decoding; image-space track association requires camera compensation; no physical range or impact inference",
+  "data_policy": "local display and explicitly authenticated team sharing only"
+}

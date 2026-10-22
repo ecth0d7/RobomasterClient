@@ -1,0 +1,14 @@
+{
+  "schema": "rm.optional.feature/1",
+  "id": "season.readiness",
+  "version": "1.0.0",
+  "name": "赛季就绪审计",
+  "optional": true,
+  "default_enabled": false,
+  "entry": "qml/Panel.qml",
+  "lifecycle": {
+    "start": "explicit user toggle",
+    "stop": "unload panel and release timers; timeline also disables its runtime",
+    "missing": "retain base MQTT/UDP/QML"
+  }
+}

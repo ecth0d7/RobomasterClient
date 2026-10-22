@@ -1,0 +1,30 @@
+{
+  "source": "field-2027.glb",
+  "source_sha256": "ef40412bae1324475aab47e908e150b7b21d66f233740561232df5adf7919882",
+  "source_bytes": 38513792,
+  "output_bytes": 67062976,
+  "source_materials": 326,
+  "canonical_materials": 44,
+  "output_meshes": 170,
+  "placed_triangles": 880181,
+  "source_world_min_m": [
+    -13.99999587424816,
+    -0.30099999008198575,
+    -8.001565175123535
+  ],
+  "source_world_max_m": [
+    13.999995874248157,
+    3.497687117553011,
+    8.001565737657227
+  ],
+  "maximum_position_rounding_error_m": 4.7679796821853415e-07,
+  "vertices_before": 2415481,
+  "vertices_after": 2348341,
+  "tile_metres": 7.0,
+  "elapsed_seconds": 3.25327212800039,
+  "retained": "triangle topology, transformed positions, transformed normals, PBR properties, embedded texture, UVs",
+  "changed": "static node hierarchy baked; equivalent opaque materials and compatible vertex attributes batched by spatial tile",
+  "runtime_variant": "field-2027-batched.glb",
+  "generator": "ProjectSupport/RobomasterClient/tools/field-art/batch_static_gltf.py",
+  "measurement_note": "Position rounding is geometry-conversion error, not a robot-localization or venue-calibration claim."
+}

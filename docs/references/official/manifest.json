@@ -1,0 +1,38 @@
+[
+  {
+    "id": "rmuc2027-rules-v1.0.0-20261015",
+    "title": "RoboMaster 2027 机甲大师超级对抗赛比赛规则手册",
+    "season": 2027,
+    "version": "V1.0.0",
+    "published_on": "2026-10-15",
+    "status": "formal",
+    "url": "https://hz-rm-bbs-web-prod.oss-cn-hangzhou.aliyuncs.com/451e5737ba5d4463909a3013456a4e551792055647969/RoboMaster%202027%20%E6%9C%BA%E7%94%B2%E5%A4%A7%E5%B8%88%E8%B6%85%E7%BA%A7%E5%AF%B9%E6%8A%97%E8%B5%9B%E6%AF%94%E8%B5%9B%E8%A7%84%E5%88%99%E6%89%8B%E5%86%8CV1.0.0%EF%BC%8820261015%EF%BC%89.pdf",
+    "file": "docs/references/rm2027/rmuc2027-rules-v1.0.0-20261015.pdf",
+    "bytes": 22455861,
+    "sha256": "9e2eed9295536c6fd547b62d634df1d5e70a2e1e2250e5dff3521d557e5d54be"
+  },
+  {
+    "id": "rmu2027-specifications-v1.0.0-20261015",
+    "title": "RoboMaster 2027 机甲大师高校系列赛机器人制作规范手册",
+    "season": 2027,
+    "version": "V1.0.0",
+    "published_on": "2026-10-15",
+    "status": "formal",
+    "url": "https://hz-rm-bbs-web-prod.oss-cn-hangzhou.aliyuncs.com/fe96f58dd62543caa97436a233ec3aab1792048283121/RoboMaster%202027%20%E6%9C%BA%E7%94%B2%E5%A4%A7%E5%B8%88%E9%AB%98%E6%A0%A1%E7%B3%BB%E5%88%97%E8%B5%9B%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%88%B6%E4%BD%9C%E8%A7%84%E8%8C%83%E6%89%8B%E5%86%8CV1.0.0%EF%BC%8820261015%EF%BC%89.pdf",
+    "file": "docs/references/rm2027/rm2027-robot-specifications-v1.0.0-20261015.pdf",
+    "bytes": 18240763,
+    "sha256": "3287fe5f521f8801ce69632032ea17a9c8d8a099091558f58618cd7721154a3c"
+  },
+  {
+    "id": "rmuc2027-participant-v1.0.0-20261015",
+    "title": "RoboMaster 2027 机甲大师超级对抗赛参赛手册",
+    "season": 2027,
+    "version": "V1.0.0",
+    "published_on": "2026-10-15",
+    "status": "formal",
+    "url": "https://hz-rm-bbs-web-prod.oss-cn-hangzhou.aliyuncs.com/e6b4f4bbb6db4f6a8b05dac2407e49ef1792056738415/RoboMaster%202027%20%E6%9C%BA%E7%94%B2%E5%A4%A7%E5%B8%88%E8%B6%85%E7%BA%A7%E5%AF%B9%E6%8A%97%E8%B5%9B%E5%8F%82%E8%B5%9B%E6%89%8B%E5%86%8CV1.0.0%EF%BC%8820261015%EF%BC%89.pdf",
+    "file": "docs/references/rm2027/rmuc2027-participant-v1.0.0-20261015.pdf",
+    "bytes": 1196653,
+    "sha256": "6b6216b2db92ef2b9fbcaf3cc074caa25f7cc4b613bd776c5339185c6e7e6bd6"
+  }
+]

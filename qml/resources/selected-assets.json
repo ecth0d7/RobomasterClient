@@ -1,0 +1,1057 @@
+{
+  "version": 1,
+  "scope": "2026 player manual reconciliation in progress; asset selection, visual review and functional acceptance are separate.",
+  "path_base": "qml/resources",
+  "selections": {
+    "roster-background": {
+      "files": [
+        "player/top_robots/red_teammate_bg.png",
+        "player/top_robots/blue_teammate_bg.png"
+      ],
+      "status": "in use",
+      "note": "Use full PNG; frame, side wing and blood seat belong to one component."
+    },
+    "roster-number": {
+      "files": [
+        "fonts/DejaVuSansMono-Bold.ttf",
+        "fonts/LICENSE-DejaVu.txt"
+      ],
+      "reference_files": [
+        "player/top_robots/red_teammate_id_1.png",
+        "player/top_robots/red_teammate_id_2.png",
+        "player/top_robots/red_teammate_id_3.png",
+        "player/top_robots/red_teammate_id_4.png",
+        "player/top_robots/red_teammate_id_5.png",
+        "player/top_robots/red_teammate_id_6.png",
+        "player/top_robots/blue_teammate_id_1.png",
+        "player/top_robots/blue_teammate_id_2.png",
+        "player/top_robots/blue_teammate_id_3.png",
+        "player/top_robots/blue_teammate_id_4.png",
+        "player/top_robots/blue_teammate_id_5.png",
+        "player/top_robots/blue_teammate_id_6.png",
+        "fonts/DejaVuSansMono-BoldOblique.ttf"
+      ],
+      "status": "in use: every roster number shares one bundled font",
+      "note": "All1/2/3/4/6/7 use same bundled Bold font19px/baseline19, red+0.25 and blue-0.25 shear; numbers centered in original side slots without mirrored unreadable text. Original digit PNGs and prior Oblique font remain reference."
+    },
+    "roster-portrait": {
+      "files": [
+        "player/top_robots/red_teammate_avatar_hero.png",
+        "player/top_robots/red_teammate_avatar_engineer.png",
+        "player/top_robots/red_teammate_avatar_soldier.png",
+        "player/top_robots/red_teammate_avatar_airplane.png",
+        "player/top_robots/blue_teammate_avatar_hero.png",
+        "player/top_robots/blue_teammate_avatar_engineer.png",
+        "player/top_robots/blue_teammate_avatar_soldier.png",
+        "player/top_robots/blue_teammate_avatar_airplane.png"
+      ],
+      "status": "in use; sentry intentionally shares infantry portrait per user instruction",
+      "note": "Top sentry shares infantry per user instruction. Original top drone parallelogram restored; own circular drone portrait remains independent. Each original slanted footprint aligns with the original full backing. Missing drone HP does not imply missing identity or death."
+    },
+    "sentry-photo": {
+      "files": [
+        "player/top_robots/red_tab_guard.png",
+        "player/top_robots/blue_tab_guard.png"
+      ],
+      "status": "in use",
+      "note": "Dedicated circular photo remains in own vitals and status table; it is not used in the top roster per the latest user instruction."
+    },
+    "roster-blood-fill": {
+      "files": [
+        "player/top_robots/red_tab_bar.png",
+        "player/top_robots/blue_tab_bar.png"
+      ],
+      "status": "in use: segmented slanted cells only inside original groove with known capacity",
+      "note": "July manual: full neutral interior16rows y174..189, preserve colored strokes170..173 and190..193. Red sourcepolygon(122,174),(391,174),(401,190),(132,190); blue(18,174),(287,174),(277,190),(8,190). Cells interpolate the same contour, exterior edges have no half-gap. Configurable100HP/cell remains unverified as official visual unit; actual trusted max_health required. No extra track; missing production teammate projection stays hidden."
+    },
+    "own-health": {
+      "files": [
+        "player/my_robot/red_statusbar_blood_background.png",
+        "player/my_robot/red_statusbar_blood_slid.png",
+        "player/my_robot/red_statusbar_blood_slid_low.png",
+        "player/my_robot/red_statusbar_blood_slid_addbuff.png",
+        "player/my_robot/blue_statusbar_blood_background.png",
+        "player/my_robot/blue_statusbar_blood_slid.png",
+        "player/my_robot/blue_statusbar_blood_slid_low.png",
+        "player/my_robot/blue_statusbar_blood_slid_addbuff.png"
+      ],
+      "status": "normal/low fills in use; buff overlays pending",
+      "note": "Original PNG/alpha retained. Compact geometry uses healthHeight30, energyHeight6, healthEnergyGap6, energyGap8, portraitScale56/61 and barRight420. Gray wing, health and both energy tracks share the original slanted edge. Numeric labels remain inside their tracks; extra energy readout captions are hidden. Buff overlays still require verified state."
+    },
+    "own-portrait": {
+      "files": [
+        "player/my_robot/red_statusbar_avatar_hero.png",
+        "player/my_robot/red_statusbar_avatar_enginner.png",
+        "player/my_robot/red_statusbar_avatar_infantry.png",
+        "player/my_robot/red_statusbar_avatar_empty.png",
+        "player/my_robot/blue_statusbar_avatar_hero.png",
+        "player/my_robot/blue_statusbar_avatar_enginner.png",
+        "player/my_robot/blue_statusbar_avatar_infantry.png",
+        "player/my_robot/blue_statusbar_avatar_empty.png",
+        "player/my_robot/red_airplane_statusbar_avatar.png",
+        "player/my_robot/blue_airplane_statusbar_avatar.png"
+      ],
+      "status": "in use",
+      "note": "Original own portrait/gray wing, XP arc, level and ID share portraitScale56/61. No separate portrait stretching. Gray wing top meets health top and lower edge meets the second energy track. Runtime resources stay in this project."
+    },
+    "base-health": {
+      "files": [
+        "player/red_base_blood/red_base_blood_bottom.png",
+        "player/red_base_blood/red_base_blood_top.png",
+        "player/red_base_blood/red_base_blood_top_full.png",
+        "player/red_base_blood/red_base_blood_middle_lowhp_0.png",
+        "player/red_base_blood/red_base_blood_invincible.png",
+        "player/blue_base_blood/blue_base_blood_bottom.png",
+        "player/blue_base_blood/blue_base_blood_top.png",
+        "player/blue_base_blood/blue_base_blood_top_full.png",
+        "player/blue_base_blood/blue_base_blood_middle_lowhp_0.png",
+        "player/blue_base_blood/blue_base_blood_invincible.png"
+      ],
+      "status": "in use: normal, slanted damage, low HP, trail and verified-fresh invulnerable drawing",
+      "note": "Originalbackgroundbody red2,2,835,68 orblue0,20,835,68 issharedframealpha. Normal/trail texturebody0,8,840,68; lowbody0,10,840,64 removes transparentverticalskirts. ExistingredHPrightanchor/blueleft preserved. Independentengine35x40paleshield redleft/blueright originalslants maskedtosameframe; zero/missingdoesnotleavesmallwhiteglyph. Native info frames use open backs. Six native states verified; full referee rules remain outside the local model.",
+      "reference_files": [
+        "player/red_base_blood/red_base_blood_middle.png",
+        "player/red_base_blood/red_base_blood_border.png",
+        "player/red_base_blood/red_base_blood_light.png",
+        "player/red_base_blood/red_base_blood_middle_full.png",
+        "player/blue_base_blood/blue_base_blood_middle.png",
+        "player/blue_base_blood/blue_base_blood_border.png",
+        "player/blue_base_blood/blue_base_blood_light.png",
+        "player/blue_base_blood/blue_base_blood_middle_full.png"
+      ],
+      "structure_pass_note": "Actual native red/blue full, damage, shield, invulnerability, low pulse and zero states checked against manual p02. Existing slot masks/materials retained. Independent defense-percent glyph/text now uses the same local structure metadata; missing source does not invent a value."
+    },
+    "outpost": {
+      "files": [
+        "player/top_outpost/red_outpost_avatar.png",
+        "player/top_outpost/red_outpost_panel.png",
+        "player/top_outpost/blue_outpost_avatar.png",
+        "player/top_outpost/blue_outpost_panel.png",
+        "player/red_base_blood/red_base_blood_top.png",
+        "player/blue_base_blood/blue_base_blood_top.png",
+        "engine-137/sprites/ServerUI_OutpostBloodBG.png",
+        "engine-137/sprites/ServerUI_OutpostBloodMiddleBG.png"
+      ],
+      "status": "in use: dedicated manual-shaped outpost plate, original title/avatar and normalized original health material",
+      "note": "July2026 manual page03; independent top title/icon and opposing slanted body, red HP left/blue HP right, destroyed muted gray, actual independent outpost_status enum/freshness. Native contour补缺. Transparent small outpost_bg and flat engine color fills not adopted as opaque body; original base gradient center reused to match glossy HUD. Rebuild rings/count/defence% absent in official wire data; explicit local unit_views now supplements them. No new bitmap. Manual double rebuild rings/count drawn natively using original A icon; same-server local producer is connected; absent extension defaults empty, offline mock only in DesignerPreview. Unknown/old/TTL/conflict fields never become valid progress. Defense percent slot continues blood slope dx/dy=+/-0.5 across2pxgap, slotheight20/slant10; red extends11right, blue11left. No ordinary status enum shown as percentage.",
+      "reference_files": [
+        "player/top_outpost/red_outpost_bg.png",
+        "player/top_outpost/red_outpost_name.png",
+        "player/top_outpost/blue_outpost_bg.png",
+        "player/top_outpost/blue_outpost_name.png",
+        "engine-137/sprites/ServerUI_RedOutpostBlood.png",
+        "engine-137/sprites/ServerUI_BlueOutpostBlood.png"
+      ],
+      "structure_pass_note": "Same-server local unit_views supplies rebuild double progress/count and independent defense percentage; official MQTT still supplies HP/status. The two rings and original A icon share 154-wide coordinates scaled into the 100-wide slot. Count has its own readable text seat; rebuilding moves 8 logical pixels upward after native measurement found a 3px collision with the roster. Red1600 complete transition and blue960 active progression verified. No new raster, no inferred progress from enum 5; official-source and local-source validation stay distinct."
+    },
+    "score": {
+      "files": [
+        "player/top_mid/top_middle_background.png",
+        "player/top_mid/top_middle_background_v2.png",
+        "player/top_mid/top_left_background.png",
+        "player/top_mid/top_right_background.png"
+      ],
+      "status": "in use; whole 1600px top group centered at larger window sizes",
+      "note": "Each team shares a 600 logical-pixel span with its robot row. Outpost outer edge and team logo outer edge align with that row. Whole 1600 group remains centered; score boxes retain their independent positions around the central timer. Native 960/1600/2400 measurements and screenshots reviewed."
+    },
+    "economy": {
+      "files": [
+        "player/panel/ic_gold_2x.png",
+        "player/top_mid/BattleVolumn_Bg.png"
+      ],
+      "status": "in use",
+      "note": "Independent BattleVolumn background and gold coin; current value remains live text."
+    },
+    "reticle": {
+      "files": [
+        "player/crosshair/crosshair_middle.png",
+        "player/crosshair/crosshair_bg_single.png",
+        "player/crosshair/crosshair_bg_double.png",
+        "player/crosshair/crosshair_slid_circle_bg.png",
+        "player/crosshair/crosshair_slid_circle_white.png",
+        "player/crosshair/crosshair_slid_circle_yellow.png",
+        "player/crosshair/crosshair_slid_circle_red.png"
+      ],
+      "status": "Original outer/center/background and white/yellow/red heat textures in use; common annular sector contour",
+      "note": "168x168 background; white192 crop12/12/168/168, yellow/red194 crop13/13/168/168. Heat core shares radii72..80 centered84/84; dynamic native Canvas4x clips original texture to the sector. Fresh actual heat/max only; zero or missing no fill. Overheat text stays accessible inside the ring. Fixed over-speed-lock durations not fabricated. Manual p06 boundary cases now use exactly0/25/50/75/100percent in the real Shark model. Explicit same-Shark shooter-lock seconds drive red colorization of the original center and a caption below the ring; a native type6 penalty alone shows its name without fabricating a countdown. Nonshooting roles hide the heat ring/readouts. The original overheart caption says 枪口过热 and does not match manual 热量超限, so native text is retained. Local lock20seconds is a server configuration, not an inferred rule."
+    },
+    "map": {
+      "files": [
+        "player/base_bg_2026_fq_small.png",
+        "player/base_bg_2026_fq_small_blue_left.png",
+        "player/minimap_bg.png",
+        "player/minimap/red_map_robot.png",
+        "player/minimap/blue_map_robot.png",
+        "player/minimap/self_map_robot.png",
+        "player/minimap/red_map_arrow.png",
+        "player/minimap/blue_map_arrow.png",
+        "player/minimap/self_map_arrow.png",
+        "player/minimap/red_map_robot_lockbg.png",
+        "player/minimap/blue_map_robot_lockbg.png",
+        "player/minimap/self_map_robot_lockbg.png",
+        "player/minimap/red_map_airplane.png",
+        "player/minimap/red_map_guard.png",
+        "player/minimap/blue_map_airplane.png",
+        "player/minimap/blue_map_guard.png",
+        "player/minimap/map_robot_lockline.png",
+        "player/minimap/map_robot_id_1.png",
+        "player/minimap/map_robot_id_2.png",
+        "player/minimap/map_robot_id_3.png",
+        "player/minimap/map_robot_id_4.png",
+        "player/minimap/map_robot_id_5.png"
+      ],
+      "status": "Shared map symbols/path and transparent large-map interaction implemented; rune map source remains pending",
+      "note": "Original red-left complete field already contains base/outpost structures. Original numbers remain upright; own robot green; dead opacity reduced; marked robots use original yellow corner frame behind body. Radar fixed enemy/ally order; zero-zero absent, uint32 overflow clamped with complete glyph inside bounds. Real RobotPosition deduplicates own radar point unless marked localization-offline. North-zero clockwise headings use formal RobotPosition or validated host headings; optional same-Shark map_display joins only nearby radar positions and expires with roster TTL, never host_verified. Own valid exact49 cumulative dm offsets draw a native Shape path below markers. Actual production Qt/real Shark MQTT/UDP verified at requested960/1600/2400, no offline UI rendering. Rune map placement/team source still pending; physical monitor hotplug/DPI validation pending. Large map no longer uses engine137 setting background or form/table layout. Explicit gimbal-only native read-only second-window is created lazily only with another screen; original complete field preserves aspect ratio. Receiver scope uses same Shark sessions, never fabricated official ACK.",
+      "in_use_files": [
+        "player/base_bg_2026_fq_small.png",
+        "player/minimap/red_map_robot.png",
+        "player/minimap/red_map_robot_lockbg.png",
+        "player/minimap/red_map_arrow.png",
+        "player/minimap/blue_map_robot.png",
+        "player/minimap/blue_map_robot_lockbg.png",
+        "player/minimap/blue_map_arrow.png",
+        "player/minimap/self_map_robot.png",
+        "player/minimap/self_map_robot_lockbg.png",
+        "player/minimap/self_map_arrow.png",
+        "player/minimap/red_map_airplane.png",
+        "player/minimap/red_map_guard.png",
+        "player/minimap/blue_map_airplane.png",
+        "player/minimap/blue_map_guard.png",
+        "player/minimap/map_robot_lockline.png",
+        "player/minimap/map_robot_id_1.png",
+        "player/minimap/map_robot_id_2.png",
+        "player/minimap/map_robot_id_3.png",
+        "player/minimap/map_robot_id_4.png",
+        "player/minimap/map_robot_id_5.png"
+      ]
+    },
+    "dart": {
+      "files": [
+        "player/silo/silo_background_1.png",
+        "player/silo/silo_background_2.png",
+        "player/silo/silo_icon_aim.png",
+        "player/silo/silo_outpost.png",
+        "player/silo/silo_defaultposition.png",
+        "player/silo/silo_endmovingposition.png",
+        "player/silo/silo_randomfixposition.png",
+        "player/silo/tab_icon_silo.png",
+        "player/silo/silo_border_normal.png",
+        "player/silo/silo_border_green.png",
+        "player/silo/silo_border_red.png"
+      ],
+      "status": "in use: original aim/keycap/confirmation assets, shared translucent384-wide frame and native vector activity ring",
+      "note": "Manual p11 / official DartCommand and target/gate sync. Panel shares message-column x/width; target slot keeps minimum9.5screenpx without clipping. F thenY/N, J target, L launch, C thenY close remain actual qualified requests. Same-Shark optional dart_views supplies explicit opening count, detection motion and server timers, paused permission and actual four-minute grant. Missing metadata displays unknown, never starts an inferred20-second UI clock. Local durations: opening2s/window20s/cooldown14s; not a claim of complete referee rules. Dense bitmap target labels/backgrounds retained as references; native text and translucent frame follow user preference."
+    },
+    "exchange-icons": {
+      "files": [
+        "player/panel/skillup_icon_blood.png",
+        "player/panel/17.png",
+        "player/panel/42.png",
+        "fonts/NotoSansCJK-Regular.ttc",
+        "fonts/DejaVuSansCondensed.ttf"
+      ],
+      "status": "Player blood/green17/yellow42 icons in the page13 compact remote card; native page22–23 supply and confirmation frames.",
+      "note": "ServerUI_Buy17mm is yellow and was the wrong semantic/color for the player remote17 slot. The player panel17/42 icons retain original colors and aspect ratios. Engine137 supply_gb is a chamfered six-sided board; ServerUI_ButtonLight is an editor white outline; neither matches the manual rectangular supply dialog/teal confirm slot. Native QML reproduces these simple frames. Confirmation backing is opaque to block underlying numbers. No generated bitmap. Quotes and local result metadata come from the actual Shark model; not official protocol ACK.",
+      "original_assets": [
+        {
+          "file": "player/icons/respawn.svg",
+          "origin": "Original project-authored vector; no third-party bitmap",
+          "purpose": "Respawn action symbol with accessible native card titles",
+          "guide_project_relative": "docs/player-2026-local.md"
+        }
+      ],
+      "retained_reference_files": [
+        "engine-137/sprites/ServerUI_BuyBlood.png",
+        "engine-137/sprites/ServerUI_Buy17mm.png",
+        "engine-137/sprites/ServerUI_Buy42mm.png",
+        "engine-137/sprites/ServerUI_Revive.png",
+        "player/icons/respawn.svg"
+      ]
+    },
+    "rune": {
+      "files": [
+        "player/rune_tab/rune_tab_bg.png",
+        "player/rune_tab/rune_tab_red.png",
+        "player/rune_tab/rune_tab_blue.png",
+        "player/rune_tab/key_able.png",
+        "player/rune_tab/key_unable.png",
+        "player/rune_tab/rune_tab_hit.png",
+        "player/rune_tab/rune_tab_nothit.png",
+        "player/rune_tab/rune_tab_hitting.png",
+        "player/rune_tab/rune_tab_delimiter.png",
+        "player/message/validate_icon_rune.png"
+      ],
+      "status": "in use: original team/key/background/group-hit/hitting/pending/delimiter textures in a native readable HUD",
+      "note": "Manual p12. F ribbon and expanded card share message-column x/384width. Original background uses12px nine-slice corners with translucent opacity; icons and text retain proportions/opacity. Row spacing adapts to available height; no additional text scaling. Average/uint32 arm count remain actual MQTT, not capped at5. Optional same-Shark rune_control supplies two independent shot slots per group, blocked rings, remaining openings, actual20-second-window timer and activation count. +0 is a second-slot miss, invalid means blocked ring, untouched slots stay empty; missing source shows unknown and never infers individual hits from average. Current-group and completed-hit originals are actually used. Native elapsed1.2s F hold; default Button padding removed to fit F. Model data and local timings are not extra official MQTT fields or complete referee rules. Local hit history is combined only when phase, valid hit count and average match the independent formal MQTT values; otherwise private slots show unknown while raw MQTT remains visible."
+    },
+    "sentry-posture": {
+      "files": [
+        "engine-137/sprites/buff_guard_attack.png",
+        "engine-137/sprites/buff_guard_defence.png",
+        "engine-137/sprites/buff_guard_move.png",
+        "player/top_robots/red_guard_avatar.png",
+        "player/top_robots/blue_guard_avatar.png",
+        "player/panel/ic_gold_2x.png",
+        "icons/map/sentry-forward.svg"
+      ],
+      "status": "own and explicit local gimbal sentry controls in use; native multi-size acceptance tracked externally",
+      "note": "Crossed swords=attack, shield=defence, spiral=move; guard_avatar is a symbolic header, tab_guard is the robot photo.",
+      "polish_note": "Manual p25 transparent 8+6 gimbal grid or 5+6 own grid attaches to M map, aligned bottom mode controls. Original engine137 green posture symbols retain aspect, native Qt Effects color variants; original coin restored. Native map-pin SVG is project semantic redraw, not an exported official texture. ServerUI_Revive/RobotBullets/Life inspected as flat bars and not used as icons. Own static identity stays independent from allied sentry. New HTTP local-only quantities and forwarding have explicit source/role/TTL/round/official-posture checks, no new official wire fields or HTTP-generated official result. Final whole-role review remains pending."
+    },
+    "air-vitals": {
+      "files": [
+        "player/my_robot/airplane_statusbar_bullet.png",
+        "player/my_robot/airplane_statusbar_bullet_bg.png",
+        "player/my_robot/airplane_statusbar_slid_bg.png",
+        "player/my_robot/airplane_statusbar_slid_less300.png",
+        "player/my_robot/airplane_statusbar_slid_more300.png",
+        "player/my_robot/airplane_statusbar_cover.png",
+        "player/my_robot/airplane_statusbar_h_bg.png",
+        "player/my_robot/airplane_statusbar_h_unable.png"
+      ],
+      "status": "bullet foreground/background and counter track in use; remaining candidate layers available, data mapping pending",
+      "note": "Green bullets represent allowed projectile amount/limit; lower track represents countermeasure progress. Ground health/energy layout is hidden for aerial role. Protocol supplies remaining_ammo/shooter_status but not ammo limit or counter progress/count limits: optional host display data defaults to null and unavailable values remain dashes. 750/50/5 are explicit offline DesignerPreview samples only; less300/more300 semantics remain unconfirmed. Counter body is shared original ROI(10,10,264,8), both background/fill use same alpha; partial end follows right slope. Zero immediately clears fill; missing optional counter source hides counter subregion. Enlarged portrait/right gray wing no longer overlaps first readout digit. Current aerial-presence pass supersedes raw optional dictionaries and placeholder-only policy: version1 per-metric host view, productionnull/false/empty session; absentoptionalrows hidden, real0 retained, strict native per-field qualification and independent local projection. Original bullet316x40 now270x34.177 (old270x30 compressed); counterROI264x8 now270x8.182. See aerial-presence selection and illustrated guide.",
+      "in_use_files": [
+        "player/my_robot/airplane_statusbar_bullet.png",
+        "player/my_robot/airplane_statusbar_bullet_bg.png",
+        "player/my_robot/airplane_statusbar_slid_bg.png"
+      ]
+    },
+    "shared-controls": {
+      "files": [
+        "engine-137/sprites/ServerUI_ButtonGreenNormal.png",
+        "engine-137/sprites/ServerUI_ButtonGreenHighlighted.png",
+        "engine-137/sprites/ServerUI_ButtonGreenPressed.png",
+        "engine-137/sprites/ServerUI_ButtonGreenDisabled.png",
+        "engine-137/sprites/ServerUI_ButtonLightNormal.png",
+        "engine-137/sprites/ServerUI_ButtonLightHighlighted.png",
+        "engine-137/sprites/ServerUI_ButtonLightPressed.png",
+        "engine-137/sprites/ServerUI_ButtonLightDisabled.png",
+        "engine-137/sprites/ServerUI_RobotClose.png"
+      ],
+      "status": "in use",
+      "note": "Shared independent button/close images; does not imply server panel layout matches player HUD.",
+      "settings_polish_note": "Settings adapts manual page 21 to actual local capabilities: identity/performance/video-input/audio-UI in four columns, concise notes, fixed feedback and actions, real local preferences and preserved service/layout/keybinding entry points. Existing settings frame/button/slider assets retained; no new bitmap or unavailable hardware controls.",
+      "hero_polish_note": "Manual page 17: original rune keycap in a compact K/L hold HUD directly above the retained H exchange entry. Actual elapsed 1.2-second hold; cooldown uses same-server metadata or an observed fresh 1-to-0 transition. No full RoleCard or invented own-half qualification.",
+      "help_polish_note": "Manual page 26 adapted into six concise groups including actual MQTT-field and keybinding tools. Native dark summary frame and keycaps; the complete existing shortcut editor remains under Ctrl+Shift+K and Settings. Hold/release F12, stage-dependent recording/save/search, and saved binding propagation checked in real Shark/Qt windows at 1600/960."
+    },
+    "legacy-score-and-modules": {
+      "files": [
+        "official/比分栏.png",
+        "official/左比分框.png",
+        "official/右比分框.png",
+        "official/模块不规范.png",
+        "official/模块在线.png",
+        "official/模块离线.png",
+        "player/top_mid/red_team_logo.png",
+        "player/top_mid/blue_team_logo.png"
+      ],
+      "status": "in use; original qrc asset version unknown",
+      "note": "Score frames use original project artwork with live text; module images retain source provenance."
+    },
+    "own-energy": {
+      "files": [
+        "player/my_robot/statusbar_energy_background.png",
+        "player/my_robot/statusbar_energy.png"
+      ],
+      "status": "in use for shared ground-robot vitals",
+      "note": "BOTHoriginalbodyROI(18,11,264,8), samebackgroundalpha,4/264slant. x165.90,w330.10,h10,y168.10/192.10;8gapfromHP/14gapbetweenenergies,24shorterthanHP. Bounded22pxlegendrowcentercoincideswith correspondingstripcenter;fulltooltip/sourcefreshness, no guessedratio."
+    },
+    "damage-icons": {
+      "files": [
+        "engine-137/sprites/ServerUI_17mmNum.png",
+        "engine-137/sprites/ServerUI_42mmNum.png",
+        "engine-137/sprites/ServerUI_NotifyWarning.png",
+        "engine-137/sprites/ServerUI_NoClient.png",
+        "engine-137/sprites/ServerUI_NotifyError.png"
+      ],
+      "status": "in use in damage panel draft",
+      "note": "17/42 mm symbols represent their own projectile types; generic warning/offline/error symbols accompany explicit text."
+    },
+    "byte-panel": {
+      "files": [
+        "engine-137/sprites/setting_bg_1.png",
+        "engine-137/sprites/ServerUI_Setting.png",
+        "engine-137/sprites/ServerUI_RobotClose.png",
+        "engine-137/sprites/ServerUI_ButtonGreenNormal.png",
+        "engine-137/sprites/ServerUI_ButtonGreenHighlighted.png",
+        "engine-137/sprites/ServerUI_ButtonGreenPressed.png",
+        "engine-137/sprites/ServerUI_ButtonGreenDisabled.png",
+        "engine-137/sprites/ServerUI_ButtonLightNormal.png",
+        "engine-137/sprites/ServerUI_ButtonLightHighlighted.png",
+        "engine-137/sprites/ServerUI_ButtonLightPressed.png",
+        "engine-137/sprites/ServerUI_ButtonLightDisabled.png",
+        "fonts/NotoSansCJK-Regular.ttc",
+        "fonts/DejaVuSansMono.ttf"
+      ],
+      "status": "Existing common frame, buttons and local fonts reused for separate receive/draft byte UI drawing",
+      "note": "No new raster resource or online dependency. Receive rows, byte counts and editor borders are QML. Native software-rendered drawings include long/empty/stale/malformed values, three input formats and 125% DPI. Production/clipboard/OpenGL/migration acceptance deferred."
+    },
+    "model-panel": {
+      "files": [
+        "engine-137/sprites/setting_bg_1.png",
+        "engine-137/sprites/ServerUI_Setting.png",
+        "engine-137/sprites/ServerUI_RobotClose.png",
+        "engine-137/sprites/ServerUI_ButtonGreenNormal.png",
+        "engine-137/sprites/ServerUI_ButtonGreenHighlighted.png",
+        "engine-137/sprites/ServerUI_ButtonGreenPressed.png",
+        "engine-137/sprites/ServerUI_ButtonGreenDisabled.png",
+        "engine-137/sprites/ServerUI_ButtonLightNormal.png",
+        "engine-137/sprites/ServerUI_ButtonLightHighlighted.png",
+        "engine-137/sprites/ServerUI_ButtonLightPressed.png",
+        "engine-137/sprites/ServerUI_ButtonLightDisabled.png",
+        "fonts/NotoSansCJK-Regular.ttc",
+        "fonts/DejaVuSansMono.ttf"
+      ],
+      "status": "Shared project-local frames/buttons/fonts reused for pre-match strategy setup and separate advice/input inspector",
+      "note": "Mandatory product redesign: battle/countdown/unknown locks, explicit saved preferences versus pending production activation; all existing assets retained."
+    },
+    "speech-panel": {
+      "files": [
+        "engine-137/sprites/setting_bg_1.png",
+        "engine-137/sprites/ServerUI_Setting.png",
+        "engine-137/sprites/ServerUI_RobotClose.png",
+        "engine-137/sprites/ServerUI_ButtonGreenNormal.png",
+        "engine-137/sprites/ServerUI_ButtonGreenHighlighted.png",
+        "engine-137/sprites/ServerUI_ButtonGreenPressed.png",
+        "engine-137/sprites/ServerUI_ButtonGreenDisabled.png",
+        "engine-137/sprites/ServerUI_ButtonLightNormal.png",
+        "engine-137/sprites/ServerUI_ButtonLightHighlighted.png",
+        "engine-137/sprites/ServerUI_ButtonLightPressed.png",
+        "engine-137/sprites/ServerUI_ButtonLightDisabled.png",
+        "fonts/NotoSansCJK-Regular.ttc",
+        "fonts/DejaVuSansMono.ttf"
+      ],
+      "status": "Common local frame/icons/button states/fonts reused for text, queue and recent audio metadata UI",
+      "note": "No new bitmap or online dependency. All audio values in preview are hand-authored fields; native GIFs synthesize/play nothing. Functional engine, queue, cancellation, graphics and migration acceptance deferred."
+    },
+    "bridge-panel": {
+      "files": [
+        "engine-137/sprites/setting_bg_1.png",
+        "engine-137/sprites/ServerUI_Setting.png",
+        "engine-137/sprites/ServerUI_RobotClose.png",
+        "engine-137/sprites/ServerUI_ButtonGreenNormal.png",
+        "engine-137/sprites/ServerUI_ButtonGreenHighlighted.png",
+        "engine-137/sprites/ServerUI_ButtonGreenPressed.png",
+        "engine-137/sprites/ServerUI_ButtonGreenDisabled.png",
+        "engine-137/sprites/ServerUI_ButtonLightNormal.png",
+        "engine-137/sprites/ServerUI_ButtonLightHighlighted.png",
+        "engine-137/sprites/ServerUI_ButtonLightPressed.png",
+        "engine-137/sprites/ServerUI_ButtonLightDisabled.png",
+        "fonts/NotoSansCJK-Regular.ttc",
+        "fonts/DejaVuSansMono.ttf"
+      ],
+      "status": "Shared project-local frame/icons/button states/fonts used for independent source/snapshot/field UI",
+      "note": "No added bitmap or external resource path. Native offline GIFs use hand-authored peers and no TCP; final bridge/UE/graphics/portability acceptance pending."
+    },
+    "advice-hud": {
+      "files": [
+        "fonts/NotoSansCJK-Regular.ttc",
+        "fonts/DejaVuSansMono.ttf"
+      ],
+      "status": "Persistent side HUD drawn natively with existing local fonts",
+      "note": "No new bitmap, remote URL or project-external path. Dynamic priority/freshness/loading/stale/offline drawing; source and snapshot explicit; real provider/identity/automatic/team voice integration pending."
+    },
+    "team-aggregation-and-discoveries": {
+      "files": [
+        "engine-137/sprites/setting_bg_1.png",
+        "engine-137/sprites/ServerUI_Setting.png",
+        "engine-137/sprites/ServerUI_RobotClose.png",
+        "engine-137/sprites/ServerUI_ButtonGreenNormal.png",
+        "engine-137/sprites/ServerUI_ButtonGreenHighlighted.png",
+        "engine-137/sprites/ServerUI_ButtonGreenPressed.png",
+        "engine-137/sprites/ServerUI_ButtonGreenDisabled.png",
+        "engine-137/sprites/ServerUI_ButtonLightNormal.png",
+        "engine-137/sprites/ServerUI_ButtonLightHighlighted.png",
+        "engine-137/sprites/ServerUI_ButtonLightPressed.png",
+        "engine-137/sprites/ServerUI_ButtonLightDisabled.png",
+        "fonts/NotoSansCJK-Regular.ttc",
+        "fonts/DejaVuSansMono.ttf",
+        "player/base_bg_2026_fq_small.png",
+        "player/minimap/red_map_robot.png",
+        "player/minimap/blue_map_robot.png",
+        "player/minimap/self_map_robot.png",
+        "player/minimap/red_map_arrow.png",
+        "player/minimap/blue_map_arrow.png",
+        "player/minimap/self_map_arrow.png"
+      ],
+      "status": "Existing project-local frames/buttons/fonts/map reused for optional aggregation/provenance and independent mock discovery HUD/projection",
+      "note": "No new runtime bitmaps or external paths. Sensor/vision/aggregation/authentication/network/AI/voice production integration and portability acceptance pending. Original direction assets rotate around marker center; numbers upright. RobotPosition.yaw is separate from official radar coordinates; optional normalized shared headings default empty, previews explicitly mock."
+    },
+    "login-identity": {
+      "files": [
+        "engine-137/sprites/setting_bg_1.png",
+        "engine-137/sprites/ServerUI_Setting.png",
+        "engine-137/sprites/ServerUI_RobotClose.png",
+        "engine-137/sprites/ServerUI_LoginBg.png",
+        "engine-137/sprites/ServerUI_LoginStatusBg.png",
+        "player/my_robot/red_statusbar_avatar_hero.png",
+        "player/my_robot/red_statusbar_avatar_enginner.png",
+        "player/my_robot/red_statusbar_avatar_infantry.png",
+        "player/my_robot/blue_statusbar_avatar_hero.png",
+        "player/my_robot/blue_statusbar_avatar_enginner.png",
+        "player/my_robot/blue_statusbar_avatar_infantry.png",
+        "player/my_robot/red_airplane_statusbar_avatar.png",
+        "player/my_robot/blue_airplane_statusbar_avatar.png",
+        "player/top_robots/red_tab_guard.png",
+        "player/top_robots/blue_tab_guard.png"
+      ],
+      "status": "Project-local official login illustration only before identity selection, status background and existing portraits reused",
+      "note": "No QR/account authentication implemented or implied; native QML radar glyph replaces empty portrait. BorderImage stretches only center; portraits preserve aspect. No new bitmaps."
+    },
+    "startup-configuration": {
+      "files": [
+        "engine-137/sprites/setting_bg_1.png",
+        "engine-137/sprites/ServerUI_Setting.png",
+        "engine-137/sprites/ServerUI_RobotClose.png",
+        "engine-137/sprites/ServerUI_ButtonGreenNormal.png",
+        "engine-137/sprites/ServerUI_ButtonGreenHighlighted.png",
+        "engine-137/sprites/ServerUI_ButtonGreenPressed.png",
+        "engine-137/sprites/ServerUI_ButtonGreenDisabled.png",
+        "engine-137/sprites/ServerUI_ButtonLightNormal.png",
+        "engine-137/sprites/ServerUI_ButtonLightHighlighted.png",
+        "engine-137/sprites/ServerUI_ButtonLightPressed.png",
+        "engine-137/sprites/ServerUI_ButtonLightDisabled.png",
+        "fonts/NotoSansCJK-Regular.ttc",
+        "fonts/DejaVuSansMono.ttf",
+        "engine-137/sprites/ServerUI_LoginBg.png"
+      ],
+      "status": "Existing official settings/buttons/fonts and first-start illustration reused for startup GUI",
+      "note": "30 selection groups; no new runtime bitmap or external image. Typed drafts/runtime snapshots are distinct; production profile operations/boot mode pending."
+    },
+    "team-identity-permissions": {
+      "files": [
+        "engine-137/sprites/setting_bg_1.png",
+        "engine-137/sprites/ServerUI_Setting.png",
+        "engine-137/sprites/ServerUI_RobotClose.png",
+        "engine-137/sprites/ServerUI_ButtonGreenNormal.png",
+        "engine-137/sprites/ServerUI_ButtonGreenHighlighted.png",
+        "engine-137/sprites/ServerUI_ButtonGreenPressed.png",
+        "engine-137/sprites/ServerUI_ButtonGreenDisabled.png",
+        "engine-137/sprites/ServerUI_ButtonLightNormal.png",
+        "engine-137/sprites/ServerUI_ButtonLightHighlighted.png",
+        "engine-137/sprites/ServerUI_ButtonLightPressed.png",
+        "engine-137/sprites/ServerUI_ButtonLightDisabled.png",
+        "fonts/NotoSansCJK-Regular.ttc",
+        "fonts/DejaVuSansMono.ttf"
+      ],
+      "status": "Existing settings/buttons/fonts reused for node identity, members, data-use matrix and voice owners",
+      "note": "31 groups, no new bitmaps. Certificate/key references only; authentication/network/model/voice production not connected."
+    },
+    "local-source-configuration": {
+      "files": [
+        "engine-137/sprites/setting_bg_1.png",
+        "engine-137/sprites/ServerUI_Setting.png",
+        "engine-137/sprites/ServerUI_RobotClose.png",
+        "engine-137/sprites/ServerUI_ButtonGreenNormal.png",
+        "engine-137/sprites/ServerUI_ButtonGreenHighlighted.png",
+        "engine-137/sprites/ServerUI_ButtonGreenPressed.png",
+        "engine-137/sprites/ServerUI_ButtonGreenDisabled.png",
+        "engine-137/sprites/ServerUI_ButtonLightNormal.png",
+        "engine-137/sprites/ServerUI_ButtonLightHighlighted.png",
+        "engine-137/sprites/ServerUI_ButtonLightPressed.png",
+        "engine-137/sprites/ServerUI_ButtonLightDisabled.png",
+        "fonts/NotoSansCJK-Regular.ttc",
+        "fonts/DejaVuSansMono.ttf"
+      ],
+      "status": "in use for source configuration UI",
+      "note": "Existing official settings frame/buttons/font; original ratios and licenses. Native QML source form/status, no generated raster or fabricated live telemetry."
+    },
+    "model-provider-configuration": {
+      "files": [
+        "engine-137/sprites/setting_bg_1.png",
+        "engine-137/sprites/ServerUI_Setting.png",
+        "engine-137/sprites/ServerUI_RobotClose.png",
+        "engine-137/sprites/ServerUI_ButtonGreenNormal.png",
+        "engine-137/sprites/ServerUI_ButtonGreenHighlighted.png",
+        "engine-137/sprites/ServerUI_ButtonGreenPressed.png",
+        "engine-137/sprites/ServerUI_ButtonGreenDisabled.png",
+        "engine-137/sprites/ServerUI_ButtonLightNormal.png",
+        "engine-137/sprites/ServerUI_ButtonLightHighlighted.png",
+        "engine-137/sprites/ServerUI_ButtonLightPressed.png",
+        "engine-137/sprites/ServerUI_ButtonLightDisabled.png",
+        "fonts/NotoSansCJK-Regular.ttc",
+        "fonts/DejaVuSansMono.ttf"
+      ],
+      "status": "in use for model provider configuration UI",
+      "note": "Existing official settings frame/buttons/fonts. Native text/config/status; no raster generation, keys or fabricated live inference."
+    },
+    "roster-level": {
+      "files": [
+        "player/top_robots/levels/tab_level_1.png",
+        "player/top_robots/levels/tab_level_2.png",
+        "player/top_robots/levels/tab_level_3.png",
+        "player/top_robots/levels/tab_level_4.png",
+        "player/top_robots/levels/tab_level_5.png",
+        "player/top_robots/levels/tab_level_6.png",
+        "player/top_robots/levels/tab_level_7.png",
+        "player/top_robots/levels/tab_level_8.png",
+        "player/top_robots/levels/tab_level_9.png",
+        "player/top_robots/levels/tab_level_10.png"
+      ],
+      "status": "in use: original natural ratios and visible-bottom baseline",
+      "note": "PNG canvases vary32x26 through30x36; measured whitebody width52source and baseline154. Originalbars1..4 growupward, thenstar/barvariants. No inferred teammate level, valid aircraft level supported. No inventedbitmap."
+    },
+    "roster-ammo-slot": {
+      "files": [
+        "player/my_robot/statusbar_bullet_border.png",
+        "engine-137/sprites/ServerUI_RobotBullets.png",
+        "player/panel/ic_gold_2x.png"
+      ],
+      "status": "in use: original material/icons with native contour",
+      "note": "Dark sourcecore(4,4,150,48) only; frame continues BOTH measuredHPside lineequations across2logicalpxgap. Redrearleft/blue rear right omittedstroke, fillclosed.17mm40x41originaltriplebullet,42mmoriginalcoin. Fields fresh/stale/zero/missing remain distinct; unchecked globalarrayorder not assumed."
+    },
+    "own-energy-fit": {
+      "files": [
+        "player/my_robot/statusbar_energy_background.png",
+        "player/my_robot/statusbar_energy.png"
+      ],
+      "status": "in use: one shared body and template",
+      "note": "BOTHoriginalbodyROI(18,11,264,8), samebackgroundalpha,4/264slant. x165.90,w330.10,h10,y168.10/192.10;8gapfromHP/14gapbetweenenergies,24shorterthanHP. Bounded22pxlegendrowcentercoincideswith correspondingstripcenter;fulltooltip/sourcefreshness, no guessedratio."
+    },
+    "own-role-template": {
+      "files": [
+        "player/my_robot/red_statusbar_avatar_empty.png",
+        "player/my_robot/blue_statusbar_avatar_empty.png",
+        "player/top_robots/red_tab_guard.png",
+        "player/top_robots/blue_tab_guard.png"
+      ],
+      "status": "in use: original graywing backing for separate sentry/radar portrait",
+      "note": "Source157x134 originalowncircle/graywing remainsunchanged; display236.79x202.10 usinguniform92/61scale tospanseparatedtracks. Emptybacking/sentrycircle/radarglyph/XP/level/ID useidenticalscale andoriginaloffsets. Noindependentphoto stretching/fakefloor; groundgraywingtopmatchesHPtop,bottommatchessecondenergybottom. Allruntimeassetsprojectlocal."
+    },
+    "keyboard-mouse-monitor": {
+      "files": [],
+      "status": "Native QML/Canvas drawing; no suitable standalone official mouse sprite found",
+      "qml_components": [
+        "OperatorMouseInput.qml",
+        "OperatorKeyMonitor.qml"
+      ],
+      "note": "Two manual-sized rows, same matched rounded mouse contour/button clip, transient screen-direction triangles; existing bundled Theme fonts. Local display source and mock explicit. Existing trigger/control official channel semantics unconfirmed; both mouse glyphs currently observe one local source. Real grab still absent, plugin reports emulated/capture_available=false; optional endpoint property does not change InputEndpoint virtual ABI. No new generated bitmap."
+    },
+    "buff-original-circle": {
+      "files": [
+        "engine-137/sprites/buff_2020_cirle_empty.png",
+        "engine-137/sprites/buff_2020_cirle_cyan.png",
+        "engine-137/sprites/buff_2020_cirle_green.png",
+        "engine-137/sprites/buff_2020_cirle_orange.png"
+      ],
+      "status": "in use: matched original band and native sector",
+      "qml_components": [
+        "OperatorBuffBadge.qml",
+        "OperatorBuffHud.qml"
+      ],
+      "note": "80x80outer40/inner34; orange176 normalizedsamefootprint. Originalbackground/alpha and4xCanvassector shareband. Dynamicaccessiblevalue separatefromcroppedglyph,48logicalnominal and40scaledminimum; first5+N; explicitmock/sourcecaption. NoTTL-as-progress, originalmaxremainingtimeNOTduration. Missingfresh_for/stale/ended/unknown typesnotactiveHUD; productioncompletecollectionunconnected. A subtle dark circle under the band keeps the original icon readable over bright live video; vulnerability caption is orange. This does not provide a complete accumulated native Buff collection."
+    },
+    "buff-original-glyph": {
+      "files": [
+        "engine-137/sprites/rune_2023_attack_200.png",
+        "engine-137/sprites/buff_2020_shield_50.png",
+        "engine-137/sprites/debuff_2023_shield_30.png",
+        "engine-137/sprites/buff_2020_addhp_10.png",
+        "engine-137/sprites/buff_bullet.png",
+        "engine-137/sprites/buff_2022_cool_UP.png",
+        "engine-137/sprites/buff_2022_attack15.png"
+      ],
+      "status": "in use: originalcategorycore withoutbakednumbers",
+      "note": "Original symbol cores exclude baked captions: infantry attack ROI(0,0,47,42), hero42 ROI(0,0,67,47), defense(0,0,55,42), vulnerability(14,14,32,29), cooling UP icon(0,0,59,38), healing(0,0,54,42). Dynamic captions use actual Buff.level: attack +50% becomes ×1.5; cooling UP has separate text. Native power gauge/terrain flag only where no matching original semantics exist."
+    },
+    "own-combat-icons": {
+      "files": [
+        "player/my_robot/combat_icon.png",
+        "player/my_robot/outofcombat_icon.png"
+      ],
+      "status": "in use: original lightning/handshake cores",
+      "note": "Original72x72lightningcore(19,16,32,44),72x69handshakecore(20,21,33,28);18pxinlinewithsameHPlegendcenter. Independentbool/countfreshness,positivecount+trueconflictneutral,noUIstateflipat0. Productioncountdownsecondsconfirmationdefaultfalse. Missing/oldexplicit."
+    },
+    "own-penalty-badges": {
+      "files": [
+        "player/my_robot/statusbar_warning_yellow.png",
+        "player/my_robot/statusbar_warning_red.png"
+      ],
+      "status": "in use via optional validated own-state projection; productionnotconnected",
+      "note": "Original62x72angledcards atsource0,118 scaled92/61, preserveaspect/glow belowXP/leftofID. Currentpenaltyquantity displays罚N, verifiedrobot-roundyellowtotal ×N, bilateral双黄. Noeventcountaccumulation/noclientID-as-offender. engine32x46uprightRobotYellowCard/icon_punishmentnotmatchingownmanual; yellow/redwarnarepanelmaterials/none_warntransparent. Session/allround/owner/field/lifecycle/clockvalidatedbyhost, rendererreadsmarkers,notauth."
+    },
+    "keyboard-typography": {
+      "files": [
+        "fonts/DejaVuSansCondensed.ttf",
+        "fonts/LICENSE-DejaVu.txt",
+        "fonts/NotoSansCJK-Regular.ttc",
+        "fonts/LICENSE-Noto.txt"
+      ],
+      "status": "in use; native accessible text, no raster glyph replacement",
+      "note": "Latin key names use bundled DejaVu Sans Condensed Book; Chinese trigger/labels/status retain Noto Sans CJK. Base14 HUDpx, small-window compensation about10.5 screenlogicalpx. Actual font metrics reserve all16 names; current keys do not change frame geometry. Explicit font dependency updates width after load/scale; label TextMetrics prevents minimum-size ellipsis. Native before248/current251, min250, ratios257..262 and40+8 mock-frame GIF267/268. Real platform grab/production acceptance pending."
+    },
+    "running-message-slots": {
+      "files": [
+        "fonts/NotoSansCJK-Regular.ttc",
+        "fonts/LICENSE-Noto.txt"
+      ],
+      "status": "in use; native QML fixed two-slot frames and accessible dynamic text",
+      "note": "Manual202607 p08: fixed384x214 overall, two104px slots at0/110, four lines each; shared transparent HUD background. System text white/green/red by verified meaning, robot text neutral white. Local UI receipt time/display window is explicit in tooltip; no upstream event timestamp or rule-derived lifetime. Independent robot-message producer remains unwired because official26MQTT exports no text message format; opaque CustomByteBlock is not guessed as UTF-8. Known Event/Penalty records use actual receive signals, not simulated offline objects."
+    },
+    "scoreboard-slots": {
+      "files": [
+        "official/比分栏.png",
+        "official/左比分框.png",
+        "official/右比分框.png",
+        "fonts/DejaVuSansMono.ttf",
+        "fonts/LICENSE-DejaVu.txt",
+        "fonts/NotoSansCJK-Regular.ttc",
+        "fonts/LICENSE-Noto.txt"
+      ],
+      "status": "in use; original bitmaps with independent accessible dynamic text",
+      "note": "Manual202607 printedp5. Central408x92 at390 width; top116x14Round seat. Opposing left87x56/right88x57 scores retain original aspect and existing centers. Separate fixed score notes/status row avoid digit/glow overlap. M:SS received values only; strict per-field freshness, valid0, missing/invalid/stale/unverified/offline distinct. Native299..327 and80-frame328/329GIFs are explicit mock, not production integration. No image generation needed: original art and native dynamic text cover this component."
+    },
+    "discovery-display-boundary": {
+      "files": [
+        "player/base_bg_2026_fq_small.png",
+        "fonts/NotoSansCJK-Regular.ttc",
+        "fonts/LICENSE-Noto.txt"
+      ],
+      "status": "existing map/font reused; native dynamic text and separate observation layer",
+      "note": "HUD340x104 shares robot message slot, four bounded24px rows, same dark surface/line. No neutral discovery bitmap exists or is needed; dynamic accessible source/time/values use native QML. Source/team renderer channels separately qualified, inactive hidden, map independently checked. Native331..381 and80+12-frame mock GIFs; production providers/auth/session barrier still unwired. Dense circular marker layout was subsequently replaced by exact anchors/short leaders/source badges; see map-discovery-labels. No imagegen asset needed; no original PNG changed."
+    },
+    "map-discovery-labels": {
+      "files": [
+        "player/base_bg_2026_fq_small.png",
+        "fonts/NotoSansCJK-Regular.ttc",
+        "fonts/LICENSE-Noto.txt"
+      ],
+      "status": "existing original map/font reused; native QML/Canvas source badges and short leaders",
+      "note": "Exact coordinate anchors, official icon/heading/command reservations, bounded in-map labels, admitted priority then per-source round-robin within the16-marker batch, explicit label n/N and Source route. Per-map canonical-key offset memory only; no sensor fusion, time renewal or action. Native382 before and386..400 final geometry,32+12-frame current mock GIFs401/402. Rejected busy drafts384/385 retained as process evidence. New runtime bitmap0; original PNG unchanged; imagegen not appropriate for dynamic accessible labels."
+    },
+    "own-energy-presence": {
+      "files": [
+        "player/my_robot/statusbar_energy_background.png",
+        "player/my_robot/statusbar_energy.png",
+        "fonts/NotoSansCJK-Regular.ttc",
+        "fonts/LICENSE-Noto.txt"
+      ],
+      "status": "original energy textures reused; strict existing-SDK fields and native dynamic labels/fill",
+      "note": "Shared original ROI18,11,264,8 and mask; fixed accepted geometry. Missing current hides optional legend/colored fill, neutral original slots retained;0/max0/missing-limit/stale/invalid/conflict/identity/offline distinct. Exact per-field metadata only, no groupfresh fallback, units not invented. Same-identity live interpolation240ms with immediatezero/invalidation and GUI-turn coalescing. Native404before405after406..436 states/ratios and80 current frames437. No new runtime bitmap, originalPNG unchanged, no imagegen need. Production reception/auth/session/atomicity remains unaccepted."
+    },
+    "own-combat-presence": {
+      "files": [
+        "player/my_robot/combat_icon.png",
+        "player/my_robot/outofcombat_icon.png",
+        "fonts/NotoSansCJK-Regular.ttc",
+        "fonts/LICENSE-Noto.txt"
+      ],
+      "status": "original icons/font reused; exact independent telemetry qualification",
+      "note": "Fixed112x26 row, original18x18 icon crops19,16,32,44 and20,21,33,28. Missing optional content hidden, false/zero retained, countdown alone neutral; stale/unverified/identity/offline/death qualified separately. Unit capability productionfalse, no UI countdown. Native mock only; reception/auth/session/atomicity unaccepted. No new runtime bitmap or imagegen need."
+    },
+    "own-vitals-left-seam": {
+      "files": [
+        "player/my_robot/red_statusbar_blood_background.png",
+        "player/my_robot/blue_statusbar_blood_background.png",
+        "player/my_robot/red_statusbar_blood_slid.png",
+        "player/my_robot/blue_statusbar_blood_slid.png",
+        "player/my_robot/statusbar_energy_background.png",
+        "player/my_robot/statusbar_energy.png",
+        "player/my_robot/red_statusbar_avatar_infantry.png",
+        "player/my_robot/blue_statusbar_avatar_infantry.png",
+        "player/my_robot/red_statusbar_avatar_empty.png",
+        "player/my_robot/blue_statusbar_avatar_empty.png"
+      ],
+      "status": "unmodified original textures; native Canvas shared real left clipping",
+      "note": "Original wing seam145,73 to111,132 plusportraitx2 withscale92/61. HP andbothenergy neutralbackground/fill cut along oneabsolute downwardleft line forbothteams. Fraction interpolates visibleleft tooriginalright so1HP/1energy staysvisible; HP text boundedinsideseam. Base/outpost/shield defaultleftInsets0. Preclip439..482 intermediate; final483 onward and current recording. No new runtime bitmap; originalPNG unchanged; no imagegen needed for dynamic paths."
+    },
+    "aerial-presence": {
+      "files": [
+        "player/my_robot/airplane_statusbar_bullet.png",
+        "player/my_robot/airplane_statusbar_bullet_bg.png",
+        "player/my_robot/airplane_statusbar_slid_bg.png",
+        "fonts/NotoSansCJK-Regular.ttc",
+        "fonts/LICENSE-Noto.txt"
+      ],
+      "status": "original bullet/counter textures and bundledfont reused; native independent qualification and interpolation",
+      "note": "Original316x40 bulletcanvas proportion preserved270x34.177 at y32; counter originalROI10,10,264,8 sharedalpha270x8.182 at y74. Fixed444x96, independent missing/current0/stale/limit0/overflow/scopes/source/session/offline status. Native exactperfield ammo/shooter vsoptional5-metric source/time/lifecycle view separated. Live/retained fills, statusbeforeelision; productionproviderunwired. Unknownless300/more300 not guessed. Runtimebitmap0; originalPNG unchanged; imagegen not appropriate for dynamic accessible text/shapes."
+    },
+    "air-support-h-and-panel": {
+      "files": [
+        "player/my_robot/airplane_statusbar_h_bg.png",
+        "player/my_robot/airplane_statusbar_h_unable.png",
+        "engine-137/sprites/ServerUI_ButtonLightNormal.png",
+        "engine-137/sprites/ServerUI_ButtonLightPressed.png",
+        "engine-137/sprites/ServerUI_ButtonLightDisabled.png",
+        "engine-137/sprites/ServerUI_ButtonLightHighlighted.png",
+        "engine-137/sprites/ServerUI_ButtonGreenNormal.png",
+        "engine-137/sprites/ServerUI_ButtonGreenPressed.png",
+        "engine-137/sprites/ServerUI_ButtonGreenDisabled.png",
+        "engine-137/sprites/ServerUI_ButtonGreenHighlighted.png",
+        "fonts/NotoSansCJK-Regular.ttc",
+        "fonts/LICENSE-Noto.txt",
+        "fonts/DejaVuSansCondensed.ttf",
+        "fonts/LICENSE-DejaVu.txt"
+      ],
+      "status": "Original H keycap/fonts; compact native two-card/one-card panel as manual page 16.",
+      "note": "480x156 two-card options, 266x156 active/ended card, 266x204 only while countermeasure action is present. Centered at the bottom above the same margin as H. Ctrl+1/Ctrl+2/N submit direct requests; no invented Enter confirmation card. Same actual server metadata supplies call time and payment mode; official MQTT supplies free time, spent coins and countermeasure state. Missing local call metadata stays unknown. No dedicated player support card background found in engine137; native frame preserves text inside the slot.",
+      "excluded_for_this_component": [
+        "player/my_robot/airplane_statusbar_cover.png",
+        "engine137 ServerUI_RedAirBg/BlueAirBg aircraft renders",
+        "popup_bg widebanner",
+        "prep_phase_frame warning frame"
+      ]
+    },
+    "module-bottom-status": {
+      "files": [
+        "official/模块在线.png",
+        "official/模块离线.png",
+        "official/模块不规范.png",
+        "player/panel/sundry_online.png",
+        "player/panel/sundry_offline.png",
+        "fonts/NotoSansCJK-Regular.ttc",
+        "fonts/LICENSE-Noto.txt"
+      ],
+      "status": "in use: fixed mixed10 HUD and native11 detail, offline mock reviewed separately",
+      "note": "Existing37square lamps keep24square originalaspect; three old official-folder lamps catalog provenance remains unregistered, no inventedlicense.152x32 playerdetailframes useBorderImage2px corners withouttinting black translucentinterior. Module enums cannotmean power/RFIDrecognition/linkMbps. Neutraluses originalalpha+QML; all3pages430x396 protectaerialammo, fillbackgroundleftslants retained. Newruntimebitmap0; nativeQML sufficient, imagegen notneeded.",
+      "not_used_as_substitutes": [
+        "Independent armor0..3/WIFI/speed/Marker/gimbal-power visualslots have no confirmed nativev2 field; no duplicatedaggregate or inventedsource.",
+        "Old diagonal squarelamps are notdetailframes; originaldetailframes are notHUDlamps.",
+        "Generated HUD screenshots or semanticicons would obscure dynamicvalues/source; no newimagegeneration."
+      ]
+    },
+    "own-vitals-native-states": {
+      "files": [
+        "player/my_robot/red_statusbar_blood_background.png",
+        "player/my_robot/red_statusbar_blood_slid.png",
+        "player/my_robot/red_statusbar_blood_slid_low.png",
+        "player/my_robot/red_statusbar_expbar_bg.png",
+        "player/my_robot/red_statusbar_level_1.png",
+        "player/my_robot/red_statusbar_level_2.png",
+        "player/my_robot/red_statusbar_level_3.png",
+        "player/my_robot/red_statusbar_level_4.png",
+        "player/my_robot/red_statusbar_level_5.png",
+        "player/my_robot/red_statusbar_level_6.png",
+        "player/my_robot/red_statusbar_level_7.png",
+        "player/my_robot/red_statusbar_level_8.png",
+        "player/my_robot/red_statusbar_level_9.png",
+        "player/my_robot/red_statusbar_level_10.png",
+        "player/my_robot/blue_statusbar_blood_background.png",
+        "player/my_robot/blue_statusbar_blood_slid.png",
+        "player/my_robot/blue_statusbar_blood_slid_low.png",
+        "player/my_robot/blue_statusbar_expbar_bg.png",
+        "player/my_robot/blue_statusbar_level_1.png",
+        "player/my_robot/blue_statusbar_level_2.png",
+        "player/my_robot/blue_statusbar_level_3.png",
+        "player/my_robot/blue_statusbar_level_4.png",
+        "player/my_robot/blue_statusbar_level_5.png",
+        "player/my_robot/blue_statusbar_level_6.png",
+        "player/my_robot/blue_statusbar_level_7.png",
+        "player/my_robot/blue_statusbar_level_8.png",
+        "player/my_robot/blue_statusbar_level_9.png",
+        "player/my_robot/blue_statusbar_level_10.png",
+        "player/my_robot/statusbar_expbar.png",
+        "fonts/NotoSansCJK-Regular.ttc",
+        "fonts/LICENSE-Noto.txt",
+        "fonts/DejaVuSansMono.ttf",
+        "fonts/DejaVuSansMono-Bold.ttf",
+        "fonts/LICENSE-DejaVu.txt"
+      ],
+      "status": "in use: isolated ownHP/level/XP exactfield renderer",
+      "note": "Original HP ROI(2,2,357,40)/fill(20,12,320,40), common leftwing line and health50/energy10/gaps8,14 retained; Arc32x92 andfill23x88 originalproportions, level1..10 originalglyphs. Neutral invalid-level circle isQML, no fakelevel1/no missingPNGloads. Native max_health neverfromrules; XP percent derived only selectedrule+qualifiedlevel+remaining, currentXPsemantics unresolved. PNGunchanged,newruntimebitmaps0; imagegen notneeded.",
+      "not_used_as_substitutes": [
+        "Rules-based HP predictions only in offlinePreview fixtures, never replace production max_health or settle upgrade HP.",
+        "No generated HUD screenshots, baked numbers, syntheticlevel11 or guessed0 for missingfields.",
+        "Unknown rule profile or source eligibility doesnotfallback to groupfreshness or an assumedcurrentseason."
+      ]
+    },
+    "roster-ammunition": {
+      "files": [
+        "engine-137/sprites/ServerUI_Robot42mm.png",
+        "engine-137/sprites/ServerUI_RobotBullets.png",
+        "player/my_robot/statusbar_bullet_border.png"
+      ],
+      "status": "in use; visually reviewed on live local server",
+      "note": "42mm uses the dedicated robot ammunition symbol, not the economy coin. Ammo slot follows both slopes of the original health groove with a 2px separation. No HP labels below the groove. Opponent ammunition is not inferred from allied MQTT array. Air support uses an explicit support-status band, blocked/counter marks and actual remaining ammunition. No ground HP or fabricated ammo ceiling. Foreign air status/ammo use same-Shark metadata; own role prefers fresh MQTT."
+    },
+    "respawn": {
+      "files": [
+        "player/gamephase/MaskTips-Ad-320.png",
+        "player/gamephase/MaskTips-Ad-Yellow-320.png"
+      ],
+      "status": "in use; native paid/free/blocked command checks passed",
+      "note": "Manual printed page09: green respawn frame; yellow when RobotStaticStatus.connection_state=0. BorderImage keeps the original luminous edges. Inner content stays inset. Actual progress only; the protocol does not specify its conversion to seconds. Underlying video/HUD use Qt Quick MultiEffect saturation -1 only while fresh own alive_state=2. F1/Y keep the same native host command guards."
+    },
+    "status-table": {
+      "files": [
+        "player/tab/tab_header_hurt.png",
+        "player/silo/silo_icon_darts.png",
+        "player/top_robots/levels/tab_level_1.png",
+        "player/my_robot/red_statusbar_id_border.png",
+        "player/my_robot/blue_statusbar_id_border.png"
+      ],
+      "status": "in use; native Tab hold/release and same-server teammate parameters checked",
+      "note": "Manual page19 two team lists with original own-role portraits clipped to circles, level glyphs and allied HP. Enemy detailed fields remain blank. Exact numeric max HP/cooling/power/heat use own MQTT or the explicitly local Shark projection; missing rate limits/hit statistics never use unrelated fields as substitutes."
+    },
+    "engineer": {
+      "files": [
+        "player/panel/ic_gold_2x.png",
+        "player/silo/silo_border_normal.png",
+        "player/silo/silo_border_green.png"
+      ],
+      "status": "in use; four native difficulty flows, distinct paired steps, actual income, cancellation and repeated-context checks; actual page15 activation/buffer implemented; cooperation failure exit/reset implemented; unit/area sensor flows implemented; final full review pending",
+      "note": "Manual pages14/15: central four-row difficulty table and bottom compact motion/steps/result card. Native QML geometry and Shapes timer are used because the engine137 complete export has no dedicated player engineer card texture. Original coins/keycaps remain. Same-Shark metadata supplies real first/repeat rates, local cap3/base10, run and separate red/blue steps; own steps must match MQTT. Missing peer metadata stays unknown. Native operator confirmation remains command authority. Actual package windows960/1600/2400 checked; full45/90 expiry verified on actual model ticks. Temporary activation and exit buffer use native transparent cards/Shapes, same-server explicit state and real L/input-capture/W; HP0/alive2 retained. Cooperation failure preserves its real remaining timer until explicit L exit or natural reset; original L keycap restored for failure/temporary cards. Unit removal/settlement and zone departure now drive actual model results1/7/3. Generic failure cards reuse the original L keycap; result7 restores the manual heading/detail order. Supplemental local grace fits the existing title; no extra opaque card. Final full UI review remains pending."
+    },
+    "roster-states": {
+      "files": [
+        "player/my_robot/statusbar_warning_yellow.png",
+        "player/top_robots/red_tab_bar.png",
+        "player/top_robots/blue_tab_bar.png"
+      ],
+      "status": "in use: independently sourced registration, yellow/red cards, respawn protection and rune award",
+      "note": "Manual p03: registration hides portrait/name/level/HP/ammo but retains original plate/number. Expelled uses gray portrait/level/slots and a native small prohibition ring, not the unrelated white punishment document icon or plain ServerUI yellow rectangle. Yellow uses the original slanted warning icon. Green cells and gold outline reuse the original groove polygon; original level images are tinted via Qt Quick Effects. No new raster. Explicit same-Shark metadata for missing official fields; own penalty can also come from fresh PenaltyInfo. Red1600/blue960 foreign simultaneous states and real expiry passed; special badges do not overlap health slots. Official cell capacity unit remains unverified."
+    },
+    "fortress-occupation": {
+      "files": [
+        "player/controlzone_red_icon.png",
+        "player/controlzone_blue_icon.png"
+      ],
+      "status": "in use: original center icons, native outer ring and actual MQTT occupation seconds",
+      "qml_components": [
+        "OperatorFortress.qml"
+      ],
+      "note": "Only active IDs/times from GlobalSpecialMechanism are visible. Array-like native sequences are normalized without assuming JS Array. The 60-second ring scale is explicit same-Shark metadata, not an official occupation limit; absent metadata leaves real icon/time and omits invented progress. Normal state publishes empty arrays."
+    },
+    "hud-transparency": {
+      "files": [],
+      "status": "shared native background material over real UDP video",
+      "qml_components": [
+        "Theme.qml",
+        "OperatorRunePanel.qml",
+        "OperatorMessages.qml",
+        "OperatorExchangeHint.qml",
+        "OperatorEngineerPanel.qml",
+        "OperatorAirSupportPanel.qml",
+        "OperatorRemoteExchangeCard.qml",
+        "OperatorSupplyCard.qml",
+        "OperatorDartPanel.qml",
+        "OperatorDamagePanel.qml",
+        "OperatorRespawnCard.qml"
+      ],
+      "note": "Theme.hudSurface alpha120/255; hover160/255. Background-only transparency preserves content visibility. Avoid stacking opaque inner strips over shared backing. Related message/F widths and left edges are shared bindings. Full-screen modal editor surfaces and text-over-text confirmation backings remain separate."
+    },
+    "own-state-effects": {
+      "files": [],
+      "status": "in use: explicit same-model effects and native Buff clock, native accessible text",
+      "qml_components": [
+        "OperatorLocalCombatData.js",
+        "OperatorVitals.qml",
+        "OperatorOwnStateHints.qml",
+        "OperatorOwnStateHintsForm.ui.qml"
+      ],
+      "note": "Chassis cutoff and respawn weakness only from qualified local Shark combat_effects (5-second local timers); power increase from actual positive type4 Buff.left_time. No module-online, buffer-zero, sentry-is_powered or generic damage inference. Fixed status row reserves a 12-logical-pixel gap to module lights and does not move as effects change. Background-free labels preserve video; source details stay in tooltip. Projection refresh updates validation time immediately to prevent transient disappearance."
+    },
+    "floating-event-notices": {
+      "files": [
+        "player/message/message_green.png",
+        "player/message/message_red.png",
+        "player/message/message_blue.png",
+        "player/message/message_kill.png",
+        "player/message/red_message_outpost.png",
+        "player/message/blue_message_outpost.png",
+        "player/my_robot/red_statusbar_avatar_hero.png",
+        "player/my_robot/blue_statusbar_avatar_hero.png",
+        "player/my_robot/red_statusbar_avatar_infantry.png",
+        "player/my_robot/blue_statusbar_avatar_infantry.png",
+        "player/top_robots/red_tab_guard.png",
+        "player/top_robots/blue_tab_guard.png"
+      ],
+      "qml_components": [
+        "OperatorEventOverlay.qml",
+        "OperatorFloatingNoticeForm.ui.qml",
+        "OperatorNoticePortrait.qml"
+      ],
+      "status": "in use: original glow strips/slash, per-robot portrait and native text",
+      "note": "Manual p08: known killer portrait + 摧毁 + crossed victim; unknown killer crossed victim + 战亡, never receiver-as-killer. Native Canvas3x clips the source circular portrait (ground ROI8,14,120,120); outpost retains330/355 aspect under circular clip. Actual affected team selects original red/blue strip, neutral uses green. Width488, centered beneath header, six-second local receive display window. Persistent own death uses fresh alive_state, disappears on actual revival. No new raster assets."
+    },
+    "event-detail-and-penalty": {
+      "files": [
+        "player/message/warning_box.png",
+        "player/rune_tab/rune_tab_red.png",
+        "player/rune_tab/rune_tab_blue.png",
+        "player/dart_middle_red.png",
+        "player/dart_middle_blue.png"
+      ],
+      "qml_components": [
+        "OperatorEventOverlay.qml"
+      ],
+      "status": "in use: original warning frame and rune/dart art over shared translucent surface",
+      "note": "Manual p09–10: yellow/bilateral/red warning shows only actual penalty fields. No invented R3 rule, damage percentage or control timeout. Rune result comes from Event3 (including ten arms/average), activation4 cannot immediately overwrite its paired result; dart9 gives actual hitting team/target. Detail matches floating width488 and sits16logicalpx below the lock caption. Four-second local display window, distinct from effect duration. Field observation revision/session prevents an older optional zero/old time from being attached to a new penalty type. Missing quantity uses icon without fake0; later explicit0 clears native badges."
+    },
+    "sentry-rfid-preparation": {
+      "files": [],
+      "status": "in use: native four-corner frame and live Chinese caption; no dedicated RFID texture found in runtime catalog/engine137 search",
+      "note": "Manual p12, pregame only. Same-Shark explicit nullable recognized flag plus gimbal role; not RobotModuleStatus.rfid online. Known true/false gives green/red corners, unknown/absent source hides. Current stage must be fresh preparation/self-check/countdown; during match hidden. No opaque center background. QML Designer visual Form remains separate from data behavior."
+    },
+    "map-command-icons": {
+      "files": [
+        "icons/map/attack.svg",
+        "icons/map/attack-outline.svg",
+        "icons/map/defend.svg",
+        "icons/map/defend-outline.svg",
+        "icons/map/warning.svg",
+        "icons/map/warning-outline.svg"
+      ],
+      "in_use_files": [
+        "icons/map/attack.svg",
+        "icons/map/attack-outline.svg",
+        "icons/map/defend.svg",
+        "icons/map/defend-outline.svg",
+        "icons/map/warning.svg",
+        "icons/map/warning-outline.svg"
+      ],
+      "status": "Project-authored SVG symbols based on manual p24; used by shared map and transparent legend",
+      "note": "No matching map-command bitmap identified in engine137/RM26 asset inventory. These are semantic redraws, not official exported textures: paired projectiles, shield/bolt and hexagon/exclamation. Fresh filled, draft/stale outline. Numbers/airplane/guard remain original assets. Commands offset from robot silhouettes with thin coordinate leader; labels avoid obstacles and stay in the map. Default M toggles, A/B/I then click; ordinary operator sends only own, explicit map_team_mark_allowed permits team scope. Actual MQTT routing and native windows checked; large UI schema editor remains independent."
+    },
+    "match-result": {
+      "files": [
+        "engine-137/sprites/ServerUI_Winner.png",
+        "player/red_team_logo.png",
+        "player/blue_team_logo.png",
+        "player/message/validate_icon_totalhurt.png",
+        "player/message/validate_icon_rune.png",
+        "player/message/validate_icon_killcount.png"
+      ],
+      "status": "in use; native result presentation adapted to available assets",
+      "note": "Winner is the original 137 WIN sprite, without another text overlay. Existing project team logos/portraits and comparison glyphs retain their current provenance. The official page 27 animated medallion was not found as a ready video/image sequence in the current export. QML opacity/scale transition and symmetric cut-corner panel are project geometry; no official animation equivalence is claimed. Official MQTT does not include per-robot damage, whole-team kill count or whole-team rune total; these remain unknown."
+    },
+    "map-rune-state": {
+      "files": [
+        "player/minimap/map_island_active.png",
+        "player/minimap/map_island_red.png",
+        "player/minimap/map_island_blue.png"
+      ],
+      "status": "in use; shared large/small/secondary map layer",
+      "note": "Existing RM26 reference assets match manual page 18. Not claimed as new 137 exports. ServerUI_RedRune/BlueRune and GainPoint textures from 137 were also inspected; unrelated assets were not substituted by name. Positions and bound RuneStatus source seats are explicit local Shark configuration, not official geometry; no MQTT fields added. Glyphs preserve the full square image; when avoiding robot symbols a leader points at the configured coordinate."
+    },
+    "terrain-buff-states": {
+      "files": [
+        "engine-137/sprites/buff_2022_fly_green.png",
+        "engine-137/sprites/buff_2022_fly_cyan.png",
+        "engine-137/sprites/buff_2024_fly_gaodi_green.png",
+        "engine-137/sprites/buff_2024_fly_gaodi_blue.png",
+        "engine-137/sprites/buff_2024_fly_gonglu_green.png",
+        "engine-137/sprites/buff_2024_fly_gonglu_blue.png",
+        "engine-137/sprites/buff_2026_tunnel_ac.png",
+        "engine-137/sprites/buff_2026_tunnel_b.png"
+      ],
+      "status": "in use for explicit local terrain states",
+      "note": "Inspected manual page04 and 137 S0Scene2026_RMUC/Data/BuffAttrs.csv. Original shapes retained, full source aspect kept inside common ring. Tunnel A/C uses ac, middle uses b; flying/highland/road phases choose original green/cyan or blue. No terrain kind guessed from official buff_level; explicit local sensor state remains separate from official Buff type7 preparation."
+    }
+  },
+  "reference_only": [
+    "engine-137/sprites/UI.png",
+    "engine-137/reference/Texture2D_UI_4454414762586223294.png",
+    "player/silo/silo_randomconstantposition.png",
+    "player/silo/silo_randommovingposition.png"
+  ],
+  "excluded_from_hud_categories": [
+    "font atlases",
+    "Unity defaults/watermarks",
+    "cubemaps",
+    "debug screenshots",
+    "result sequences outside result screen"
+  ],
+  "at_utc": "2026-10-13T15:21:02Z"
+}

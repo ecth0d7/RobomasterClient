@@ -1,0 +1,1 @@
+{"id":"mqtt.mosquitto","role":"mqtt","apiVersion":1,"version":"1.0.0","description":"Mosquitto MQTT transport; background network loop"}

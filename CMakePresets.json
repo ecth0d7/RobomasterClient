@@ -1,0 +1,78 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 21,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "debug",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/../ProjectSupport/RobomasterClient/builds/debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "BUILD_TESTING": "OFF",
+        "ROBOMASTER_BUILD_DEVELOPER_TOOLS": "OFF"
+      }
+    },
+    {
+      "name": "release",
+      "inherits": "debug",
+      "binaryDir": "${sourceDir}/../ProjectSupport/RobomasterClient/builds/release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "supported-release",
+      "inherits": "release",
+      "binaryDir": "${sourceDir}/../ProjectSupport/RobomasterClient/builds/supported-release",
+      "cacheVariables": {
+        "Protobuf_INCLUDE_DIR": "${sourceDir}/../ProjectSupport/RobomasterClient/builds/dependencies/protobuf-3203-prefix/include",
+        "Protobuf_LIBRARY": "${sourceDir}/../ProjectSupport/RobomasterClient/builds/dependencies/protobuf-3203-prefix/lib/libprotobuf.so",
+        "Protobuf_PROTOC_EXECUTABLE": "${sourceDir}/../ProjectSupport/RobomasterClient/builds/dependencies/protobuf-3203-prefix/bin/protoc"
+      }
+    },
+    {
+      "name": "validation",
+      "inherits": "debug",
+      "binaryDir": "${sourceDir}/../ProjectSupport/RobomasterClient/builds/validation",
+      "cacheVariables": {
+        "BUILD_TESTING": "ON",
+        "ROBOMASTER_BUILD_DEVELOPER_TOOLS": "ON"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "debug",
+      "configurePreset": "debug",
+      "jobs": 4
+    },
+    {
+      "name": "release",
+      "configurePreset": "release",
+      "jobs": 4
+    },
+    {
+      "name": "supported-release",
+      "configurePreset": "supported-release",
+      "jobs": 4
+    },
+    {
+      "name": "validation",
+      "configurePreset": "validation",
+      "jobs": 4
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "validation",
+      "configurePreset": "validation",
+      "output": {
+        "outputOnFailure": true
+      }
+    }
+  ]
+}

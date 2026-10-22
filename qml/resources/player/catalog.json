@@ -1,0 +1,2965 @@
+{
+  "source": "RM26_Client reference project player images; engine version unrecorded",
+  "assets": [
+    {
+      "file": "MaskTips-Ad-320.png",
+      "source_file": "images/MaskTips-Ad-320.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 344,
+      "height": 124,
+      "transformation": "none"
+    },
+    {
+      "file": "app_icon.png",
+      "source_file": "images/app_icon.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 256,
+      "height": 256,
+      "transformation": "none"
+    },
+    {
+      "file": "app_icon_512.png",
+      "source_file": "images/app_icon_512.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 512,
+      "height": 512,
+      "transformation": "none"
+    },
+    {
+      "file": "base_bg_2026_fq_small.png",
+      "source_file": "images/base_bg_2026_fq_small.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 800,
+      "height": 430,
+      "transformation": "none"
+    },
+    {
+      "file": "base_bg_2026_fq_small_blue_left.png",
+      "source_file": "images/base_bg_2026_fq_small_blue_left.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 800,
+      "height": 430,
+      "transformation": "none"
+    },
+    {
+      "file": "blue_base_blood/blue_base_blood_border.png",
+      "source_file": "images/blue_base_blood/blue_base_blood_border.png",
+      "category": "选手端 / 基地血条",
+      "width": 837,
+      "height": 72,
+      "transformation": "none"
+    },
+    {
+      "file": "blue_base_blood/blue_base_blood_bottom.png",
+      "source_file": "images/blue_base_blood/blue_base_blood_bottom.png",
+      "category": "选手端 / 基地血条",
+      "width": 880,
+      "height": 104,
+      "transformation": "none"
+    },
+    {
+      "file": "blue_base_blood/blue_base_blood_invincible.png",
+      "source_file": "images/blue_base_blood/blue_base_blood_invincible.png",
+      "category": "选手端 / 基地血条",
+      "width": 880,
+      "height": 104,
+      "transformation": "none"
+    },
+    {
+      "file": "blue_base_blood/blue_base_blood_light.png",
+      "source_file": "images/blue_base_blood/blue_base_blood_light.png",
+      "category": "选手端 / 基地血条",
+      "width": 910,
+      "height": 80,
+      "transformation": "none"
+    },
+    {
+      "file": "blue_base_blood/blue_base_blood_middle.png",
+      "source_file": "images/blue_base_blood/blue_base_blood_middle.png",
+      "category": "选手端 / 基地血条",
+      "width": 840,
+      "height": 72,
+      "transformation": "none"
+    },
+    {
+      "file": "blue_base_blood/blue_base_blood_middle_full.png",
+      "source_file": "images/blue_base_blood/blue_base_blood_middle_full.png",
+      "category": "选手端 / 基地血条",
+      "width": 996,
+      "height": 160,
+      "transformation": "none"
+    },
+    {
+      "file": "blue_base_blood/blue_base_blood_middle_lowhp_0.png",
+      "source_file": "images/blue_base_blood/blue_base_blood_middle_lowhp_0.png",
+      "category": "选手端 / 基地血条",
+      "width": 840,
+      "height": 84,
+      "transformation": "none"
+    },
+    {
+      "file": "blue_base_blood/blue_base_blood_top.png",
+      "source_file": "images/blue_base_blood/blue_base_blood_top.png",
+      "category": "选手端 / 基地血条",
+      "width": 840,
+      "height": 84,
+      "transformation": "none"
+    },
+    {
+      "file": "blue_base_blood/blue_base_blood_top_full.png",
+      "source_file": "images/blue_base_blood/blue_base_blood_top_full.png",
+      "category": "选手端 / 基地血条",
+      "width": 840,
+      "height": 84,
+      "transformation": "none"
+    },
+    {
+      "file": "blue_robot_icon.png",
+      "source_file": "images/blue_robot_icon.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 258,
+      "height": 238,
+      "transformation": "none"
+    },
+    {
+      "file": "blue_team_logo.png",
+      "source_file": "images/blue_team_logo.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 500,
+      "height": 500,
+      "transformation": "none"
+    },
+    {
+      "file": "blue_teammate_avatar_hero_adbuff.png",
+      "source_file": "images/blue_teammate_avatar_hero_adbuff.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 138,
+      "height": 105,
+      "transformation": "none"
+    },
+    {
+      "file": "buffs_new/addhp_10.png",
+      "source_file": "images/buffs_new/addhp_10.png",
+      "category": "选手端 / 增益图标",
+      "width": 54,
+      "height": 65,
+      "transformation": "none"
+    },
+    {
+      "file": "buffs_new/addhp_25.png",
+      "source_file": "images/buffs_new/addhp_25.png",
+      "category": "选手端 / 增益图标",
+      "width": 54,
+      "height": 65,
+      "transformation": "none"
+    },
+    {
+      "file": "buffs_new/attack_300.png",
+      "source_file": "images/buffs_new/attack_300.png",
+      "category": "选手端 / 增益图标",
+      "width": 80,
+      "height": 80,
+      "transformation": "none"
+    },
+    {
+      "file": "buffs_new/buff_2022_attack15.png",
+      "source_file": "images/buffs_new/buff_2022_attack15.png",
+      "category": "选手端 / 增益图标",
+      "width": 67,
+      "height": 73,
+      "transformation": "none"
+    },
+    {
+      "file": "buffs_new/cool_2.png",
+      "source_file": "images/buffs_new/cool_2.png",
+      "category": "选手端 / 增益图标",
+      "width": 88,
+      "height": 88,
+      "transformation": "none"
+    },
+    {
+      "file": "buffs_new/cool_3.png",
+      "source_file": "images/buffs_new/cool_3.png",
+      "category": "选手端 / 增益图标",
+      "width": 88,
+      "height": 88,
+      "transformation": "none"
+    },
+    {
+      "file": "buffs_new/cool_5.png",
+      "source_file": "images/buffs_new/cool_5.png",
+      "category": "选手端 / 增益图标",
+      "width": 88,
+      "height": 88,
+      "transformation": "none"
+    },
+    {
+      "file": "buffs_new/cool_up.png",
+      "source_file": "images/buffs_new/cool_up.png",
+      "category": "选手端 / 增益图标",
+      "width": 59,
+      "height": 64,
+      "transformation": "none"
+    },
+    {
+      "file": "buffs_new/debuff_100.png",
+      "source_file": "images/buffs_new/debuff_100.png",
+      "category": "选手端 / 增益图标",
+      "width": 72,
+      "height": 69,
+      "transformation": "none"
+    },
+    {
+      "file": "buffs_new/debuff_15.png",
+      "source_file": "images/buffs_new/debuff_15.png",
+      "category": "选手端 / 增益图标",
+      "width": 60,
+      "height": 69,
+      "transformation": "none"
+    },
+    {
+      "file": "buffs_new/debuff_20.png",
+      "source_file": "images/buffs_new/debuff_20.png",
+      "category": "选手端 / 增益图标",
+      "width": 116,
+      "height": 133,
+      "transformation": "none"
+    },
+    {
+      "file": "buffs_new/debuff_25.png",
+      "source_file": "images/buffs_new/debuff_25.png",
+      "category": "选手端 / 增益图标",
+      "width": 116,
+      "height": 133,
+      "transformation": "none"
+    },
+    {
+      "file": "buffs_new/debuff_30.png",
+      "source_file": "images/buffs_new/debuff_30.png",
+      "category": "选手端 / 增益图标",
+      "width": 60,
+      "height": 69,
+      "transformation": "none"
+    },
+    {
+      "file": "buffs_new/debuff_40.png",
+      "source_file": "images/buffs_new/debuff_40.png",
+      "category": "选手端 / 增益图标",
+      "width": 116,
+      "height": 133,
+      "transformation": "none"
+    },
+    {
+      "file": "buffs_new/defence_100.png",
+      "source_file": "images/buffs_new/defence_100.png",
+      "category": "选手端 / 增益图标",
+      "width": 70,
+      "height": 78,
+      "transformation": "none"
+    },
+    {
+      "file": "buffs_new/defence_25.png",
+      "source_file": "images/buffs_new/defence_25.png",
+      "category": "选手端 / 增益图标",
+      "width": 55,
+      "height": 65,
+      "transformation": "none"
+    },
+    {
+      "file": "buffs_new/defence_50.png",
+      "source_file": "images/buffs_new/defence_50.png",
+      "category": "选手端 / 增益图标",
+      "width": 55,
+      "height": 65,
+      "transformation": "none"
+    },
+    {
+      "file": "buffs_new/rune_big_2022.png",
+      "source_file": "images/buffs_new/rune_big_2022.png",
+      "category": "选手端 / 增益图标",
+      "width": 80,
+      "height": 80,
+      "transformation": "none"
+    },
+    {
+      "file": "buffs_new/rune_normal_15.png",
+      "source_file": "images/buffs_new/rune_normal_15.png",
+      "category": "选手端 / 增益图标",
+      "width": 80,
+      "height": 80,
+      "transformation": "none"
+    },
+    {
+      "file": "buffs_new/terrain_fly_green.png",
+      "source_file": "images/buffs_new/terrain_fly_green.png",
+      "category": "选手端 / 增益图标",
+      "width": 66,
+      "height": 38,
+      "transformation": "none"
+    },
+    {
+      "file": "buffs_new/terrain_highground_green.png",
+      "source_file": "images/buffs_new/terrain_highground_green.png",
+      "category": "选手端 / 增益图标",
+      "width": 75,
+      "height": 45,
+      "transformation": "none"
+    },
+    {
+      "file": "buffs_new/terrain_tunnel_ac.png",
+      "source_file": "images/buffs_new/terrain_tunnel_ac.png",
+      "category": "选手端 / 增益图标",
+      "width": 92,
+      "height": 108,
+      "transformation": "none"
+    },
+    {
+      "file": "buffs_new/terrain_tunnel_b.png",
+      "source_file": "images/buffs_new/terrain_tunnel_b.png",
+      "category": "选手端 / 增益图标",
+      "width": 92,
+      "height": 108,
+      "transformation": "none"
+    },
+    {
+      "file": "controlzone_blue_icon.png",
+      "source_file": "images/controlzone_blue_icon.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 56,
+      "height": 50,
+      "transformation": "none"
+    },
+    {
+      "file": "controlzone_red_icon.png",
+      "source_file": "images/controlzone_red_icon.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 56,
+      "height": 50,
+      "transformation": "none"
+    },
+    {
+      "file": "crosshair/crosshair_Yellow.png",
+      "source_file": "images/crosshair/crosshair_Yellow.png",
+      "category": "选手端 / 准星",
+      "width": 108,
+      "height": 108,
+      "transformation": "none"
+    },
+    {
+      "file": "crosshair/crosshair_attacked_down.png",
+      "source_file": "images/crosshair/crosshair_attacked_down.png",
+      "category": "选手端 / 准星",
+      "width": 250,
+      "height": 385,
+      "transformation": "none"
+    },
+    {
+      "file": "crosshair/crosshair_attacked_left.png",
+      "source_file": "images/crosshair/crosshair_attacked_left.png",
+      "category": "选手端 / 准星",
+      "width": 385,
+      "height": 250,
+      "transformation": "none"
+    },
+    {
+      "file": "crosshair/crosshair_attacked_right.png",
+      "source_file": "images/crosshair/crosshair_attacked_right.png",
+      "category": "选手端 / 准星",
+      "width": 385,
+      "height": 250,
+      "transformation": "none"
+    },
+    {
+      "file": "crosshair/crosshair_attacked_up.png",
+      "source_file": "images/crosshair/crosshair_attacked_up.png",
+      "category": "选手端 / 准星",
+      "width": 250,
+      "height": 385,
+      "transformation": "none"
+    },
+    {
+      "file": "crosshair/crosshair_bg_double.png",
+      "source_file": "images/crosshair/crosshair_bg_double.png",
+      "category": "选手端 / 准星",
+      "width": 1608,
+      "height": 1084,
+      "transformation": "none"
+    },
+    {
+      "file": "crosshair/crosshair_bg_single.png",
+      "source_file": "images/crosshair/crosshair_bg_single.png",
+      "category": "选手端 / 准星",
+      "width": 1608,
+      "height": 1084,
+      "transformation": "none"
+    },
+    {
+      "file": "crosshair/crosshair_border_left.png",
+      "source_file": "images/crosshair/crosshair_border_left.png",
+      "category": "选手端 / 准星",
+      "width": 192,
+      "height": 132,
+      "transformation": "none"
+    },
+    {
+      "file": "crosshair/crosshair_border_right.png",
+      "source_file": "images/crosshair/crosshair_border_right.png",
+      "category": "选手端 / 准星",
+      "width": 192,
+      "height": 244,
+      "transformation": "none"
+    },
+    {
+      "file": "crosshair/crosshair_middle.png",
+      "source_file": "images/crosshair/crosshair_middle.png",
+      "category": "选手端 / 准星",
+      "width": 56,
+      "height": 56,
+      "transformation": "none"
+    },
+    {
+      "file": "crosshair/crosshair_slid_circle_bg.png",
+      "source_file": "images/crosshair/crosshair_slid_circle_bg.png",
+      "category": "选手端 / 准星",
+      "width": 168,
+      "height": 168,
+      "transformation": "none"
+    },
+    {
+      "file": "crosshair/crosshair_slid_circle_red.png",
+      "source_file": "images/crosshair/crosshair_slid_circle_red.png",
+      "category": "选手端 / 准星",
+      "width": 194,
+      "height": 194,
+      "transformation": "none"
+    },
+    {
+      "file": "crosshair/crosshair_slid_circle_white.png",
+      "source_file": "images/crosshair/crosshair_slid_circle_white.png",
+      "category": "选手端 / 准星",
+      "width": 192,
+      "height": 192,
+      "transformation": "none"
+    },
+    {
+      "file": "crosshair/crosshair_slid_circle_yellow.png",
+      "source_file": "images/crosshair/crosshair_slid_circle_yellow.png",
+      "category": "选手端 / 准星",
+      "width": 194,
+      "height": 194,
+      "transformation": "none"
+    },
+    {
+      "file": "crosshair/crosshair_slid_double_bg.png",
+      "source_file": "images/crosshair/crosshair_slid_double_bg.png",
+      "category": "选手端 / 准星",
+      "width": 208,
+      "height": 143,
+      "transformation": "none"
+    },
+    {
+      "file": "crosshair/crosshair_slid_double_red_left.png",
+      "source_file": "images/crosshair/crosshair_slid_double_red_left.png",
+      "category": "选手端 / 准星",
+      "width": 65,
+      "height": 165,
+      "transformation": "none"
+    },
+    {
+      "file": "crosshair/crosshair_slid_double_red_right.png",
+      "source_file": "images/crosshair/crosshair_slid_double_red_right.png",
+      "category": "选手端 / 准星",
+      "width": 65,
+      "height": 165,
+      "transformation": "none"
+    },
+    {
+      "file": "crosshair/crosshair_slid_double_white_left.png",
+      "source_file": "images/crosshair/crosshair_slid_double_white_left.png",
+      "category": "选手端 / 准星",
+      "width": 63,
+      "height": 165,
+      "transformation": "none"
+    },
+    {
+      "file": "crosshair/crosshair_slid_double_white_right.png",
+      "source_file": "images/crosshair/crosshair_slid_double_white_right.png",
+      "category": "选手端 / 准星",
+      "width": 63,
+      "height": 165,
+      "transformation": "none"
+    },
+    {
+      "file": "crosshair/crosshair_slid_double_yellow_left.png",
+      "source_file": "images/crosshair/crosshair_slid_double_yellow_left.png",
+      "category": "选手端 / 准星",
+      "width": 64,
+      "height": 165,
+      "transformation": "none"
+    },
+    {
+      "file": "crosshair/crosshair_slid_double_yellow_right.png",
+      "source_file": "images/crosshair/crosshair_slid_double_yellow_right.png",
+      "category": "选手端 / 准星",
+      "width": 64,
+      "height": 165,
+      "transformation": "none"
+    },
+    {
+      "file": "crosshair/crosshair_tip_overheart_chs.png",
+      "source_file": "images/crosshair/crosshair_tip_overheart_chs.png",
+      "category": "选手端 / 准星",
+      "width": 256,
+      "height": 80,
+      "transformation": "none"
+    },
+    {
+      "file": "crosshair/crosshair_tip_overheart_en.png",
+      "source_file": "images/crosshair/crosshair_tip_overheart_en.png",
+      "category": "选手端 / 准星",
+      "width": 256,
+      "height": 80,
+      "transformation": "none"
+    },
+    {
+      "file": "damage_icon.png",
+      "source_file": "images/damage_icon.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 48,
+      "height": 42,
+      "transformation": "none"
+    },
+    {
+      "file": "dart_middle_blue.png",
+      "source_file": "images/dart_middle_blue.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 560,
+      "height": 560,
+      "transformation": "none"
+    },
+    {
+      "file": "dart_middle_red.png",
+      "source_file": "images/dart_middle_red.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 560,
+      "height": 560,
+      "transformation": "none"
+    },
+    {
+      "file": "gamephase/MaskTips-Ad-320.png",
+      "source_file": "images/gamephase/MaskTips-Ad-320.png",
+      "category": "选手端 / 比赛阶段",
+      "width": 344,
+      "height": 124,
+      "transformation": "none"
+    },
+    {
+      "file": "gamephase/MaskTips-Ad-Yellow-320.png",
+      "source_file": "images/gamephase/MaskTips-Ad-Yellow-320.png",
+      "category": "选手端 / 比赛阶段",
+      "width": 344,
+      "height": 125,
+      "transformation": "none"
+    },
+    {
+      "file": "gamephase/freeze_1.png",
+      "source_file": "images/gamephase/freeze_1.png",
+      "category": "选手端 / 比赛阶段",
+      "width": 157,
+      "height": 310,
+      "transformation": "none"
+    },
+    {
+      "file": "gamephase/freeze_2.png",
+      "source_file": "images/gamephase/freeze_2.png",
+      "category": "选手端 / 比赛阶段",
+      "width": 288,
+      "height": 310,
+      "transformation": "none"
+    },
+    {
+      "file": "gamephase/freeze_3.png",
+      "source_file": "images/gamephase/freeze_3.png",
+      "category": "选手端 / 比赛阶段",
+      "width": 288,
+      "height": 310,
+      "transformation": "none"
+    },
+    {
+      "file": "gamephase/freeze_4.png",
+      "source_file": "images/gamephase/freeze_4.png",
+      "category": "选手端 / 比赛阶段",
+      "width": 279,
+      "height": 310,
+      "transformation": "none"
+    },
+    {
+      "file": "gamephase/freeze_5.png",
+      "source_file": "images/gamephase/freeze_5.png",
+      "category": "选手端 / 比赛阶段",
+      "width": 288,
+      "height": 310,
+      "transformation": "none"
+    },
+    {
+      "file": "gamephase/freeze_start.png",
+      "source_file": "images/gamephase/freeze_start.png",
+      "category": "选手端 / 比赛阶段",
+      "width": 509,
+      "height": 112,
+      "transformation": "none"
+    },
+    {
+      "file": "gamephase/gamestatus_cyan.png",
+      "source_file": "images/gamephase/gamestatus_cyan.png",
+      "category": "选手端 / 比赛阶段",
+      "width": 320,
+      "height": 188,
+      "transformation": "none"
+    },
+    {
+      "file": "gamephase/gamestatus_red.png",
+      "source_file": "images/gamephase/gamestatus_red.png",
+      "category": "选手端 / 比赛阶段",
+      "width": 320,
+      "height": 188,
+      "transformation": "none"
+    },
+    {
+      "file": "gamephase/gamestatus_yellow.png",
+      "source_file": "images/gamephase/gamestatus_yellow.png",
+      "category": "选手端 / 比赛阶段",
+      "width": 320,
+      "height": 188,
+      "transformation": "none"
+    },
+    {
+      "file": "gamestatus_cyan.png",
+      "source_file": "images/gamestatus_cyan.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 320,
+      "height": 188,
+      "transformation": "none"
+    },
+    {
+      "file": "gamestatus_red.png",
+      "source_file": "images/gamestatus_red.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 320,
+      "height": 188,
+      "transformation": "none"
+    },
+    {
+      "file": "gamestatus_yellow.png",
+      "source_file": "images/gamestatus_yellow.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 320,
+      "height": 188,
+      "transformation": "none"
+    },
+    {
+      "file": "message/blue_message_outpost.png",
+      "source_file": "images/message/blue_message_outpost.png",
+      "category": "选手端 / 消息",
+      "width": 330,
+      "height": 355,
+      "transformation": "none"
+    },
+    {
+      "file": "message/blue_message_outpost_dead.png",
+      "source_file": "images/message/blue_message_outpost_dead.png",
+      "category": "选手端 / 消息",
+      "width": 330,
+      "height": 355,
+      "transformation": "none"
+    },
+    {
+      "file": "message/blue_validate_outpost.png",
+      "source_file": "images/message/blue_validate_outpost.png",
+      "category": "选手端 / 消息",
+      "width": 260,
+      "height": 279,
+      "transformation": "none"
+    },
+    {
+      "file": "message/blue_wingman_outpost.png",
+      "source_file": "images/message/blue_wingman_outpost.png",
+      "category": "选手端 / 消息",
+      "width": 193,
+      "height": 240,
+      "transformation": "none"
+    },
+    {
+      "file": "message/blue_wingman_outpost_alive.png",
+      "source_file": "images/message/blue_wingman_outpost_alive.png",
+      "category": "选手端 / 消息",
+      "width": 187,
+      "height": 229,
+      "transformation": "none"
+    },
+    {
+      "file": "message/blue_wingman_outpost_dead.png",
+      "source_file": "images/message/blue_wingman_outpost_dead.png",
+      "category": "选手端 / 消息",
+      "width": 187,
+      "height": 229,
+      "transformation": "none"
+    },
+    {
+      "file": "message/controlzone_blue_icon.png",
+      "source_file": "images/message/controlzone_blue_icon.png",
+      "category": "选手端 / 消息",
+      "width": 56,
+      "height": 50,
+      "transformation": "none"
+    },
+    {
+      "file": "message/controlzone_gray_icon.png",
+      "source_file": "images/message/controlzone_gray_icon.png",
+      "category": "选手端 / 消息",
+      "width": 28,
+      "height": 25,
+      "transformation": "none"
+    },
+    {
+      "file": "message/controlzone_red_icon.png",
+      "source_file": "images/message/controlzone_red_icon.png",
+      "category": "选手端 / 消息",
+      "width": 56,
+      "height": 50,
+      "transformation": "none"
+    },
+    {
+      "file": "message/message_blue.png",
+      "source_file": "images/message/message_blue.png",
+      "category": "选手端 / 消息",
+      "width": 976,
+      "height": 132,
+      "transformation": "none"
+    },
+    {
+      "file": "message/message_green.png",
+      "source_file": "images/message/message_green.png",
+      "category": "选手端 / 消息",
+      "width": 976,
+      "height": 132,
+      "transformation": "none"
+    },
+    {
+      "file": "message/message_kill.png",
+      "source_file": "images/message/message_kill.png",
+      "category": "选手端 / 消息",
+      "width": 190,
+      "height": 190,
+      "transformation": "none"
+    },
+    {
+      "file": "message/message_red.png",
+      "source_file": "images/message/message_red.png",
+      "category": "选手端 / 消息",
+      "width": 976,
+      "height": 132,
+      "transformation": "none"
+    },
+    {
+      "file": "message/red_message_outpost.png",
+      "source_file": "images/message/red_message_outpost.png",
+      "category": "选手端 / 消息",
+      "width": 330,
+      "height": 355,
+      "transformation": "none"
+    },
+    {
+      "file": "message/red_message_outpost_dead.png",
+      "source_file": "images/message/red_message_outpost_dead.png",
+      "category": "选手端 / 消息",
+      "width": 330,
+      "height": 355,
+      "transformation": "none"
+    },
+    {
+      "file": "message/red_wingman_outpost.png",
+      "source_file": "images/message/red_wingman_outpost.png",
+      "category": "选手端 / 消息",
+      "width": 193,
+      "height": 244,
+      "transformation": "none"
+    },
+    {
+      "file": "message/red_wingman_outpost_alive.png",
+      "source_file": "images/message/red_wingman_outpost_alive.png",
+      "category": "选手端 / 消息",
+      "width": 182,
+      "height": 233,
+      "transformation": "none"
+    },
+    {
+      "file": "message/red_wingman_outpost_dead.png",
+      "source_file": "images/message/red_wingman_outpost_dead.png",
+      "category": "选手端 / 消息",
+      "width": 182,
+      "height": 233,
+      "transformation": "none"
+    },
+    {
+      "file": "message/validate_icon_hp.png",
+      "source_file": "images/message/validate_icon_hp.png",
+      "category": "选手端 / 消息",
+      "width": 56,
+      "height": 36,
+      "transformation": "none"
+    },
+    {
+      "file": "message/validate_icon_killcount.png",
+      "source_file": "images/message/validate_icon_killcount.png",
+      "category": "选手端 / 消息",
+      "width": 48,
+      "height": 52,
+      "transformation": "none"
+    },
+    {
+      "file": "message/validate_icon_rune.png",
+      "source_file": "images/message/validate_icon_rune.png",
+      "category": "选手端 / 消息",
+      "width": 52,
+      "height": 60,
+      "transformation": "none"
+    },
+    {
+      "file": "message/validate_icon_totalhurt.png",
+      "source_file": "images/message/validate_icon_totalhurt.png",
+      "category": "选手端 / 消息",
+      "width": 48,
+      "height": 42,
+      "transformation": "none"
+    },
+    {
+      "file": "message/warning_box.png",
+      "source_file": "images/message/warning_box.png",
+      "category": "选手端 / 消息",
+      "width": 584,
+      "height": 124,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/blue_map_Interchange_station.png",
+      "source_file": "images/minimap/blue_map_Interchange_station.png",
+      "category": "选手端 / 小地图",
+      "width": 46,
+      "height": 50,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/blue_map_airplane.png",
+      "source_file": "images/minimap/blue_map_airplane.png",
+      "category": "选手端 / 小地图",
+      "width": 52,
+      "height": 52,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/blue_map_arrow.png",
+      "source_file": "images/minimap/blue_map_arrow.png",
+      "category": "选手端 / 小地图",
+      "width": 20,
+      "height": 22,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/blue_map_base.png",
+      "source_file": "images/minimap/blue_map_base.png",
+      "category": "选手端 / 小地图",
+      "width": 58,
+      "height": 64,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/blue_map_base_animation_1.png",
+      "source_file": "images/minimap/blue_map_base_animation_1.png",
+      "category": "选手端 / 小地图",
+      "width": 50,
+      "height": 55,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/blue_map_base_animation_2.png",
+      "source_file": "images/minimap/blue_map_base_animation_2.png",
+      "category": "选手端 / 小地图",
+      "width": 90,
+      "height": 101,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/blue_map_base_animation_3.png",
+      "source_file": "images/minimap/blue_map_base_animation_3.png",
+      "category": "选手端 / 小地图",
+      "width": 122,
+      "height": 139,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/blue_map_base_animation_4.png",
+      "source_file": "images/minimap/blue_map_base_animation_4.png",
+      "category": "选手端 / 小地图",
+      "width": 146,
+      "height": 166,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/blue_map_base_area.png",
+      "source_file": "images/minimap/blue_map_base_area.png",
+      "category": "选手端 / 小地图",
+      "width": 105,
+      "height": 117,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/blue_map_dart_launch.png",
+      "source_file": "images/minimap/blue_map_dart_launch.png",
+      "category": "选手端 / 小地图",
+      "width": 52,
+      "height": 60,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/blue_map_guard(1).png",
+      "source_file": "images/minimap/blue_map_guard(1).png",
+      "category": "选手端 / 小地图",
+      "width": 48,
+      "height": 44,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/blue_map_guard.png",
+      "source_file": "images/minimap/blue_map_guard.png",
+      "category": "选手端 / 小地图",
+      "width": 48,
+      "height": 44,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/blue_map_outpost.png",
+      "source_file": "images/minimap/blue_map_outpost.png",
+      "category": "选手端 / 小地图",
+      "width": 60,
+      "height": 72,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/blue_map_outpost_bg.png",
+      "source_file": "images/minimap/blue_map_outpost_bg.png",
+      "category": "选手端 / 小地图",
+      "width": 89,
+      "height": 57,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/blue_map_robot.png",
+      "source_file": "images/minimap/blue_map_robot.png",
+      "category": "选手端 / 小地图",
+      "width": 48,
+      "height": 48,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/blue_map_robot_lockbg.png",
+      "source_file": "images/minimap/blue_map_robot_lockbg.png",
+      "category": "选手端 / 小地图",
+      "width": 96,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/map_island_active.png",
+      "source_file": "images/minimap/map_island_active.png",
+      "category": "选手端 / 小地图",
+      "width": 80,
+      "height": 80,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/map_island_blue.png",
+      "source_file": "images/minimap/map_island_blue.png",
+      "category": "选手端 / 小地图",
+      "width": 80,
+      "height": 80,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/map_island_counting.png",
+      "source_file": "images/minimap/map_island_counting.png",
+      "category": "选手端 / 小地图",
+      "width": 80,
+      "height": 80,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/map_island_red.png",
+      "source_file": "images/minimap/map_island_red.png",
+      "category": "选手端 / 小地图",
+      "width": 80,
+      "height": 80,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/map_robot_id_1.png",
+      "source_file": "images/minimap/map_robot_id_1.png",
+      "category": "选手端 / 小地图",
+      "width": 11,
+      "height": 23,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/map_robot_id_2.png",
+      "source_file": "images/minimap/map_robot_id_2.png",
+      "category": "选手端 / 小地图",
+      "width": 17,
+      "height": 23,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/map_robot_id_3.png",
+      "source_file": "images/minimap/map_robot_id_3.png",
+      "category": "选手端 / 小地图",
+      "width": 16,
+      "height": 24,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/map_robot_id_4.png",
+      "source_file": "images/minimap/map_robot_id_4.png",
+      "category": "选手端 / 小地图",
+      "width": 18,
+      "height": 23,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/map_robot_id_5.png",
+      "source_file": "images/minimap/map_robot_id_5.png",
+      "category": "选手端 / 小地图",
+      "width": 16,
+      "height": 24,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/map_robot_lockline.png",
+      "source_file": "images/minimap/map_robot_lockline.png",
+      "category": "选手端 / 小地图",
+      "width": 90,
+      "height": 82,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/red_map_Interchange_station.png",
+      "source_file": "images/minimap/red_map_Interchange_station.png",
+      "category": "选手端 / 小地图",
+      "width": 48,
+      "height": 48,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/red_map_airplane.png",
+      "source_file": "images/minimap/red_map_airplane.png",
+      "category": "选手端 / 小地图",
+      "width": 52,
+      "height": 52,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/red_map_arrow.png",
+      "source_file": "images/minimap/red_map_arrow.png",
+      "category": "选手端 / 小地图",
+      "width": 20,
+      "height": 22,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/red_map_base.png",
+      "source_file": "images/minimap/red_map_base.png",
+      "category": "选手端 / 小地图",
+      "width": 58,
+      "height": 64,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/red_map_base_animation_1.png",
+      "source_file": "images/minimap/red_map_base_animation_1.png",
+      "category": "选手端 / 小地图",
+      "width": 50,
+      "height": 55,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/red_map_base_animation_2.png",
+      "source_file": "images/minimap/red_map_base_animation_2.png",
+      "category": "选手端 / 小地图",
+      "width": 90,
+      "height": 101,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/red_map_base_animation_3.png",
+      "source_file": "images/minimap/red_map_base_animation_3.png",
+      "category": "选手端 / 小地图",
+      "width": 122,
+      "height": 139,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/red_map_base_animation_4.png",
+      "source_file": "images/minimap/red_map_base_animation_4.png",
+      "category": "选手端 / 小地图",
+      "width": 146,
+      "height": 166,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/red_map_base_area.png",
+      "source_file": "images/minimap/red_map_base_area.png",
+      "category": "选手端 / 小地图",
+      "width": 105,
+      "height": 117,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/red_map_dart_launch.png",
+      "source_file": "images/minimap/red_map_dart_launch.png",
+      "category": "选手端 / 小地图",
+      "width": 54,
+      "height": 60,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/red_map_guard(1).png",
+      "source_file": "images/minimap/red_map_guard(1).png",
+      "category": "选手端 / 小地图",
+      "width": 48,
+      "height": 44,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/red_map_guard.png",
+      "source_file": "images/minimap/red_map_guard.png",
+      "category": "选手端 / 小地图",
+      "width": 48,
+      "height": 44,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/red_map_outpost.png",
+      "source_file": "images/minimap/red_map_outpost.png",
+      "category": "选手端 / 小地图",
+      "width": 60,
+      "height": 72,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/red_map_outpost_bg.png",
+      "source_file": "images/minimap/red_map_outpost_bg.png",
+      "category": "选手端 / 小地图",
+      "width": 88,
+      "height": 57,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/red_map_robot.png",
+      "source_file": "images/minimap/red_map_robot.png",
+      "category": "选手端 / 小地图",
+      "width": 48,
+      "height": 48,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/red_map_robot_lockbg.png",
+      "source_file": "images/minimap/red_map_robot_lockbg.png",
+      "category": "选手端 / 小地图",
+      "width": 96,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/self_map_arrow.png",
+      "source_file": "images/minimap/self_map_arrow.png",
+      "category": "选手端 / 小地图",
+      "width": 20,
+      "height": 22,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/self_map_robot.png",
+      "source_file": "images/minimap/self_map_robot.png",
+      "category": "选手端 / 小地图",
+      "width": 96,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap/self_map_robot_lockbg.png",
+      "source_file": "images/minimap/self_map_robot_lockbg.png",
+      "category": "选手端 / 小地图",
+      "width": 96,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "minimap_bg.png",
+      "source_file": "images/minimap_bg.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 800,
+      "height": 430,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/airplane_statusbar_bullet.png",
+      "source_file": "images/my_robot/airplane_statusbar_bullet.png",
+      "category": "选手端 / 自身机器人",
+      "width": 316,
+      "height": 40,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/airplane_statusbar_bullet_bg.png",
+      "source_file": "images/my_robot/airplane_statusbar_bullet_bg.png",
+      "category": "选手端 / 自身机器人",
+      "width": 316,
+      "height": 40,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/airplane_statusbar_cover.png",
+      "source_file": "images/my_robot/airplane_statusbar_cover.png",
+      "category": "选手端 / 自身机器人",
+      "width": 100,
+      "height": 80,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/airplane_statusbar_h_bg.png",
+      "source_file": "images/my_robot/airplane_statusbar_h_bg.png",
+      "category": "选手端 / 自身机器人",
+      "width": 52,
+      "height": 52,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/airplane_statusbar_h_unable.png",
+      "source_file": "images/my_robot/airplane_statusbar_h_unable.png",
+      "category": "选手端 / 自身机器人",
+      "width": 52,
+      "height": 52,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/airplane_statusbar_slid_bg.png",
+      "source_file": "images/my_robot/airplane_statusbar_slid_bg.png",
+      "category": "选手端 / 自身机器人",
+      "width": 284,
+      "height": 28,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/airplane_statusbar_slid_less300.png",
+      "source_file": "images/my_robot/airplane_statusbar_slid_less300.png",
+      "category": "选手端 / 自身机器人",
+      "width": 284,
+      "height": 28,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/airplane_statusbar_slid_more300.png",
+      "source_file": "images/my_robot/airplane_statusbar_slid_more300.png",
+      "category": "选手端 / 自身机器人",
+      "width": 284,
+      "height": 28,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/blood_addbuff.png",
+      "source_file": "images/my_robot/blood_addbuff.png",
+      "category": "选手端 / 自身机器人",
+      "width": 483,
+      "height": 84,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/blood_invincible.png",
+      "source_file": "images/my_robot/blood_invincible.png",
+      "category": "选手端 / 自身机器人",
+      "width": 483,
+      "height": 84,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/blue_airplane_statusbar_avatar.png",
+      "source_file": "images/my_robot/blue_airplane_statusbar_avatar.png",
+      "category": "选手端 / 自身机器人",
+      "width": 157,
+      "height": 134,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/blue_statusbar_avatar_empty.png",
+      "source_file": "images/my_robot/blue_statusbar_avatar_empty.png",
+      "category": "选手端 / 自身机器人",
+      "width": 157,
+      "height": 127,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/blue_statusbar_avatar_enginner.png",
+      "source_file": "images/my_robot/blue_statusbar_avatar_enginner.png",
+      "category": "选手端 / 自身机器人",
+      "width": 157,
+      "height": 134,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/blue_statusbar_avatar_enginner_invincible.png",
+      "source_file": "images/my_robot/blue_statusbar_avatar_enginner_invincible.png",
+      "category": "选手端 / 自身机器人",
+      "width": 163,
+      "height": 134,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/blue_statusbar_avatar_hero.png",
+      "source_file": "images/my_robot/blue_statusbar_avatar_hero.png",
+      "category": "选手端 / 自身机器人",
+      "width": 157,
+      "height": 134,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/blue_statusbar_avatar_hero_invincible.png",
+      "source_file": "images/my_robot/blue_statusbar_avatar_hero_invincible.png",
+      "category": "选手端 / 自身机器人",
+      "width": 163,
+      "height": 134,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/blue_statusbar_avatar_infantry.png",
+      "source_file": "images/my_robot/blue_statusbar_avatar_infantry.png",
+      "category": "选手端 / 自身机器人",
+      "width": 157,
+      "height": 134,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/blue_statusbar_avatar_infantry_invincible.png",
+      "source_file": "images/my_robot/blue_statusbar_avatar_infantry_invincible.png",
+      "category": "选手端 / 自身机器人",
+      "width": 163,
+      "height": 134,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/blue_statusbar_blood_background.png",
+      "source_file": "images/my_robot/blue_statusbar_blood_background.png",
+      "category": "选手端 / 自身机器人",
+      "width": 362,
+      "height": 44,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/blue_statusbar_blood_slid.png",
+      "source_file": "images/my_robot/blue_statusbar_blood_slid.png",
+      "category": "选手端 / 自身机器人",
+      "width": 380,
+      "height": 64,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/blue_statusbar_blood_slid_addbuff.png",
+      "source_file": "images/my_robot/blue_statusbar_blood_slid_addbuff.png",
+      "category": "选手端 / 自身机器人",
+      "width": 379,
+      "height": 64,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/blue_statusbar_blood_slid_low.png",
+      "source_file": "images/my_robot/blue_statusbar_blood_slid_low.png",
+      "category": "选手端 / 自身机器人",
+      "width": 380,
+      "height": 64,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/blue_statusbar_expbar_bg.png",
+      "source_file": "images/my_robot/blue_statusbar_expbar_bg.png",
+      "category": "选手端 / 自身机器人",
+      "width": 32,
+      "height": 92,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/blue_statusbar_id_border.png",
+      "source_file": "images/my_robot/blue_statusbar_id_border.png",
+      "category": "选手端 / 自身机器人",
+      "width": 128,
+      "height": 128,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/blue_statusbar_level_1.png",
+      "source_file": "images/my_robot/blue_statusbar_level_1.png",
+      "category": "选手端 / 自身机器人",
+      "width": 96,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/blue_statusbar_level_10.png",
+      "source_file": "images/my_robot/blue_statusbar_level_10.png",
+      "category": "选手端 / 自身机器人",
+      "width": 96,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/blue_statusbar_level_2.png",
+      "source_file": "images/my_robot/blue_statusbar_level_2.png",
+      "category": "选手端 / 自身机器人",
+      "width": 96,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/blue_statusbar_level_3.png",
+      "source_file": "images/my_robot/blue_statusbar_level_3.png",
+      "category": "选手端 / 自身机器人",
+      "width": 96,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/blue_statusbar_level_4.png",
+      "source_file": "images/my_robot/blue_statusbar_level_4.png",
+      "category": "选手端 / 自身机器人",
+      "width": 96,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/blue_statusbar_level_5.png",
+      "source_file": "images/my_robot/blue_statusbar_level_5.png",
+      "category": "选手端 / 自身机器人",
+      "width": 96,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/blue_statusbar_level_6.png",
+      "source_file": "images/my_robot/blue_statusbar_level_6.png",
+      "category": "选手端 / 自身机器人",
+      "width": 96,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/blue_statusbar_level_7.png",
+      "source_file": "images/my_robot/blue_statusbar_level_7.png",
+      "category": "选手端 / 自身机器人",
+      "width": 96,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/blue_statusbar_level_8.png",
+      "source_file": "images/my_robot/blue_statusbar_level_8.png",
+      "category": "选手端 / 自身机器人",
+      "width": 96,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/blue_statusbar_level_9.png",
+      "source_file": "images/my_robot/blue_statusbar_level_9.png",
+      "category": "选手端 / 自身机器人",
+      "width": 96,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/buff_2020_addhp_5.png",
+      "source_file": "images/my_robot/buff_2020_addhp_5.png",
+      "category": "选手端 / 自身机器人",
+      "width": 54,
+      "height": 65,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/buff_2022_cool_2.png",
+      "source_file": "images/my_robot/buff_2022_cool_2.png",
+      "category": "选手端 / 自身机器人",
+      "width": 88,
+      "height": 88,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/combat_icon.png",
+      "source_file": "images/my_robot/combat_icon.png",
+      "category": "选手端 / 自身机器人",
+      "width": 72,
+      "height": 72,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/outofcombat_icon.png",
+      "source_file": "images/my_robot/outofcombat_icon.png",
+      "category": "选手端 / 自身机器人",
+      "width": 72,
+      "height": 69,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/red_airplane_statusbar_avatar.png",
+      "source_file": "images/my_robot/red_airplane_statusbar_avatar.png",
+      "category": "选手端 / 自身机器人",
+      "width": 157,
+      "height": 134,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/red_statusbar_avatar_empty.png",
+      "source_file": "images/my_robot/red_statusbar_avatar_empty.png",
+      "category": "选手端 / 自身机器人",
+      "width": 157,
+      "height": 127,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/red_statusbar_avatar_enginner.png",
+      "source_file": "images/my_robot/red_statusbar_avatar_enginner.png",
+      "category": "选手端 / 自身机器人",
+      "width": 157,
+      "height": 134,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/red_statusbar_avatar_enginner_invincible.png",
+      "source_file": "images/my_robot/red_statusbar_avatar_enginner_invincible.png",
+      "category": "选手端 / 自身机器人",
+      "width": 163,
+      "height": 134,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/red_statusbar_avatar_hero.png",
+      "source_file": "images/my_robot/red_statusbar_avatar_hero.png",
+      "category": "选手端 / 自身机器人",
+      "width": 157,
+      "height": 134,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/red_statusbar_avatar_hero_invincible.png",
+      "source_file": "images/my_robot/red_statusbar_avatar_hero_invincible.png",
+      "category": "选手端 / 自身机器人",
+      "width": 163,
+      "height": 134,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/red_statusbar_avatar_infantry.png",
+      "source_file": "images/my_robot/red_statusbar_avatar_infantry.png",
+      "category": "选手端 / 自身机器人",
+      "width": 157,
+      "height": 134,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/red_statusbar_avatar_infantry_invincible.png",
+      "source_file": "images/my_robot/red_statusbar_avatar_infantry_invincible.png",
+      "category": "选手端 / 自身机器人",
+      "width": 163,
+      "height": 134,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/red_statusbar_blood_background.png",
+      "source_file": "images/my_robot/red_statusbar_blood_background.png",
+      "category": "选手端 / 自身机器人",
+      "width": 362,
+      "height": 44,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/red_statusbar_blood_slid.png",
+      "source_file": "images/my_robot/red_statusbar_blood_slid.png",
+      "category": "选手端 / 自身机器人",
+      "width": 380,
+      "height": 64,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/red_statusbar_blood_slid_addbuff.png",
+      "source_file": "images/my_robot/red_statusbar_blood_slid_addbuff.png",
+      "category": "选手端 / 自身机器人",
+      "width": 379,
+      "height": 64,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/red_statusbar_blood_slid_low.png",
+      "source_file": "images/my_robot/red_statusbar_blood_slid_low.png",
+      "category": "选手端 / 自身机器人",
+      "width": 380,
+      "height": 64,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/red_statusbar_expbar_bg.png",
+      "source_file": "images/my_robot/red_statusbar_expbar_bg.png",
+      "category": "选手端 / 自身机器人",
+      "width": 32,
+      "height": 92,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/red_statusbar_id_border.png",
+      "source_file": "images/my_robot/red_statusbar_id_border.png",
+      "category": "选手端 / 自身机器人",
+      "width": 128,
+      "height": 128,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/red_statusbar_level_1.png",
+      "source_file": "images/my_robot/red_statusbar_level_1.png",
+      "category": "选手端 / 自身机器人",
+      "width": 96,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/red_statusbar_level_10.png",
+      "source_file": "images/my_robot/red_statusbar_level_10.png",
+      "category": "选手端 / 自身机器人",
+      "width": 96,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/red_statusbar_level_2.png",
+      "source_file": "images/my_robot/red_statusbar_level_2.png",
+      "category": "选手端 / 自身机器人",
+      "width": 96,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/red_statusbar_level_3.png",
+      "source_file": "images/my_robot/red_statusbar_level_3.png",
+      "category": "选手端 / 自身机器人",
+      "width": 96,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/red_statusbar_level_4.png",
+      "source_file": "images/my_robot/red_statusbar_level_4.png",
+      "category": "选手端 / 自身机器人",
+      "width": 96,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/red_statusbar_level_5.png",
+      "source_file": "images/my_robot/red_statusbar_level_5.png",
+      "category": "选手端 / 自身机器人",
+      "width": 96,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/red_statusbar_level_6.png",
+      "source_file": "images/my_robot/red_statusbar_level_6.png",
+      "category": "选手端 / 自身机器人",
+      "width": 96,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/red_statusbar_level_7.png",
+      "source_file": "images/my_robot/red_statusbar_level_7.png",
+      "category": "选手端 / 自身机器人",
+      "width": 96,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/red_statusbar_level_8.png",
+      "source_file": "images/my_robot/red_statusbar_level_8.png",
+      "category": "选手端 / 自身机器人",
+      "width": 96,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/red_statusbar_level_9.png",
+      "source_file": "images/my_robot/red_statusbar_level_9.png",
+      "category": "选手端 / 自身机器人",
+      "width": 96,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/statusbar_bullet_border.png",
+      "source_file": "images/my_robot/statusbar_bullet_border.png",
+      "category": "选手端 / 自身机器人",
+      "width": 200,
+      "height": 56,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/statusbar_bullet_icon.png",
+      "source_file": "images/my_robot/statusbar_bullet_icon.png",
+      "category": "选手端 / 自身机器人",
+      "width": 43,
+      "height": 44,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/statusbar_bullet_icon_red.png",
+      "source_file": "images/my_robot/statusbar_bullet_icon_red.png",
+      "category": "选手端 / 自身机器人",
+      "width": 43,
+      "height": 44,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/statusbar_energy.png",
+      "source_file": "images/my_robot/statusbar_energy.png",
+      "category": "选手端 / 自身机器人",
+      "width": 300,
+      "height": 30,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/statusbar_energy_background.png",
+      "source_file": "images/my_robot/statusbar_energy_background.png",
+      "category": "选手端 / 自身机器人",
+      "width": 300,
+      "height": 30,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/statusbar_expbar.png",
+      "source_file": "images/my_robot/statusbar_expbar.png",
+      "category": "选手端 / 自身机器人",
+      "width": 23,
+      "height": 88,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/statusbar_signallamp_full.png",
+      "source_file": "images/my_robot/statusbar_signallamp_full.png",
+      "category": "选手端 / 自身机器人",
+      "width": 52,
+      "height": 56,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/statusbar_signallamp_green_single.png",
+      "source_file": "images/my_robot/statusbar_signallamp_green_single.png",
+      "category": "选手端 / 自身机器人",
+      "width": 52,
+      "height": 56,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/statusbar_signallamp_high.png",
+      "source_file": "images/my_robot/statusbar_signallamp_high.png",
+      "category": "选手端 / 自身机器人",
+      "width": 48,
+      "height": 46,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/statusbar_signallamp_low.png",
+      "source_file": "images/my_robot/statusbar_signallamp_low.png",
+      "category": "选手端 / 自身机器人",
+      "width": 49,
+      "height": 50,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/statusbar_signallamp_middle.png",
+      "source_file": "images/my_robot/statusbar_signallamp_middle.png",
+      "category": "选手端 / 自身机器人",
+      "width": 53,
+      "height": 50,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/statusbar_signallamp_red_single.png",
+      "source_file": "images/my_robot/statusbar_signallamp_red_single.png",
+      "category": "选手端 / 自身机器人",
+      "width": 63,
+      "height": 64,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/statusbar_signallamp_yellow_single.png",
+      "source_file": "images/my_robot/statusbar_signallamp_yellow_single.png",
+      "category": "选手端 / 自身机器人",
+      "width": 52,
+      "height": 56,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/statusbar_warning_red.png",
+      "source_file": "images/my_robot/statusbar_warning_red.png",
+      "category": "选手端 / 自身机器人",
+      "width": 62,
+      "height": 72,
+      "transformation": "none"
+    },
+    {
+      "file": "my_robot/statusbar_warning_yellow.png",
+      "source_file": "images/my_robot/statusbar_warning_yellow.png",
+      "category": "选手端 / 自身机器人",
+      "width": 62,
+      "height": 72,
+      "transformation": "none"
+    },
+    {
+      "file": "panel/17.png",
+      "source_file": "images/panel/17.png",
+      "category": "选手端 / 面板图标",
+      "width": 62,
+      "height": 62,
+      "transformation": "none"
+    },
+    {
+      "file": "panel/42.png",
+      "source_file": "images/panel/42.png",
+      "category": "选手端 / 面板图标",
+      "width": 36,
+      "height": 36,
+      "transformation": "none"
+    },
+    {
+      "file": "panel/Tips_bg_2x.png",
+      "source_file": "images/panel/Tips_bg_2x.png",
+      "category": "选手端 / 面板图标",
+      "width": 840,
+      "height": 192,
+      "transformation": "none"
+    },
+    {
+      "file": "panel/ic_gold mine.png",
+      "source_file": "images/panel/ic_gold mine.png",
+      "category": "选手端 / 面板图标",
+      "width": 36,
+      "height": 36,
+      "transformation": "none"
+    },
+    {
+      "file": "panel/ic_gold_2x.png",
+      "source_file": "images/panel/ic_gold_2x.png",
+      "category": "选手端 / 面板图标",
+      "width": 56,
+      "height": 60,
+      "transformation": "none"
+    },
+    {
+      "file": "panel/ic_silver mine.png",
+      "source_file": "images/panel/ic_silver mine.png",
+      "category": "选手端 / 面板图标",
+      "width": 36,
+      "height": 36,
+      "transformation": "none"
+    },
+    {
+      "file": "panel/map_island_blue.png",
+      "source_file": "images/panel/map_island_blue.png",
+      "category": "选手端 / 面板图标",
+      "width": 80,
+      "height": 80,
+      "transformation": "none"
+    },
+    {
+      "file": "panel/map_island_red.png",
+      "source_file": "images/panel/map_island_red.png",
+      "category": "选手端 / 面板图标",
+      "width": 80,
+      "height": 80,
+      "transformation": "none"
+    },
+    {
+      "file": "panel/setting_arrow.png",
+      "source_file": "images/panel/setting_arrow.png",
+      "category": "选手端 / 面板图标",
+      "width": 32,
+      "height": 20,
+      "transformation": "none"
+    },
+    {
+      "file": "panel/skillup_icon_blood.png",
+      "source_file": "images/panel/skillup_icon_blood.png",
+      "category": "选手端 / 面板图标",
+      "width": 40,
+      "height": 56,
+      "transformation": "none"
+    },
+    {
+      "file": "panel/sundry_bullet.png",
+      "source_file": "images/panel/sundry_bullet.png",
+      "category": "选手端 / 面板图标",
+      "width": 64,
+      "height": 64,
+      "transformation": "none"
+    },
+    {
+      "file": "panel/sundry_golf.png",
+      "source_file": "images/panel/sundry_golf.png",
+      "category": "选手端 / 面板图标",
+      "width": 64,
+      "height": 64,
+      "transformation": "none"
+    },
+    {
+      "file": "panel/sundry_icon.png",
+      "source_file": "images/panel/sundry_icon.png",
+      "category": "选手端 / 面板图标",
+      "width": 52,
+      "height": 52,
+      "transformation": "none"
+    },
+    {
+      "file": "panel/sundry_offline.png",
+      "source_file": "images/panel/sundry_offline.png",
+      "category": "选手端 / 面板图标",
+      "width": 152,
+      "height": 32,
+      "transformation": "none"
+    },
+    {
+      "file": "panel/sundry_online.png",
+      "source_file": "images/panel/sundry_online.png",
+      "category": "选手端 / 面板图标",
+      "width": 152,
+      "height": 32,
+      "transformation": "none"
+    },
+    {
+      "file": "popup_bg.png",
+      "source_file": "images/popup_bg.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 840,
+      "height": 192,
+      "transformation": "none"
+    },
+    {
+      "file": "prep_phase_frame.png",
+      "source_file": "images/prep_phase_frame.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 227,
+      "height": 112,
+      "transformation": "none"
+    },
+    {
+      "file": "red_base_blood/red_base_blood_border.png",
+      "source_file": "images/red_base_blood/red_base_blood_border.png",
+      "category": "选手端 / 基地血条",
+      "width": 837,
+      "height": 72,
+      "transformation": "none"
+    },
+    {
+      "file": "red_base_blood/red_base_blood_bottom.png",
+      "source_file": "images/red_base_blood/red_base_blood_bottom.png",
+      "category": "选手端 / 基地血条",
+      "width": 837,
+      "height": 72,
+      "transformation": "none"
+    },
+    {
+      "file": "red_base_blood/red_base_blood_invincible.png",
+      "source_file": "images/red_base_blood/red_base_blood_invincible.png",
+      "category": "选手端 / 基地血条",
+      "width": 880,
+      "height": 104,
+      "transformation": "none"
+    },
+    {
+      "file": "red_base_blood/red_base_blood_light.png",
+      "source_file": "images/red_base_blood/red_base_blood_light.png",
+      "category": "选手端 / 基地血条",
+      "width": 910,
+      "height": 80,
+      "transformation": "none"
+    },
+    {
+      "file": "red_base_blood/red_base_blood_middle.png",
+      "source_file": "images/red_base_blood/red_base_blood_middle.png",
+      "category": "选手端 / 基地血条",
+      "width": 840,
+      "height": 84,
+      "transformation": "none"
+    },
+    {
+      "file": "red_base_blood/red_base_blood_middle_full.png",
+      "source_file": "images/red_base_blood/red_base_blood_middle_full.png",
+      "category": "选手端 / 基地血条",
+      "width": 996,
+      "height": 160,
+      "transformation": "none"
+    },
+    {
+      "file": "red_base_blood/red_base_blood_middle_lowhp_0.png",
+      "source_file": "images/red_base_blood/red_base_blood_middle_lowhp_0.png",
+      "category": "选手端 / 基地血条",
+      "width": 840,
+      "height": 84,
+      "transformation": "none"
+    },
+    {
+      "file": "red_base_blood/red_base_blood_top.png",
+      "source_file": "images/red_base_blood/red_base_blood_top.png",
+      "category": "选手端 / 基地血条",
+      "width": 840,
+      "height": 84,
+      "transformation": "none"
+    },
+    {
+      "file": "red_base_blood/red_base_blood_top_full.png",
+      "source_file": "images/red_base_blood/red_base_blood_top_full.png",
+      "category": "选手端 / 基地血条",
+      "width": 840,
+      "height": 84,
+      "transformation": "none"
+    },
+    {
+      "file": "red_message_guard.png",
+      "source_file": "images/red_message_guard.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 363,
+      "height": 287,
+      "transformation": "none"
+    },
+    {
+      "file": "red_robot_icon.png",
+      "source_file": "images/red_robot_icon.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 286,
+      "height": 226,
+      "transformation": "none"
+    },
+    {
+      "file": "red_team_logo.png",
+      "source_file": "images/red_team_logo.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 500,
+      "height": 500,
+      "transformation": "none"
+    },
+    {
+      "file": "robot_avatar.png",
+      "source_file": "images/robot_avatar.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 363,
+      "height": 287,
+      "transformation": "none"
+    },
+    {
+      "file": "robots/blue_drone.png",
+      "source_file": "images/robots/blue_drone.png",
+      "category": "参考工程 / 角色图标",
+      "width": 188,
+      "height": 120,
+      "transformation": "none"
+    },
+    {
+      "file": "robots/blue_engineer.png",
+      "source_file": "images/robots/blue_engineer.png",
+      "category": "参考工程 / 角色图标",
+      "width": 367,
+      "height": 215,
+      "transformation": "none"
+    },
+    {
+      "file": "robots/blue_hero.png",
+      "source_file": "images/robots/blue_hero.png",
+      "category": "参考工程 / 角色图标",
+      "width": 279,
+      "height": 216,
+      "transformation": "none"
+    },
+    {
+      "file": "robots/blue_infantry.png",
+      "source_file": "images/robots/blue_infantry.png",
+      "category": "参考工程 / 角色图标",
+      "width": 320,
+      "height": 196,
+      "transformation": "none"
+    },
+    {
+      "file": "robots/blue_sentry.png",
+      "source_file": "images/robots/blue_sentry.png",
+      "category": "参考工程 / 角色图标",
+      "width": 48,
+      "height": 48,
+      "transformation": "none"
+    },
+    {
+      "file": "robots/red_drone.png",
+      "source_file": "images/robots/red_drone.png",
+      "category": "参考工程 / 角色图标",
+      "width": 191,
+      "height": 120,
+      "transformation": "none"
+    },
+    {
+      "file": "robots/red_engineer.png",
+      "source_file": "images/robots/red_engineer.png",
+      "category": "参考工程 / 角色图标",
+      "width": 355,
+      "height": 203,
+      "transformation": "none"
+    },
+    {
+      "file": "robots/red_hero.png",
+      "source_file": "images/robots/red_hero.png",
+      "category": "参考工程 / 角色图标",
+      "width": 272,
+      "height": 205,
+      "transformation": "none"
+    },
+    {
+      "file": "robots/red_infantry.png",
+      "source_file": "images/robots/red_infantry.png",
+      "category": "参考工程 / 角色图标",
+      "width": 307,
+      "height": 187,
+      "transformation": "none"
+    },
+    {
+      "file": "robots/red_sentry.png",
+      "source_file": "images/robots/red_sentry.png",
+      "category": "参考工程 / 角色图标",
+      "width": 48,
+      "height": 48,
+      "transformation": "none"
+    },
+    {
+      "file": "rune_tab/key_able.png",
+      "source_file": "images/rune_tab/key_able.png",
+      "category": "选手端 / 能量机关",
+      "width": 76,
+      "height": 76,
+      "transformation": "none"
+    },
+    {
+      "file": "rune_tab/key_unable.png",
+      "source_file": "images/rune_tab/key_unable.png",
+      "category": "选手端 / 能量机关",
+      "width": 76,
+      "height": 76,
+      "transformation": "none"
+    },
+    {
+      "file": "rune_tab/rune_tab_bg.png",
+      "source_file": "images/rune_tab/rune_tab_bg.png",
+      "category": "选手端 / 能量机关",
+      "width": 316,
+      "height": 336,
+      "transformation": "none"
+    },
+    {
+      "file": "rune_tab/rune_tab_blue.png",
+      "source_file": "images/rune_tab/rune_tab_blue.png",
+      "category": "选手端 / 能量机关",
+      "width": 189,
+      "height": 160,
+      "transformation": "none"
+    },
+    {
+      "file": "rune_tab/rune_tab_delimiter.png",
+      "source_file": "images/rune_tab/rune_tab_delimiter.png",
+      "category": "选手端 / 能量机关",
+      "width": 2,
+      "height": 24,
+      "transformation": "none"
+    },
+    {
+      "file": "rune_tab/rune_tab_hit.png",
+      "source_file": "images/rune_tab/rune_tab_hit.png",
+      "category": "选手端 / 能量机关",
+      "width": 52,
+      "height": 52,
+      "transformation": "none"
+    },
+    {
+      "file": "rune_tab/rune_tab_hitting.png",
+      "source_file": "images/rune_tab/rune_tab_hitting.png",
+      "category": "选手端 / 能量机关",
+      "width": 64,
+      "height": 64,
+      "transformation": "none"
+    },
+    {
+      "file": "rune_tab/rune_tab_nothit.png",
+      "source_file": "images/rune_tab/rune_tab_nothit.png",
+      "category": "选手端 / 能量机关",
+      "width": 48,
+      "height": 48,
+      "transformation": "none"
+    },
+    {
+      "file": "rune_tab/rune_tab_red.png",
+      "source_file": "images/rune_tab/rune_tab_red.png",
+      "category": "选手端 / 能量机关",
+      "width": 191,
+      "height": 158,
+      "transformation": "none"
+    },
+    {
+      "file": "silo/silo_background_1.png",
+      "source_file": "images/silo/silo_background_1.png",
+      "category": "选手端 / 飞镖",
+      "width": 448,
+      "height": 340,
+      "transformation": "none"
+    },
+    {
+      "file": "silo/silo_background_2.png",
+      "source_file": "images/silo/silo_background_2.png",
+      "category": "选手端 / 飞镖",
+      "width": 448,
+      "height": 620,
+      "transformation": "none"
+    },
+    {
+      "file": "silo/silo_border_big.png",
+      "source_file": "images/silo/silo_border_big.png",
+      "category": "选手端 / 飞镖",
+      "width": 64,
+      "height": 64,
+      "transformation": "none"
+    },
+    {
+      "file": "silo/silo_border_green.png",
+      "source_file": "images/silo/silo_border_green.png",
+      "category": "选手端 / 飞镖",
+      "width": 48,
+      "height": 48,
+      "transformation": "none"
+    },
+    {
+      "file": "silo/silo_border_normal.png",
+      "source_file": "images/silo/silo_border_normal.png",
+      "category": "选手端 / 飞镖",
+      "width": 48,
+      "height": 48,
+      "transformation": "none"
+    },
+    {
+      "file": "silo/silo_border_red.png",
+      "source_file": "images/silo/silo_border_red.png",
+      "category": "选手端 / 飞镖",
+      "width": 48,
+      "height": 48,
+      "transformation": "none"
+    },
+    {
+      "file": "silo/silo_dartstate_background.png",
+      "source_file": "images/silo/silo_dartstate_background.png",
+      "category": "选手端 / 飞镖",
+      "width": 916,
+      "height": 220,
+      "transformation": "none"
+    },
+    {
+      "file": "silo/silo_defaultposition.png",
+      "source_file": "images/silo/silo_defaultposition.png",
+      "category": "选手端 / 飞镖",
+      "width": 480,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "silo/silo_defaultposition_en.png",
+      "source_file": "images/silo/silo_defaultposition_en.png",
+      "category": "选手端 / 飞镖",
+      "width": 240,
+      "height": 48,
+      "transformation": "none"
+    },
+    {
+      "file": "silo/silo_endmovingposition.png",
+      "source_file": "images/silo/silo_endmovingposition.png",
+      "category": "选手端 / 飞镖",
+      "width": 480,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "silo/silo_icon_aim.png",
+      "source_file": "images/silo/silo_icon_aim.png",
+      "category": "选手端 / 飞镖",
+      "width": 32,
+      "height": 32,
+      "transformation": "none"
+    },
+    {
+      "file": "silo/silo_icon_darts.png",
+      "source_file": "images/silo/silo_icon_darts.png",
+      "category": "选手端 / 飞镖",
+      "width": 30,
+      "height": 30,
+      "transformation": "none"
+    },
+    {
+      "file": "silo/silo_icon_speed.png",
+      "source_file": "images/silo/silo_icon_speed.png",
+      "category": "选手端 / 飞镖",
+      "width": 32,
+      "height": 26,
+      "transformation": "none"
+    },
+    {
+      "file": "silo/silo_outpost.png",
+      "source_file": "images/silo/silo_outpost.png",
+      "category": "选手端 / 飞镖",
+      "width": 480,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "silo/silo_outpost_en.png",
+      "source_file": "images/silo/silo_outpost_en.png",
+      "category": "选手端 / 飞镖",
+      "width": 240,
+      "height": 48,
+      "transformation": "none"
+    },
+    {
+      "file": "silo/silo_randomconstantposition.png",
+      "source_file": "images/silo/silo_randomconstantposition.png",
+      "category": "参考工程 / 带生成水印（不用于 HUD）",
+      "width": 4579,
+      "height": 915,
+      "transformation": "none"
+    },
+    {
+      "file": "silo/silo_randomfixposition.png",
+      "source_file": "images/silo/silo_randomfixposition.png",
+      "category": "选手端 / 飞镖",
+      "width": 480,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "silo/silo_randommovingposition.png",
+      "source_file": "images/silo/silo_randommovingposition.png",
+      "category": "参考工程 / 带生成水印（不用于 HUD）",
+      "width": 4579,
+      "height": 915,
+      "transformation": "none"
+    },
+    {
+      "file": "silo/silo_randomposition.png",
+      "source_file": "images/silo/silo_randomposition.png",
+      "category": "选手端 / 飞镖",
+      "width": 480,
+      "height": 96,
+      "transformation": "none"
+    },
+    {
+      "file": "silo/silo_randomposition_en.png",
+      "source_file": "images/silo/silo_randomposition_en.png",
+      "category": "选手端 / 飞镖",
+      "width": 240,
+      "height": 48,
+      "transformation": "none"
+    },
+    {
+      "file": "silo/tab_icon_silo.png",
+      "source_file": "images/silo/tab_icon_silo.png",
+      "category": "选手端 / 飞镖",
+      "width": 56,
+      "height": 56,
+      "transformation": "none"
+    },
+    {
+      "file": "silo_icon_darts.png",
+      "source_file": "images/silo_icon_darts.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 30,
+      "height": 30,
+      "transformation": "none"
+    },
+    {
+      "file": "sundry_bullet.png",
+      "source_file": "images/sundry_bullet.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 64,
+      "height": 64,
+      "transformation": "none"
+    },
+    {
+      "file": "sundry_golf.png",
+      "source_file": "images/sundry_golf.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 64,
+      "height": 64,
+      "transformation": "none"
+    },
+    {
+      "file": "sundry_icon.png",
+      "source_file": "images/sundry_icon.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 52,
+      "height": 52,
+      "transformation": "none"
+    },
+    {
+      "file": "tab/message_disconnect.png",
+      "source_file": "images/tab/message_disconnect.png",
+      "category": "选手端 / 状态表",
+      "width": 78,
+      "height": 90,
+      "transformation": "none"
+    },
+    {
+      "file": "tab/tab_header_hurt.png",
+      "source_file": "images/tab/tab_header_hurt.png",
+      "category": "选手端 / 状态表",
+      "width": 1000,
+      "height": 132,
+      "transformation": "none"
+    },
+    {
+      "file": "tab/tab_level_1.png",
+      "source_file": "images/tab/tab_level_1.png",
+      "category": "选手端 / 状态表",
+      "width": 32,
+      "height": 26,
+      "transformation": "none"
+    },
+    {
+      "file": "tab/tab_level_10.png",
+      "source_file": "images/tab/tab_level_10.png",
+      "category": "选手端 / 状态表",
+      "width": 30,
+      "height": 36,
+      "transformation": "none"
+    },
+    {
+      "file": "tab/tab_level_2.png",
+      "source_file": "images/tab/tab_level_2.png",
+      "category": "选手端 / 状态表",
+      "width": 32,
+      "height": 33,
+      "transformation": "none"
+    },
+    {
+      "file": "tab/tab_level_3.png",
+      "source_file": "images/tab/tab_level_3.png",
+      "category": "选手端 / 状态表",
+      "width": 32,
+      "height": 34,
+      "transformation": "none"
+    },
+    {
+      "file": "tab/tab_level_4.png",
+      "source_file": "images/tab/tab_level_4.png",
+      "category": "选手端 / 状态表",
+      "width": 32,
+      "height": 34,
+      "transformation": "none"
+    },
+    {
+      "file": "tab/tab_level_5.png",
+      "source_file": "images/tab/tab_level_5.png",
+      "category": "选手端 / 状态表",
+      "width": 36,
+      "height": 35,
+      "transformation": "none"
+    },
+    {
+      "file": "tab/tab_level_6.png",
+      "source_file": "images/tab/tab_level_6.png",
+      "category": "选手端 / 状态表",
+      "width": 30,
+      "height": 36,
+      "transformation": "none"
+    },
+    {
+      "file": "tab/tab_level_7.png",
+      "source_file": "images/tab/tab_level_7.png",
+      "category": "选手端 / 状态表",
+      "width": 30,
+      "height": 36,
+      "transformation": "none"
+    },
+    {
+      "file": "tab/tab_level_8.png",
+      "source_file": "images/tab/tab_level_8.png",
+      "category": "选手端 / 状态表",
+      "width": 30,
+      "height": 36,
+      "transformation": "none"
+    },
+    {
+      "file": "tab/tab_level_9.png",
+      "source_file": "images/tab/tab_level_9.png",
+      "category": "选手端 / 状态表",
+      "width": 30,
+      "height": 36,
+      "transformation": "none"
+    },
+    {
+      "file": "tactical_camera_main_default.png",
+      "source_file": "images/tactical_camera_main_default.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 2940,
+      "height": 1686,
+      "transformation": "none"
+    },
+    {
+      "file": "tactical_camera_preview_default.png",
+      "source_file": "images/tactical_camera_preview_default.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 2940,
+      "height": 1574,
+      "transformation": "none"
+    },
+    {
+      "file": "top_mid/BattleVolumn_Bg.png",
+      "source_file": "images/top_mid/BattleVolumn_Bg.png",
+      "category": "选手端 / 比分与经济",
+      "width": 452,
+      "height": 196,
+      "transformation": "none"
+    },
+    {
+      "file": "top_mid/blue_team_logo.png",
+      "source_file": "images/top_mid/blue_team_logo.png",
+      "category": "选手端 / 比分与经济",
+      "width": 500,
+      "height": 500,
+      "transformation": "none"
+    },
+    {
+      "file": "top_mid/red_team_logo.png",
+      "source_file": "images/top_mid/red_team_logo.png",
+      "category": "选手端 / 比分与经济",
+      "width": 500,
+      "height": 500,
+      "transformation": "none"
+    },
+    {
+      "file": "top_mid/top_left_background.png",
+      "source_file": "images/top_mid/top_left_background.png",
+      "category": "选手端 / 比分与经济",
+      "width": 88,
+      "height": 56,
+      "transformation": "none"
+    },
+    {
+      "file": "top_mid/top_middle_background.png",
+      "source_file": "images/top_mid/top_middle_background.png",
+      "category": "选手端 / 比分与经济",
+      "width": 414,
+      "height": 106,
+      "transformation": "none"
+    },
+    {
+      "file": "top_mid/top_middle_background_v2.png",
+      "source_file": "images/top_mid/top_middle_background_v2.png",
+      "category": "选手端 / 比分与经济",
+      "width": 414,
+      "height": 106,
+      "transformation": "none"
+    },
+    {
+      "file": "top_mid/top_right_background.png",
+      "source_file": "images/top_mid/top_right_background.png",
+      "category": "选手端 / 比分与经济",
+      "width": 88,
+      "height": 56,
+      "transformation": "none"
+    },
+    {
+      "file": "top_outpost/blue_outpost_avatar.png",
+      "source_file": "images/top_outpost/blue_outpost_avatar.png",
+      "category": "选手端 / 前哨站",
+      "width": 44,
+      "height": 48,
+      "transformation": "none"
+    },
+    {
+      "file": "top_outpost/blue_outpost_bg.png",
+      "source_file": "images/top_outpost/blue_outpost_bg.png",
+      "category": "选手端 / 前哨站",
+      "width": 89,
+      "height": 57,
+      "transformation": "none"
+    },
+    {
+      "file": "top_outpost/blue_outpost_name.png",
+      "source_file": "images/top_outpost/blue_outpost_name.png",
+      "category": "选手端 / 前哨站",
+      "width": 144,
+      "height": 47,
+      "transformation": "none"
+    },
+    {
+      "file": "top_outpost/blue_outpost_panel.png",
+      "source_file": "images/top_outpost/blue_outpost_panel.png",
+      "category": "选手端 / 前哨站",
+      "width": 117,
+      "height": 38,
+      "transformation": "none"
+    },
+    {
+      "file": "top_outpost/red_outpost_avatar.png",
+      "source_file": "images/top_outpost/red_outpost_avatar.png",
+      "category": "选手端 / 前哨站",
+      "width": 44,
+      "height": 48,
+      "transformation": "none"
+    },
+    {
+      "file": "top_outpost/red_outpost_bg.png",
+      "source_file": "images/top_outpost/red_outpost_bg.png",
+      "category": "选手端 / 前哨站",
+      "width": 88,
+      "height": 57,
+      "transformation": "none"
+    },
+    {
+      "file": "top_outpost/red_outpost_name.png",
+      "source_file": "images/top_outpost/red_outpost_name.png",
+      "category": "选手端 / 前哨站",
+      "width": 146,
+      "height": 47,
+      "transformation": "none"
+    },
+    {
+      "file": "top_outpost/red_outpost_panel.png",
+      "source_file": "images/top_outpost/red_outpost_panel.png",
+      "category": "选手端 / 前哨站",
+      "width": 117,
+      "height": 38,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/blue_guard_avatar.png",
+      "source_file": "images/top_robots/blue_guard_avatar.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 48,
+      "height": 48,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/blue_tab_bar.png",
+      "source_file": "images/top_robots/blue_tab_bar.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 660,
+      "height": 24,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/blue_tab_guard.png",
+      "source_file": "images/top_robots/blue_tab_guard.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 238,
+      "height": 238,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/blue_teammate_avatar_airplane.png",
+      "source_file": "images/top_robots/blue_teammate_avatar_airplane.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 188,
+      "height": 120,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/blue_teammate_avatar_engineer.png",
+      "source_file": "images/top_robots/blue_teammate_avatar_engineer.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 367,
+      "height": 215,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/blue_teammate_avatar_hero.png",
+      "source_file": "images/top_robots/blue_teammate_avatar_hero.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 279,
+      "height": 216,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/blue_teammate_avatar_soldier.png",
+      "source_file": "images/top_robots/blue_teammate_avatar_soldier.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 320,
+      "height": 196,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/blue_teammate_bg.png",
+      "source_file": "images/top_robots/blue_teammate_bg.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 404,
+      "height": 196,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/blue_teammate_id_1.png",
+      "source_file": "images/top_robots/blue_teammate_id_1.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 51,
+      "height": 69,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/blue_teammate_id_2.png",
+      "source_file": "images/top_robots/blue_teammate_id_2.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 59,
+      "height": 70,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/blue_teammate_id_3.png",
+      "source_file": "images/top_robots/blue_teammate_id_3.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 59,
+      "height": 70,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/blue_teammate_id_4.png",
+      "source_file": "images/top_robots/blue_teammate_id_4.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 60,
+      "height": 69,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/blue_teammate_id_5.png",
+      "source_file": "images/top_robots/blue_teammate_id_5.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 59,
+      "height": 69,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/blue_teammate_id_6.png",
+      "source_file": "images/top_robots/blue_teammate_id_6.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 64,
+      "height": 107,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/levels/tab_level_1.png",
+      "source_file": "images/top_robots/levels/tab_level_1.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 32,
+      "height": 26,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/levels/tab_level_10.png",
+      "source_file": "images/top_robots/levels/tab_level_10.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 30,
+      "height": 36,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/levels/tab_level_2.png",
+      "source_file": "images/top_robots/levels/tab_level_2.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 32,
+      "height": 33,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/levels/tab_level_3.png",
+      "source_file": "images/top_robots/levels/tab_level_3.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 32,
+      "height": 34,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/levels/tab_level_4.png",
+      "source_file": "images/top_robots/levels/tab_level_4.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 32,
+      "height": 34,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/levels/tab_level_5.png",
+      "source_file": "images/top_robots/levels/tab_level_5.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 36,
+      "height": 35,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/levels/tab_level_6.png",
+      "source_file": "images/top_robots/levels/tab_level_6.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 30,
+      "height": 36,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/levels/tab_level_7.png",
+      "source_file": "images/top_robots/levels/tab_level_7.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 30,
+      "height": 36,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/levels/tab_level_8.png",
+      "source_file": "images/top_robots/levels/tab_level_8.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 30,
+      "height": 36,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/levels/tab_level_9.png",
+      "source_file": "images/top_robots/levels/tab_level_9.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 30,
+      "height": 36,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/red_guard_avatar.png",
+      "source_file": "images/top_robots/red_guard_avatar.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 48,
+      "height": 48,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/red_tab_bar.png",
+      "source_file": "images/top_robots/red_tab_bar.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 660,
+      "height": 24,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/red_tab_guard.png",
+      "source_file": "images/top_robots/red_tab_guard.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 238,
+      "height": 238,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/red_teammate_avatar_airplane.png",
+      "source_file": "images/top_robots/red_teammate_avatar_airplane.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 191,
+      "height": 120,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/red_teammate_avatar_engineer.png",
+      "source_file": "images/top_robots/red_teammate_avatar_engineer.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 355,
+      "height": 203,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/red_teammate_avatar_hero.png",
+      "source_file": "images/top_robots/red_teammate_avatar_hero.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 272,
+      "height": 205,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/red_teammate_avatar_soldier.png",
+      "source_file": "images/top_robots/red_teammate_avatar_soldier.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 307,
+      "height": 187,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/red_teammate_bg.png",
+      "source_file": "images/top_robots/red_teammate_bg.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 409,
+      "height": 196,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/red_teammate_id_1.png",
+      "source_file": "images/top_robots/red_teammate_id_1.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 53,
+      "height": 69,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/red_teammate_id_2.png",
+      "source_file": "images/top_robots/red_teammate_id_2.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 58,
+      "height": 70,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/red_teammate_id_3.png",
+      "source_file": "images/top_robots/red_teammate_id_3.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 57,
+      "height": 70,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/red_teammate_id_4.png",
+      "source_file": "images/top_robots/red_teammate_id_4.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 57,
+      "height": 69,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/red_teammate_id_5.png",
+      "source_file": "images/top_robots/red_teammate_id_5.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 57,
+      "height": 69,
+      "transformation": "none"
+    },
+    {
+      "file": "top_robots/red_teammate_id_6.png",
+      "source_file": "images/top_robots/red_teammate_id_6.png",
+      "category": "选手端 / 顶部机器人",
+      "width": 64,
+      "height": 112,
+      "transformation": "none"
+    },
+    {
+      "file": "warning_box.png",
+      "source_file": "images/warning_box.png",
+      "category": "选手端 / 其他独立图片",
+      "width": 584,
+      "height": 124,
+      "transformation": "none"
+    }
+  ]
+}
