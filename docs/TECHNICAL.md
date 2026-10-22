@@ -736,20 +736,54 @@ robomaster_package_extension(
 | C++ | C++17 编译器 |
 | CMake | 工程最低 3.19；随附 Presets 需要 3.21 及以上 |
 | Qt | 最低 6.5，Core / Gui / Network / Qml / Quick / QuickControls2；三维功能还需对应模块 |
-| Protobuf | 支持 proto3 optional 的 3.15 及以上兼容版本，运行库和 protoc 应匹配 |
+| Protobuf | 优先采用支持 proto3 optional 的 3.15 及以上；旧版生成路径使用实验开关，运行库和 protoc 应匹配 |
 | libmosquitto | MQTT 连接与消息发布 / 订阅 |
 | FFmpeg | avcodec / avutil / swscale 等视频依赖 |
 | Python 图像计算 | 仅视觉能力需要相应解释器与 numpy、OpenCV、ONNX Runtime |
 | 语音服务 | 按选定实现提供合成程序或 HTTP 服务，以及需要的播放设备 |
 
-可用 Qt 安装前缀通过 `QT_PREFIX` 提供，在项目根目录配置与构建：
+在项目根目录打开终端。这里的根目录指包含 `CMakeLists.txt`、`CMakePresets.json` 和 `README.md` 的源码目录，不是 `build/`。首次下载时可依次执行：
 
 ```bash
-cmake --preset release -DCMAKE_PREFIX_PATH="$QT_PREFIX"
-cmake --build --preset release
+git clone https://github.com/ecth0d7/RobomasterClient.git
+cd RobomasterClient
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build --parallel 4
+./build/RoboMasterMqttTest
 ```
 
-构建目录由预设声明，配置结束时 CMake 会打印实际输出位置；可执行文件名为 `RoboMasterMqttTest`。安装后从安装目录的 `bin` 启动同名程序。对包含符号链接的旧构建目录，应使用它的真实路径或单独预设重新配置，避免相对协议依赖指向错误位置。
+已有源码时跳过前两行，直接在项目根目录配置、编译和启动。`cmake -S . -B build` 读取当前目录的源码，在项目内创建普通的 `build/` 构建目录；后续编译使用已有缓存增量构建。构建产物已被 Git 忽略，常规构建不依赖项目外的测试、工具或示例。
+
+可执行文件为 `build/RoboMasterMqttTest`，构建时同时复制界面包和插件。启动方式取决于终端当前位置：
+
+| 终端所在目录 | 启动命令 |
+| --- | --- |
+| 项目根目录 | `./build/RoboMasterMqttTest` |
+| 项目内的 `build/` | `./RoboMasterMqttTest` |
+| 安装目录的 `bin/` | `./RoboMasterMqttTest` |
+
+启动后按 Ctrl+Shift+L 配置 MQTT、UDP 与身份，再执行连接；修改连接不要求重新编译。关闭窗口或在启动终端按 Ctrl+C 退出。
+
+如果未找到 Qt，把 `QT_PREFIX` 设置为当前设备的 Qt 安装前缀，该目录应包含 `lib/cmake/Qt6/Qt6Config.cmake`，然后执行：
+
+```bash
+export QT_PREFIX="/path/to/Qt/6.x/gcc_64"  # 替换为实际的 Qt 安装前缀
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$QT_PREFIX"
+cmake --build build --parallel 4
+./build/RoboMasterMqttTest
+```
+
+预设 `release` 与上述配置使用同一个 `build/`。已有预设命令仍可使用：
+
+```bash
+cmake --preset release
+cmake --build --preset release
+./build/RoboMasterMqttTest
+```
+
+其他可选预设输出到 `build/debug/`、`build/supported-release/` 和 `build/validation/`；常规使用只需 `build/`。`supported-release` 保留旧名称，但依赖改由当前设备发现，不绑定某台设备的 Protobuf 安装目录。`validation` 需要单独提供测试与开发工具源码，普通构建无需这些辅助文件。
+
+采用项目内构建目录，是为了让源码、编译命令和启动位置一一对应；代价是各设备需要自行安装匹配的 Qt、Protobuf 及视频依赖。预设仅记录可移植配置，不记录个人安装路径。若已有旧的符号链接构建目录，应在新的普通目录配置，不要混用不同源码目录的缓存。
 
 运行时需要可用的 Qt 平台和图形插件、QML 模块、消息库及视频库。Qt Quick 3D、识别运行环境、语音合成和第三方权重按启用能力交付，不把所有可选依赖强制加入基础客户端。现有运行截图来自 Linux / Qt 环境，不据此宣称所有桌面平台均已完成部署验收。
 
@@ -778,6 +812,7 @@ cmake --build --preset release
 | --- | --- |
 | MQTT 未连接 | 核对官方导出目标、端口、网卡路由、身份与错误；从连接面板重新连接 |
 | MQTT 已连接但无字段更新 | 检查订阅主题、身份、Protobuf 解码及实际更新时间；连接成功不能证明有有效消息 |
+| UDP 提示端口已被占用 | 检查是否已启动另一个客户端；关闭确认不再使用的实例，或给当前实例选择不同监听端口，并同步修改发送方目标端口 |
 | UDP 绑定正常但黑屏 | 核对发送方目标网卡和端口、来源锁定、H.264 / HEVC、分片和参数集，再看解码帧是否递增 |
 | 英雄已部署但仍无独立画面 | 检查独立视频能力、部署状态时效、`CustomByteBlock` 输入、格式和帧连续性 |
 | 吊射画面正常但无轨迹 | 区分视频和候选检测是否分别启用，检查画质、区域和候选证据；无候选不等于解码失败 |
